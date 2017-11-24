@@ -73,8 +73,8 @@ class WC_Gateway_Paypal_API_Handler {
 	/**
 	 * Capture an authorization.
 	 * @param  WC_Order $order
-	 * @param  float $amount
-	 * @return object Either an object of name value pairs for a success, or a WP_ERROR object.
+	 * @param  float    $amount
+	 * @return object           Either an object of name value pairs for a success, or a WP_ERROR object.
 	 */
 	public static function do_capture( $order, $amount = null ) {
 		$raw_response = wp_safe_remote_post(
@@ -106,7 +106,7 @@ class WC_Gateway_Paypal_API_Handler {
 	 * @param  WC_Order $order
 	 * @param  float    $amount
 	 * @param  string   $reason
-	 * @return object Either an object of name value pairs for a success, or a WP_ERROR object.
+	 * @return object           Either an object of name value pairs for a success, or a WP_ERROR object.
 	 */
 	public static function refund_transaction( $order, $amount = null, $reason = '' ) {
 		$raw_response = wp_safe_remote_post(
@@ -132,6 +132,7 @@ class WC_Gateway_Paypal_API_Handler {
 
 		return (object) $response;
 	}
+
 }
 
 /**
@@ -142,6 +143,7 @@ class WC_Gateway_Paypal_Refund extends WC_Gateway_Paypal_API_Handler {
 	public static function get_request( $order, $amount = null, $reason = '' ) {
 		return self::get_refund_request( $order, $amount, $reason );
 	}
+
 	public static function refund_order( $order, $amount = null, $reason = '', $sandbox = false ) {
 		if ( $sandbox ) {
 			self::$sandbox = $sandbox;
@@ -153,4 +155,5 @@ class WC_Gateway_Paypal_Refund extends WC_Gateway_Paypal_API_Handler {
 			return (array) $result;
 		}
 	}
+
 }
