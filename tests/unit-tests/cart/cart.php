@@ -9,8 +9,8 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	/**
 	 * Test some discount logic which has caused issues in the past.
 	 * Tickets:
-	 * 	https://github.com/woocommerce/woocommerce/issues/10573
-	 *  https://github.com/woocommerce/woocommerce/issues/10963
+	 * https://github.com/woocommerce/woocommerce/issues/10573
+	 * https://github.com/woocommerce/woocommerce/issues/10963
 	 *
 	 * Due to discounts being split amongst products in cart.
 	 */
@@ -25,7 +25,7 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 		# Test case 1 #10963
 
 		// Create dummy coupon - fixed cart, 1 value
-		$coupon  = WC_Helper_Coupon::create_coupon();
+		$coupon = WC_Helper_Coupon::create_coupon();
 
 		// Add coupon
 		WC()->cart->add_discount( $coupon->get_code() );
@@ -158,7 +158,7 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	public function test_discount_cart_rounding() {
 		global $wpdb;
 
-		# Test with no taxes.
+		# Test with no taxes .
 		WC()->cart->empty_cart();
 		WC()->cart->remove_coupons();
 
@@ -183,7 +183,7 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 		WC()->cart->empty_cart();
 		WC()->cart->remove_coupons();
 
-		# Test with taxes.
+		# Test with taxes .
 		update_option( 'woocommerce_prices_include_tax', 'no' );
 		update_option( 'woocommerce_calc_taxes', 'yes' );
 
@@ -378,7 +378,7 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	 * Helper that can be hooked to a filter to force the customer's shipping country to be GB.
 	 *
 	 * @since 3.3
-	 * @param string $country
+	 * @param  string $country
 	 * @return string
 	 */
 	public function force_customer_gb_shipping( $country ) {
@@ -389,7 +389,7 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	 * Helper that can be hooked to a filter to force the customer's shipping country to be US.
 	 *
 	 * @since 3.3
-	 * @param string $country
+	 * @param  string $country
 	 * @return string
 	 */
 	public function force_customer_us_shipping( $country ) {
@@ -418,7 +418,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_add_to_cart_simple() {
-
 		// Create dummy product
 		$product = WC_Helper_Product::create_simple_product();
 
@@ -513,7 +512,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_find_product_in_cart() {
-
 		// Create dummy product
 		$product = WC_Helper_Product::create_simple_product();
 
@@ -531,7 +529,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 
 		// Clean up product
 		WC_Helper_Product::delete_product( $product->get_id() );
-
 	}
 
 	/**
@@ -540,7 +537,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_generate_cart_id() {
-
 		// Setup data
 		$product_id     = 1;
 		$variation_id   = 2;
@@ -587,7 +583,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 
 		// Assert
 		$this->assertEquals( $manual_cart_id, WC()->cart->generate_cart_id( $product_id, $variation_id, array( 'Testing' => 'yup' ), $cart_item_data ) );
-
 	}
 
 	/**
@@ -630,7 +625,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_check_cart_item_validity() {
-
 		// Create dummy product
 		$product = WC_Helper_Product::create_simple_product();
 
@@ -645,7 +639,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 
 		// Clean up product
 		WC_Helper_Product::delete_product( $product->get_id() );
-
 	}
 
 	/**
@@ -654,7 +647,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_get_total() {
-
 		// Create dummy product
 		$product = WC_Helper_Product::create_simple_product();
 
@@ -973,7 +965,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 
 		// Delete coupon
 		WC_Helper_Coupon::delete_coupon( $coupon->get_id() );
-
 	}
 
 	/**
@@ -982,7 +973,6 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	 * @since 3.2
 	 */
 	public function test_add_discount_code_id() {
-
 		$coupon = new WC_Coupon;
 		$coupon->set_code( 'test' );
 		$coupon->set_amount( 100 );
@@ -1017,7 +1007,7 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 	}
 
 	public function test_add_individual_use_coupon_removal() {
-		$coupon = WC_Helper_Coupon::create_coupon();
+		$coupon    = WC_Helper_Coupon::create_coupon();
 		$iu_coupon = WC_Helper_Coupon::create_coupon( 'code1' );
 		$iu_coupon->set_individual_use( true );
 		$iu_coupon->save();
@@ -1098,11 +1088,12 @@ class WC_Tests_Cart extends WC_Unit_Test_Case {
 		$new_cart = clone $cart;
 
 		// Get the properties from each object.
-		$cart_fees = $cart->fees_api();
+		$cart_fees     = $cart->fees_api();
 		$new_cart_fees = $new_cart->fees_api();
 
 		// Ensure that cloned properties are not identical.
 		$identical_fees = $cart_fees === $new_cart_fees;
 		$this->assertFalse( $identical_fees, 'Cloned cart fees should not be identical to original cart.' );
 	}
+
 }
