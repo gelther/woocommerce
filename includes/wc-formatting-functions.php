@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Converts a string (e.g. 'yes' or 'no') to a bool.
  *
  * @since 3.0.0
- * @param string $string String to convert.
+ * @param  string $string String to convert.
  * @return bool
  */
 function wc_string_to_bool( $string ) {
@@ -29,7 +29,7 @@ function wc_string_to_bool( $string ) {
  * Converts a bool to a 'yes' or 'no'.
  *
  * @since 3.0.0
- * @param bool $bool String to convert.
+ * @param  bool   $bool String to convert.
  * @return string
  */
 function wc_bool_to_string( $bool ) {
@@ -43,8 +43,8 @@ function wc_bool_to_string( $bool ) {
  * Explode a string into an array by $delimiter and remove empty values.
  *
  * @since 3.0.0
- * @param string $string    String to convert.
- * @param string $delimiter Delimiter, defaults to ','.
+ * @param  string $string    String to convert.
+ * @param  string $delimiter Delimiter, defaults to ','.
  * @return array
  */
 function wc_string_to_array( $string, $delimiter = ',' ) {
@@ -55,7 +55,7 @@ function wc_string_to_array( $string, $delimiter = ',' ) {
  * Sanitize taxonomy names. Slug format (no spaces, lowercase).
  * Urldecode is used to reverse munging of UTF8 characters.
  *
- * @param string $taxonomy Taxonomy name.
+ * @param  string $taxonomy Taxonomy name.
  * @return string
  */
 function wc_sanitize_taxonomy_name( $taxonomy ) {
@@ -88,7 +88,7 @@ function wc_sanitize_permalink( $value ) {
 /**
  * Gets the filename part of a download URL.
  *
- * @param string $file_url File URL.
+ * @param  string $file_url File URL.
  * @return string
  */
 function wc_get_filename_from_url( $file_url ) {
@@ -105,10 +105,10 @@ function wc_get_filename_from_url( $file_url ) {
  * wc_get_dimension( 55, 'in' );
  * wc_get_dimension( 55, 'in', 'm' );
  *
- * @param int|float $dimension    Dimension.
- * @param string    $to_unit      Unit to convert to.
+ * @param  int|float $dimension Dimension.
+ * @param  string    $to_unit   Unit to convert to.
  *                                Options: 'in', 'm', 'cm', 'm'.
- * @param string    $from_unit    Unit to convert from.
+ * @param  string    $from_unit Unit to convert from.
  *                                Defaults to ''.
  *                                Options: 'in', 'm', 'cm', 'm'.
  * @return float
@@ -164,10 +164,10 @@ function wc_get_dimension( $dimension, $to_unit, $from_unit = '' ) {
  * wc_get_weight(55, 'kg');
  * wc_get_weight(55, 'kg', 'lbs');
  *
- * @param int|float $weight    Weight.
- * @param string    $to_unit   Unit to convert to.
+ * @param  int|float $weight    Weight.
+ * @param  string    $to_unit   Unit to convert to.
  *                             Options: 'g', 'kg', 'lbs', 'oz'.
- * @param string    $from_unit Unit to convert from.
+ * @param  string    $from_unit Unit to convert from.
  *                             Defaults to ''.
  *                             Options: 'g', 'kg', 'lbs', 'oz'.
  * @return float
@@ -214,7 +214,7 @@ function wc_get_weight( $weight, $to_unit, $from_unit = '' ) {
 /**
  * Trim trailing zeros off prices.
  *
- * @param string|float|int $price Price.
+ * @param  string|float|int $price Price.
  * @return string
  */
 function wc_trim_zeros( $price ) {
@@ -224,7 +224,7 @@ function wc_trim_zeros( $price ) {
 /**
  * Round a tax amount.
  *
- * @param  double $value Amount to round.
+ * @param  double $value     Amount to round.
  * @param  int    $precision DP to round. Defaults to wc_get_price_decimals.
  * @return double
  */
@@ -255,7 +255,7 @@ function wc_round_tax_total( $value, $precision = null ) {
 /**
  * Make a refund total negative.
  *
- * @param float $amount Refunded amount.
+ * @param  float $amount Refunded amount.
  *
  * @return float
  */
@@ -271,7 +271,7 @@ function wc_format_refund_total( $amount ) {
  * This function does not remove thousands - this should be done before passing a value to the function.
  *
  * @param  float|string $number     Expects either a float or a string with a decimal separator only (no thousands).
- * @param  mixed        $dp number  Number of decimal points to use, blank to use woocommerce_price_num_decimals, or false to avoid all rounding.
+ * @param  mixed        $dp         number  Number of decimal points to use, blank to use woocommerce_price_num_decimals, or false to avoid all rounding.
  * @param  bool         $trim_zeros From end of string.
  * @return string
  */
@@ -305,7 +305,7 @@ function wc_format_decimal( $number, $dp = false, $trim_zeros = false ) {
 /**
  * Convert a float to a string without locale formatting which PHP adds when changing floats to strings.
  *
- * @param  float $float Float value to format.
+ * @param  float  $float Float value to format.
  * @return string
  */
 function wc_float_to_string( $float ) {
@@ -356,7 +356,7 @@ function wc_format_coupon_code( $value ) {
  * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
  * Non-scalar values are ignored.
  *
- * @param string|array $var Data to sanitize.
+ * @param  string|array $var Data to sanitize.
  * @return string|array
  */
 function wc_clean( $var ) {
@@ -402,8 +402,8 @@ function wc_sanitize_tooltip( $var ) {
 /**
  * Merge two arrays.
  *
- * @param array $a1 First array to merge.
- * @param array $a2 Second array to merge.
+ * @param  array $a1 First array to merge.
+ * @param  array $a2 Second array to merge.
  * @return array
  */
 function wc_array_overlay( $a1, $a2 ) {
@@ -437,7 +437,7 @@ function wc_stock_amount( $amount ) {
  */
 function get_woocommerce_price_format() {
 	$currency_pos = get_option( 'woocommerce_currency_pos' );
-	$format = '%1$s%2$s';
+	$format       = '%1$s%2$s';
 
 	switch ( $currency_pos ) {
 		case 'left' :
@@ -491,8 +491,8 @@ function wc_get_price_decimals() {
 /**
  * Format the price with a currency symbol.
  *
- * @param  float $price Raw price.
- * @param  array $args  Arguments to format a price {
+ * @param float $price Raw price.
+ * @param array $args  Arguments to format a price {
  *     Array of arguments.
  *     Defaults to empty array.
  *
@@ -540,10 +540,10 @@ function wc_price( $price, $args = array() ) {
 	/**
 	 * Filters the string of price markup.
 	 *
-	 * @param string $return 			Price HTML markup.
-	 * @param string $price	            Formatted price.
-	 * @param array  $args     			Pass on the args.
-	 * @param float  $unformatted_price	Price as float to allow plugins custom formatting. Since 3.2.0.
+	 * @param string $return            Price HTML markup.
+	 * @param string $price             Formatted price.
+	 * @param array  $args              Pass on the args.
+	 * @param float  $unformatted_price Price as float to allow plugins custom formatting. Since 3.2.0.
 	 */
 	return apply_filters( 'wc_price', $return, $price, $args, $unformatted_price );
 }
@@ -624,7 +624,7 @@ function wc_string_to_timestamp( $time_string, $from_timestamp = null ) {
  * Convert a date string to a WC_DateTime.
  *
  * @since  3.1.0
- * @param  string $time_string Time string.
+ * @param  string      $time_string Time string.
  * @return WC_DateTime
  */
 function wc_string_to_datetime( $time_string ) {
@@ -635,7 +635,7 @@ function wc_string_to_datetime( $time_string ) {
 	} else {
 		$timestamp = wc_string_to_timestamp( get_gmt_from_date( gmdate( 'Y-m-d H:i:s', wc_string_to_timestamp( $time_string ) ) ) );
 	}
-	$datetime  = new WC_DateTime( "@{$timestamp}", new DateTimeZone( 'UTC' ) );
+	$datetime = new WC_DateTime( "@{$timestamp}", new DateTimeZone( 'UTC' ) );
 
 	// Set local timezone or offset.
 	if ( get_option( 'timezone_string' ) ) {
@@ -719,7 +719,7 @@ if ( ! function_exists( 'wc_rgb_from_hex' ) ) {
 	/**
 	 * Convert RGB to HEX.
 	 *
-	 * @param mixed $color Color.
+	 * @param  mixed $color Color.
 	 *
 	 * @return array
 	 */
@@ -735,6 +735,7 @@ if ( ! function_exists( 'wc_rgb_from_hex' ) ) {
 
 		return $rgb;
 	}
+
 }
 
 if ( ! function_exists( 'wc_hex_darker' ) ) {
@@ -742,8 +743,8 @@ if ( ! function_exists( 'wc_hex_darker' ) ) {
 	/**
 	 * Make HEX color darker.
 	 *
-	 * @param mixed $color  Color.
-	 * @param int   $factor Darker factor.
+	 * @param  mixed  $color  Color.
+	 * @param  int    $factor Darker factor.
 	 *                      Defaults to 30.
 	 * @return string
 	 */
@@ -765,6 +766,7 @@ if ( ! function_exists( 'wc_hex_darker' ) ) {
 
 		return $color;
 	}
+
 }
 
 if ( ! function_exists( 'wc_hex_lighter' ) ) {
@@ -772,8 +774,8 @@ if ( ! function_exists( 'wc_hex_lighter' ) ) {
 	/**
 	 * Make HEX color lighter.
 	 *
-	 * @param mixed $color  Color.
-	 * @param int   $factor Lighter factor.
+	 * @param  mixed  $color  Color.
+	 * @param  int    $factor Lighter factor.
 	 *                      Defaults to 30.
 	 * @return string
 	 */
@@ -796,6 +798,7 @@ if ( ! function_exists( 'wc_hex_lighter' ) ) {
 
 		return $color;
 	}
+
 }
 
 if ( ! function_exists( 'wc_light_or_dark' ) ) {
@@ -803,10 +806,10 @@ if ( ! function_exists( 'wc_light_or_dark' ) ) {
 	/**
 	 * Detect if we should use a light or dark color on a background color.
 	 *
-	 * @param mixed  $color Color.
-	 * @param string $dark  Darkest reference.
+	 * @param  mixed  $color Color.
+	 * @param  string $dark  Darkest reference.
 	 *                      Defaults to '#000000'.
-	 * @param string $light Lightest reference.
+	 * @param  string $light Lightest reference.
 	 *                      Defaults to '#FFFFFF'.
 	 * @return string
 	 */
@@ -821,6 +824,7 @@ if ( ! function_exists( 'wc_light_or_dark' ) ) {
 
 		return $brightness > 155 ? $dark : $light;
 	}
+
 }
 
 if ( ! function_exists( 'wc_format_hex' ) ) {
@@ -828,7 +832,7 @@ if ( ! function_exists( 'wc_format_hex' ) ) {
 	/**
 	 * Format string as hex.
 	 *
-	 * @param string $hex HEX color.
+	 * @param  string      $hex HEX color.
 	 * @return string|null
 	 */
 	function wc_format_hex( $hex ) {
@@ -840,13 +844,14 @@ if ( ! function_exists( 'wc_format_hex' ) ) {
 
 		return $hex ? '#' . $hex : null;
 	}
+
 }
 
 /**
  * Format the postcode according to the country and length of the postcode.
  *
- * @param string $postcode Unformatted postcode.
- * @param string $country  Base country.
+ * @param  string $postcode Unformatted postcode.
+ * @param  string $country  Base country.
  * @return string
  */
 function wc_format_postcode( $postcode, $country ) {
@@ -881,7 +886,7 @@ function wc_format_postcode( $postcode, $country ) {
  * Remove spaces and convert characters to uppercase.
  *
  * @since 2.6.0
- * @param string $postcode Postcode.
+ * @param  string $postcode Postcode.
  * @return string
  */
 function wc_normalize_postcode( $postcode ) {
@@ -891,7 +896,7 @@ function wc_normalize_postcode( $postcode ) {
 /**
  * Format phone numbers.
  *
- * @param string $phone Phone number.
+ * @param  string $phone Phone number.
  * @return string
  */
 function wc_format_phone_number( $phone ) {
@@ -1045,7 +1050,7 @@ if ( ! function_exists( 'wc_make_numeric_postcode' ) ) {
 	 * E.g. PE30 becomes 16050300 (P = 16, E = 05, 3 = 03, 0 = 00)
 	 *
 	 * @since 2.6.0
-	 * @param string $postcode Regular postcode.
+	 * @param  string $postcode Regular postcode.
 	 * @return string
 	 */
 	function wc_make_numeric_postcode( $postcode ) {
@@ -1067,6 +1072,7 @@ if ( ! function_exists( 'wc_make_numeric_postcode' ) ) {
 
 		return $numeric_postcode;
 	}
+
 }
 
 /**
@@ -1142,7 +1148,7 @@ function wc_format_price_range( $from, $to ) {
  * Format a weight for display.
  *
  * @since  3.0.0
- * @param  float $weight Weight.
+ * @param  float  $weight Weight.
  * @return string
  */
 function wc_format_weight( $weight ) {
@@ -1161,7 +1167,7 @@ function wc_format_weight( $weight ) {
  * Format dimensions for display.
  *
  * @since  3.0.0
- * @param  array $dimensions Array of dimensions.
+ * @param  array  $dimensions Array of dimensions.
  * @return string
  */
 function wc_format_dimensions( $dimensions ) {
