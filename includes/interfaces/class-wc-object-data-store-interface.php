@@ -32,8 +32,8 @@ interface WC_Object_Data_Store_Interface {
 	/**
 	 * Deletes a record from the database.
 	 * @param  WC_Data &$data
-	 * @param  array $args Array of args to pass to the delete method.
-	 * @return bool result
+	 * @param  array   $args  Array of args to pass to the delete method.
+	 * @return bool           result
 	 */
 	public function delete( &$data, $args = array() );
 
@@ -47,7 +47,7 @@ interface WC_Object_Data_Store_Interface {
 	/**
 	 * Deletes meta based on meta ID.
 	 * @param  WC_Data &$data
-	 * @param  object $meta (containing at least ->id)
+	 * @param  object  $meta  (containing at least ->id)
 	 * @return array
 	 */
 	public function delete_meta( &$data, $meta );
@@ -55,15 +55,15 @@ interface WC_Object_Data_Store_Interface {
 	/**
 	 * Add new piece of meta.
 	 * @param  WC_Data &$data
-	 * @param  object $meta (containing ->key and ->value)
-	 * @return int meta ID
+	 * @param  object  $meta  (containing ->key and ->value)
+	 * @return int            meta ID
 	 */
 	public function add_meta( &$data, $meta );
 
 	/**
 	 * Update meta.
-	 * @param  WC_Data &$data
-	 * @param  object $meta (containing ->id, ->key and ->value)
+	 * @param WC_Data &$data
+	 * @param object  $meta  (containing ->id, ->key and ->value)
 	 */
 	public function update_meta( &$data, $meta );
 }

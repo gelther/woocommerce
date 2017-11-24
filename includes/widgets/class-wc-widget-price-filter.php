@@ -26,13 +26,13 @@ class WC_Widget_Price_Filter extends WC_Widget {
 		$this->widget_id          = 'woocommerce_price_filter';
 		$this->widget_name        = __( 'Filter Products by Price', 'woocommerce' );
 		$this->settings           = array(
-			'title'  => array(
+			'title' => array(
 				'type'  => 'text',
 				'std'   => __( 'Filter by price', 'woocommerce' ),
 				'label' => __( 'Title', 'woocommerce' ),
 			),
 		);
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$suffix                   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		wp_register_script( 'accounting', WC()->plugin_url() . '/assets/js/accounting/accounting' . $suffix . '.js', array( 'jquery' ), '0.4.2' );
 		wp_register_script( 'wc-jquery-ui-touchpunch', WC()->plugin_url() . '/assets/js/jquery-ui-touch-punch/jquery-ui-touch-punch' . $suffix . '.js', array( 'jquery-ui-slider' ), WC_VERSION, true );
 		wp_register_script( 'wc-price-slider', WC()->plugin_url() . '/assets/js/frontend/price-slider' . $suffix . '.js', array( 'jquery-ui-slider', 'wc-jquery-ui-touchpunch', 'accounting' ), WC_VERSION, true );
@@ -174,4 +174,5 @@ class WC_Widget_Price_Filter extends WC_Widget {
 
 		return $wpdb->get_row( $sql );
 	}
+
 }

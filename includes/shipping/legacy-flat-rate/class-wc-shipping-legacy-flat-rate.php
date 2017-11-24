@@ -123,7 +123,7 @@ class WC_Shipping_Legacy_Flat_Rate extends WC_Shipping_Method {
 
 	/**
 	 * Work out fee (shortcode).
-	 * @param  array $atts
+	 * @param  array  $atts
 	 * @return string
 	 */
 	public function fee( $atts ) {
@@ -247,7 +247,7 @@ class WC_Shipping_Legacy_Flat_Rate extends WC_Shipping_Method {
 
 	/**
 	 * Finds and returns shipping classes and the products with said class.
-	 * @param mixed $package
+	 * @param  mixed $package
 	 * @return array
 	 */
 	public function find_shipping_classes( $package ) {
@@ -274,7 +274,7 @@ class WC_Shipping_Legacy_Flat_Rate extends WC_Shipping_Method {
 	 * @deprecated 2.4.0
 	 *
 	 * Additional rates defined like this:
-	 * 	Option Name | Additional Cost [+- Percents%] | Per Cost Type (order, class, or item).
+	 * Option Name | Additional Cost [+- Percents%] | Per Cost Type (order, class, or item).
 	 */
 	public function calculate_extra_shipping( $method, $rate ) {
 		if ( $this->options ) {
@@ -325,7 +325,7 @@ class WC_Shipping_Legacy_Flat_Rate extends WC_Shipping_Method {
 	 * @deprecated 2.4.0
 	 * @param  string $cost_string
 	 * @param  string $type
-	 * @param  array $package
+	 * @param  array  $package
 	 * @return float
 	 */
 	public function get_extra_cost( $cost_string, $type, $package ) {
@@ -333,11 +333,11 @@ class WC_Shipping_Legacy_Flat_Rate extends WC_Shipping_Method {
 		$cost_percent = false;
 		// @codingStandardsIgnoreStart
 		$pattern      =
-			'/' .           // Start regex.
+			'/' . // Start regex.
 			'(\d+\.?\d*)' . // Capture digits, optionally capture a `.` and more digits.
-			'\s*' .         // Match whitespace.
-			'(\+|-)' .      // Capture the operand.
-			'\s*' .         // Match whitespace.
+			'\s*' . // Match whitespace.
+			'(\+|-)' . // Capture the operand.
+			'\s*' . // Match whitespace.
 			'(\d+\.?\d*)' . // Capture digits, optionally capture a `.` and more digits.
 			'\%/';          // Match the percent sign & end regex.
 		// @codingStandardsIgnoreEnd
@@ -378,4 +378,5 @@ class WC_Shipping_Legacy_Flat_Rate extends WC_Shipping_Method {
 		}
 		return $cost;
 	}
+
 }

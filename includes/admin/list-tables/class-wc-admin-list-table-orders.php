@@ -67,8 +67,8 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 	/**
 	 * Get row actions to show in the list table.
 	 *
-	 * @param array   $actions Array of actions.
-	 * @param WP_Post $post Current post object.
+	 * @param  array   $actions Array of actions.
+	 * @param  WP_Post $post    Current post object.
 	 * @return array
 	 */
 	protected function get_row_actions( $actions, $post ) {
@@ -90,7 +90,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 	/**
 	 * Define which columns are sortable.
 	 *
-	 * @param array $columns Existing columns.
+	 * @param  array $columns Existing columns.
 	 * @return array
 	 */
 	public function define_sortable_columns( $columns ) {
@@ -107,7 +107,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 	/**
 	 * Define which columns to show on this screen.
 	 *
-	 * @param array $columns Existing columns.
+	 * @param  array $columns Existing columns.
 	 * @return array
 	 */
 	public function define_columns( $columns ) {
@@ -132,7 +132,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 	/**
 	 * Define bulk actions.
 	 *
-	 * @param array $actions Existing actions.
+	 * @param  array $actions Existing actions.
 	 * @return array
 	 */
 	public function define_bulk_actions( $actions ) {
@@ -261,17 +261,17 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 
 		if ( $this->object->has_status( array( 'pending', 'on-hold' ) ) ) {
 			$actions['processing'] = array(
-				'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $this->object->get_id() ), 'woocommerce-mark-order-status' ),
-				'name'      => __( 'Processing', 'woocommerce' ),
-				'action'    => 'processing',
+				'url'    => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id=' . $this->object->get_id() ), 'woocommerce-mark-order-status' ),
+				'name'   => __( 'Processing', 'woocommerce' ),
+				'action' => 'processing',
 			);
 		}
 
 		if ( $this->object->has_status( array( 'pending', 'on-hold', 'processing' ) ) ) {
 			$actions['complete'] = array(
-				'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id=' . $this->object->get_id() ), 'woocommerce-mark-order-status' ),
-				'name'      => __( 'Complete', 'woocommerce' ),
-				'action'    => 'complete',
+				'url'    => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id=' . $this->object->get_id() ), 'woocommerce-mark-order-status' ),
+				'name'   => __( 'Complete', 'woocommerce' ),
+				'action' => 'complete',
 			);
 		}
 
@@ -411,7 +411,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 		}
 
 		$changed = 0;
-		$ids = array_map( 'absint', $ids );
+		$ids     = array_map( 'absint', $ids );
 
 		foreach ( $ids as $id ) {
 			$order = wc_get_order( $id );
@@ -495,7 +495,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 	/**
 	 * Handle any filters.
 	 *
-	 * @param array $query_vars Query vars.
+	 * @param  array $query_vars Query vars.
 	 * @return array
 	 */
 	public function request_query( $query_vars ) {
@@ -511,7 +511,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 	/**
 	 * Handle any custom filters.
 	 *
-	 * @param array $query_vars Query vars.
+	 * @param  array $query_vars Query vars.
 	 * @return array
 	 */
 	protected function query_filters( $query_vars ) {
@@ -522,8 +522,8 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 			// @codingStandardsIgnoreStart
 			$query_vars['meta_query'] = array(
 				array(
-					'key'   => '_customer_user',
-					'value' => (int) $_GET['_customer_user'], // WPCS: input var ok, sanitization ok.
+					'key'     => '_customer_user',
+					'value'   => (int) $_GET['_customer_user'], // WPCS: input var ok, sanitization ok.
 					'compare' => '=',
 				),
 			);
@@ -535,8 +535,8 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 			if ( 'order_total' === $query_vars['orderby'] ) {
 				// @codingStandardsIgnoreStart
 				$query_vars = array_merge( $query_vars, array(
-					'meta_key'  => '_order_total',
-					'orderby'   => 'meta_value_num',
+					'meta_key' => '_order_total',
+					'orderby'  => 'meta_value_num',
 				) );
 				// @codingStandardsIgnoreEnd
 			}
@@ -560,7 +560,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 	/**
 	 * Change the label when searching orders.
 	 *
-	 * @param mixed $query Current search query.
+	 * @param  mixed  $query Current search query.
 	 * @return string
 	 */
 	public function search_label( $query ) {
@@ -576,7 +576,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 	/**
 	 * Query vars for custom searches.
 	 *
-	 * @param mixed $public_query_vars Array of query vars.
+	 * @param  mixed $public_query_vars Array of query vars.
 	 * @return array
 	 */
 	public function add_custom_query_var( $public_query_vars ) {
@@ -609,6 +609,7 @@ class WC_Admin_List_Table_Orders extends WC_Admin_List_Table {
 			$wp->query_vars['post__in'] = array_merge( $post_ids, array( 0 ) );
 		}
 	}
+
 }
 
 new WC_Admin_List_Table_Orders();

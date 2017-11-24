@@ -50,7 +50,7 @@ class WC_Settings_Rest_API extends WC_Settings_Page {
 	/**
 	 * Get settings array.
 	 *
-	 * @param string $current_section
+	 * @param  string $current_section
 	 * @return array
 	 */
 	public function get_settings( $current_section = '' ) {
@@ -75,7 +75,7 @@ class WC_Settings_Rest_API extends WC_Settings_Page {
 
 				array(
 					'type' => 'sectionend',
-					'id' => 'general_options',
+					'id'   => 'general_options',
 				),
 			) );
 		}
@@ -156,6 +156,7 @@ class WC_Settings_Rest_API extends WC_Settings_Page {
 			WC_Admin_Settings::save_fields( $settings );
 		}
 	}
+
 }
 
 endif;

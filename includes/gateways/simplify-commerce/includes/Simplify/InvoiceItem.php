@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/*
+/**
  * Copyright (c) 2013 - 2015 MasterCard International Incorporated
  * All rights reserved.
  *
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Simplify_InvoiceItem extends Simplify_Object {
 	/**
 	 * Creates an Simplify_InvoiceItem object
-	 * @param     array $hash a map of parameters; valid keys are:<dl style="padding-left:10px;">
+	 * @param  array       $hash           a map of parameters; valid keys are:<dl style="padding-left:10px;">
 	 *     <dt><tt>amount</tt></dt>    <dd>Amount of the invoice item in the smallest unit of your currency. Example: 100 = $1.00USD [min value: -9999900, max value: 9999900] <strong>required </strong></dd>
 	 *     <dt><tt>description</tt></dt>    <dd>Individual items of an invoice [max length: 1024] </dd>
 	 *     <dt><tt>invoice</tt></dt>    <dd>The ID of the invoice this item belongs to. </dd>
@@ -42,60 +42,54 @@ class Simplify_InvoiceItem extends Simplify_Object {
 	 *     <dt><tt>quantity</tt></dt>    <dd>Quantity of the item.  This total amount of the invoice item is the amount * quantity. [min value: 1, max value: 999999, default: 1] </dd>
 	 *     <dt><tt>reference</tt></dt>    <dd>User defined reference field. [max length: 255] </dd>
 	 *     <dt><tt>tax</tt></dt>    <dd>The tax ID of the tax charge in the invoice item. </dd></dl>
-	 * @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.<i/>
-	 * @return    InvoiceItem a InvoiceItem object.
+	 * @param              $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.<i/>
+	 * @return InvoiceItem                 a InvoiceItem object.
 	 */
-	static public function createInvoiceItem($hash, $authentication = null) {
-
-		$args = func_get_args();
-		$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 2);
+	static public function createInvoiceItem( $hash, $authentication = null ) {
+		$args           = func_get_args();
+		$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 2 );
 
 		$instance = new Simplify_InvoiceItem();
-		$instance->setAll($hash);
+		$instance->setAll( $hash );
 
-		$object = Simplify_PaymentsApi::createObject($instance, $authentication);
+		$object = Simplify_PaymentsApi::createObject( $instance, $authentication );
 		return $object;
 	}
-
 
 	/**
 	 * Deletes an Simplify_InvoiceItem object.
 	 *
-	 * @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
+	 * @param       $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
 	 *
 	 * @return true
 	 */
-		public function deleteInvoiceItem($authentication = null) {
+		public function deleteInvoiceItem( $authentication = null ) {
+			$args           = func_get_args();
+			$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 1 );
 
-			$args = func_get_args();
-			$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 1);
-
-			$obj = Simplify_PaymentsApi::deleteObject($this, $authentication);
+			$obj              = Simplify_PaymentsApi::deleteObject( $this, $authentication );
 			$this->properties = null;
 			return true;
 		}
 
-
 		/**
 		 * Retrieve a Simplify_InvoiceItem object from the API
 		 *
-		 * @param     string id  the id of the InvoiceItem object to retrieve
-		 * @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
-		 * @return    InvoiceItem a InvoiceItem object
+		 * @param  string                      id  the id of the InvoiceItem object to retrieve
+		 * @param              $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
+		 * @return InvoiceItem                 a InvoiceItem object
 		 */
-		static public function findInvoiceItem($id, $authentication = null) {
+		static public function findInvoiceItem( $id, $authentication = null ) {
+			$args           = func_get_args();
+			$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 2 );
 
-			$args = func_get_args();
-			$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 2);
-
-			$val = new Simplify_InvoiceItem();
+			$val     = new Simplify_InvoiceItem();
 			$val->id = $id;
 
-			$obj = Simplify_PaymentsApi::findObject($val, $authentication);
+			$obj = Simplify_PaymentsApi::findObject( $val, $authentication );
 
 			return $obj;
 		}
-
 
 		/**
 		 * Updates an Simplify_InvoiceItem object.
@@ -107,15 +101,14 @@ class Simplify_InvoiceItem extends Simplify_Object {
 		 *     <dt><tt>quantity</tt></dt>    <dd>Quantity of the item.  This total amount of the invoice item is the amount * quantity. [min value: 1, max value: 999999] </dd>
 		 *     <dt><tt>reference</tt></dt>    <dd>User defined reference field. </dd>
 		 *     <dt><tt>tax</tt></dt>    <dd>The tax ID of the tax charge in the invoice item. </dd></dl>
-		 * @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
-		 * @return    InvoiceItem a InvoiceItem object.
+		 * @param              $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
+		 * @return InvoiceItem                 a InvoiceItem object.
 		 */
-		public function updateInvoiceItem($authentication = null)  {
+		public function updateInvoiceItem( $authentication = null ) {
+			$args           = func_get_args();
+			$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 1 );
 
-			$args = func_get_args();
-			$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 1);
-
-			$object = Simplify_PaymentsApi::updateObject($this, $authentication);
+			$object = Simplify_PaymentsApi::updateObject( $this, $authentication );
 			return $object;
 		}
 
@@ -123,6 +116,7 @@ class Simplify_InvoiceItem extends Simplify_Object {
 	 * @ignore
 	 */
 	public function getClazz() {
-		return "InvoiceItem";
+		return 'InvoiceItem';
 	}
+
 }

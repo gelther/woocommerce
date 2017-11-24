@@ -17,15 +17,15 @@ interface WC_Order_Item_Data_Store_Interface {
 	/**
 	 * Add an order item to an order.
 	 * @param  int   $order_id
-	 * @param  array $item order_item_name and order_item_type.
-	 * @return int   Order Item ID
+	 * @param  array $item     order_item_name and order_item_type.
+	 * @return int             Order Item ID
 	 */
 	public function add_order_item( $order_id, $item );
 
 	/**
 	 * Update an order item.
-	 * @param  int   $item_id
-	 * @param  array $item order_item_name or order_item_type.
+	 * @param  int     $item_id
+	 * @param  array   $item    order_item_name or order_item_type.
 	 * @return boolean
 	 */
 	public function update_order_item( $item_id, $item );
@@ -51,8 +51,8 @@ interface WC_Order_Item_Data_Store_Interface {
 	 * @param  int    $item_id
 	 * @param  string $meta_key
 	 * @param  mixed  $meta_value
-	 * @param  bool   $unique (default: false)
-	 * @return int    New row ID or 0
+	 * @param  bool   $unique     (default: false)
+	 * @return int                New row ID or 0
 	 */
 	function add_metadata( $item_id, $meta_key, $meta_value, $unique = false );
 
@@ -71,7 +71,7 @@ interface WC_Order_Item_Data_Store_Interface {
 	 * Get term meta.
 	 * @param  int    $item_id
 	 * @param  string $key
-	 * @param  bool   $single (default: true)
+	 * @param  bool   $single  (default: true)
 	 * @return mixed
 	 */
 	function get_metadata( $item_id, $key, $single = true );
@@ -85,7 +85,7 @@ interface WC_Order_Item_Data_Store_Interface {
 
 	/**
 	 * Get the order item type based on Item ID.
-	 * @param  int $item_id
+	 * @param  int    $item_id
 	 * @return string
 	 */
 	public function get_order_item_type( $item_id );

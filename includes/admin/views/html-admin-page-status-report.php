@@ -45,17 +45,17 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		<tr>
 			<td data-export-label="Home URL"><?php _e( 'Home URL', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The homepage URL of your site.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $environment['home_url'] ) ?></td>
+			<td><?php echo esc_html( $environment['home_url'] ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="Site URL"><?php _e( 'Site URL', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The root URL of your site.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $environment['site_url'] ) ?></td>
+			<td><?php echo esc_html( $environment['site_url'] ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="WC Version"><?php _e( 'WC version', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The version of WooCommerce installed on your site.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $environment['version'] ) ?></td>
+			<td><?php echo esc_html( $environment['version'] ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="Log Directory Writable"><?php _e( 'Log directory writable', 'woocommerce' ); ?>:</td>
@@ -71,7 +71,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		<tr>
 			<td data-export-label="WP Version"><?php _e( 'WP version', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The version of WordPress installed on your site.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $environment['wp_version'] ) ?></td>
+			<td><?php echo esc_html( $environment['wp_version'] ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="WP Multisite"><?php _e( 'WP multisite', 'woocommerce' ); ?>:</td>
@@ -114,7 +114,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		<tr>
 			<td data-export-label="Language"><?php _e( 'Language', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The current language used by WordPress. Default = English', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $environment['language'] ) ?></td>
+			<td><?php echo esc_html( $environment['language'] ); ?></td>
 		</tr>
 	</tbody>
 </table>
@@ -145,22 +145,22 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 			<tr>
 				<td data-export-label="PHP Post Max Size"><?php _e( 'PHP post max size', 'woocommerce' ); ?>:</td>
 				<td class="help"><?php echo wc_help_tip( __( 'The largest filesize that can be contained in one post.', 'woocommerce' ) ); ?></td>
-				<td><?php echo esc_html( size_format( $environment['php_post_max_size'] ) ) ?></td>
+				<td><?php echo esc_html( size_format( $environment['php_post_max_size'] ) ); ?></td>
 			</tr>
 			<tr>
 				<td data-export-label="PHP Time Limit"><?php _e( 'PHP time limit', 'woocommerce' ); ?>:</td>
 				<td class="help"><?php echo wc_help_tip( __( 'The amount of time (in seconds) that your site will spend on a single operation before timing out (to avoid server lockups)', 'woocommerce' ) ); ?></td>
-				<td><?php echo esc_html( $environment['php_max_execution_time'] ) ?></td>
+				<td><?php echo esc_html( $environment['php_max_execution_time'] ); ?></td>
 			</tr>
 			<tr>
 				<td data-export-label="PHP Max Input Vars"><?php _e( 'PHP max input vars', 'woocommerce' ); ?>:</td>
 				<td class="help"><?php echo wc_help_tip( __( 'The maximum number of variables your server can use for a single function to avoid overloads.', 'woocommerce' ) ); ?></td>
-				<td><?php echo esc_html( $environment['php_max_input_vars'] ) ?></td>
+				<td><?php echo esc_html( $environment['php_max_input_vars'] ); ?></td>
 			</tr>
 			<tr>
 				<td data-export-label="cURL Version"><?php _e( 'cURL version', 'woocommerce' ); ?>:</td>
 				<td class="help"><?php echo wc_help_tip( __( 'The version of cURL installed on your server.', 'woocommerce' ) ); ?></td>
-				<td><?php echo esc_html( $environment['curl_version'] ) ?></td>
+				<td><?php echo esc_html( $environment['curl_version'] ); ?></td>
 			</tr>
 			<tr>
 				<td data-export-label="SUHOSIN Installed"><?php _e( 'SUHOSIN installed', 'woocommerce' ); ?>:</td>
@@ -191,7 +191,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		<tr>
 			<td data-export-label="Max Upload Size"><?php _e( 'Max upload size', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The largest filesize that can be uploaded to your WordPress installation.', 'woocommerce' ) ); ?></td>
-			<td><?php echo size_format( $environment['max_upload_size'] ) ?></td>
+			<td><?php echo size_format( $environment['max_upload_size'] ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="Default Timezone is UTC"><?php _e( 'Default timezone is UTC', 'woocommerce' ); ?>:</td>
@@ -286,10 +286,10 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		foreach ( $rows as $row ) {
 			if ( ! empty( $row['success'] ) ) {
 				$css_class = 'yes';
-				$icon = '<span class="dashicons dashicons-yes"></span>';
+				$icon      = '<span class="dashicons dashicons-yes"></span>';
 			} else {
 				$css_class = 'error';
-				$icon = '<span class="dashicons dashicons-no-alt"></span>';
+				$icon      = '<span class="dashicons dashicons-no-alt"></span>';
 			}
 			?>
 			<tr>
@@ -334,12 +334,12 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
             <td data-export-label="MaxMind GeoIP Database"><?php _e( 'MaxMind GeoIP database', 'woocommerce' ); ?>:</td>
             <td class="help"><?php echo wc_help_tip( __( 'The GeoIP database from MaxMind is used to geolocate customers.', 'woocommerce' ) ); ?></td>
             <td><?php
-			    if ( file_exists( $database['maxmind_geoip_database'] ) ) {
-				    echo '<mark class="yes"><span class="dashicons dashicons-yes"></span> <code class="private">' . esc_html( $database['maxmind_geoip_database'] ) . '</code></mark> ';
-			    } else {
-				    printf( '<mark class="error"><span class="dashicons dashicons-warning"></span> ' . sprintf( __( 'The MaxMind GeoIP Database does not exist - Geolocation will not function. You can download and install it manually from %1$s to the path: %2$s. Scroll down to "Downloads" and download the "Binary / gzip" file next to "GeoLite Country". Please remember to uncompress GeoIP.dat.gz and upload the GeoIP.dat file only.', 'woocommerce' ), make_clickable( 'http://dev.maxmind.com/geoip/legacy/geolite/' ), '<code class="private">' . $database['maxmind_geoip_database'] . '</code>' ) . '</mark>', WC_LOG_DIR );
-			    }
-			    ?></td>
+				if ( file_exists( $database['maxmind_geoip_database'] ) ) {
+					echo '<mark class="yes"><span class="dashicons dashicons-yes"></span> <code class="private">' . esc_html( $database['maxmind_geoip_database'] ) . '</code></mark> ';
+				} else {
+					printf( '<mark class="error"><span class="dashicons dashicons-warning"></span> ' . sprintf( __( 'The MaxMind GeoIP Database does not exist - Geolocation will not function. You can download and install it manually from %1$s to the path: %2$s. Scroll down to "Downloads" and download the "Binary / gzip" file next to "GeoLite Country". Please remember to uncompress GeoIP.dat.gz and upload the GeoIP.dat file only.', 'woocommerce' ), make_clickable( 'http://dev.maxmind.com/geoip/legacy/geolite/' ), '<code class="private">' . $database['maxmind_geoip_database'] . '</code>' ) . '</mark>', WC_LOG_DIR );
+				}
+				?></td>
         </tr>
     <?php } ?>
 
@@ -366,7 +366,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
         <td><?php echo esc_html( $table ); ?></td>
         <td class="help">&nbsp;</td>
         <td>
-			<?php if( ! $table_data ) {
+			<?php if ( ! $table_data ) {
 				echo '<mark class="error"><span class="dashicons dashicons-warning"></span> ' . __( 'Table does not exist', 'woocommerce' ) . '</mark>';
 			} else {
 				printf( __( 'Data: %.2fMB + Index: %.2fMB', 'woocommerce' ), wc_format_decimal( $table_data['data'], 2 ), wc_format_decimal( $table_data['index'], 2 ) );
@@ -440,7 +440,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 <table class="wc_status_table widefat" cellspacing="0">
 	<thead>
 		<tr>
-			<th colspan="3" data-export-label="Active Plugins (<?php echo count( $active_plugins ) ?>)"><h2><?php _e( 'Active plugins', 'woocommerce' ); ?> (<?php echo count( $active_plugins ) ?>)</h2></th>
+			<th colspan="3" data-export-label="Active Plugins (<?php echo count( $active_plugins ); ?>)"><h2><?php _e( 'Active plugins', 'woocommerce' ); ?> (<?php echo count( $active_plugins ); ?>)</h2></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -452,7 +452,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 				// Link the plugin name to the plugin url if available.
 				$plugin_name = esc_html( $plugin['name'] );
 				if ( ! empty( $plugin['url'] ) ) {
-					$plugin_name = '<a href="' . esc_url( $plugin['url'] ) . '" aria-label="' . esc_attr__( 'Visit plugin homepage' , 'woocommerce' ) . '" target="_blank">' . $plugin_name . '</a>';
+					$plugin_name = '<a href="' . esc_url( $plugin['url'] ) . '" aria-label="' . esc_attr__( 'Visit plugin homepage', 'woocommerce' ) . '" target="_blank">' . $plugin_name . '</a>';
 				}
 
 				$version_string = '';
@@ -505,29 +505,29 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 			<td><?php echo $settings['force_ssl'] ? '<mark class="yes"><span class="dashicons dashicons-yes"></span></mark>' : '<mark class="no">&ndash;</mark>'; ?></td>
 		</tr>
 		<tr>
-			<td data-export-label="Currency"><?php _e( 'Currency', 'woocommerce' ) ?></td>
+			<td data-export-label="Currency"><?php _e( 'Currency', 'woocommerce' ); ?></td>
 			<td class="help"><?php echo wc_help_tip( __( 'What currency prices are listed at in the catalog and which currency gateways will take payments in.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $settings['currency'] ) ?> (<?php echo esc_html( $settings['currency_symbol'] ) ?>)</td>
+			<td><?php echo esc_html( $settings['currency'] ); ?> (<?php echo esc_html( $settings['currency_symbol'] ); ?>)</td>
 		</tr>
 		<tr>
-			<td data-export-label="Currency Position"><?php _e( 'Currency position', 'woocommerce' ) ?></td>
+			<td data-export-label="Currency Position"><?php _e( 'Currency position', 'woocommerce' ); ?></td>
 			<td class="help"><?php echo wc_help_tip( __( 'The position of the currency symbol.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $settings['currency_position'] ) ?></td>
+			<td><?php echo esc_html( $settings['currency_position'] ); ?></td>
 		</tr>
 		<tr>
-			<td data-export-label="Thousand Separator"><?php _e( 'Thousand separator', 'woocommerce' ) ?></td>
+			<td data-export-label="Thousand Separator"><?php _e( 'Thousand separator', 'woocommerce' ); ?></td>
 			<td class="help"><?php echo wc_help_tip( __( 'The thousand separator of displayed prices.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $settings['thousand_separator'] ) ?></td>
+			<td><?php echo esc_html( $settings['thousand_separator'] ); ?></td>
 		</tr>
 		<tr>
-			<td data-export-label="Decimal Separator"><?php _e( 'Decimal separator', 'woocommerce' ) ?></td>
+			<td data-export-label="Decimal Separator"><?php _e( 'Decimal separator', 'woocommerce' ); ?></td>
 			<td class="help"><?php echo wc_help_tip( __( 'The decimal separator of displayed prices.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $settings['decimal_separator'] ) ?></td>
+			<td><?php echo esc_html( $settings['decimal_separator'] ); ?></td>
 		</tr>
 		<tr>
-			<td data-export-label="Number of Decimals"><?php _e( 'Number of decimals', 'woocommerce' ) ?></td>
+			<td data-export-label="Number of Decimals"><?php _e( 'Number of decimals', 'woocommerce' ); ?></td>
 			<td class="help"><?php echo wc_help_tip( __( 'The number of decimal points shown in displayed prices.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $settings['number_of_decimals'] ) ?></td>
+			<td><?php echo esc_html( $settings['number_of_decimals'] ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="Taxonomies: Product Types"><?php _e( 'Taxonomies: Product types', 'woocommerce' ); ?></th>
@@ -563,7 +563,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		<?php
 			$alt = 1;
 			foreach ( $pages as $page ) {
-				$error   = false;
+				$error = false;
 
 				if ( $page['page_id'] ) {
 					$page_name = '<a href="' . get_edit_post_link( $page['page_id'] ) . '" aria-label="' . sprintf( __( 'Edit %s page', 'woocommerce' ), esc_html( $page['page_name'] ) ) . '">' . esc_html( $page['page_name'] ) . '</a>';
@@ -613,7 +613,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		<tr>
 			<td data-export-label="Name"><?php _e( 'Name', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The name of the current active theme.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $theme['name'] ) ?></td>
+			<td><?php echo esc_html( $theme['name'] ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="Version"><?php _e( 'Version', 'woocommerce' ); ?>:</td>
@@ -629,7 +629,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		<tr>
 			<td data-export-label="Author URL"><?php _e( 'Author URL', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The theme developers URL.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $theme['author_url'] ) ?></td>
+			<td><?php echo esc_html( $theme['author_url'] ); ?></td>
 		</tr>
 		<tr>
 			<td data-export-label="Child Theme"><?php _e( 'Child theme', 'woocommerce' ); ?>:</td>
@@ -660,9 +660,9 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 		<tr>
 			<td data-export-label="Parent Theme Author URL"><?php _e( 'Parent theme author URL', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'The parent theme developers URL.', 'woocommerce' ) ); ?></td>
-			<td><?php echo esc_html( $theme['parent_author_url'] ) ?></td>
+			<td><?php echo esc_html( $theme['parent_author_url'] ); ?></td>
 		</tr>
-		<?php endif ?>
+		<?php endif; ?>
 		<tr>
 			<td data-export-label="WooCommerce Support"><?php _e( 'WooCommerce support', 'woocommerce' ); ?>:</td>
 			<td class="help"><?php echo wc_help_tip( __( 'Displays whether or not the current active theme declares WooCommerce support.', 'woocommerce' ) ); ?></td>
@@ -689,7 +689,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 			<td class="help">&nbsp;</td>
 			<td><?php _e( 'Your theme has a woocommerce.php file, you will not be able to override the woocommerce/archive-product.php custom template since woocommerce.php has priority over archive-product.php. This is intended to prevent display issues.', 'woocommerce' ); ?></td>
 		</tr>
-		<?php endif ?>
+		<?php endif; ?>
 		<?php
 			if ( ! empty( $theme['overrides'] ) ) { ?>
 					<tr>
@@ -735,7 +735,7 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 				<tr>
 					<td data-export-label="Outdated Templates"><?php _e( 'Outdated templates', 'woocommerce' ); ?>:</td>
 					<td class="help">&nbsp;</td>
-					<td><mark class="error"><span class="dashicons dashicons-warning"></span></mark><a href="https://docs.woocommerce.com/document/fix-outdated-templates-woocommerce/" target="_blank"><?php _e( 'Learn how to update', 'woocommerce' ) ?></a></td>
+					<td><mark class="error"><span class="dashicons dashicons-warning"></span></mark><a href="https://docs.woocommerce.com/document/fix-outdated-templates-woocommerce/" target="_blank"><?php _e( 'Learn how to update', 'woocommerce' ); ?></a></td>
 				</tr>
 				<?php
 			}
@@ -743,4 +743,4 @@ $untested_plugins = $plugin_updates->get_untested_plugins( WC()->version, 'minor
 	</tbody>
 </table>
 
-<?php do_action( 'woocommerce_system_status_report' ); ?>
+<?php do_action( 'woocommerce_system_status_report' );

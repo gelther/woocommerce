@@ -33,7 +33,7 @@ class WC_Order_Item_Shipping extends WC_Order_Item {
 	 *
 	 * @since  3.2.0
 	 * @param  array $calculate_tax_for Location data to get taxes for. Required.
-	 * @return bool  True if taxes were calculated.
+	 * @return bool                     True if taxes were calculated.
 	 */
 	public function calculate_taxes( $calculate_tax_for = array() ) {
 		if ( ! isset( $calculate_tax_for['country'], $calculate_tax_for['state'], $calculate_tax_for['postcode'], $calculate_tax_for['city'], $calculate_tax_for['tax_class'] ) ) {
@@ -119,13 +119,13 @@ class WC_Order_Item_Shipping extends WC_Order_Item {
 	public function set_taxes( $raw_tax_data ) {
 		$raw_tax_data = maybe_unserialize( $raw_tax_data );
 		$tax_data     = array(
-			'total'    => array(),
+			'total' => array(),
 		);
 		if ( isset( $raw_tax_data['total'] ) ) {
-			$tax_data['total']    = array_map( 'wc_format_decimal', $raw_tax_data['total'] );
+			$tax_data['total'] = array_map( 'wc_format_decimal', $raw_tax_data['total'] );
 		} elseif ( ! empty( $raw_tax_data ) && is_array( $raw_tax_data ) ) {
 			// Older versions just used an array.
-			$tax_data['total']    = array_map( 'wc_format_decimal', $raw_tax_data );
+			$tax_data['total'] = array_map( 'wc_format_decimal', $raw_tax_data );
 		}
 		$this->set_prop( 'taxes', $tax_data );
 		$this->set_total_tax( array_sum( $tax_data['total'] ) );
@@ -246,7 +246,7 @@ class WC_Order_Item_Shipping extends WC_Order_Item {
 	/**
 	 * offsetGet for ArrayAccess/Backwards compatibility.
 	 * @deprecated Add deprecation notices in future release.
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return mixed
 	 */
 	public function offsetGet( $offset ) {
@@ -260,7 +260,7 @@ class WC_Order_Item_Shipping extends WC_Order_Item {
 	 * offsetSet for ArrayAccess/Backwards compatibility.
 	 * @deprecated Add deprecation notices in future release.
 	 * @param string $offset
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function offsetSet( $offset, $value ) {
 		if ( 'cost' === $offset ) {
@@ -271,7 +271,7 @@ class WC_Order_Item_Shipping extends WC_Order_Item {
 
 	/**
 	 * offsetExists for ArrayAccess
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return bool
 	 */
 	public function offsetExists( $offset ) {
@@ -280,4 +280,5 @@ class WC_Order_Item_Shipping extends WC_Order_Item {
 		}
 		return parent::offsetExists( $offset );
 	}
+
 }

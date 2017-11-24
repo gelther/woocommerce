@@ -21,16 +21,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function wc_get_coupon_types() {
 	return (array) apply_filters( 'woocommerce_coupon_discount_types', array(
-		'percent'         => __( 'Percentage discount', 'woocommerce' ),
-		'fixed_cart'      => __( 'Fixed cart discount', 'woocommerce' ),
-		'fixed_product'   => __( 'Fixed product discount', 'woocommerce' ),
+		'percent'       => __( 'Percentage discount', 'woocommerce' ),
+		'fixed_cart'    => __( 'Fixed cart discount', 'woocommerce' ),
+		'fixed_product' => __( 'Fixed product discount', 'woocommerce' ),
 	) );
 }
 
 /**
  * Get a coupon type's name.
  *
- * @param string $type (default: '')
+ * @param  string $type (default: '')
  * @return string
  */
 function wc_get_coupon_type( $type = '' ) {
@@ -74,7 +74,7 @@ function wc_coupons_enabled() {
  * Get coupon code by ID.
  *
  * @since 3.0.0
- * @param int $id Coupon ID.
+ * @param  int    $id Coupon ID.
  * @return string
  */
 function wc_get_coupon_code_by_id( $id ) {
@@ -86,8 +86,8 @@ function wc_get_coupon_code_by_id( $id ) {
  * Get coupon code by ID.
  *
  * @since 3.0.0
- * @param string $code
- * @param int $exclude Used to exclude an ID from the check if you're checking existence.
+ * @param  string $code
+ * @param  int    $exclude Used to exclude an ID from the check if you're checking existence.
  * @return int
  */
 function wc_get_coupon_id_by_code( $code, $exclude = 0 ) {

@@ -64,5 +64,4 @@ abstract class WC_Legacy_Shipping_Zone extends WC_Data {
 		}
 	}
 
-
 }

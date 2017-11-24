@@ -106,4 +106,5 @@ class WC_Tests_Data_Store extends WC_Unit_Test_Case {
 	function set_default_product_store( $store ) {
 		return 'WC_Dummy_Data_Store_CPT';
 	}
+
 }

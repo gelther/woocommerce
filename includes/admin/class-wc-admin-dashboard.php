@@ -46,21 +46,21 @@ class WC_Admin_Dashboard {
 	private function get_top_seller() {
 		global $wpdb;
 
-		$query            = array();
-		$query['fields']  = "SELECT SUM( order_item_meta.meta_value ) as qty, order_item_meta_2.meta_value as product_id
+		$query             = array();
+		$query['fields']   = "SELECT SUM( order_item_meta.meta_value ) as qty, order_item_meta_2.meta_value as product_id
 			FROM {$wpdb->posts} as posts";
-		$query['join']    = "INNER JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_id ";
-		$query['join']   .= "INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id ";
-		$query['join']   .= "INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta_2 ON order_items.order_item_id = order_item_meta_2.order_item_id ";
-		$query['where']   = "WHERE posts.post_type IN ( '" . implode( "','", wc_get_order_types( 'order-count' ) ) . "' ) ";
-		$query['where']  .= "AND posts.post_status IN ( 'wc-" . implode( "','wc-", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "' ) ";
-		$query['where']  .= "AND order_item_meta.meta_key = '_qty' ";
-		$query['where']  .= "AND order_item_meta_2.meta_key = '_product_id' ";
-		$query['where']  .= "AND posts.post_date >= '" . date( 'Y-m-01', current_time( 'timestamp' ) ) . "' ";
-		$query['where']  .= "AND posts.post_date <= '" . date( 'Y-m-d H:i:s', current_time( 'timestamp' ) ) . "' ";
-		$query['groupby'] = "GROUP BY product_id";
-		$query['orderby'] = "ORDER BY qty DESC";
-		$query['limits']  = "LIMIT 1";
+		$query['join']     = "INNER JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON posts.ID = order_id ";
+		$query['join']    .= "INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id ";
+		$query['join']    .= "INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS order_item_meta_2 ON order_items.order_item_id = order_item_meta_2.order_item_id ";
+		$query['where']    = "WHERE posts.post_type IN ( '" . implode( "','", wc_get_order_types( 'order-count' ) ) . "' ) ";
+		$query['where']   .= "AND posts.post_status IN ( 'wc-" . implode( "','wc-", apply_filters( 'woocommerce_reports_order_statuses', array( 'completed', 'processing', 'on-hold' ) ) ) . "' ) ";
+		$query['where']   .= "AND order_item_meta.meta_key = '_qty' ";
+		$query['where']   .= "AND order_item_meta_2.meta_key = '_product_id' ";
+		$query['where']   .= "AND posts.post_date >= '" . date( 'Y-m-01', current_time( 'timestamp' ) ) . "' ";
+		$query['where']   .= "AND posts.post_date <= '" . date( 'Y-m-d H:i:s', current_time( 'timestamp' ) ) . "' ";
+		$query['groupby']  = 'GROUP BY product_id';
+		$query['orderby']  = 'ORDER BY qty DESC';
+		$query['limits']   = 'LIMIT 1';
 
 		return $wpdb->get_row( implode( ' ', apply_filters( 'woocommerce_dashboard_status_widget_top_seller_query', $query ) ) );
 	}
@@ -144,7 +144,7 @@ class WC_Admin_Dashboard {
 		$processing_count = 0;
 
 		foreach ( wc_get_order_types( 'order-count' ) as $type ) {
-			$counts           = (array) wp_count_posts( $type );
+			$counts            = (array) wp_count_posts( $type );
 			$on_hold_count    += isset( $counts['wc-on-hold'] ) ? $counts['wc-on-hold'] : 0;
 			$processing_count += isset( $counts['wc-processing'] ) ? $counts['wc-processing'] : 0;
 		}
@@ -186,7 +186,7 @@ class WC_Admin_Dashboard {
 		$transient_name = 'wc_low_stock_count';
 
 		if ( false === ( $lowinstock_count = get_transient( $transient_name ) ) ) {
-			$query_from = apply_filters( 'woocommerce_report_low_in_stock_query_from', "FROM {$wpdb->posts} as posts
+			$query_from       = apply_filters( 'woocommerce_report_low_in_stock_query_from', "FROM {$wpdb->posts} as posts
 				INNER JOIN {$wpdb->postmeta} AS postmeta ON posts.ID = postmeta.post_id
 				INNER JOIN {$wpdb->postmeta} AS postmeta2 ON posts.ID = postmeta2.post_id
 				WHERE 1=1
@@ -203,7 +203,7 @@ class WC_Admin_Dashboard {
 		$transient_name = 'wc_outofstock_count';
 
 		if ( false === ( $outofstock_count = get_transient( $transient_name ) ) ) {
-			$query_from = apply_filters( 'woocommerce_report_out_of_stock_query_from', "FROM {$wpdb->posts} as posts
+			$query_from       = apply_filters( 'woocommerce_report_out_of_stock_query_from', "FROM {$wpdb->posts} as posts
 				INNER JOIN {$wpdb->postmeta} AS postmeta ON posts.ID = postmeta.post_id
 				INNER JOIN {$wpdb->postmeta} AS postmeta2 ON posts.ID = postmeta2.post_id
 				WHERE 1=1
@@ -286,6 +286,7 @@ class WC_Admin_Dashboard {
 			echo '<p>' . __( 'There are no product reviews yet.', 'woocommerce' ) . '</p>';
 		}
 	}
+
 }
 
 endif;

@@ -42,8 +42,8 @@ class WC_Data_Store_WP {
 	 *
 	 * @since  3.0.0
 	 * @param  WC_Data|integer $object
-	 * @param  string $taxonomy Taxonomy name e.g. product_cat
-	 * @return array of terms
+	 * @param  string          $taxonomy Taxonomy name e.g. product_cat
+	 * @return array                     of terms
 	 */
 	protected function get_term_ids( $object, $taxonomy ) {
 		if ( is_numeric( $object ) ) {
@@ -84,8 +84,8 @@ class WC_Data_Store_WP {
 	 * Deletes meta based on meta ID.
 	 *
 	 * @since  3.0.0
-	 * @param  WC_Data
-	 * @param  stdClass (containing at least ->id)
+	 * @param WC_Data
+	 * @param stdClass (containing at least ->id)
 	 */
 	public function delete_meta( &$object, $meta ) {
 		delete_metadata_by_mid( $this->meta_type, $meta->id );
@@ -97,7 +97,7 @@ class WC_Data_Store_WP {
 	 * @since  3.0.0
 	 * @param  WC_Data
 	 * @param  stdClass (containing ->key and ->value)
-	 * @return int meta ID
+	 * @return int      meta ID
 	 */
 	public function add_meta( &$object, $meta ) {
 		return add_metadata( $this->meta_type, $object->get_id(), $meta->key, is_string( $meta->value ) ? wp_slash( $meta->value ) : $meta->value, false );
@@ -107,8 +107,8 @@ class WC_Data_Store_WP {
 	 * Update meta.
 	 *
 	 * @since  3.0.0
-	 * @param  WC_Data
-	 * @param  stdClass (containing ->id, ->key and ->value)
+	 * @param WC_Data
+	 * @param stdClass (containing ->id, ->key and ->value)
 	 */
 	public function update_meta( &$object, $meta ) {
 		update_metadata_by_mid( $this->meta_type, $meta->id, $meta->value, $meta->key );
@@ -123,16 +123,16 @@ class WC_Data_Store_WP {
 	protected function get_db_info() {
 		global $wpdb;
 
-		$meta_id_field   = 'meta_id'; // for some reason users calls this umeta_id so we need to track this as well.
-		$table           = $wpdb->prefix;
+		$meta_id_field = 'meta_id'; // for some reason users calls this umeta_id so we need to track this as well.
+		$table         = $wpdb->prefix;
 
 		// If we are dealing with a type of metadata that is not a core type, the table should be prefixed.
 		if ( ! in_array( $this->meta_type, array( 'post', 'user', 'comment', 'term' ) ) ) {
 			$table .= 'woocommerce_';
 		}
 
-		$table          .= $this->meta_type . 'meta';
-		$object_id_field = $this->meta_type . '_id';
+		$table           .= $this->meta_type . 'meta';
+		$object_id_field  = $this->meta_type . '_id';
 
 		// Figure out our field names.
 		if ( 'user' === $this->meta_type ) {
@@ -156,7 +156,7 @@ class WC_Data_Store_WP {
 	 * addition to all data props with _ prefix.
 	 * @since 2.6.0
 	 *
-	 * @param string $key
+	 * @param  string $key
 	 *
 	 * @return string
 	 */
@@ -167,7 +167,7 @@ class WC_Data_Store_WP {
 	/**
 	 * Callback to remove unwanted meta data.
 	 *
-	 * @param object $meta
+	 * @param  object $meta
 	 * @return bool
 	 */
 	protected function exclude_internal_meta_keys( $meta ) {
@@ -178,10 +178,10 @@ class WC_Data_Store_WP {
 	 * Gets a list of props and meta keys that need updated based on change state
 	 * or if they are present in the database or not.
 	 *
-	 * @param  WC_Data $object              The WP_Data object (WC_Coupon for coupons, etc).
-	 * @param  array   $meta_key_to_props   A mapping of meta keys => prop names.
-	 * @param  string  $meta_type           The internal WP meta type (post, user, etc).
-	 * @return array                        A mapping of meta keys => prop names, filtered by ones that should be updated.
+	 * @param  WC_Data $object            The WP_Data object (WC_Coupon for coupons, etc).
+	 * @param  array   $meta_key_to_props A mapping of meta keys => prop names.
+	 * @param  string  $meta_type         The internal WP meta type (post, user, etc).
+	 * @return array                      A mapping of meta keys => prop names, filtered by ones that should be updated.
 	 */
 	protected function get_props_to_update( $object, $meta_key_to_props, $meta_type = 'post' ) {
 		$props_to_update = array();
@@ -201,13 +201,12 @@ class WC_Data_Store_WP {
 	 * Get valid WP_Query args from a WC_Object_Query's query variables.
 	 *
 	 * @since 3.1.0
-	 * @param array $query_vars query vars from a WC_Object_Query
+	 * @param  array $query_vars query vars from a WC_Object_Query
 	 * @return array
 	 */
 	protected function get_wp_query_args( $query_vars ) {
-
 		$skipped_values = array( '', array(), null );
-		$wp_query_args = array(
+		$wp_query_args  = array(
 			'errors'     => array(),
 			'meta_query' => array(),
 		);
@@ -252,10 +251,10 @@ class WC_Data_Store_WP {
 	 * Also accepts a WC_DateTime object.
 	 *
 	 * @since 3.2.0
-	 * @param mixed $query_var A valid date format
-	 * @param string $key meta or db column key
-	 * @param array $wp_query_args WP_Query args
-	 * @return array Modified $wp_query_args
+	 * @param  mixed  $query_var     A valid date format
+	 * @param  string $key           meta or db column key
+	 * @param  array  $wp_query_args WP_Query args
+	 * @return array                 Modified $wp_query_args
 	 */
 	public function parse_date_for_wp_query( $query_var, $key, $wp_query_args = array() ) {
 		$query_parse_regex = '/([^.<>]*)(>=|<=|>|<|\.\.\.)([^.<>]+)/';
@@ -283,7 +282,7 @@ class WC_Data_Store_WP {
 				}
 
 				$operator = in_array( $sections[2], $valid_operators ) ? $sections[2] : '';
-				$dates[] = is_numeric( $sections[3] ) ? new WC_DateTime( "@{$sections[3]}", new DateTimeZone( 'UTC' ) ) : wc_string_to_datetime( $sections[3] );
+				$dates[]  = is_numeric( $sections[3] ) ? new WC_DateTime( "@{$sections[3]}", new DateTimeZone( 'UTC' ) ) : wc_string_to_datetime( $sections[3] );
 
 				if ( ! is_numeric( $sections[1] ) && ! is_numeric( $sections[3] ) ) {
 					$precision = 'day';
@@ -291,7 +290,7 @@ class WC_Data_Store_WP {
 
 			// Specific time query with a string.
 			} else {
-				$dates[] = wc_string_to_datetime( $query_var );
+				$dates[]   = wc_string_to_datetime( $query_var );
 				$precision = 'day';
 			}
 		} catch ( Exception $e ) {
@@ -365,7 +364,7 @@ class WC_Data_Store_WP {
 		// Check against beginning/end-of-day timestamps when using 'day' precision.
 		if ( 'day' === $precision ) {
 			$start_timestamp = strtotime( gmdate( 'm/d/Y 00:00:00', $dates[0]->getTimestamp() ) );
-			$end_timestamp = '...' !== $operator ? ( $start_timestamp + DAY_IN_SECONDS ) : strtotime( gmdate( 'm/d/Y 00:00:00', $dates[1]->getTimestamp() ) );
+			$end_timestamp   = '...' !== $operator ? ( $start_timestamp + DAY_IN_SECONDS ) : strtotime( gmdate( 'm/d/Y 00:00:00', $dates[1]->getTimestamp() ) );
 			switch ( $operator ) {
 				case '>':
 				case '<=':
@@ -430,4 +429,5 @@ class WC_Data_Store_WP {
 	public function get_internal_meta_keys() {
 		return $this->internal_meta_keys;
 	}
+
 }

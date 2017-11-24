@@ -50,16 +50,16 @@ function wc_update_200_file_paths() {
  */
 function wc_update_200_permalinks() {
 	// Setup default permalinks if shop page is defined.
-	$permalinks 	= get_option( 'woocommerce_permalinks' );
-	$shop_page_id 	= wc_get_page_id( 'shop' );
+	$permalinks   = get_option( 'woocommerce_permalinks' );
+	$shop_page_id = wc_get_page_id( 'shop' );
 
 	if ( empty( $permalinks ) && $shop_page_id > 0 ) {
 
-		$base_slug 		= $shop_page_id > 0 && get_post( $shop_page_id ) ? get_page_uri( $shop_page_id ) : 'shop';
+		$base_slug = $shop_page_id > 0 && get_post( $shop_page_id ) ? get_page_uri( $shop_page_id ) : 'shop';
 
-		$category_base 	= get_option( 'woocommerce_prepend_shop_page_to_urls' ) == 'yes' ? trailingslashit( $base_slug ) : '';
-		$category_slug 	= get_option( 'woocommerce_product_category_slug' ) ? get_option( 'woocommerce_product_category_slug' ) : _x( 'product-category', 'slug', 'woocommerce' );
-		$tag_slug 		= get_option( 'woocommerce_product_tag_slug' ) ? get_option( 'woocommerce_product_tag_slug' ) : _x( 'product-tag', 'slug', 'woocommerce' );
+		$category_base = get_option( 'woocommerce_prepend_shop_page_to_urls' ) == 'yes' ? trailingslashit( $base_slug ) : '';
+		$category_slug = get_option( 'woocommerce_product_category_slug' ) ? get_option( 'woocommerce_product_category_slug' ) : _x( 'product-category', 'slug', 'woocommerce' );
+		$tag_slug      = get_option( 'woocommerce_product_tag_slug' ) ? get_option( 'woocommerce_product_tag_slug' ) : _x( 'product-tag', 'slug', 'woocommerce' );
 
 		if ( 'yes' == get_option( 'woocommerce_prepend_shop_page_to_products' ) ) {
 			$product_base = trailingslashit( $base_slug );
@@ -76,10 +76,10 @@ function wc_update_200_permalinks() {
 		}
 
 		$permalinks = array(
-			'product_base' 		=> untrailingslashit( $product_base ),
-			'category_base' 	=> untrailingslashit( $category_base . $category_slug ),
-			'attribute_base' 	=> untrailingslashit( $category_base ),
-			'tag_base' 			=> untrailingslashit( $category_base . $tag_slug ),
+			'product_base'   => untrailingslashit( $product_base ),
+			'category_base'  => untrailingslashit( $category_base . $category_slug ),
+			'attribute_base' => untrailingslashit( $category_base ),
+			'tag_base'       => untrailingslashit( $category_base . $tag_slug ),
 		);
 
 		update_option( 'woocommerce_permalinks', $permalinks );
@@ -119,7 +119,7 @@ function wc_update_200_taxrates() {
 	global $wpdb;
 
 	// Update tax rates.
-	$loop = 0;
+	$loop      = 0;
 	$tax_rates = get_option( 'woocommerce_tax_rates' );
 
 	if ( $tax_rates ) {
@@ -231,23 +231,23 @@ function wc_update_200_line_items() {
 		foreach ( $order_items as $order_item ) {
 
 			if ( ! isset( $order_item['line_total'] ) && isset( $order_item['taxrate'] ) && isset( $order_item['cost'] ) ) {
-				$order_item['line_tax'] 			= number_format( ( $order_item['cost'] * $order_item['qty'] ) * ( $order_item['taxrate'] / 100 ), 2, '.', '' );
-				$order_item['line_total'] 			= $order_item['cost'] * $order_item['qty'];
-				$order_item['line_subtotal_tax'] 	= $order_item['line_tax'];
-				$order_item['line_subtotal'] 		= $order_item['line_total'];
+				$order_item['line_tax']          = number_format( ( $order_item['cost'] * $order_item['qty'] ) * ( $order_item['taxrate'] / 100 ), 2, '.', '' );
+				$order_item['line_total']        = $order_item['cost'] * $order_item['qty'];
+				$order_item['line_subtotal_tax'] = $order_item['line_tax'];
+				$order_item['line_subtotal']     = $order_item['line_total'];
 			}
 
-			$order_item['line_tax'] 			= isset( $order_item['line_tax'] ) ? $order_item['line_tax'] : 0;
-			$order_item['line_total']			= isset( $order_item['line_total'] ) ? $order_item['line_total'] : 0;
-			$order_item['line_subtotal_tax'] 	= isset( $order_item['line_subtotal_tax'] ) ? $order_item['line_subtotal_tax'] : 0;
-			$order_item['line_subtotal'] 		= isset( $order_item['line_subtotal'] ) ? $order_item['line_subtotal'] : 0;
+			$order_item['line_tax']          = isset( $order_item['line_tax'] ) ? $order_item['line_tax'] : 0;
+			$order_item['line_total']        = isset( $order_item['line_total'] ) ? $order_item['line_total'] : 0;
+			$order_item['line_subtotal_tax'] = isset( $order_item['line_subtotal_tax'] ) ? $order_item['line_subtotal_tax'] : 0;
+			$order_item['line_subtotal']     = isset( $order_item['line_subtotal'] ) ? $order_item['line_subtotal'] : 0;
 
 			$item_id = wc_add_order_item( $order_item_row->post_id, array(
-				 'order_item_name' 		=> $order_item['name'],
-				 'order_item_type' 		=> 'line_item',
+				'order_item_name' => $order_item['name'],
+				'order_item_type' => 'line_item',
 			) );
 
-			 // Add line item meta.
+			// Add line item meta.
 			if ( $item_id ) {
 				wc_add_order_item_meta( $item_id, '_qty', absint( $order_item['qty'] ) );
 				wc_add_order_item_meta( $item_id, '_tax_class', $order_item['tax_class'] );
@@ -277,7 +277,7 @@ function wc_update_200_line_items() {
 					$wpdb->query( $wpdb->prepare( "
 						INSERT INTO {$wpdb->prefix}woocommerce_order_itemmeta ( order_item_id, meta_key, meta_value )
 						VALUES " . implode( ',', $meta_rows ) . ';
-                    ', $order_item_row->post_id ) );
+					', $order_item_row->post_id ) );
 				}
 
 				// Delete from DB (rename).
@@ -312,11 +312,11 @@ function wc_update_200_line_items() {
 				}
 
 				$item_id = wc_add_order_item( $order_tax_row->post_id, array(
-					 'order_item_name' 		=> $order_tax['label'],
-					 'order_item_type' 		=> 'tax',
+					'order_item_name' => $order_tax['label'],
+					'order_item_type' => 'tax',
 				) );
 
-				 // Add line item meta.
+				// Add line item meta.
 				if ( $item_id ) {
 					wc_add_order_item_meta( $item_id, 'compound', absint( isset( $order_tax['compound'] ) ? $order_tax['compound'] : 0 ) );
 					wc_add_order_item_meta( $item_id, 'tax_amount', wc_clean( $order_tax['cart_tax'] ) );
@@ -348,9 +348,9 @@ function wc_update_200_images() {
 	foreach ( array( 'catalog', 'single', 'thumbnail' ) as $value ) {
 
 		$old_settings = array_filter( array(
-			'width' => get_option( 'woocommerce_' . $value . '_image_width' ),
+			'width'  => get_option( 'woocommerce_' . $value . '_image_width' ),
 			'height' => get_option( 'woocommerce_' . $value . '_image_height' ),
-			'crop' => get_option( 'woocommerce_' . $value . '_image_crop' ),
+			'crop'   => get_option( 'woocommerce_' . $value . '_image_crop' ),
 		) );
 
 		if ( ! empty( $old_settings ) && update_option( 'shop_' . $value . '_image_size', $old_settings ) ) {
@@ -798,7 +798,7 @@ function wc_update_240_api_keys() {
 
 	// Get user data.
 	foreach ( $api_users as $_user ) {
-		$user = get_userdata( $_user->user_id );
+		$user        = get_userdata( $_user->user_id );
 		$apps_keys[] = array(
 			'user_id'         => $user->ID,
 			'permissions'     => $user->woocommerce_api_key_permissions,
@@ -1376,8 +1376,8 @@ function wc_update_320_mexican_states() {
 				"
 					UPDATE $wpdb->postmeta
 					SET meta_value = %s
-		 			WHERE meta_key IN ( '_billing_state', '_shipping_state' )
-		 			AND meta_value = %s
+					WHERE meta_key IN ( '_billing_state', '_shipping_state' )
+					AND meta_value = %s
 				",
 				$new, $old
 			)

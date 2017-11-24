@@ -42,12 +42,12 @@ class WC_Shipping_Rate {
 	/**
 	 * Constructor.
 	 *
-	 * @param string $id
-	 * @param string $label
+	 * @param string  $id
+	 * @param string  $label
 	 * @param integer $cost
-	 * @param array $taxes
-	 * @param string $method_id
-	 * @param int $instance_id
+	 * @param array   $taxes
+	 * @param string  $method_id
+	 * @param int     $instance_id
 	 */
 	public function __construct( $id = '', $label = '', $cost = 0, $taxes = array(), $method_id = '', $instance_id = 0 ) {
 		$this->set_id( $id );
@@ -62,7 +62,7 @@ class WC_Shipping_Rate {
 	 * Magic methods to support direct access to props.
 	 *
 	 * @since 3.2.0
-	 * @param string $key
+	 * @param  string $key
 	 * @return bool
 	 */
 	public function __isset( $key ) {
@@ -73,7 +73,7 @@ class WC_Shipping_Rate {
 	 * Magic methods to support direct access to props.
 	 *
 	 * @since 3.2.0
-	 * @param string $key
+	 * @param  string $key
 	 * @return mixed
 	 */
 	public function __get( $key ) {
@@ -249,4 +249,5 @@ class WC_Shipping_Rate {
 	public function get_meta_data() {
 		return $this->meta_data;
 	}
+
 }

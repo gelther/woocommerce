@@ -36,7 +36,7 @@ class WC_Admin_Customize {
 	 * @param  array $item_types Menu item types.
 	 * @return array
 	 */
-	public function register_customize_nav_menu_item_types( $item_types  ) {
+	public function register_customize_nav_menu_item_types( $item_types ) {
 		$item_types[] = array(
 			'title'      => __( 'WooCommerce endpoints', 'woocommerce' ),
 			'type_label' => __( 'WooCommerce endpoint', 'woocommerce' ),
@@ -91,6 +91,7 @@ class WC_Admin_Customize {
 
 		return $items;
 	}
+
 }
 
 endif;

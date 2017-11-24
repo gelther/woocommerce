@@ -156,7 +156,7 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 	/**
 	 * Method to delete an order from the database.
 	 * @param WC_Order $order
-	 * @param array $args Array of args to pass to the delete method.
+	 * @param array    $args  Array of args to pass to the delete method.
 	 */
 	public function delete( &$order, $args = array() ) {
 		$id   = $order->get_id();
@@ -291,7 +291,7 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 	 * Read order items of a specific type from the database for this order.
 	 *
 	 * @param  WC_Order $order
-	 * @param  string $type
+	 * @param  string   $type
 	 * @return array
 	 */
 	public function read_items( $order, $type ) {
@@ -324,7 +324,7 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 	 * Remove all line items (products, coupons, shipping, taxes) from the order.
 	 *
 	 * @param WC_Order $order
-	 * @param string   $type Order item type. Default null.
+	 * @param string   $type  Order item type. Default null.
 	 */
 	public function delete_items( $order, $type = null ) {
 		global $wpdb;
@@ -341,7 +341,7 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 	/**
 	 * Get token ids for an order.
 	 *
-	 * @param WC_Order $order
+	 * @param  WC_Order $order
 	 * @return array
 	 */
 	public function get_payment_token_ids( $order ) {
@@ -358,4 +358,5 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 	public function update_payment_token_ids( $order, $token_ids ) {
 		update_post_meta( $order->get_id(), '_payment_tokens', $token_ids );
 	}
+
 }

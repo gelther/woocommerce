@@ -31,28 +31,28 @@ class WC_Customer extends WC_Legacy_Customer {
 		'role'               => 'customer',
 		'username'           => '',
 		'billing'            => array(
-			'first_name'     => '',
-			'last_name'      => '',
-			'company'        => '',
-			'address_1'      => '',
-			'address_2'      => '',
-			'city'           => '',
-			'state'          => '',
-			'postcode'       => '',
-			'country'        => '',
-			'email'          => '',
-			'phone'          => '',
+			'first_name' => '',
+			'last_name'  => '',
+			'company'    => '',
+			'address_1'  => '',
+			'address_2'  => '',
+			'city'       => '',
+			'state'      => '',
+			'postcode'   => '',
+			'country'    => '',
+			'email'      => '',
+			'phone'      => '',
 		),
 		'shipping'           => array(
-			'first_name'     => '',
-			'last_name'      => '',
-			'company'        => '',
-			'address_1'      => '',
-			'address_2'      => '',
-			'city'           => '',
-			'state'          => '',
-			'postcode'       => '',
-			'country'        => '',
+			'first_name' => '',
+			'last_name'  => '',
+			'company'    => '',
+			'address_1'  => '',
+			'address_2'  => '',
+			'city'       => '',
+			'state'      => '',
+			'postcode'   => '',
+			'country'    => '',
 		),
 		'is_paying_customer' => false,
 	);
@@ -84,8 +84,8 @@ class WC_Customer extends WC_Legacy_Customer {
 	 * If $customer is 'new', you can build a new WC_Customer object. If it's empty, some
 	 * data will be pulled from the session for the current user/customer.
 	 *
-	 * @param WC_Customer|int $data Customer ID or data.
-	 * @param bool $is_session True if this is the customer session
+	 * @param WC_Customer|int $data       Customer ID or data.
+	 * @param bool            $is_session True if this is the customer session
 	 * @throws Exception if customer cannot be read/found and $data is set.
 	 */
 	public function __construct( $data = 0, $is_session = false ) {
@@ -296,7 +296,7 @@ class WC_Customer extends WC_Legacy_Customer {
 	/**
 	 * Gets the customers last order.
 	 *
-	 * @param WC_Customer
+	 * @param  WC_Customer
 	 * @return WC_Order|false
 	 */
 	public function get_last_order() {
@@ -306,7 +306,7 @@ class WC_Customer extends WC_Legacy_Customer {
 	/**
 	 * Return the number of orders this customer has.
 	 *
-	 * @param WC_Customer
+	 * @param  WC_Customer
 	 * @return integer
 	 */
 	public function get_order_count() {
@@ -316,7 +316,7 @@ class WC_Customer extends WC_Legacy_Customer {
 	/**
 	 * Return how much money this customer has spent.
 	 *
-	 * @param WC_Customer
+	 * @param  WC_Customer
 	 * @return float
 	 */
 	public function get_total_spent() {
@@ -324,9 +324,9 @@ class WC_Customer extends WC_Legacy_Customer {
 	}
 
 	/*
-	 |--------------------------------------------------------------------------
-	 | Getters
-	 |--------------------------------------------------------------------------
+	|--------------------------------------------------------------------------
+	| Getters
+	|--------------------------------------------------------------------------
 	 */
 
 	/**
@@ -399,8 +399,8 @@ class WC_Customer extends WC_Legacy_Customer {
 	 * Return the date this customer was created.
 	 *
 	 * @since  3.0.0
-	 * @param  string $context
-	 * @return WC_DateTime|null object if the date is set or null if there is no date.
+	 * @param  string           $context
+	 * @return WC_DateTime|null          object if the date is set or null if there is no date.
 	 */
 	public function get_date_created( $context = 'view' ) {
 		return $this->get_prop( 'date_created', $context );
@@ -410,8 +410,8 @@ class WC_Customer extends WC_Legacy_Customer {
 	 * Return the date this customer was last updated.
 	 *
 	 * @since  3.0.0
-	 * @param  string $context
-	 * @return WC_DateTime|null object if the date is set or null if there is no date.
+	 * @param  string           $context
+	 * @return WC_DateTime|null          object if the date is set or null if there is no date.
 	 */
 	public function get_date_modified( $context = 'view' ) {
 		return $this->get_prop( 'date_modified', $context );
@@ -421,7 +421,7 @@ class WC_Customer extends WC_Legacy_Customer {
 	 * Gets a prop for a getter method.
 	 *
 	 * @since  3.0.0
-	 * @param  string $prop Name of prop to get.
+	 * @param  string $prop    Name of prop to get.
 	 * @param  string $address billing or shipping.
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return mixed
@@ -598,7 +598,7 @@ class WC_Customer extends WC_Legacy_Customer {
 	 * @return string
 	 */
 	public function get_shipping_last_name( $context = 'view' ) {
-		 return $this->get_address_prop( 'last_name', 'shipping', $context );
+		return $this->get_address_prop( 'last_name', 'shipping', $context );
 	}
 
 	/**
@@ -776,7 +776,7 @@ class WC_Customer extends WC_Legacy_Customer {
 	 * Set the date this customer was last updated.
 	 *
 	 * @since  3.0.0
-	 * @param  string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
+	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 * @throws WC_Data_Exception
 	 */
 	public function set_date_created( $date = null ) {
@@ -787,7 +787,7 @@ class WC_Customer extends WC_Legacy_Customer {
 	 * Set the date this customer was last updated.
 	 *
 	 * @since  3.0.0
-	 * @param  string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
+	 * @param string|integer|null $date UTC timestamp, or ISO 8601 DateTime. If the DateTime string has no timezone or offset, WordPress site timezone will be assumed. Null if their is no date.
 	 * @throws WC_Data_Exception
 	 */
 	public function set_date_modified( $date = null ) {
@@ -856,9 +856,9 @@ class WC_Customer extends WC_Legacy_Customer {
 	 * Sets a prop for a setter method.
 	 *
 	 * @since 3.0.0
-	 * @param string $prop Name of prop to set.
+	 * @param string $prop    Name of prop to set.
 	 * @param string $address Name of address to set. billing or shipping.
-	 * @param mixed  $value Value of the prop.
+	 * @param mixed  $value   Value of the prop.
 	 */
 	protected function set_address_prop( $prop, $address = 'billing', $value ) {
 		if ( array_key_exists( $prop, $this->data[ $address ] ) ) {
@@ -1105,4 +1105,5 @@ class WC_Customer extends WC_Legacy_Customer {
 	function set_is_paying_customer( $is_paying_customer ) {
 		$this->set_prop( 'is_paying_customer', (bool) $is_paying_customer );
 	}
+
 }

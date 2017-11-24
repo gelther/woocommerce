@@ -72,7 +72,7 @@ class WC_Helper_Compat {
 
 		$request = WC_Helper_API::post( 'oauth/migrate', array(
 			'body' => array(
-				'home_url' => home_url(),
+				'home_url'   => home_url(),
 				'master_key' => $master_key,
 			),
 		) );
@@ -92,8 +92,8 @@ class WC_Helper_Compat {
 		$request = WC_Helper_API::post( 'oauth/access_token', array(
 			'body' => array(
 				'request_token' => $request_token,
-				'home_url' => home_url(),
-				'migrate' => true,
+				'home_url'      => home_url(),
+				'migrate'       => true,
 			),
 		) );
 
@@ -109,11 +109,11 @@ class WC_Helper_Compat {
 		}
 
 		WC_Helper_Options::update( 'auth', array(
-			'access_token' => $access_token['access_token'],
+			'access_token'        => $access_token['access_token'],
 			'access_token_secret' => $access_token['access_token_secret'],
-			'site_id' => $access_token['site_id'],
-			'user_id' => null, // Set this later
-			'updated' => time(),
+			'site_id'             => $access_token['site_id'],
+			'user_id'             => null, // Set this later
+			'updated'             => time(),
 		) );
 
 		// Obtain the connected user info.
@@ -162,11 +162,12 @@ class WC_Helper_Compat {
 	 */
 	public static function render_compat_menu() {
 		$helper_url = add_query_arg( array(
-			'page' => 'wc-addons',
+			'page'    => 'wc-addons',
 			'section' => 'helper',
 		), admin_url( 'admin.php' ) );
 		include( WC_Helper::get_view_filename( 'html-helper-compat.php' ) );
 	}
+
 }
 
 WC_Helper_Compat::load();

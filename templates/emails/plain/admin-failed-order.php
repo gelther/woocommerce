@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-echo "= " . $email_heading . " =\n\n";
+echo '= ' . $email_heading . " =\n\n";
 
 echo sprintf( __( 'Payment for order #%1$d from %2$s has failed. The order was as follows:', 'woocommerce' ), $order->get_id(), $order->get_formatted_billing_full_name() ) . "\n\n";
 

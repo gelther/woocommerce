@@ -32,8 +32,8 @@ class WC_REST_Webhooks_Controller extends WC_REST_Webhooks_V1_Controller {
 	/**
 	 * Prepare a single webhook output for response.
 	 *
-	 * @param object $post
-	 * @param WP_REST_Request $request Request object.
+	 * @param  object           $post
+	 * @param  WP_REST_Request  $request  Request object.
 	 *
 	 * @return WP_REST_Response $response Response data.
 	 */
@@ -95,18 +95,18 @@ class WC_REST_Webhooks_Controller extends WC_REST_Webhooks_V1_Controller {
 			'title'      => 'webhook',
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'                => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name' => array(
+				'name'              => array(
 					'description' => __( 'A friendly name for the webhook.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'status' => array(
+				'status'            => array(
 					'description' => __( 'Webhook status.', 'woocommerce' ),
 					'type'        => 'string',
 					'default'     => 'active',
@@ -116,57 +116,57 @@ class WC_REST_Webhooks_Controller extends WC_REST_Webhooks_V1_Controller {
 						'sanitize_callback' => 'wc_is_webhook_valid_topic',
 					),
 				),
-				'topic' => array(
+				'topic'             => array(
 					'description' => __( 'Webhook topic.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'resource' => array(
+				'resource'          => array(
 					'description' => __( 'Webhook resource.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'event' => array(
+				'event'             => array(
 					'description' => __( 'Webhook event.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'hooks' => array(
+				'hooks'             => array(
 					'description' => __( 'WooCommerce action names associated with the webhook.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 					'items'       => array(
-						'type'    => 'string',
+						'type' => 'string',
 					),
 				),
-				'delivery_url' => array(
+				'delivery_url'      => array(
 					'description' => __( 'The URL where the webhook payload is delivered.', 'woocommerce' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'secret' => array(
+				'secret'            => array(
 					'description' => __( "Secret key used to generate a hash of the delivered webhook and provided in the request headers. This will default is a MD5 hash from the current user's ID|username if not provided.", 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'edit' ),
 				),
-				'date_created' => array(
+				'date_created'      => array(
 					'description' => __( "The date the webhook was created, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created_gmt' => array(
+				'date_created_gmt'  => array(
 					'description' => __( 'The date the webhook was created, as GMT.', 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified' => array(
+				'date_modified'     => array(
 					'description' => __( "The date the webhook was last modified, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
@@ -183,4 +183,5 @@ class WC_REST_Webhooks_Controller extends WC_REST_Webhooks_V1_Controller {
 
 		return $this->add_additional_fields_schema( $schema );
 	}
+
 }

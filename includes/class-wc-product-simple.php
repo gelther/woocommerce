@@ -22,7 +22,7 @@ class WC_Product_Simple extends WC_Product {
 	 * @param mixed $product
 	 */
 	public function __construct( $product = 0 ) {
-		$this->supports[]   = 'ajax_add_to_cart';
+		$this->supports[] = 'ajax_add_to_cart';
 		parent::__construct( $product );
 	}
 
@@ -68,4 +68,5 @@ class WC_Product_Simple extends WC_Product {
 
 		return apply_filters( 'woocommerce_product_add_to_cart_description', sprintf( $text, $this->get_name() ), $this );
 	}
+
 }

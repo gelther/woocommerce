@@ -34,8 +34,8 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param array           $args    Request args.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  array           $args    Request args.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return array
 	 */
 	public function query_args( $args, $request ) {
@@ -154,8 +154,8 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param WP_Post         $post    Post object.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  WP_Post          $post    Post object.
+	 * @param  WP_REST_Request  $request Request object.
 	 * @return WP_REST_Response
 	 */
 	public function prepare_item_for_response( $post, $request ) {
@@ -187,9 +187,9 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 		 * The dynamic portion of the hook name, $this->post_type, refers to post_type of the post being
 		 * prepared for the response.
 		 *
-		 * @param WP_REST_Response   $response   The response object.
-		 * @param WP_Post            $post       Post object.
-		 * @param WP_REST_Request    $request    Request object.
+		 * @param WP_REST_Response $response The response object.
+		 * @param WP_Post          $post     Post object.
+		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "woocommerce_rest_prepare_{$this->post_type}", $response, $post, $request );
 	}
@@ -198,7 +198,7 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	 * Get product menu order.
 	 *
 	 * @deprecated 3.0.0
-	 * @param WC_Product $product Product instance.
+	 * @param  WC_Product $product Product instance.
 	 * @return int
 	 */
 	protected function get_product_menu_order( $product ) {
@@ -209,8 +209,8 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	 * Save product meta.
 	 *
 	 * @deprecated 3.0.0
-	 * @param WC_Product $product
-	 * @param WP_REST_Request $request
+	 * @param  WC_Product      $product
+	 * @param  WP_REST_Request $request
 	 * @return bool
 	 * @throws WC_REST_Exception
 	 */
@@ -227,8 +227,8 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	 * @deprecated 3.0.0
 	 *
 	 * @throws WC_REST_Exception REST API exceptions.
-	 * @param WC_Product      $product Product instance.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  WC_Product      $product Product instance.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return WC_Product
 	 */
 	protected function set_product_meta( $product, $request ) {
@@ -517,8 +517,8 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	 * @deprecated 3.0.0
 	 *
 	 * @throws WC_REST_Exception REST API exceptions.
-	 * @param WC_Product      $product          Product instance.
-	 * @param WP_REST_Request $request          Request data.
+	 * @param  WC_Product      $product Product instance.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return bool
 	 */
 	protected function save_variations_data( $product, $request ) {
@@ -646,7 +646,7 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 
 			// Update taxonomies.
 			if ( isset( $data['attributes'] ) ) {
-				$attributes = array();
+				$attributes        = array();
 				$parent_attributes = $product->get_attributes();
 
 				foreach ( $data['attributes'] as $attribute ) {
@@ -702,8 +702,8 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param WP_Post         $post    Post data.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  WP_Post         $post    Post data.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return bool|WP_Error
 	 */
 	protected function add_post_meta_fields( $post, $request ) {
@@ -713,8 +713,8 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	/**
 	 * Update post meta fields.
 	 *
-	 * @param WP_Post         $post    Post data.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  WP_Post         $post    Post data.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return bool|WP_Error
 	 */
 	protected function update_post_meta_fields( $post, $request ) {
@@ -791,7 +791,7 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param int $product_id
+	 * @param int   $product_id
 	 * @param array $images
 	 * @throws WC_REST_Exception
 	 */
@@ -800,4 +800,5 @@ class WC_REST_Legacy_Products_Controller extends WC_REST_CRUD_Controller {
 
 		return set_product_images( $product, $images );
 	}
+
 }

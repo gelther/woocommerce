@@ -108,12 +108,12 @@ class WC_Discounts {
 		$this->object = $order;
 
 		foreach ( $order->get_items() as $order_item ) {
-			$item                = new stdClass();
-			$item->key           = $order_item->get_id();
-			$item->object        = $order_item;
-			$item->product       = $order_item->get_product();
-			$item->quantity      = $order_item->get_quantity();
-			$item->price         = wc_add_number_precision_deep( $order_item->get_total() );
+			$item           = new stdClass();
+			$item->key      = $order_item->get_id();
+			$item->object   = $order_item;
+			$item->product  = $order_item->get_product();
+			$item->quantity = $order_item->get_quantity();
+			$item->price    = wc_add_number_precision_deep( $order_item->get_total() );
 
 			if ( $order->get_prices_include_tax() ) {
 				$item->price += wc_add_number_precision_deep( $order_item->get_total_tax() );
@@ -139,7 +139,7 @@ class WC_Discounts {
 	 * Get discount by key with or without precision.
 	 *
 	 * @since  3.2.0
-	 * @param  string $key name of discount row to return.
+	 * @param  string $key      name of discount row to return.
 	 * @param  bool   $in_cents Should the totals be returned in cents, or without precision.
 	 * @return array
 	 */
@@ -152,7 +152,7 @@ class WC_Discounts {
 	 * Get all discount totals.
 	 *
 	 * @since  3.2.0
-	 * @param  bool $in_cents Should the totals be returned in cents, or without precision.
+	 * @param  bool  $in_cents Should the totals be returned in cents, or without precision.
 	 * @return array
 	 */
 	public function get_discounts( $in_cents = false ) {
@@ -164,7 +164,7 @@ class WC_Discounts {
 	 * Get all discount totals per item.
 	 *
 	 * @since  3.2.0
-	 * @param  bool $in_cents Should the totals be returned in cents, or without precision.
+	 * @param  bool  $in_cents Should the totals be returned in cents, or without precision.
 	 * @return array
 	 */
 	public function get_discounts_by_item( $in_cents = false ) {
@@ -184,7 +184,7 @@ class WC_Discounts {
 	 * Get all discount totals per coupon.
 	 *
 	 * @since  3.2.0
-	 * @param  bool $in_cents Should the totals be returned in cents, or without precision.
+	 * @param  bool  $in_cents Should the totals be returned in cents, or without precision.
 	 * @return array
 	 */
 	public function get_discounts_by_coupon( $in_cents = false ) {
@@ -219,9 +219,9 @@ class WC_Discounts {
 	 * Apply a discount to all items using a coupon.
 	 *
 	 * @since  3.2.0
-	 * @param  WC_Coupon $coupon Coupon object being applied to the items.
-	 * @param  bool      $validate Set to false to skip coupon validation.
-	 * @return bool|WP_Error True if applied or WP_Error instance in failure.
+	 * @param  WC_Coupon     $coupon   Coupon object being applied to the items.
+	 * @param  bool          $validate Set to false to skip coupon validation.
+	 * @return bool|WP_Error           True if applied or WP_Error instance in failure.
 	 */
 	public function apply_coupon( $coupon, $validate = true ) {
 		if ( ! is_a( $coupon, 'WC_Coupon' ) ) {
@@ -305,7 +305,7 @@ class WC_Discounts {
 	 * @return array
 	 */
 	protected function get_items_to_apply_coupon( $coupon ) {
-		$items_to_apply  = array();
+		$items_to_apply = array();
 
 		foreach ( $this->items as $item ) {
 			$item_to_apply = clone $item; // Clone the item so changes to this item do not affect the originals.
@@ -327,9 +327,9 @@ class WC_Discounts {
 	 * Apply percent discount to items and return an array of discounts granted.
 	 *
 	 * @since  3.2.0
-	 * @param  WC_Coupon $coupon Coupon object. Passed through filters.
+	 * @param  WC_Coupon $coupon         Coupon object. Passed through filters.
 	 * @param  array     $items_to_apply Array of items to apply the coupon to.
-	 * @return int Total discounted.
+	 * @return int                       Total discounted.
 	 */
 	protected function apply_coupon_percent( $coupon, $items_to_apply ) {
 		$total_discount        = 0;
@@ -343,11 +343,11 @@ class WC_Discounts {
 		}
 
 		// Because get_amount() could return an empty string, let's be sure to set our local variable to a known good value.
-		$coupon_amount  = ( '' === $coupon->get_amount() ) ? 0 : $coupon->get_amount();
+		$coupon_amount = ( '' === $coupon->get_amount() ) ? 0 : $coupon->get_amount();
 
 		foreach ( $items_to_apply as $item ) {
 			// Find out how much price is available to discount for the item.
-			$discounted_price  = $this->get_discounted_price_in_cents( $item );
+			$discounted_price = $this->get_discounted_price_in_cents( $item );
 
 			// Get the price we actually want to discount, based on settings.
 			$price_to_discount = ( 'yes' === get_option( 'woocommerce_calc_discounts_sequentially', 'no' ) ) ? $discounted_price : $item->price;
@@ -393,10 +393,10 @@ class WC_Discounts {
 	 * Apply fixed product discount to items.
 	 *
 	 * @since  3.2.0
-	 * @param  WC_Coupon $coupon Coupon object. Passed through filters.
+	 * @param  WC_Coupon $coupon         Coupon object. Passed through filters.
 	 * @param  array     $items_to_apply Array of items to apply the coupon to.
-	 * @param  int       $amount Fixed discount amount to apply in cents. Leave blank to pull from coupon.
-	 * @return int Total discounted.
+	 * @param  int       $amount         Fixed discount amount to apply in cents. Leave blank to pull from coupon.
+	 * @return int                       Total discounted.
 	 */
 	protected function apply_coupon_fixed_product( $coupon, $items_to_apply, $amount = null ) {
 		$total_discount  = 0;
@@ -410,7 +410,7 @@ class WC_Discounts {
 
 		foreach ( $items_to_apply as $item ) {
 			// Find out how much price is available to discount for the item.
-			$discounted_price  = $this->get_discounted_price_in_cents( $item );
+			$discounted_price = $this->get_discounted_price_in_cents( $item );
 
 			// Get the price we actually want to discount, based on settings.
 			$price_to_discount = ( 'yes' === get_option( 'woocommerce_calc_discounts_sequentially', 'no' ) ) ? $discounted_price : $item->price;
@@ -444,10 +444,10 @@ class WC_Discounts {
 	 * Apply fixed cart discount to items.
 	 *
 	 * @since  3.2.0
-	 * @param  WC_Coupon $coupon Coupon object. Passed through filters.
+	 * @param  WC_Coupon $coupon         Coupon object. Passed through filters.
 	 * @param  array     $items_to_apply Array of items to apply the coupon to.
-	 * @param  int       $amount Fixed discount amount to apply in cents. Leave blank to pull from coupon.
-	 * @return int Total discounted.
+	 * @param  int       $amount         Fixed discount amount to apply in cents. Leave blank to pull from coupon.
+	 * @return int                       Total discounted.
 	 */
 	protected function apply_coupon_fixed_cart( $coupon, $items_to_apply, $amount = null ) {
 		$total_discount = 0;
@@ -485,10 +485,10 @@ class WC_Discounts {
 	 * until the amount is expired, discounting 1 cent at a time.
 	 *
 	 * @since 3.2.0
-	 * @param  WC_Coupon $coupon Coupon object if appliable. Passed through filters.
+	 * @param  WC_Coupon $coupon         Coupon object if appliable. Passed through filters.
 	 * @param  array     $items_to_apply Array of items to apply the coupon to.
-	 * @param  int       $amount Fixed discount amount to apply.
-	 * @return int Total discounted.
+	 * @param  int       $amount         Fixed discount amount to apply.
+	 * @return int                       Total discounted.
 	 */
 	protected function apply_coupon_remainder( $coupon, $items_to_apply, $amount ) {
 		$total_discount = 0;
@@ -496,7 +496,7 @@ class WC_Discounts {
 		foreach ( $items_to_apply as $item ) {
 			for ( $i = 0; $i < $item->quantity; $i ++ ) {
 				// Find out how much price is available to discount for the item.
-				$discounted_price  = $this->get_discounted_price_in_cents( $item );
+				$discounted_price = $this->get_discounted_price_in_cents( $item );
 
 				// Get the price we actually want to discount, based on settings.
 				$price_to_discount = ( 'yes' === get_option( 'woocommerce_calc_discounts_sequentially', 'no' ) ) ? $discounted_price : $item->price;
@@ -522,9 +522,9 @@ class WC_Discounts {
 	}
 
 	/*
-	 |--------------------------------------------------------------------------
-	 | Validation & Error Handling
-	 |--------------------------------------------------------------------------
+	|--------------------------------------------------------------------------
+	| Validation & Error Handling
+	|--------------------------------------------------------------------------
 	 */
 
 	/**
@@ -609,7 +609,7 @@ class WC_Discounts {
 	 *
 	 * @since  3.2.0
 	 * @throws Exception Error message.
-	 * @param  WC_Coupon $coupon   Coupon data.
+	 * @param  WC_Coupon $coupon Coupon data.
 	 * @return bool
 	 */
 	protected function validate_coupon_minimum_amount( $coupon ) {
@@ -627,7 +627,7 @@ class WC_Discounts {
 	 *
 	 * @since  3.2.0
 	 * @throws Exception Error message.
-	 * @param  WC_Coupon $coupon   Coupon data.
+	 * @param  WC_Coupon $coupon Coupon data.
 	 * @return bool
 	 */
 	protected function validate_coupon_maximum_amount( $coupon ) {
@@ -827,7 +827,7 @@ class WC_Discounts {
 					$product_cats = array_merge( $product_cats, wc_get_product_cat_ids( $item->product->get_parent_id() ) );
 				}
 
-				$cat_id_list  = array_intersect( $product_cats, $coupon->get_excluded_product_categories() );
+				$cat_id_list = array_intersect( $product_cats, $coupon->get_excluded_product_categories() );
 				if ( count( $cat_id_list ) > 0 ) {
 					foreach ( $cat_id_list as $cat_id ) {
 						$cat          = get_term( $cat_id, 'product_cat' );
@@ -882,7 +882,7 @@ class WC_Discounts {
 	 *
 	 * @since  3.2.0
 	 * @throws Exception Error message.
-	 * @param  WC_Coupon $coupon Coupon data.
+	 * @param  WC_Coupon     $coupon Coupon data.
 	 * @return bool|WP_Error
 	 */
 	public function is_coupon_valid( $coupon ) {
@@ -918,4 +918,5 @@ class WC_Discounts {
 		}
 		return true;
 	}
+
 }

@@ -55,12 +55,12 @@ if ( $show_downloads ) {
 				$product = apply_filters( 'woocommerce_order_item_product', $item->get_product(), $item );
 
 				wc_get_template( 'order/order-details-item.php', array(
-					'order'			     => $order,
-					'item_id'		     => $item_id,
-					'item'			     => $item,
+					'order'              => $order,
+					'item_id'            => $item_id,
+					'item'               => $item,
 					'show_purchase_note' => $show_purchase_note,
-					'purchase_note'	     => $product ? $product->get_purchase_note() : '',
-					'product'	         => $product,
+					'purchase_note'      => $product ? $product->get_purchase_note() : '',
+					'product'            => $product,
 				) );
 			}
 

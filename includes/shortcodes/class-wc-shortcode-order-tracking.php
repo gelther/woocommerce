@@ -19,7 +19,7 @@ class WC_Shortcode_Order_Tracking {
 	/**
 	 * Get the shortcode content.
 	 *
-	 * @param array $atts
+	 * @param  array  $atts
 	 * @return string
 	 */
 	public static function get( $atts ) {
@@ -67,4 +67,5 @@ class WC_Shortcode_Order_Tracking {
 
 		wc_get_template( 'order/form-tracking.php' );
 	}
+
 }

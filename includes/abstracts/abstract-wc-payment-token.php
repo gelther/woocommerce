@@ -18,18 +18,18 @@ include_once( WC_ABSPATH . 'includes/legacy/abstract-wc-legacy-payment-token.php
  * @category	Abstract Class
  * @author		WooThemes
  */
- abstract class WC_Payment_Token extends WC_Legacy_Payment_Token {
+	abstract class WC_Payment_Token extends WC_Legacy_Payment_Token {
 
 	/**
 	 * Token Data (stored in the payment_tokens table).
 	 * @var array
 	 */
 	protected $data = array(
-		 'gateway_id' => '',
-		 'token'      => '',
-		 'is_default' => false,
-		 'user_id'    => 0,
-		 'type'       => '',
+		'gateway_id' => '',
+		'token'      => '',
+		'is_default' => false,
+		'user_id'    => 0,
+		'type'       => '',
 	);
 
 	/**
@@ -71,9 +71,9 @@ include_once( WC_ABSPATH . 'includes/legacy/abstract-wc-legacy-payment-token.php
 	}
 
 	/*
-	 |--------------------------------------------------------------------------
-	 | Getters
-	 |--------------------------------------------------------------------------
+	|--------------------------------------------------------------------------
+	| Getters
+	|--------------------------------------------------------------------------
 	 */
 
 	/**
@@ -81,7 +81,7 @@ include_once( WC_ABSPATH . 'includes/legacy/abstract-wc-legacy-payment-token.php
 	 *
 	 * @since  2.6.0
 	 * @param  string $context
-	 * @return string Raw token
+	 * @return string          Raw token
 	 */
 	public function get_token( $context = 'view' ) {
 		return $this->get_prop( 'token', $context );
@@ -93,7 +93,7 @@ include_once( WC_ABSPATH . 'includes/legacy/abstract-wc-legacy-payment-token.php
 	 *
 	 * @since  2.6.0
 	 * @param  string $deprecated Deprecated since WooCommerce 3.0
-	 * @return string Payment Token Type (CC, eCheck)
+	 * @return string             Payment Token Type (CC, eCheck)
 	 */
 	public function get_type( $deprecated = '' ) {
 		return $this->type;
@@ -116,7 +116,7 @@ include_once( WC_ABSPATH . 'includes/legacy/abstract-wc-legacy-payment-token.php
 	 *
 	 * @since 2.6.0
 	 * @param  string $context
-	 * @return int User ID if this token is associated with a user or 0 if no user is associated
+	 * @return int             User ID if this token is associated with a user or 0 if no user is associated
 	 */
 	public function get_user_id( $context = 'view' ) {
 		return $this->get_prop( 'user_id', $context );
@@ -127,7 +127,7 @@ include_once( WC_ABSPATH . 'includes/legacy/abstract-wc-legacy-payment-token.php
 	 *
 	 * @since 2.6.0
 	 * @param  string $context
-	 * @return string Gateway ID
+	 * @return string          Gateway ID
 	 */
 	public function get_gateway_id( $context = 'view' ) {
 		return $this->get_prop( 'gateway_id', $context );
@@ -138,16 +138,16 @@ include_once( WC_ABSPATH . 'includes/legacy/abstract-wc-legacy-payment-token.php
 	 *
 	 * @since 2.6.0
 	 * @param  string $context
-	 * @return string Gateway ID
+	 * @return string          Gateway ID
 	 */
 	public function get_is_default( $context = 'view' ) {
 		return $this->get_prop( 'is_default', $context );
 	}
 
 	/*
-	 |--------------------------------------------------------------------------
-	 | Setters
-	 |--------------------------------------------------------------------------
+	|--------------------------------------------------------------------------
+	| Setters
+	|--------------------------------------------------------------------------
 	 */
 
 	/**
@@ -190,9 +190,9 @@ include_once( WC_ABSPATH . 'includes/legacy/abstract-wc-legacy-payment-token.php
 	}
 
 	/*
-	 |--------------------------------------------------------------------------
-	 | Other Methods
-	 |--------------------------------------------------------------------------
+	|--------------------------------------------------------------------------
+	| Other Methods
+	|--------------------------------------------------------------------------
 	 */
 
 	/**

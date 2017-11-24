@@ -37,23 +37,23 @@ interface WC_Customer_Download_Data_Store_Interface {
 	 * Get array of download ids by specified args.
 	 *
 	 * @param  array $args
-	 * @return array of WC_Customer_Download
+	 * @return array       of WC_Customer_Download
 	 */
 	public function get_downloads( $args = array() );
 
 	/**
 	 * Update download ids if the hash changes.
 	 *
-	 * @param  int $product_id
-	 * @param  string $old_id
-	 * @param  string $new_id
+	 * @param int    $product_id
+	 * @param string $old_id
+	 * @param string $new_id
 	 */
 	public function update_download_id( $product_id, $old_id, $new_id );
 
 	/**
 	 * Get a customers downloads.
 	 *
-	 * @param  int $customer_id
+	 * @param  int   $customer_id
 	 * @return array
 	 */
 	public function get_downloads_for_customer( $customer_id );
@@ -61,9 +61,9 @@ interface WC_Customer_Download_Data_Store_Interface {
 	/**
 	 * Update user prop for downloads based on order id.
 	 *
-	 * @param  int $order_id
-	 * @param  int $customer_id
-	 * @param  string $email
+	 * @param int    $order_id
+	 * @param int    $customer_id
+	 * @param string $email
 	 */
 	public function update_user_by_order_id( $order_id, $customer_id, $email );
 }

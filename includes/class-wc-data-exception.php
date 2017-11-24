@@ -65,4 +65,5 @@ class WC_Data_Exception extends Exception {
 	public function getErrorData() {
 		return $this->error_data;
 	}
+
 }

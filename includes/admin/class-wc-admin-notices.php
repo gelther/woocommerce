@@ -103,7 +103,7 @@ class WC_Admin_Notices {
 
 	/**
 	 * Remove a notice from being displayed.
-	 * @param  string $name
+	 * @param string $name
 	 */
 	public static function remove_notice( $name ) {
 		self::$notices = array_diff( self::get_notices(), array( $name ) );
@@ -314,6 +314,7 @@ class WC_Admin_Notices {
 			include( 'views/html-notice-simplify-commerce.php' );
 		}
 	}
+
 }
 
 WC_Admin_Notices::init();

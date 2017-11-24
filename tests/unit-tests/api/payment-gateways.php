@@ -14,7 +14,7 @@ class Payment_Gateways extends WC_REST_Unit_Test_Case {
 	public function setUp() {
 		parent::setUp();
 		$this->endpoint = new WC_REST_Payment_Gateways_Controller();
-		$this->user = $this->factory->user->create( array(
+		$this->user     = $this->factory->user->create( array(
 			'role' => 'administrator',
 		) );
 	}
@@ -51,7 +51,7 @@ class Payment_Gateways extends WC_REST_Unit_Test_Case {
 			'method_title'       => 'Check payments',
 			'method_description' => 'Allows check payments. Why would you take checks in this day and age? Well you probably would not, but it does allow you to make test purchases for testing order emails and the success pages.',
 			'settings'           => array_diff_key( $this->get_settings( 'WC_Gateway_Cheque' ), array( 'enabled' => false, 'description' => false ) ),
-			'_links' => array(
+			'_links'             => array(
 				'self'       => array(
 					array(
 						'href' => rest_url( '/wc/v2/payment_gateways/cheque' ),
@@ -231,7 +231,7 @@ class Payment_Gateways extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_update_payment_gateway_invalid_id() {
 		wp_set_current_user( $this->user );
-		$request  = new WP_REST_Request( 'POST', '/wc/v2/payment_gateways/totally_fake_method' );
+		$request = new WP_REST_Request( 'POST', '/wc/v2/payment_gateways/totally_fake_method' );
 		$request->set_body_params( array(
 			'enabled' => true,
 		) );
@@ -247,9 +247,9 @@ class Payment_Gateways extends WC_REST_Unit_Test_Case {
 	public function test_payment_gateway_schema() {
 		wp_set_current_user( $this->user );
 
-		$request = new WP_REST_Request( 'OPTIONS', '/wc/v2/payment_gateways' );
-		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$request    = new WP_REST_Request( 'OPTIONS', '/wc/v2/payment_gateways' );
+		$response   = $this->server->dispatch( $request );
+		$data       = $response->get_data();
 		$properties = $data['schema']['properties'];
 
 		$this->assertEquals( 8, count( $properties ) );
@@ -270,7 +270,7 @@ class Payment_Gateways extends WC_REST_Unit_Test_Case {
 	 * @param string $gateway_class Name of WC_Payment_Gateway class.
 	 */
 	private function get_settings( $gateway_class ) {
-		$gateway = new $gateway_class;
+		$gateway  = new $gateway_class;
 		$settings = array();
 		$gateway->init_form_fields();
 		foreach ( $gateway->form_fields as $id => $field ) {

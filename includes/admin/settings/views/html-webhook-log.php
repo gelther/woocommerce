@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<ul>
 			<?php foreach ( (array) $log['request_headers'] as $key => $value ) : ?>
 				<li><strong><em><?php echo strtolower( esc_html( $key ) ); ?>: </em></strong><code><?php echo esc_html( $value ); ?></code></li>
-			<?php endforeach ?>
+			<?php endforeach; ?>
 		</ul>
 		<p><strong><?php _e( 'Content', 'woocommerce' ); ?>: </strong></p>
 		<pre><code><?php echo esc_html( $log['request_body'] ); ?></code></pre>
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php $response_headers = is_callable( array( $log['response_headers'], 'getAll' ) ) ? $log['response_headers']->getAll() : $log['response_headers']; ?>
 			<?php foreach ( (array) $response_headers as $key => $value ) : ?>
 				<li><strong><em><?php echo strtolower( esc_html( $key ) ); ?>: </em></strong><code><?php echo esc_html( $value ); ?></code></li>
-			<?php endforeach ?>
+			<?php endforeach; ?>
 		</ul>
 		<?php if ( ! empty( $log['response_body'] ) ) : ?>
 			<h4><?php _e( 'Content', 'woocommerce' ); ?>:</h4>

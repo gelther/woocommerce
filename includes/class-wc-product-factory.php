@@ -20,9 +20,9 @@ class WC_Product_Factory {
 	/**
 	 * Get a product.
 	 *
-	 * @param mixed $product_id (default: false)
-	 * @param array $deprecated Previously used to pass arguments to the factory, e.g. to force a type.
-	 * @return WC_Product|bool Product object or null if the product cannot be loaded.
+	 * @param  mixed           $product_id (default: false)
+	 * @param  array           $deprecated Previously used to pass arguments to the factory, e.g. to force a type.
+	 * @return WC_Product|bool             Product object or null if the product cannot be loaded.
 	 */
 	public function get_product( $product_id = false, $deprecated = array() ) {
 		if ( ! $product_id = $this->get_product_id( $product_id ) ) {
@@ -71,7 +71,7 @@ class WC_Product_Factory {
 	 * Get the product type for a product.
 	 *
 	 * @since 3.0.0
-	 * @param  int $product_id
+	 * @param  int          $product_id
 	 * @return string|false
 	 */
 	public static function get_product_type( $product_id ) {
@@ -87,7 +87,7 @@ class WC_Product_Factory {
 	/**
 	 * Create a WC coding standards compliant class name e.g. WC_Product_Type_Class instead of WC_Product_type-class.
 	 *
-	 * @param  string $product_type
+	 * @param  string       $product_type
 	 * @return string|false
 	 */
 	public static function get_classname_from_product_type( $product_type ) {
@@ -98,8 +98,8 @@ class WC_Product_Factory {
 	 * Get the product ID depending on what was passed.
 	 *
 	 * @since 3.0.0
-	 * @param  mixed $product
-	 * @return int|bool false on failure
+	 * @param  mixed    $product
+	 * @return int|bool          false on failure
 	 */
 	private function get_product_id( $product ) {
 		if ( false === $product && isset( $GLOBALS['post'], $GLOBALS['post']->ID ) && 'product' === get_post_type( $GLOBALS['post']->ID ) ) {
@@ -114,4 +114,5 @@ class WC_Product_Factory {
 			return false;
 		}
 	}
+
 }

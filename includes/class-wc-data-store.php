@@ -71,12 +71,12 @@ class WC_Data_Store {
 	 */
 	public function __construct( $object_type ) {
 		$this->object_type = $object_type;
-		$this->stores = apply_filters( 'woocommerce_data_stores', $this->stores );
+		$this->stores      = apply_filters( 'woocommerce_data_stores', $this->stores );
 
 		// If this object type can't be found, check to see if we can load one
 		// level up (so if product-type isn't found, we try product).
 		if ( ! array_key_exists( $object_type, $this->stores ) ) {
-			$pieces = explode( '-', $object_type );
+			$pieces      = explode( '-', $object_type );
 			$object_type = $pieces[0];
 		}
 
@@ -87,13 +87,13 @@ class WC_Data_Store {
 					throw new Exception( __( 'Invalid data store.', 'woocommerce' ) );
 				}
 				$this->current_class_name = get_class( $store );
-				$this->instance = $store;
+				$this->instance           = $store;
 			} else {
 				if ( ! class_exists( $store ) ) {
 					throw new Exception( __( 'Invalid data store.', 'woocommerce' ) );
 				}
 				$this->current_class_name = $store;
-				$this->instance = new $store;
+				$this->instance           = new $store;
 			}
 		} else {
 			throw new Exception( __( 'Invalid data store.', 'woocommerce' ) );
@@ -173,7 +173,7 @@ class WC_Data_Store {
 	 *
 	 * @since 3.0.0
 	 * @param WC_Data
-	 * @param array $args Array of args to pass to the delete method.
+	 * @param array   $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$data, $args = array() ) {
 		$this->instance->delete( $data, $args );
@@ -186,8 +186,8 @@ class WC_Data_Store {
 	 *
 	 * @since 3.0.0
 	 *
-	 * @param $method
-	 * @param $parameters
+	 * @param        $method
+	 * @param        $parameters
 	 *
 	 * @return mixed
 	 */

@@ -375,4 +375,5 @@ class WC_Tests_Order_Coupons extends WC_Unit_Test_Case {
 		$order->apply_coupon( 'test-coupon-2' );
 		$this->assertEquals( '639.2', $order->get_total(), $order->get_total() );
 	}
+
 }

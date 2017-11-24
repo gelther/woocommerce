@@ -28,14 +28,13 @@ class WC_API_Coupons extends WC_API_Resource {
 	 * GET /coupons/<id>
 	 *
 	 * @since 2.1
-	 * @param array $routes
+	 * @param  array $routes
 	 * @return array
 	 */
 	public function register_routes( $routes ) {
-
 		# GET /coupons
 		$routes[ $this->base ] = array(
-			array( array( $this, 'get_coupons' ),     WC_API_Server::READABLE ),
+			array( array( $this, 'get_coupons' ), WC_API_Server::READABLE ),
 		);
 
 		# GET /coupons/count
@@ -45,7 +44,7 @@ class WC_API_Coupons extends WC_API_Resource {
 
 		# GET /coupons/<id>
 		$routes[ $this->base . '/(?P<id>\d+)' ] = array(
-			array( array( $this, 'get_coupon' ),  WC_API_Server::READABLE ),
+			array( array( $this, 'get_coupon' ), WC_API_Server::READABLE ),
 		);
 
 		# GET /coupons/code/<code>, note that coupon codes can contain spaces, dashes and underscores
@@ -60,13 +59,12 @@ class WC_API_Coupons extends WC_API_Resource {
 	 * Get all coupons
 	 *
 	 * @since 2.1
-	 * @param string $fields
-	 * @param array $filter
-	 * @param int $page
+	 * @param  string $fields
+	 * @param  array  $filter
+	 * @param  int    $page
 	 * @return array
 	 */
 	public function get_coupons( $fields = null, $filter = array(), $page = 1 ) {
-
 		$filter['page'] = $page;
 
 		$query = $this->query_coupons( $filter );
@@ -92,8 +90,8 @@ class WC_API_Coupons extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 *
-	 * @param int $id the coupon ID
-	 * @param string $fields fields to include in response
+	 * @param  int            $id     the coupon ID
+	 * @param  string         $fields fields to include in response
 	 *
 	 * @return array|WP_Error
 	 * @throws WC_API_Exception
@@ -142,12 +140,11 @@ class WC_API_Coupons extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 *
-	 * @param array $filter
+	 * @param  array          $filter
 	 *
 	 * @return array|WP_Error
 	 */
 	public function get_coupons_count( $filter = array() ) {
-
 		$query = $this->query_coupons( $filter );
 
 		if ( ! current_user_can( 'read_private_shop_coupons' ) ) {
@@ -161,8 +158,8 @@ class WC_API_Coupons extends WC_API_Resource {
 	 * Get the coupon for the given code
 	 *
 	 * @since 2.1
-	 * @param string $code the coupon code
-	 * @param string $fields fields to include in response
+	 * @param  string       $code   the coupon code
+	 * @param  string       $fields fields to include in response
 	 * @return int|WP_Error
 	 */
 	public function get_coupon_by_code( $code, $fields = null ) {
@@ -180,23 +177,21 @@ class WC_API_Coupons extends WC_API_Resource {
 	/**
 	 * Create a coupon
 	 *
-	 * @param array $data
+	 * @param  array $data
 	 * @return array
 	 */
 	public function create_coupon( $data ) {
-
 		return array();
 	}
 
 	/**
 	 * Edit a coupon
 	 *
-	 * @param int $id the coupon ID
-	 * @param array $data
+	 * @param  int            $id   the coupon ID
+	 * @param  array          $data
 	 * @return array|WP_Error
 	 */
 	public function edit_coupon( $id, $data ) {
-
 		$id = $this->validate_request( $id, 'shop_coupon', 'edit' );
 
 		if ( is_wp_error( $id ) ) {
@@ -209,12 +204,11 @@ class WC_API_Coupons extends WC_API_Resource {
 	/**
 	 * Delete a coupon
 	 *
-	 * @param int $id the coupon ID
-	 * @param bool $force true to permanently delete coupon, false to move to trash
+	 * @param  int            $id    the coupon ID
+	 * @param  bool           $force true to permanently delete coupon, false to move to trash
 	 * @return array|WP_Error
 	 */
 	public function delete_coupon( $id, $force = false ) {
-
 		$id = $this->validate_request( $id, 'shop_coupon', 'delete' );
 
 		if ( is_wp_error( $id ) ) {
@@ -228,11 +222,10 @@ class WC_API_Coupons extends WC_API_Resource {
 	 * Helper method to get coupon post objects
 	 *
 	 * @since 2.1
-	 * @param array $args request arguments for filtering query
+	 * @param  array    $args request arguments for filtering query
 	 * @return WP_Query
 	 */
 	private function query_coupons( $args ) {
-
 		// set base query arguments
 		$query_args = array(
 			'fields'      => 'ids',
@@ -244,4 +237,5 @@ class WC_API_Coupons extends WC_API_Resource {
 
 		return new WP_Query( $query_args );
 	}
+
 }

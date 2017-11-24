@@ -61,8 +61,8 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 	 */
 	public function register_routes() {
 		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
-			'args' => array(
-				'order_id'  => array(
+			'args'   => array(
+				'order_id' => array(
 					'description' => __( 'The order ID.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
@@ -83,12 +83,12 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
-			'args' => array(
-				'order_id'  => array(
+			'args'   => array(
+				'order_id' => array(
 					'description' => __( 'The order ID.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
-				'id' => array(
+				'id'       => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
@@ -121,7 +121,7 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 	 * Get object.
 	 *
 	 * @since  3.0.0
-	 * @param  int $id Object ID.
+	 * @param  int     $id Object ID.
 	 * @return WC_Data
 	 */
 	protected function get_object( $id ) {
@@ -175,8 +175,8 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 	 *
 	 * @since  3.0.0
 	 *
-	 * @param  WC_Data         $object  Object data.
-	 * @param  WP_REST_Request $request Request object.
+	 * @param  WC_Data                   $object  Object data.
+	 * @param  WP_REST_Request           $request Request object.
 	 *
 	 * @return WP_Error|WP_REST_Response
 	 */
@@ -219,20 +219,20 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param WC_Data         $object  Object data.
-	 * @param WP_REST_Request $request Request object.
-	 * @return array                   Links for the given post.
+	 * @param  WC_Data         $object  Object data.
+	 * @param  WP_REST_Request $request Request object.
+	 * @return array                    Links for the given post.
 	 */
 	protected function prepare_links( $object, $request ) {
-		$base     = str_replace( '(?P<order_id>[\d]+)', $object->get_parent_id(), $this->rest_base );
-		$links    = array(
-			'self' => array(
+		$base  = str_replace( '(?P<order_id>[\d]+)', $object->get_parent_id(), $this->rest_base );
+		$links = array(
+			'self'       => array(
 				'href' => rest_url( sprintf( '/%s/%s/%d', $this->namespace, $base, $object->get_id() ) ),
 			),
 			'collection' => array(
 				'href' => rest_url( sprintf( '/%s/%s', $this->namespace, $base ) ),
 			),
-			'up' => array(
+			'up'         => array(
 				'href' => rest_url( sprintf( '/%s/orders/%d', $this->namespace, $object->get_parent_id() ) ),
 			),
 		);
@@ -260,9 +260,9 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 	 * Prepares one object for create or update operation.
 	 *
 	 * @since  3.0.0
-	 * @param  WP_REST_Request $request Request object.
-	 * @param  bool            $creating If is creating a new object.
-	 * @return WP_Error|WC_Data The prepared item, or WP_Error object on failure.
+	 * @param  WP_REST_Request  $request  Request object.
+	 * @param  bool             $creating If is creating a new object.
+	 * @return WP_Error|WC_Data           The prepared item, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$order = wc_get_order( (int) $request['order_id'] );
@@ -317,8 +317,8 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 	 * Save an object data.
 	 *
 	 * @since  3.0.0
-	 * @param  WP_REST_Request $request  Full details about the request.
-	 * @param  bool            $creating If is creating a new object.
+	 * @param  WP_REST_Request  $request  Full details about the request.
+	 * @param  bool             $creating If is creating a new object.
 	 * @return WC_Data|WP_Error
 	 */
 	protected function save_object( $request, $creating = false ) {
@@ -348,53 +348,53 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 			'title'      => $this->post_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'               => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created' => array(
+				'date_created'     => array(
 					'description' => __( "The date the order refund was created, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
 				'date_created_gmt' => array(
-					'description' => __( "The date the order refund was created, as GMT.", 'woocommerce' ),
+					'description' => __( 'The date the order refund was created, as GMT.', 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'amount' => array(
+				'amount'           => array(
 					'description' => __( 'Refund amount.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'reason' => array(
+				'reason'           => array(
 					'description' => __( 'Reason for refund.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'refunded_by' => array(
+				'refunded_by'      => array(
 					'description' => __( 'User ID of user who created the refund.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data' => array(
+				'meta_data'        => array(
 					'description' => __( 'Meta data.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'    => array(
 								'description' => __( 'Meta ID.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'key' => array(
+							'key'   => array(
 								'description' => __( 'Meta key.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
@@ -407,25 +407,25 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 						),
 					),
 				),
-				'line_items' => array(
+				'line_items'       => array(
 					'description' => __( 'Line items data.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'           => array(
 								'description' => __( 'Item ID.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'name' => array(
+							'name'         => array(
 								'description' => __( 'Product name.', 'woocommerce' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'product_id' => array(
+							'product_id'   => array(
 								'description' => __( 'Product ID.', 'woocommerce' ),
 								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
@@ -435,17 +435,17 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'quantity' => array(
+							'quantity'     => array(
 								'description' => __( 'Quantity ordered.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'tax_class' => array(
+							'tax_class'    => array(
 								'description' => __( 'Tax class of product.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'subtotal' => array(
+							'subtotal'     => array(
 								'description' => __( 'Line subtotal (before discounts).', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
@@ -456,18 +456,18 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'total' => array(
+							'total'        => array(
 								'description' => __( 'Line total (after discounts).', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'total_tax' => array(
+							'total_tax'    => array(
 								'description' => __( 'Line total tax (after discounts).', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'taxes' => array(
+							'taxes'        => array(
 								'description' => __( 'Line taxes.', 'woocommerce' ),
 								'type'        => 'array',
 								'context'     => array( 'view', 'edit' ),
@@ -475,12 +475,12 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 								'items'       => array(
 									'type'       => 'object',
 									'properties' => array(
-										'id' => array(
+										'id'       => array(
 											'description' => __( 'Tax rate ID.', 'woocommerce' ),
 											'type'        => 'integer',
 											'context'     => array( 'view', 'edit' ),
 										),
-										'total' => array(
+										'total'    => array(
 											'description' => __( 'Tax total.', 'woocommerce' ),
 											'type'        => 'string',
 											'context'     => array( 'view', 'edit' ),
@@ -493,20 +493,20 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 									),
 								),
 							),
-							'meta_data' => array(
+							'meta_data'    => array(
 								'description' => __( 'Meta data.', 'woocommerce' ),
 								'type'        => 'array',
 								'context'     => array( 'view', 'edit' ),
 								'items'       => array(
 									'type'       => 'object',
 									'properties' => array(
-										'id' => array(
+										'id'    => array(
 											'description' => __( 'Meta ID.', 'woocommerce' ),
 											'type'        => 'integer',
 											'context'     => array( 'view', 'edit' ),
 											'readonly'    => true,
 										),
-										'key' => array(
+										'key'   => array(
 											'description' => __( 'Meta key.', 'woocommerce' ),
 											'type'        => 'string',
 											'context'     => array( 'view', 'edit' ),
@@ -519,13 +519,13 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 									),
 								),
 							),
-							'sku' => array(
+							'sku'          => array(
 								'description' => __( 'Product SKU.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'price' => array(
+							'price'        => array(
 								'description' => __( 'Product price.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
@@ -534,7 +534,7 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 						),
 					),
 				),
-				'api_refund' => array(
+				'api_refund'       => array(
 					'description' => __( 'When true, the payment gateway API is used to generate the refund.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'edit' ),
@@ -558,4 +558,5 @@ class WC_REST_Order_Refunds_Controller extends WC_REST_Orders_Controller {
 
 		return $params;
 	}
+
 }

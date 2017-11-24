@@ -85,15 +85,15 @@ class WC_Email_Customer_New_Account extends WC_Email {
 	/**
 	 * Trigger.
 	 *
-	 * @param int $user_id
+	 * @param int    $user_id
 	 * @param string $user_pass
-	 * @param bool $password_generated
+	 * @param bool   $password_generated
 	 */
 	public function trigger( $user_id, $user_pass = '', $password_generated = false ) {
 		$this->setup_locale();
 
 		if ( $user_id ) {
-			$this->object             = new WP_User( $user_id );
+			$this->object = new WP_User( $user_id );
 
 			$this->user_pass          = $user_pass;
 			$this->user_login         = stripslashes( $this->object->user_login );
@@ -124,7 +124,7 @@ class WC_Email_Customer_New_Account extends WC_Email {
 			'password_generated' => $this->password_generated,
 			'sent_to_admin'      => false,
 			'plain_text'         => false,
-			'email'				 => $this,
+			'email'              => $this,
 		) );
 	}
 
@@ -143,9 +143,10 @@ class WC_Email_Customer_New_Account extends WC_Email {
 			'password_generated' => $this->password_generated,
 			'sent_to_admin'      => false,
 			'plain_text'         => true,
-			'email'			     => $this,
+			'email'              => $this,
 		) );
 	}
+
 }
 
 endif;

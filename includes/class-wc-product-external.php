@@ -191,4 +191,5 @@ class WC_Product_External extends WC_Product {
 		/* translators: %s: Product title */
 		return apply_filters( 'woocommerce_product_add_to_cart_description', $this->get_button_text() ? $this->get_button_text() : sprintf( __( 'Buy &ldquo;%s&rdquo;', 'woocommerce' ), $this->get_name() ), $this );
 	}
+
 }

@@ -43,7 +43,7 @@ class WC_Auth {
 	 *
 	 * @since  2.4.0
 	 *
-	 * @param  array $vars
+	 * @param  array    $vars
 	 *
 	 * @return string[]
 	 */
@@ -122,7 +122,7 @@ class WC_Auth {
 	 *
 	 * @since  2.4.0
 	 *
-	 * @param  array $data
+	 * @param  array  $data
 	 * @param  string $endpoint
 	 *
 	 * @return string
@@ -131,11 +131,11 @@ class WC_Auth {
 		$url = wc_get_endpoint_url( 'wc-auth/v' . self::VERSION, $endpoint, home_url( '/' ) );
 
 		return add_query_arg( array(
-			'app_name'            => wc_clean( $data['app_name'] ),
-			'user_id'             => wc_clean( $data['user_id'] ),
-			'return_url'          => urlencode( $this->get_formatted_url( $data['return_url'] ) ),
-			'callback_url'        => urlencode( $this->get_formatted_url( $data['callback_url'] ) ),
-			'scope'               => wc_clean( $data['scope'] ),
+			'app_name'     => wc_clean( $data['app_name'] ),
+			'user_id'      => wc_clean( $data['user_id'] ),
+			'return_url'   => urlencode( $this->get_formatted_url( $data['return_url'] ) ),
+			'callback_url' => urlencode( $this->get_formatted_url( $data['callback_url'] ) ),
+			'scope'        => wc_clean( $data['scope'] ),
 		), $url );
 	}
 
@@ -218,7 +218,7 @@ class WC_Auth {
 			date_i18n( wc_date_format() ),
 			date_i18n( wc_time_format() )
 		);
-		$user = wp_get_current_user();
+		$user        = wp_get_current_user();
 
 		// Created API keys.
 		$permissions     = ( in_array( $scope, array( 'read', 'write', 'read_write' ) ) ) ? sanitize_text_field( $scope ) : 'read';
@@ -267,9 +267,9 @@ class WC_Auth {
 	 */
 	protected function post_consumer_data( $consumer_data, $url ) {
 		$params = array(
-			'body'      => json_encode( $consumer_data ),
-			'timeout'   => 60,
-			'headers'   => array(
+			'body'    => json_encode( $consumer_data ),
+			'timeout' => 60,
+			'headers' => array(
 				'Content-Type' => 'application/json;charset=' . get_bloginfo( 'charset' ),
 			),
 		);
@@ -398,5 +398,6 @@ class WC_Auth {
 			$wpdb->delete( $wpdb->prefix . 'woocommerce_api_keys', array( 'key_id' => $key['key_id'] ), array( '%d' ) );
 		}
 	}
+
 }
 new WC_Auth();

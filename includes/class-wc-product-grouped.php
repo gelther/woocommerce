@@ -89,7 +89,7 @@ class WC_Product_Grouped extends WC_Product {
 	 * Returns the price in html format.
 	 *
 	 * @access public
-	 * @param string $price (default: '')
+	 * @param  string $price (default: '')
 	 * @return string
 	 */
 	public function get_price_html( $price = '' ) {
@@ -172,9 +172,9 @@ class WC_Product_Grouped extends WC_Product {
 	 * Sync a grouped product with it's children. These sync functions sync
 	 * upwards (from child to parent) when the variation is saved.
 	 *
-	 * @param WC_Product|int $product Product object or ID for which you wish to sync.
-	 * @param bool $save If true, the product object will be saved to the DB before returning it.
-	 * @return WC_Product Synced product object.
+	 * @param  WC_Product|int $product Product object or ID for which you wish to sync.
+	 * @param  bool           $save    If true, the product object will be saved to the DB before returning it.
+	 * @return WC_Product              Synced product object.
 	 */
 	public static function sync( $product, $save = true ) {
 		if ( ! is_a( $product, 'WC_Product' ) ) {
@@ -189,4 +189,5 @@ class WC_Product_Grouped extends WC_Product {
 		}
 		return $product;
 	}
+
 }

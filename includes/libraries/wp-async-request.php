@@ -62,9 +62,9 @@ abstract class WP_Async_Request {
 	/**
 	 * Set data used during the request
 	 *
-	 * @param array $data Data.
+	 * @param  array $data Data.
 	 *
-	 * @return $this
+	 * @return       $this
 	 */
 	public function data( $data ) {
 		$this->data = $data;

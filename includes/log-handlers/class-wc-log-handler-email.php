@@ -60,7 +60,7 @@ class WC_Log_Handler_Email extends WC_Log_Handler {
 	 * Constructor for log handler.
 	 *
 	 * @param string|array $recipients Optional. Email(s) to receive log messages. Defaults to site admin email.
-	 * @param string $threshold Optional. Minimum level that should receive log messages.
+	 * @param string       $threshold  Optional. Minimum level that should receive log messages.
 	 *     Default 'alert'. One of: emergency|alert|critical|error|warning|notice|info|debug
 	 */
 	public function __construct( $recipients = null, $threshold = 'alert' ) {
@@ -92,8 +92,8 @@ class WC_Log_Handler_Email extends WC_Log_Handler {
 	/**
 	 * Determine whether handler should handle log.
 	 *
-	 * @param string $level emergency|alert|critical|error|warning|notice|info|debug
-	 * @return bool True if the log should be handled.
+	 * @param  string $level emergency|alert|critical|error|warning|notice|info|debug
+	 * @return bool          True if the log should be handled.
 	 */
 	protected function should_handle( $level ) {
 		return $this->threshold <= WC_Log_Levels::get_level_severity( $level );
@@ -102,15 +102,14 @@ class WC_Log_Handler_Email extends WC_Log_Handler {
 	/**
 	 * Handle a log entry.
 	 *
-	 * @param int $timestamp Log timestamp.
-	 * @param string $level emergency|alert|critical|error|warning|notice|info|debug
-	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param  int    $timestamp Log timestamp.
+	 * @param  string $level     emergency|alert|critical|error|warning|notice|info|debug
+	 * @param  string $message   Log message.
+	 * @param  array  $context   Optional. Additional information for log handlers.
 	 *
-	 * @return bool False if value was not handled and true if value was handled.
+	 * @return bool              False if value was not handled and true if value was handled.
 	 */
 	public function handle( $timestamp, $level, $message, $context ) {
-
 		if ( $this->should_handle( $level ) ) {
 			$this->add_log( $timestamp, $level, $message, $context );
 			return true;
@@ -129,8 +128,8 @@ class WC_Log_Handler_Email extends WC_Log_Handler {
 
 		if ( ! empty( $this->logs ) ) {
 			$subject = $this->get_subject();
-			$body = $this->get_body();
-			$result = wp_mail( $this->recipients, $subject, $body );
+			$body    = $this->get_body();
+			$result  = wp_mail( $this->recipients, $subject, $body );
 			$this->clear_logs();
 		}
 
@@ -167,7 +166,7 @@ class WC_Log_Handler_Email extends WC_Log_Handler {
 	 */
 	protected function get_body() {
 		$site_name = get_bloginfo( 'name' );
-		$entries = implode( PHP_EOL, $this->logs );
+		$entries   = implode( PHP_EOL, $this->logs );
 		$log_count = count( $this->logs );
 		return _n(
 				'You have received the following WooCommerce log message:',
@@ -197,10 +196,10 @@ class WC_Log_Handler_Email extends WC_Log_Handler {
 	/**
 	 * Add log message.
 	 *
-	 * @param int $timestamp Log timestamp.
-	 * @param string $level emergency|alert|critical|error|warning|notice|info|debug
-	 * @param string $message Log message.
-	 * @param array $context Additional information for log handlers.
+	 * @param int    $timestamp Log timestamp.
+	 * @param string $level     emergency|alert|critical|error|warning|notice|info|debug
+	 * @param string $message   Log message.
+	 * @param array  $context   Additional information for log handlers.
 	 */
 	protected function add_log( $timestamp, $level, $message, $context ) {
 		$this->logs[] = $this->format_entry( $timestamp, $level, $message, $context );

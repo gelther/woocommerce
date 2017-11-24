@@ -30,7 +30,6 @@ class WC_API_Resource {
 	 * @param WC_API_Server $server
 	 */
 	public function __construct( WC_API_Server $server ) {
-
 		$this->server = $server;
 
 		// automatically register routes for sub-classes
@@ -54,13 +53,12 @@ class WC_API_Resource {
 	 * 3) the current user has the proper permissions to read/edit/delete the post
 	 *
 	 * @since 2.1
-	 * @param string|int $id the post ID
-	 * @param string $type the post type, either `shop_order`, `shop_coupon`, or `product`
-	 * @param string $context the context of the request, either `read`, `edit` or `delete`
-	 * @return int|WP_Error valid post ID or WP_Error if any of the checks fails
+	 * @param  string|int   $id      the post ID
+	 * @param  string       $type    the post type, either `shop_order`, `shop_coupon`, or `product`
+	 * @param  string       $context the context of the request, either `read`, `edit` or `delete`
+	 * @return int|WP_Error          valid post ID or WP_Error if any of the checks fails
 	 */
 	protected function validate_request( $id, $type, $context ) {
-
 		if ( 'shop_order' === $type || 'shop_coupon' === $type ) {
 			$resource_name = str_replace( 'shop_', '', $type );
 		} else {
@@ -117,12 +115,11 @@ class WC_API_Resource {
 	 * Add common request arguments to argument list before WP_Query is run
 	 *
 	 * @since 2.1
-	 * @param array $base_args required arguments for the query (e.g. `post_type`, etc)
-	 * @param array $request_args arguments provided in the request
+	 * @param  array $base_args    required arguments for the query (e.g. `post_type`, etc)
+	 * @param  array $request_args arguments provided in the request
 	 * @return array
 	 */
 	protected function merge_query_args( $base_args, $request_args ) {
-
 		$args = array();
 
 		// date
@@ -177,12 +174,11 @@ class WC_API_Resource {
 	 * `<resource_name>_meta` attribute (e.g. `order_meta`) as a list of key/value pairs
 	 *
 	 * @since 2.1
-	 * @param array $data the resource data
-	 * @param object $resource the resource object (e.g WC_Order)
+	 * @param  array  $data     the resource data
+	 * @param  object $resource the resource object (e.g WC_Order)
 	 * @return mixed
 	 */
 	public function maybe_add_meta( $data, $resource ) {
-
 		if ( isset( $this->server->params['GET']['filter']['meta'] ) && 'true' === $this->server->params['GET']['filter']['meta'] && is_object( $resource ) ) {
 
 			// don't attempt to add meta more than once
@@ -237,18 +233,17 @@ class WC_API_Resource {
 	 * Restrict the fields included in the response if the request specified certain only certain fields should be returned
 	 *
 	 * @since 2.1
-	 * @param array $data the response data
-	 * @param object $resource the object that provided the response data, e.g. WC_Coupon or WC_Order
-	 * @param array|string the requested list of fields to include in the response
-	 * @return array response data
+	 * @param  array        $data     the response data
+	 * @param  object       $resource the object that provided the response data, e.g. WC_Coupon or WC_Order
+	 * @param  array|string           the requested list of fields to include in the response
+	 * @return array                  response data
 	 */
 	public function filter_response_fields( $data, $resource, $fields ) {
-
 		if ( ! is_array( $data ) || empty( $fields ) ) {
 			return $data;
 		}
 
-		$fields = explode( ',', $fields );
+		$fields     = explode( ',', $fields );
 		$sub_fields = array();
 
 		// get sub fields
@@ -292,13 +287,12 @@ class WC_API_Resource {
 	 * Delete a given resource
 	 *
 	 * @since 2.1
-	 * @param int $id the resource ID
-	 * @param string $type the resource post type, or `customer`
-	 * @param bool $force true to permanently delete resource, false to move to trash (not supported for `customer`)
+	 * @param  int            $id    the resource ID
+	 * @param  string         $type  the resource post type, or `customer`
+	 * @param  bool           $force true to permanently delete resource, false to move to trash (not supported for `customer`)
 	 * @return array|WP_Error
 	 */
 	protected function delete( $id, $type, $force = false ) {
-
 		if ( 'shop_order' === $type || 'shop_coupon' === $type ) {
 			$resource_name = str_replace( 'shop_', '', $type );
 		} else {
@@ -335,17 +329,15 @@ class WC_API_Resource {
 		}
 	}
 
-
 	/**
 	 * Checks if the given post is readable by the current user
 	 *
 	 * @since 2.1
 	 * @see WC_API_Resource::check_permission()
-	 * @param WP_Post|int $post
+	 * @param  WP_Post|int $post
 	 * @return bool
 	 */
 	protected function is_readable( $post ) {
-
 		return $this->check_permission( $post, 'read' );
 	}
 
@@ -354,13 +346,11 @@ class WC_API_Resource {
 	 *
 	 * @since 2.1
 	 * @see WC_API_Resource::check_permission()
-	 * @param WP_Post|int $post
+	 * @param  WP_Post|int $post
 	 * @return bool
 	 */
 	protected function is_editable( $post ) {
-
 		return $this->check_permission( $post, 'edit' );
-
 	}
 
 	/**
@@ -368,11 +358,10 @@ class WC_API_Resource {
 	 *
 	 * @since 2.1
 	 * @see WC_API_Resource::check_permission()
-	 * @param WP_Post|int $post
+	 * @param  WP_Post|int $post
 	 * @return bool
 	 */
 	protected function is_deletable( $post ) {
-
 		return $this->check_permission( $post, 'delete' );
 	}
 
@@ -380,12 +369,11 @@ class WC_API_Resource {
 	 * Checks the permissions for the current user given a post and context
 	 *
 	 * @since 2.1
-	 * @param WP_Post|int $post
-	 * @param string $context the type of permission to check, either `read`, `write`, or `delete`
-	 * @return bool true if the current user has the permissions to perform the context on the post
+	 * @param  WP_Post|int $post
+	 * @param  string      $context the type of permission to check, either `read`, `write`, or `delete`
+	 * @return bool                 true if the current user has the permissions to perform the context on the post
 	 */
 	private function check_permission( $post, $context ) {
-
 		if ( ! is_a( $post, 'WP_Post' ) ) {
 			$post = get_post( $post );
 		}
@@ -406,4 +394,5 @@ class WC_API_Resource {
 			return false;
 		}
 	}
+
 }

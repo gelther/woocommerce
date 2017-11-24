@@ -29,11 +29,10 @@ class WC_API_Products extends WC_API_Resource {
 	 * GET /products/<id>/reviews
 	 *
 	 * @since 2.1
-	 * @param array $routes
+	 * @param  array $routes
 	 * @return array
 	 */
 	public function register_routes( $routes ) {
-
 		# GET/POST /products
 		$routes[ $this->base ] = array(
 			array( array( $this, 'get_products' ), WC_API_Server::READABLE ),
@@ -102,14 +101,13 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get all products
 	 *
 	 * @since 2.1
-	 * @param string $fields
-	 * @param string $type
-	 * @param array $filter
-	 * @param int $page
+	 * @param  string $fields
+	 * @param  string $type
+	 * @param  array  $filter
+	 * @param  int    $page
 	 * @return array
 	 */
 	public function get_products( $fields = null, $type = null, $filter = array(), $page = 1 ) {
-
 		if ( ! empty( $type ) ) {
 			$filter['type'] = $type;
 		}
@@ -138,12 +136,11 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the product for the given ID
 	 *
 	 * @since 2.1
-	 * @param int $id the product ID
-	 * @param string $fields
+	 * @param  int            $id     the product ID
+	 * @param  string         $fields
 	 * @return array|WP_Error
 	 */
 	public function get_product( $id, $fields = null ) {
-
 		$id = $this->validate_request( $id, 'product', 'read' );
 
 		if ( is_wp_error( $id ) ) {
@@ -162,7 +159,7 @@ class WC_API_Products extends WC_API_Resource {
 
 		// add the parent product data to an individual variation
 		if ( $product->is_type( 'variation' ) && $product->get_parent_id() ) {
-			$_product = wc_get_product( $product->get_parent_id() );
+			$_product               = wc_get_product( $product->get_parent_id() );
 			$product_data['parent'] = $this->get_product_data( $_product );
 		}
 
@@ -174,8 +171,8 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 *
-	 * @param string $type
-	 * @param array $filter
+	 * @param  string         $type
+	 * @param  array          $filter
 	 *
 	 * @return array|WP_Error
 	 */
@@ -202,7 +199,7 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.2
 	 *
-	 * @param array $data posted data
+	 * @param  array          $data posted data
 	 *
 	 * @return array|WP_Error
 	 */
@@ -312,8 +309,8 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.2
 	 *
-	 * @param int $id the product ID
-	 * @param array $data
+	 * @param  int            $id   the product ID
+	 * @param  array          $data
 	 *
 	 * @return array|WP_Error
 	 */
@@ -407,13 +404,12 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.2
 	 *
-	 * @param int $id the product ID.
-	 * @param bool $force true to permanently delete order, false to move to trash.
+	 * @param  int            $id    the product ID.
+	 * @param  bool           $force true to permanently delete order, false to move to trash.
 	 *
 	 * @return array|WP_Error
 	 */
 	public function delete_product( $id, $force = false ) {
-
 		$id = $this->validate_request( $id, 'product', 'delete' );
 
 		if ( is_wp_error( $id ) ) {
@@ -468,12 +464,11 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the reviews for a product
 	 *
 	 * @since 2.1
-	 * @param int $id the product ID to get reviews for
-	 * @param string $fields fields to include in response
+	 * @param  int            $id     the product ID to get reviews for
+	 * @param  string         $fields fields to include in response
 	 * @return array|WP_Error
 	 */
 	public function get_product_reviews( $id, $fields = null ) {
-
 		$id = $this->validate_request( $id, 'product', 'read' );
 
 		if ( is_wp_error( $id ) ) {
@@ -503,11 +498,11 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the orders for a product
 	 *
 	 * @since 2.4.0
-	 * @param int $id the product ID to get orders for
-	 * @param string fields  fields to retrieve
-	 * @param array $filter filters to include in response
-	 * @param string $status the order status to retrieve
-	 * @param $page  $page   page to retrieve
+	 * @param  int            $id     the product ID to get orders for
+	 * @param  string                 fields  fields to retrieve
+	 * @param  array          $filter filters to include in response
+	 * @param  string         $status the order status to retrieve
+	 * @param                 $page   $page   page to retrieve
 	 * @return array|WP_Error
 	 */
 	public function get_product_orders( $id, $fields = null, $filter = array(), $status = null, $page = 1 ) {
@@ -524,7 +519,7 @@ class WC_API_Products extends WC_API_Resource {
 			FROM {$wpdb->prefix}woocommerce_order_items
 			WHERE order_item_id IN ( SELECT order_item_id FROM {$wpdb->prefix}woocommerce_order_itemmeta WHERE meta_key = '_product_id' AND meta_value = %d )
 			AND order_item_type = 'line_item'
-		 ", $id ) );
+		", $id ) );
 
 		if ( empty( $order_ids ) ) {
 			return array( 'orders' => array() );
@@ -544,7 +539,7 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.2
 	 *
-	 * @param string|null $fields fields to limit response to
+	 * @param  string|null    $fields fields to limit response to
 	 *
 	 * @return array|WP_Error
 	 */
@@ -574,8 +569,8 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.2
 	 *
-	 * @param string $id product category term ID
-	 * @param string|null $fields fields to limit response to
+	 * @param  string         $id     product category term ID
+	 * @param  string|null    $fields fields to limit response to
 	 *
 	 * @return array|WP_Error
 	 */
@@ -631,11 +626,10 @@ class WC_API_Products extends WC_API_Resource {
 	 * Helper method to get product post objects
 	 *
 	 * @since 2.1
-	 * @param array $args request arguments for filtering query
+	 * @param  array    $args request arguments for filtering query
 	 * @return WP_Query
 	 */
 	private function query_products( $args ) {
-
 		// Set base query arguments
 		$query_args = array(
 			'fields'      => 'ids',
@@ -688,7 +682,7 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get standard product data that applies to every product type
 	 *
 	 * @since 2.1
-	 * @param WC_Product|int $product
+	 * @param  WC_Product|int $product
 	 * @return array
 	 */
 	private function get_product_data( $product ) {
@@ -772,7 +766,7 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get an individual variation's data
 	 *
 	 * @since 2.1
-	 * @param WC_Product $product
+	 * @param  WC_Product $product
 	 * @return array
 	 */
 	private function get_variation_data( $product ) {
@@ -832,8 +826,8 @@ class WC_API_Products extends WC_API_Resource {
 	 * Save default attributes.
 	 *
 	 * @since 3.0.0
-	 * @param WC_Product $product
-	 * @param array $request
+	 * @param  WC_Product $product
+	 * @param  array      $request
 	 * @return WC_Product
 	 */
 	protected function save_default_attributes( $product, $request ) {
@@ -890,7 +884,7 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since  2.2
 	 * @param  WC_Product $product
-	 * @param  array $data
+	 * @param  array      $data
 	 * @return WC_Product
 	 * @throws WC_API_Exception
 	 */
@@ -1266,7 +1260,7 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since  2.2
 	 * @param  WC_Product $product
-	 * @param  array $request
+	 * @param  array      $request
 	 *
 	 * @return true
 	 *
@@ -1453,8 +1447,8 @@ class WC_API_Products extends WC_API_Resource {
 	 * Save product shipping data
 	 *
 	 * @since 2.2
-	 * @param WC_Product $product
-	 * @param array $data
+	 * @param  WC_Product $product
+	 * @param  array      $data
 	 * @return WC_Product
 	 */
 	private function save_product_shipping_data( $product, $data ) {
@@ -1506,9 +1500,9 @@ class WC_API_Products extends WC_API_Resource {
 	 * Save downloadable files
 	 *
 	 * @since 2.2
-	 * @param WC_Product $product
-	 * @param array $downloads
-	 * @param int $deprecated Deprecated since 3.0.
+	 * @param  WC_Product $product
+	 * @param  array      $downloads
+	 * @param  int        $deprecated Deprecated since 3.0.
 	 * @return WC_Product
 	 */
 	private function save_downloadable_files( $product, $downloads, $deprecated = 0 ) {
@@ -1530,7 +1524,7 @@ class WC_API_Products extends WC_API_Resource {
 			$download->set_id( $key );
 			$download->set_name( $file['name'] ? $file['name'] : wc_get_filename_from_url( $file['file'] ) );
 			$download->set_file( apply_filters( 'woocommerce_file_download_path', $file['file'], $product, $key ) );
-			$files[]  = $download;
+			$files[] = $download;
 		}
 		$product->set_downloads( $files );
 
@@ -1541,11 +1535,11 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get attribute taxonomy by slug.
 	 *
 	 * @since 2.2
-	 * @param string $slug
+	 * @param  string      $slug
 	 * @return string|null
 	 */
 	private function get_attribute_taxonomy_by_slug( $slug ) {
-		$taxonomy = null;
+		$taxonomy             = null;
 		$attribute_taxonomies = wc_get_attribute_taxonomies();
 
 		foreach ( $attribute_taxonomies as $key => $tax ) {
@@ -1563,7 +1557,7 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the images for a product or product variation
 	 *
 	 * @since 2.1
-	 * @param WC_Product|WC_Product_Variation $product
+	 * @param  WC_Product|WC_Product_Variation $product
 	 * @return array
 	 */
 	private function get_images( $product ) {
@@ -1626,8 +1620,8 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since  2.2
 	 *
-	 * @param WC_Product $product
-	 * @param array      $images
+	 * @param  WC_Product $product
+	 * @param  array      $images
 	 *
 	 * @return WC_Product
 	 * @throws WC_API_Exception
@@ -1684,7 +1678,7 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since  2.2
 	 *
-	 * @param  string $image_url
+	 * @param  string         $image_url
 	 *
 	 * @return array|WP_Error
 	 *
@@ -1760,8 +1754,8 @@ class WC_API_Products extends WC_API_Resource {
 	 * Sets product image as attachment and returns the attachment ID.
 	 *
 	 * @since 2.2
-	 * @param array $upload
-	 * @param int $id
+	 * @param  array $upload
+	 * @param  int   $id
 	 * @return int
 	 */
 	protected function set_product_image_as_attachment( $upload, $id ) {
@@ -1797,8 +1791,8 @@ class WC_API_Products extends WC_API_Resource {
 	/**
 	 * Get attribute options.
 	 *
-	 * @param int $product_id
-	 * @param array $attribute
+	 * @param  int   $product_id
+	 * @param  array $attribute
 	 * @return array
 	 */
 	protected function get_attribute_options( $product_id, $attribute ) {
@@ -1815,11 +1809,10 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the attributes for a product or product variation
 	 *
 	 * @since 2.1
-	 * @param WC_Product|WC_Product_Variation $product
+	 * @param  WC_Product|WC_Product_Variation $product
 	 * @return array
 	 */
 	private function get_attributes( $product ) {
-
 		$attributes = array();
 
 		if ( $product->is_type( 'variation' ) ) {
@@ -1855,11 +1848,10 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the downloads for a product or product variation
 	 *
 	 * @since 2.1
-	 * @param WC_Product|WC_Product_Variation $product
+	 * @param  WC_Product|WC_Product_Variation $product
 	 * @return array
 	 */
 	private function get_downloads( $product ) {
-
 		$downloads = array();
 
 		if ( $product->is_downloadable() ) {
@@ -1882,7 +1874,7 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.4.0
 	 *
-	 * @param string|null $fields fields to limit response to
+	 * @param  string|null    $fields fields to limit response to
 	 *
 	 * @return array|WP_Error
 	 */
@@ -1918,8 +1910,8 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.4.0
 	 *
-	 * @param string $id product attribute term ID
-	 * @param string|null $fields fields to limit response to
+	 * @param  string         $id     product attribute term ID
+	 * @param  string|null    $fields fields to limit response to
 	 *
 	 * @return array|WP_Error
 	 */
@@ -1943,7 +1935,7 @@ class WC_API_Products extends WC_API_Resource {
 				SELECT *
 				FROM {$wpdb->prefix}woocommerce_attribute_taxonomies
 				WHERE attribute_id = %d
-			 ", $id ) );
+			", $id ) );
 
 			if ( is_wp_error( $attribute ) || is_null( $attribute ) ) {
 				throw new WC_API_Exception( 'woocommerce_api_invalid_product_attribute_id', __( 'A product attribute with the provided ID could not be found', 'woocommerce' ), 404 );
@@ -2007,7 +1999,7 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.4.0
 	 *
-	 * @param array $data posted data
+	 * @param  array          $data posted data
 	 *
 	 * @return array|WP_Error
 	 */
@@ -2089,8 +2081,8 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.4.0
 	 *
-	 * @param int $id the attribute ID
-	 * @param array $data
+	 * @param  int            $id   the attribute ID
+	 * @param  array          $data
 	 *
 	 * @return array|WP_Error
 	 */
@@ -2172,7 +2164,7 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since  2.4.0
 	 *
-	 * @param  int $id the product attribute ID
+	 * @param  int            $id the product attribute ID
 	 *
 	 * @return array|WP_Error
 	 */
@@ -2191,7 +2183,7 @@ class WC_API_Products extends WC_API_Resource {
 				SELECT attribute_name
 				FROM {$wpdb->prefix}woocommerce_attribute_taxonomies
 				WHERE attribute_id = %d
-			 ", $id ) );
+			", $id ) );
 
 			if ( is_null( $attribute_name ) ) {
 				throw new WC_API_Exception( 'woocommerce_api_invalid_product_attribute_id', __( 'A product attribute with the provided ID could not be found', 'woocommerce' ), 404 );
@@ -2235,8 +2227,8 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since  2.3.0
 	 *
-	 * @param  int    $sku the product SKU
-	 * @param  string $fields
+	 * @param  int            $sku    the product SKU
+	 * @param  string         $fields
 	 *
 	 * @return array|WP_Error
 	 */
@@ -2287,12 +2279,11 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.4.0
 	 *
-	 * @param array $data
+	 * @param  array          $data
 	 *
 	 * @return array|WP_Error
 	 */
 	public function bulk( $data ) {
-
 		try {
 			if ( ! isset( $data['products'] ) ) {
 				throw new WC_API_Exception( 'woocommerce_api_missing_products_data', sprintf( __( 'No %1$s data specified to create/edit %1$s', 'woocommerce' ), 'products' ), 400 );
@@ -2358,4 +2349,5 @@ class WC_API_Products extends WC_API_Resource {
 			return new WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
 	}
+
 }

@@ -69,7 +69,6 @@ class WC_Tax_Rate_Importer extends WP_Importer {
 	 * Manages the three separate stages of the CSV import process.
 	 */
 	public function dispatch() {
-
 		$this->header();
 
 		$step = empty( $_GET['step'] ) ? 0 : (int) $_GET['step'];
@@ -117,8 +116,8 @@ class WC_Tax_Rate_Importer extends WP_Importer {
 	/**
 	 * UTF-8 encode the data if `$enc` value isn't UTF-8.
 	 *
-	 * @param mixed  $data Data.
-	 * @param string $enc Encoding.
+	 * @param  mixed  $data Data.
+	 * @param  string $enc  Encoding.
 	 * @return string
 	 */
 	public function format_data_from_csv( $data, $enc ) {
@@ -240,7 +239,6 @@ class WC_Tax_Rate_Importer extends WP_Importer {
 	 * Output information about the uploading process.
 	 */
 	public function greet() {
-
 		echo '<div class="narrow">';
 		echo '<p>' . esc_html__( 'Hi there! Upload a CSV file containing tax rates to import the contents into your shop. Choose a .csv file to upload, then click "Upload file and import".', 'woocommerce' ) . '</p>';
 
@@ -248,8 +246,8 @@ class WC_Tax_Rate_Importer extends WP_Importer {
 
 		$action = 'admin.php?import=woocommerce_tax_rate_csv&step=1';
 
-		$bytes = apply_filters( 'import_upload_size_limit', wp_max_upload_size() );
-		$size = size_format( $bytes );
+		$bytes      = apply_filters( 'import_upload_size_limit', wp_max_upload_size() );
+		$size       = size_format( $bytes );
 		$upload_dir = wp_upload_dir();
 		if ( ! empty( $upload_dir['error'] ) ) :
 			?><div class="error"><p><?php esc_html_e( 'Before you can upload your import file, you will need to fix the following error:', 'woocommerce' ); ?></p>
@@ -305,7 +303,7 @@ class WC_Tax_Rate_Importer extends WP_Importer {
 	/**
 	 * Show import error and quit.
 	 *
-	 * @param  string $message Error messag.
+	 * @param string $message Error messag.
 	 */
 	private function import_error( $message = '' ) {
 		echo '<p><strong>' . esc_html__( 'Sorry, there has been an error.', 'woocommerce' ) . '</strong><br />';
@@ -321,9 +319,10 @@ class WC_Tax_Rate_Importer extends WP_Importer {
 	 * Added to http_request_timeout filter to force timeout at 60 seconds during import.
 	 *
 	 * @param  int $val Value.
-	 * @return int 60
+	 * @return int      60
 	 */
 	public function bump_request_timeout( $val ) {
 		return 60;
 	}
+
 }

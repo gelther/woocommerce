@@ -52,4 +52,5 @@ class WC_Order_Item_Coupon_Data_Store extends Abstract_WC_Order_Item_Type_Data_S
 			update_metadata( 'order_item', $id, $key, $value );
 		}
 	}
+
 }

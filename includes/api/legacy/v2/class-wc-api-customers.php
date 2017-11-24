@@ -32,7 +32,6 @@ class WC_API_Customers extends WC_API_Resource {
 	 * @param WC_API_Server $server
 	 */
 	public function __construct( WC_API_Server $server ) {
-
 		parent::__construct( $server );
 
 		// add customer data to order responses
@@ -51,14 +50,13 @@ class WC_API_Customers extends WC_API_Resource {
 	 * GET /customers/<id>/orders
 	 *
 	 * @since 2.2
-	 * @param array $routes
+	 * @param  array $routes
 	 * @return array
 	 */
 	public function register_routes( $routes ) {
-
 		# GET/POST /customers
 		$routes[ $this->base ] = array(
-			array( array( $this, 'get_customers' ),   WC_API_SERVER::READABLE ),
+			array( array( $this, 'get_customers' ), WC_API_SERVER::READABLE ),
 			array( array( $this, 'create_customer' ), WC_API_SERVER::CREATABLE | WC_API_Server::ACCEPT_DATA ),
 		);
 
@@ -69,8 +67,8 @@ class WC_API_Customers extends WC_API_Resource {
 
 		# GET/PUT/DELETE /customers/<id>
 		$routes[ $this->base . '/(?P<id>\d+)' ] = array(
-			array( array( $this, 'get_customer' ),    WC_API_SERVER::READABLE ),
-			array( array( $this, 'edit_customer' ),   WC_API_SERVER::EDITABLE | WC_API_SERVER::ACCEPT_DATA ),
+			array( array( $this, 'get_customer' ), WC_API_SERVER::READABLE ),
+			array( array( $this, 'edit_customer' ), WC_API_SERVER::EDITABLE | WC_API_SERVER::ACCEPT_DATA ),
 			array( array( $this, 'delete_customer' ), WC_API_SERVER::DELETABLE ),
 		);
 
@@ -101,13 +99,12 @@ class WC_API_Customers extends WC_API_Resource {
 	 * Get all customers
 	 *
 	 * @since 2.1
-	 * @param array $fields
-	 * @param array $filter
-	 * @param int $page
+	 * @param  array $fields
+	 * @param  array $filter
+	 * @param  int   $page
 	 * @return array
 	 */
 	public function get_customers( $fields = null, $filter = array(), $page = 1 ) {
-
 		$filter['page'] = $page;
 
 		$query = $this->query_customers( $filter );
@@ -132,8 +129,8 @@ class WC_API_Customers extends WC_API_Resource {
 	 * Get the customer for the given ID
 	 *
 	 * @since 2.1
-	 * @param int $id the customer ID
-	 * @param array $fields
+	 * @param  int            $id     the customer ID
+	 * @param  array          $fields
 	 * @return array|WP_Error
 	 */
 	public function get_customer( $id, $fields = null ) {
@@ -194,8 +191,8 @@ class WC_API_Customers extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 *
-	 * @param string $email the customer email
-	 * @param array $fields
+	 * @param  string         $email  the customer email
+	 * @param  array          $fields
 	 *
 	 * @return array|WP_Error
 	 */
@@ -221,7 +218,7 @@ class WC_API_Customers extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 *
-	 * @param array $filter
+	 * @param  array          $filter
 	 *
 	 * @return array|WP_Error
 	 */
@@ -289,12 +286,11 @@ class WC_API_Customers extends WC_API_Resource {
 	 * Add/Update customer data.
 	 *
 	 * @since 2.2
-	 * @param int $id the customer ID
-	 * @param array $data
+	 * @param int         $id       the customer ID
+	 * @param array       $data
 	 * @param WC_Customer $customer
 	 */
 	protected function update_customer_data( $id, $data, $customer ) {
-
 		// Customer first name.
 		if ( isset( $data['first_name'] ) ) {
 			$customer->set_first_name( wc_clean( $data['first_name'] ) );
@@ -339,7 +335,7 @@ class WC_API_Customers extends WC_API_Resource {
 	 *
 	 * @since 2.2
 	 *
-	 * @param array $data
+	 * @param  array          $data
 	 *
 	 * @return array|WP_Error
 	 */
@@ -393,8 +389,8 @@ class WC_API_Customers extends WC_API_Resource {
 	 *
 	 * @since 2.2
 	 *
-	 * @param int $id the customer ID
-	 * @param array $data
+	 * @param  int            $id   the customer ID
+	 * @param  array          $data
 	 *
 	 * @return array|WP_Error
 	 */
@@ -445,11 +441,10 @@ class WC_API_Customers extends WC_API_Resource {
 	 * Delete a customer
 	 *
 	 * @since 2.2
-	 * @param int $id the customer ID
+	 * @param  int            $id the customer ID
 	 * @return array|WP_Error
 	 */
 	public function delete_customer( $id ) {
-
 		// Validate the customer ID.
 		$id = $this->validate_request( $id, 'customer', 'delete' );
 
@@ -467,8 +462,8 @@ class WC_API_Customers extends WC_API_Resource {
 	 * Get the orders for a customer
 	 *
 	 * @since 2.1
-	 * @param int $id the customer ID
-	 * @param string $fields fields to include in response
+	 * @param  int            $id     the customer ID
+	 * @param  string         $fields fields to include in response
 	 * @return array|WP_Error
 	 */
 	public function get_customer_orders( $id, $fields = null ) {
@@ -505,8 +500,8 @@ class WC_API_Customers extends WC_API_Resource {
 	 * Get the available downloads for a customer
 	 *
 	 * @since 2.2
-	 * @param int $id the customer ID
-	 * @param string $fields fields to include in response
+	 * @param  int            $id     the customer ID
+	 * @param  string         $fields fields to include in response
 	 * @return array|WP_Error
 	 */
 	public function get_customer_downloads( $id, $fields = null ) {
@@ -545,11 +540,10 @@ class WC_API_Customers extends WC_API_Resource {
 	 * The filter for role can only be a single role in a string.
 	 *
 	 * @since 2.3
-	 * @param array $args request arguments for filtering query
+	 * @param  array         $args request arguments for filtering query
 	 * @return WP_User_Query
 	 */
 	private function query_customers( $args = array() ) {
-
 		// default users per page
 		$users_per_page = get_option( 'posts_per_page' );
 
@@ -621,7 +615,7 @@ class WC_API_Customers extends WC_API_Resource {
 
 		// Helper members for pagination headers
 		$query->total_pages = ( -1 == $args['limit'] ) ? 1 : ceil( $query->get_total() / $users_per_page );
-		$query->page = $page;
+		$query->page        = $page;
 
 		return $query;
 	}
@@ -630,12 +624,11 @@ class WC_API_Customers extends WC_API_Resource {
 	 * Add customer data to orders
 	 *
 	 * @since 2.1
-	 * @param $order_data
-	 * @param $order
+	 * @param        $order_data
+	 * @param        $order
 	 * @return array
 	 */
 	public function add_customer_data( $order_data, $order ) {
-
 		if ( 0 == $order->get_user_id() ) {
 
 			// add customer data from order
@@ -685,7 +678,6 @@ class WC_API_Customers extends WC_API_Resource {
 	 * @param WP_User_Query $query
 	 */
 	public function modify_user_query( $query ) {
-
 		if ( $this->created_at_min ) {
 			$query->query_where .= sprintf( " AND user_registered >= STR_TO_DATE( '%s', '%%Y-%%m-%%d %%H:%%i:%%s' )", esc_sql( $this->created_at_min ) );
 		}
@@ -704,13 +696,12 @@ class WC_API_Customers extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 * @see WC_API_Resource::validate_request()
-	 * @param integer $id the customer ID
-	 * @param string $type the request type, unused because this method overrides the parent class
-	 * @param string $context the context of the request, either `read`, `edit` or `delete`
-	 * @return int|WP_Error valid user ID or WP_Error if any of the checks fails
+	 * @param  integer      $id      the customer ID
+	 * @param  string       $type    the request type, unused because this method overrides the parent class
+	 * @param  string       $context the context of the request, either `read`, `edit` or `delete`
+	 * @return int|WP_Error          valid user ID or WP_Error if any of the checks fails
 	 */
 	protected function validate_request( $id, $type, $context ) {
-
 		try {
 			$id = absint( $id );
 
@@ -759,8 +750,8 @@ class WC_API_Customers extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 * @see WC_API_Resource::is_readable()
-	 * @param int|WP_Post $post unused
-	 * @return bool true if the current user can read users, false otherwise
+	 * @param  int|WP_Post $post unused
+	 * @return bool              true if the current user can read users, false otherwise
 	 */
 	protected function is_readable( $post ) {
 		return current_user_can( 'list_users' );
@@ -773,12 +764,11 @@ class WC_API_Customers extends WC_API_Resource {
 	 *
 	 * @since 2.4.0
 	 *
-	 * @param array $data
+	 * @param  array          $data
 	 *
 	 * @return array|WP_Error
 	 */
 	public function bulk( $data ) {
-
 		try {
 			if ( ! isset( $data['customers'] ) ) {
 				throw new WC_API_Exception( 'woocommerce_api_missing_customers_data', sprintf( __( 'No %1$s data specified to create/edit %1$s', 'woocommerce' ), 'customers' ), 400 );
@@ -834,4 +824,5 @@ class WC_API_Customers extends WC_API_Resource {
 			return new WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
 	}
+
 }

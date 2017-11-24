@@ -177,8 +177,8 @@ class WC_Session_Handler extends WC_Session {
 			$wpdb->replace(
 				$this->_table,
 				array(
-					'session_key' => $this->_customer_id,
-					'session_value' => maybe_serialize( $this->_data ),
+					'session_key'    => $this->_customer_id,
+					'session_value'  => maybe_serialize( $this->_data ),
 					'session_expiry' => $this->_session_expiration,
 				),
 				array(
@@ -217,7 +217,7 @@ class WC_Session_Handler extends WC_Session {
 	/**
 	 * When a user is logged out, ensure they have a unique nonce by using the customer/session ID.
 	 *
-	 * @param int $uid
+	 * @param  int    $uid
 	 *
 	 * @return string
 	 */
@@ -244,8 +244,8 @@ class WC_Session_Handler extends WC_Session {
 	/**
 	 * Returns the session.
 	 *
-	 * @param string $customer_id
-	 * @param mixed $default
+	 * @param  string       $customer_id
+	 * @param  mixed        $default
 	 * @return string|array
 	 */
 	public function get_session( $customer_id, $default = false ) {
@@ -293,7 +293,7 @@ class WC_Session_Handler extends WC_Session {
 	 * Update the session expiry timestamp.
 	 *
 	 * @param string $customer_id
-	 * @param int $timestamp
+	 * @param int    $timestamp
 	 */
 	public function update_session_timestamp( $customer_id, $timestamp ) {
 		global $wpdb;
@@ -311,4 +311,5 @@ class WC_Session_Handler extends WC_Session {
 			)
 		);
 	}
+
 }

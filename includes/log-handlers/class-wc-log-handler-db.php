@@ -17,10 +17,10 @@ class WC_Log_Handler_DB extends WC_Log_Handler {
 	/**
 	 * Handle a log entry.
 	 *
-	 * @param int $timestamp Log timestamp.
-	 * @param string $level emergency|alert|critical|error|warning|notice|info|debug
-	 * @param string $message Log message.
-	 * @param array $context {
+	 * @param int    $timestamp Log timestamp.
+	 * @param string $level     emergency|alert|critical|error|warning|notice|info|debug
+	 * @param string $message   Log message.
+	 * @param array  $context   {
 	 *     Additional information for log handlers.
 	 *
 	 *     @type string $source Optional. Source will be available in log table.
@@ -32,7 +32,6 @@ class WC_Log_Handler_DB extends WC_Log_Handler {
 	 * @return bool False if value was not handled and true if value was handled.
 	 */
 	public function handle( $timestamp, $level, $message, $context ) {
-
 		if ( isset( $context['source'] ) && $context['source'] ) {
 			$source = $context['source'];
 		} else {
@@ -45,24 +44,24 @@ class WC_Log_Handler_DB extends WC_Log_Handler {
 	/**
 	 * Add a log entry to chosen file.
 	 *
-	 * @param int $timestamp Log timestamp.
-	 * @param string $level emergency|alert|critical|error|warning|notice|info|debug
-	 * @param string $message Log message.
-	 * @param string $source Log source. Useful for filtering and sorting.
-	 * @param array $context {
+	 * @param  int    $timestamp Log timestamp.
+	 * @param  string $level     emergency|alert|critical|error|warning|notice|info|debug
+	 * @param  string $message   Log message.
+	 * @param  string $source    Log source. Useful for filtering and sorting.
+	 * @param  array  $context   {
 	 *     Context will be serialized and stored in database.
 	 * }
 	 *
-	 * @return bool True if write was successful.
+	 * @return bool              True if write was successful.
 	 */
 	protected static function add( $timestamp, $level, $message, $source, $context ) {
 		global $wpdb;
 
 		$insert = array(
 			'timestamp' => date( 'Y-m-d H:i:s', $timestamp ),
-			'level' => WC_Log_Levels::get_level_severity( $level ),
-			'message' => $message,
-			'source' => $source,
+			'level'     => WC_Log_Levels::get_level_severity( $level ),
+			'message'   => $message,
+			'source'    => $source,
 		);
 
 		$format = array(
@@ -94,7 +93,7 @@ class WC_Log_Handler_DB extends WC_Log_Handler {
 	/**
 	 * Delete selected logs from DB.
 	 *
-	 * @param int|string|array Log ID or array of Log IDs to be deleted.
+	 * @param  int|string|array Log ID or array of Log IDs to be deleted.
 	 *
 	 * @return bool
 	 */

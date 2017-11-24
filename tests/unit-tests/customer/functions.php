@@ -12,7 +12,6 @@ class WC_Tests_Customer_Functions extends WC_Unit_Test_Case {
 	 * @since 3.1
 	 */
 	public function test_wc_create_new_customer() {
-
 		// Basic.
 		$id = wc_create_new_customer( 'test@example.com', 'testuser', 'testpassword' );
 		$this->assertTrue( is_numeric( $id ) && $id > 0 );
@@ -35,13 +34,13 @@ class WC_Tests_Customer_Functions extends WC_Unit_Test_Case {
 
 		// Username with auto-generation.
 		update_option( 'woocommerce_registration_generate_username', 'yes' );
-		$id = wc_create_new_customer( 'fred@example.com', '', 'testpassword' );
+		$id       = wc_create_new_customer( 'fred@example.com', '', 'testpassword' );
 		$userdata = get_userdata( $id );
 		$this->assertEquals( 'fred', $userdata->user_login );
-		$id = wc_create_new_customer( 'fred@mail.com', '', 'testpassword' );
+		$id       = wc_create_new_customer( 'fred@mail.com', '', 'testpassword' );
 		$userdata = get_userdata( $id );
 		$this->assertEquals( 'fred1', $userdata->user_login );
-		$id = wc_create_new_customer( 'fred@test.com', '', 'testpassword' );
+		$id       = wc_create_new_customer( 'fred@test.com', '', 'testpassword' );
 		$userdata = get_userdata( $id );
 		$this->assertEquals( 'fred2', $userdata->user_login );
 
@@ -62,7 +61,7 @@ class WC_Tests_Customer_Functions extends WC_Unit_Test_Case {
 	 */
 	function test_wc_update_new_customer_past_orders() {
 		$customer_id = wc_create_new_customer( 'test@example.com', 'testuser', 'testpassword' );
-		$order1 = new WC_Order;
+		$order1      = new WC_Order;
 		$order1->set_billing_email( 'test@example.com' );
 		$order1->set_status( 'completed' );
 		$order1->save();
@@ -117,7 +116,7 @@ class WC_Tests_Customer_Functions extends WC_Unit_Test_Case {
 	 */
 	function test_wc_update_new_customer_past_orders_invalid_changed_email() {
 		$customer_id = wc_create_new_customer( 'test@example.com', 'testuser', 'testpassword' );
-		$order1 = new WC_Order;
+		$order1      = new WC_Order;
 		$order1->set_billing_email( 'test@example.com' );
 		$order1->set_status( 'completed' );
 		$order1->save();
@@ -165,10 +164,10 @@ class WC_Tests_Customer_Functions extends WC_Unit_Test_Case {
 	function test_wc_customer_bought_product() {
 		$customer_id_1 = wc_create_new_customer( 'test@example.com', 'testuser', 'testpassword' );
 		$customer_id_2 = wc_create_new_customer( 'test2@example.com', 'testuser2', 'testpassword2' );
-		$product_1 = new WC_Product_Simple;
+		$product_1     = new WC_Product_Simple;
 		$product_1->save();
 		$product_id_1 = $product_1->get_id();
-		$product_2 = new WC_Product_Simple;
+		$product_2    = new WC_Product_Simple;
 		$product_2->save();
 		$product_id_2 = $product_2->get_id();
 
@@ -384,7 +383,7 @@ class WC_Tests_Customer_Functions extends WC_Unit_Test_Case {
 	 */
 	function test_wc_reset_order_customer_id_on_deleted_user() {
 		$customer_id = wc_create_new_customer( 'test@example.com', 'testuser', 'testpassword' );
-		$customer = new WC_Customer( $customer_id );
+		$customer    = new WC_Customer( $customer_id );
 
 		$order = new WC_Order;
 		$order->set_customer_id( $customer_id );
@@ -414,4 +413,5 @@ class WC_Tests_Customer_Functions extends WC_Unit_Test_Case {
 		$last_order = wc_get_customer_last_order( $customer_id );
 		$this->assertEquals( $order_2->get_id(), $last_order->get_id() );
 	}
+
 }

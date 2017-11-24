@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<form class="wc-progress-form-content woocommerce-importer" method="post" action="<?php echo esc_url( $this->get_next_step_link() ) ?>">
+<form class="wc-progress-form-content woocommerce-importer" method="post" action="<?php echo esc_url( $this->get_next_step_link() ); ?>">
 	<header>
 		<h2><?php esc_html_e( 'Map CSV fields to products', 'woocommerce' ); ?></h2>
 		<p><?php esc_html_e( 'Select fields from your CSV file to map against products fields, or to ignore during import.', 'woocommerce' ); ?></p>
@@ -42,12 +42,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 										<optgroup label="<?php echo esc_attr( $value['name'] ); ?>">
 											<?php foreach ( $value['options'] as $sub_key => $sub_value ) : ?>
 												<option value="<?php echo esc_attr( $sub_key ); ?>" <?php selected( $mapped_value, $sub_key ); ?>><?php echo esc_html( $sub_value ); ?></option>
-											<?php endforeach ?>
+											<?php endforeach; ?>
 										</optgroup>
 									<?php else : ?>
 										<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $mapped_value, $key ); ?>><?php echo esc_html( $value ); ?></option>
 									<?php endif; ?>
-								<?php endforeach ?>
+								<?php endforeach; ?>
 							</select>
 						</td>
 					</tr>

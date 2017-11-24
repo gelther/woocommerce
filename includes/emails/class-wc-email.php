@@ -126,11 +126,11 @@ class WC_Email extends WC_Settings_API {
 	protected $customer_email = false;
 
 	/**
-	 *  List of preg* regular expression patterns to search for,
-	 *  used in conjunction with $plain_replace.
-	 *  https://raw.github.com/ushahidi/wp-silcc/master/class.html2text.inc
-	 *  @var array $plain_search
-	 *  @see $plain_replace
+	 * List of preg* regular expression patterns to search for,
+	 * used in conjunction with $plain_replace.
+	 * https://raw.github.com/ushahidi/wp-silcc/master/class.html2text.inc
+	 * @var array $plain_search
+	 * @see $plain_replace
 	 */
 	public $plain_search = array(
 		"/\r/",                                          // Non-legal carriage return
@@ -156,9 +156,9 @@ class WC_Email extends WC_Settings_API {
 	);
 
 	/**
-	 *  List of pattern replacements corresponding to patterns searched.
-	 *  @var array $plain_replace
-	 *  @see $plain_search
+	 * List of pattern replacements corresponding to patterns searched.
+	 * @var array $plain_replace
+	 * @see $plain_search
 	 */
 	public $plain_replace = array(
 		'',                                             // Non-legal carriage return
@@ -190,7 +190,7 @@ class WC_Email extends WC_Settings_API {
 	 */
 	protected $placeholders = array();
 
- 	/**
+	/**
 	 * Strings to find in subjects/headings.
 	 *
 	 * @deprecated 3.2.0 in favour of placeholders
@@ -250,7 +250,7 @@ class WC_Email extends WC_Settings_API {
 	/**
 	 * Format email string.
 	 *
-	 * @param mixed $string Text to replace placeholders in.
+	 * @param  mixed  $string Text to replace placeholders in.
 	 * @return string
 	 */
 	public function format_string( $string ) {
@@ -360,7 +360,7 @@ class WC_Email extends WC_Settings_API {
 	 * @return string
 	 */
 	public function get_headers() {
-		$header = "Content-Type: " . $this->get_content_type() . "\r\n";
+		$header = 'Content-Type: ' . $this->get_content_type() . "\r\n";
 
 		if ( 'new_order' === $this->id && $this->object && $this->object->get_billing_email() && ( $this->object->get_billing_first_name() || $this->object->get_billing_last_name() ) ) {
 			$header .= 'Reply-to: ' . $this->object->get_billing_first_name() . ' ' . $this->object->get_billing_last_name() . ' <' . $this->object->get_billing_email() . ">\r\n";
@@ -422,8 +422,8 @@ class WC_Email extends WC_Settings_API {
 	/**
 	 * Proxy to parent's get_option and attempt to localize the result using gettext.
 	 *
-	 * @param string $key
-	 * @param mixed  $empty_value
+	 * @param  string $key
+	 * @param  mixed  $empty_value
 	 * @return string
 	 */
 	public function get_option( $key, $empty_value = null ) {
@@ -484,7 +484,7 @@ class WC_Email extends WC_Settings_API {
 	/**
 	 * Apply inline styles to dynamic content.
 	 *
-	 * @param string|null $content
+	 * @param  string|null $content
 	 * @return string
 	 */
 	public function style_inline( $content ) {
@@ -510,13 +510,13 @@ class WC_Email extends WC_Settings_API {
 	 * Get the email content in plain text format.
 	 * @return string
 	 */
-	public function get_content_plain() { return ''; }
+	public function get_content_plain() {return ''; }
 
 	/**
 	 * Get the email content in HTML format.
 	 * @return string
 	 */
-	public function get_content_html() { return ''; }
+	public function get_content_html() {return ''; }
 
 	/**
 	 * Get the from name for outgoing emails.
@@ -538,12 +538,12 @@ class WC_Email extends WC_Settings_API {
 
 	/**
 	 * Send an email.
-	 * @param string $to
-	 * @param string $subject
-	 * @param string $message
-	 * @param string $headers
-	 * @param string $attachments
-	 * @return bool success
+	 * @param  string $to
+	 * @param  string $subject
+	 * @param  string $message
+	 * @param  string $headers
+	 * @param  string $attachments
+	 * @return bool                success
 	 */
 	public function send( $to, $subject, $message, $headers, $attachments ) {
 		add_filter( 'wp_mail_from', array( $this, 'get_from_address' ) );
@@ -564,32 +564,32 @@ class WC_Email extends WC_Settings_API {
 	 * Initialise Settings Form Fields - these are generic email options most will use.
 	 */
 	public function init_form_fields() {
-		$this->form_fields    = array(
-			'enabled'         => array(
-				'title'       => __( 'Enable/Disable', 'woocommerce' ),
-				'type'        => 'checkbox',
-				'label'       => __( 'Enable this email notification', 'woocommerce' ),
-				'default'     => 'yes',
+		$this->form_fields = array(
+			'enabled'    => array(
+				'title'   => __( 'Enable/Disable', 'woocommerce' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable this email notification', 'woocommerce' ),
+				'default' => 'yes',
 			),
-			'subject'         => array(
+			'subject'    => array(
 				'title'       => __( 'Subject', 'woocommerce' ),
 				'type'        => 'text',
-				'desc_tip'      => true,
+				'desc_tip'    => true,
 				/* translators: %s: list of placeholders */
-				'description'   => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>' . implode( '</code>, <code>', array_keys( $this->placeholders ) ) . '</code>' ),
+				'description' => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>' . implode( '</code>, <code>', array_keys( $this->placeholders ) ) . '</code>' ),
 				'placeholder' => $this->get_default_subject(),
 				'default'     => '',
 			),
-			'heading'         => array(
+			'heading'    => array(
 				'title'       => __( 'Email heading', 'woocommerce' ),
 				'type'        => 'text',
-				'desc_tip'      => true,
+				'desc_tip'    => true,
 				/* translators: %s: list of placeholders */
-				'description'   => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>' . implode( '</code>, <code>', array_keys( $this->placeholders ) ) . '</code>' ),
+				'description' => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>' . implode( '</code>, <code>', array_keys( $this->placeholders ) ) . '</code>' ),
 				'placeholder' => $this->get_default_heading(),
 				'default'     => '',
 			),
-			'email_type'      => array(
+			'email_type' => array(
 				'title'       => __( 'Email type', 'woocommerce' ),
 				'type'        => 'select',
 				'description' => __( 'Choose which format of email to send.', 'woocommerce' ),
@@ -660,9 +660,9 @@ class WC_Email extends WC_Settings_API {
 	 */
 	protected function save_template( $template_code, $template_path ) {
 		if ( current_user_can( 'edit_themes' ) && ! empty( $template_code ) && ! empty( $template_path ) ) {
-			$saved  = false;
-			$file   = get_stylesheet_directory() . '/' . WC()->template_path() . $template_path;
-			$code   = wp_unslash( $template_code );
+			$saved = false;
+			$file  = get_stylesheet_directory() . '/' . WC()->template_path() . $template_path;
+			$code  = wp_unslash( $template_code );
 
 			if ( is_writeable( $file ) ) {
 				$f = fopen( $file, 'w+' );
@@ -717,7 +717,7 @@ class WC_Email extends WC_Settings_API {
 					 * woocommerce_copy_email_template action hook.
 					 *
 					 * @param string $template_type The copied template type
-					 * @param string $email The email object
+					 * @param string $email         The email object
 					 */
 					do_action( 'woocommerce_copy_email_template', $template_type, $this );
 
@@ -746,7 +746,7 @@ class WC_Email extends WC_Settings_API {
 					 * woocommerce_delete_email_template action hook.
 					 *
 					 * @param string $template The deleted template type
-					 * @param string $email The email object
+					 * @param string $email    The email object
 					 */
 					do_action( 'woocommerce_delete_email_template', $template_type, $this );
 
@@ -950,4 +950,5 @@ class WC_Email extends WC_Settings_API {
 			" );
 		}
 	}
+
 }

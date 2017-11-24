@@ -64,7 +64,6 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * @return mixed
 	 */
 	public function __get( $key ) {
-
 		if ( 'post_type' === $key ) {
 			return $this->post_type;
 		}
@@ -181,8 +180,8 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param int $amount
-	 * @param string $mode
+	 * @param  int    $amount
+	 * @param  string $mode
 	 *
 	 * @return int
 	 */
@@ -195,8 +194,8 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Reduce stock level of the product.
 	 *
 	 * @deprecated 3.0.0
-	 * @param int $amount Amount to reduce by. Default: 1
-	 * @return int new stock level
+	 * @param  int $amount Amount to reduce by. Default: 1
+	 * @return int         new stock level
 	 */
 	public function reduce_stock( $amount = 1 ) {
 		wc_deprecated_function( 'WC_Product::reduce_stock', '3.0', 'wc_update_product_stock' );
@@ -207,8 +206,8 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Increase stock level of the product.
 	 *
 	 * @deprecated 3.0.0
-	 * @param int $amount Amount to increase by. Default 1.
-	 * @return int new stock level
+	 * @param  int $amount Amount to increase by. Default 1.
+	 * @return int         new stock level
 	 */
 	public function increase_stock( $amount = 1 ) {
 		wc_deprecated_function( 'WC_Product::increase_stock', '3.0', 'wc_update_product_stock' );
@@ -228,7 +227,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Get and return related products.
 	 * @deprecated 3.0.0 Use wc_get_related_products instead.
 	 *
-	 * @param int $limit
+	 * @param  int   $limit
 	 *
 	 * @return array
 	 */
@@ -241,7 +240,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Retrieves related product terms.
 	 * @deprecated 3.0.0 Use wc_get_product_term_ids instead.
 	 *
-	 * @param $term
+	 * @param        $term
 	 *
 	 * @return array
 	 */
@@ -268,7 +267,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	/**
 	 * Returns the child product.
 	 * @deprecated 3.0.0 Use wc_get_product instead.
-	 * @param mixed $child_id
+	 * @param  mixed                                      $child_id
 	 * @return WC_Product|WC_Product|WC_Product_variation
 	 */
 	public function get_child( $child_id ) {
@@ -292,7 +291,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 *
 	 * @deprecated 3.0.0 Use wc_format_sale_price instead.
 	 * @param  string $from String or float to wrap with 'from' text
-	 * @param  mixed $to String or float to wrap with 'to' text
+	 * @param  mixed  $to   String or float to wrap with 'to' text
 	 * @return string
 	 */
 	public function get_price_html_from_to( $from, $to ) {
@@ -313,7 +312,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Returns the price (including tax). Uses customer tax rates. Can work for a specific $qty for more accurate taxes.
 	 *
 	 * @deprecated 3.0.0 Use wc_get_price_including_tax instead.
-	 * @param  int $qty
+	 * @param  int    $qty
 	 * @param  string $price to calculate, left blank to just use get_price()
 	 * @return string
 	 */
@@ -340,7 +339,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Uses store base tax rates. Can work for a specific $qty for more accurate taxes.
 	 *
 	 * @deprecated 3.0.0 Use wc_get_price_excluding_tax instead.
-	 * @param  int $qty
+	 * @param  int    $qty
 	 * @param  string $price to calculate, left blank to just use get_price()
 	 * @return string
 	 */
@@ -364,9 +363,9 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Returns the product categories.
 	 *
 	 * @deprecated 3.0.0
-	 * @param string $sep (default: ', ').
-	 * @param string $before (default: '').
-	 * @param string $after (default: '').
+	 * @param  string $sep    (default: ', ').
+	 * @param  string $before (default: '').
+	 * @param  string $after  (default: '').
 	 * @return string
 	 */
 	public function get_categories( $sep = ', ', $before = '', $after = '' ) {
@@ -378,9 +377,9 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Returns the product tags.
 	 *
 	 * @deprecated 3.0.0
-	 * @param string $sep (default: ', ').
-	 * @param string $before (default: '').
-	 * @param string $after (default: '').
+	 * @param  string $sep    (default: ', ').
+	 * @param  string $before (default: '').
+	 * @param  string $after  (default: '').
 	 * @return array
 	 */
 	public function get_tags( $sep = ', ', $before = '', $after = '' ) {
@@ -520,7 +519,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 
 			foreach ( $this->get_children() as $child_id ) {
 				if ( 'yes' === get_post_meta( $child_id, '_manage_stock', true ) ) {
-					$stock = get_post_meta( $child_id, '_stock', true );
+					$stock        = get_post_meta( $child_id, '_stock', true );
 					$total_stock += max( 0, wc_stock_amount( $stock ) );
 				}
 			}
@@ -535,7 +534,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param bool $flat
+	 * @param  bool   $flat
 	 *
 	 * @return string
 	 */
@@ -566,7 +565,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	/**
 	 * Sync the variable product's attributes with the variations.
 	 *
-	 * @param $product
+	 * @param      $product
 	 * @param bool $children
 	 */
 	public static function sync_attributes( $product, $children = false ) {
@@ -637,7 +636,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Returns the product rating in html format.
 	 *
 	 * @deprecated 3.0.0
-	 * @param string $rating (default: '')
+	 * @param  string $rating (default: '')
 	 * @return string
 	 */
 	public function get_rating_html( $rating = null ) {
@@ -649,7 +648,7 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Sync product rating. Can be called statically.
 	 *
 	 * @deprecated 3.0.0
-	 * @param  int $post_id
+	 * @param int $post_id
 	 */
 	public static function sync_average_rating( $post_id ) {
 		wc_deprecated_function( 'WC_Product::sync_average_rating', '3.0', 'WC_Comments::get_average_rating_for_product or leave to CRUD.' );
@@ -661,11 +660,11 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	 * Sync product rating count. Can be called statically.
 	 *
 	 * @deprecated 3.0.0
-	 * @param  int $post_id
+	 * @param int $post_id
 	 */
 	public static function sync_rating_count( $post_id ) {
 		wc_deprecated_function( 'WC_Product::sync_rating_count', '3.0', 'WC_Comments::get_rating_counts_for_product or leave to CRUD.' );
-		$counts     = WC_Comments::get_rating_counts_for_product( wc_get_product( $post_id ) );
+		$counts = WC_Comments::get_rating_counts_for_product( wc_get_product( $post_id ) );
 		update_post_meta( $post_id, '_wc_rating_count', $counts );
 	}
 
@@ -686,4 +685,5 @@ abstract class WC_Abstract_Legacy_Product extends WC_Data {
 	public function grouped_product_sync() {
 		wc_deprecated_function( 'WC_Product::grouped_product_sync', '3.0' );
 	}
+
 }

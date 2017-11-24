@@ -64,7 +64,7 @@ abstract class WC_Settings_Page {
 	/**
 	 * Add this page to settings.
 	 *
-	 * @param array $pages
+	 * @param  array $pages
 	 *
 	 * @return mixed
 	 */
@@ -137,6 +137,7 @@ abstract class WC_Settings_Page {
 			do_action( 'woocommerce_update_options_' . $this->id . '_' . $current_section );
 		}
 	}
+
 }
 
 endif;

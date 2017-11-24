@@ -50,7 +50,7 @@ class WC_Settings_Emails extends WC_Settings_Page {
 	public function get_settings() {
 		$settings = apply_filters( 'woocommerce_email_settings', array(
 
-			array( 'title' => __( 'Email notifications', 'woocommerce' ),  'desc' => __( 'Email notifications sent from WooCommerce are listed below. Click on an email to configure it.', 'woocommerce' ), 'type' => 'title', 'id' => 'email_notification_settings' ),
+			array( 'title' => __( 'Email notifications', 'woocommerce' ), 'desc' => __( 'Email notifications sent from WooCommerce are listed below. Click on an email to configure it.', 'woocommerce' ), 'type' => 'title', 'id' => 'email_notification_settings' ),
 
 			array( 'type' => 'email_notification' ),
 
@@ -104,7 +104,7 @@ class WC_Settings_Emails extends WC_Settings_Page {
 			array(
 				'title'       => __( 'Footer text', 'woocommerce' ),
 				'desc'        => __( 'The text to appear in the footer of WooCommerce emails.', 'woocommerce' )
-					 . ' ' . sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '{site_title}' ),
+					. ' ' . sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '{site_title}' ),
 				'id'          => 'woocommerce_email_footer_text',
 				'css'         => 'width:300px; height: 75px;',
 				'placeholder' => __( 'N/A', 'woocommerce' ),
@@ -301,6 +301,7 @@ class WC_Settings_Emails extends WC_Settings_Page {
 		</tr>
 		<?php
 	}
+
 }
 
 endif;

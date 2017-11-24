@@ -15,7 +15,7 @@ abstract class WC_Legacy_Customer extends WC_Data {
 
 	/**
 	 * __isset legacy.
-	 * @param mixed $key
+	 * @param  mixed $key
 	 * @return bool
 	 */
 	public function __isset( $key ) {
@@ -38,13 +38,13 @@ abstract class WC_Legacy_Customer extends WC_Data {
 			'is_vat_exempt',
 			'calculated_shipping',
 		);
-		$key = $this->filter_legacy_key( $key );
+		$key         = $this->filter_legacy_key( $key );
 		return in_array( $key, $legacy_keys );
 	}
 
 	/**
 	 * __get function.
-	 * @param string $key
+	 * @param  string $key
 	 * @return string
 	 */
 	public function __get( $key ) {
@@ -60,7 +60,7 @@ abstract class WC_Legacy_Customer extends WC_Data {
 	 * __set function.
 	 *
 	 * @param string $key
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function __set( $key, $value ) {
 		wc_doing_it_wrong( $key, 'Customer properties should not be set directly.', '3.0' );
@@ -95,7 +95,7 @@ abstract class WC_Legacy_Customer extends WC_Data {
 	 * @param string $country
 	 * @param string $state
 	 * @param string $postcode (default: '')
-	 * @param string $city (default: '')
+	 * @param string $city     (default: '')
 	 */
 	public function set_location( $country, $state, $postcode = '', $city = '' ) {
 		$this->set_billing_location( $country, $state, $postcode, $city );
@@ -164,7 +164,7 @@ abstract class WC_Legacy_Customer extends WC_Data {
 	/**
 	 * Is the user a paying customer?
 	 *
-	 * @param int $user_id
+	 * @param  int  $user_id
 	 *
 	 * @return bool
 	 */
@@ -283,4 +283,5 @@ abstract class WC_Legacy_Customer extends WC_Data {
 		wc_deprecated_function( 'WC_Customer::set_address_2', '3.0', 'WC_Customer::set_billing_address_2' );
 		$this->set_billing_address_2( $address );
 	}
+
 }

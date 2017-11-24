@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since  3.0.0 this supports set, increase and decrease.
  *
  * @param  int|WC_Product $product
- * @param  int|null $stock_quantity
- * @param  string $operation set, increase and decrease.
+ * @param  int|null       $stock_quantity
+ * @param  string         $operation      set, increase and decrease.
  *
  * @return bool|int|null
  */
@@ -55,8 +55,8 @@ function wc_update_product_stock( $product, $stock_quantity = null, $operation =
 /**
  * Update a product's stock status.
  *
- * @param  int $product_id
- * @param  int $status
+ * @param int $product_id
+ * @param int $status
  */
 function wc_update_product_stock_status( $product_id, $status ) {
 	$product = wc_get_product( $product_id );

@@ -57,7 +57,7 @@ class WC_Comments {
 	 *
 	 * @since  3.1.0
 	 * @param  bool $open
-	 * @param  int $post_id
+	 * @param  int  $post_id
 	 * @return bool
 	 */
 	public static function comments_open( $open, $post_id ) {
@@ -163,8 +163,8 @@ class WC_Comments {
 
 	/**
 	 * Modify recipient of review email.
-	 * @param array $emails
-	 * @param int $comment_id
+	 * @param  array $emails
+	 * @param  int   $comment_id
 	 * @return array
 	 */
 	public static function comment_moderation_recipients( $emails, $comment_id ) {
@@ -182,7 +182,6 @@ class WC_Comments {
 	 * @param int $post_id
 	 */
 	public static function clear_transients( $post_id ) {
-
 		if ( 'product' === get_post_type( $post_id ) ) {
 			$product = wc_get_product( $post_id );
 			self::get_rating_counts_for_product( $product );
@@ -277,7 +276,7 @@ class WC_Comments {
 
 	/**
 	 * Determine if a review is from a verified owner at submission.
-	 * @param int $comment_id
+	 * @param  int  $comment_id
 	 * @return bool
 	 */
 	public static function add_comment_purchase_verification( $comment_id ) {
@@ -294,7 +293,7 @@ class WC_Comments {
 	 * Get product rating for a product. Please note this is not cached.
 	 *
 	 * @since 3.0.0
-	 * @param WC_Product $product
+	 * @param  WC_Product $product
 	 * @return float
 	 */
 	public static function get_average_rating_for_product( &$product ) {
@@ -303,7 +302,7 @@ class WC_Comments {
 		$count = $product->get_rating_count();
 
 		if ( $count ) {
-			$ratings = $wpdb->get_var( $wpdb->prepare("
+			$ratings = $wpdb->get_var( $wpdb->prepare( "
 				SELECT SUM(meta_value) FROM $wpdb->commentmeta
 				LEFT JOIN $wpdb->comments ON $wpdb->commentmeta.comment_id = $wpdb->comments.comment_ID
 				WHERE meta_key = 'rating'
@@ -328,13 +327,13 @@ class WC_Comments {
 	 * Get product review count for a product (not replies). Please note this is not cached.
 	 *
 	 * @since 3.0.0
-	 * @param WC_Product $product
+	 * @param  WC_Product $product
 	 * @return int
 	 */
 	public static function get_review_count_for_product( &$product ) {
 		global $wpdb;
 
-		$count = $wpdb->get_var( $wpdb->prepare("
+		$count = $wpdb->get_var( $wpdb->prepare( "
 			SELECT COUNT(*) FROM $wpdb->comments
 			WHERE comment_parent = 0
 			AND comment_post_ID = %d
@@ -353,8 +352,8 @@ class WC_Comments {
 	 * Get product rating count for a product. Please note this is not cached.
 	 *
 	 * @since 3.0.0
-	 * @param WC_Product $product
-	 * @return array of integers
+	 * @param  WC_Product $product
+	 * @return array               of integers
 	 */
 	public static function get_rating_counts_for_product( &$product ) {
 		global $wpdb;
@@ -381,6 +380,7 @@ class WC_Comments {
 
 		return $counts;
 	}
+
 }
 
 WC_Comments::init();

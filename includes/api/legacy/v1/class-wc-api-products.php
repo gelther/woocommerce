@@ -29,14 +29,13 @@ class WC_API_Products extends WC_API_Resource {
 	 * GET /products/<id>/reviews
 	 *
 	 * @since 2.1
-	 * @param array $routes
+	 * @param  array $routes
 	 * @return array
 	 */
 	public function register_routes( $routes ) {
-
 		# GET /products
 		$routes[ $this->base ] = array(
-			array( array( $this, 'get_products' ),     WC_API_Server::READABLE ),
+			array( array( $this, 'get_products' ), WC_API_Server::READABLE ),
 		);
 
 		# GET /products/count
@@ -46,7 +45,7 @@ class WC_API_Products extends WC_API_Resource {
 
 		# GET /products/<id>
 		$routes[ $this->base . '/(?P<id>\d+)' ] = array(
-			array( array( $this, 'get_product' ),  WC_API_Server::READABLE ),
+			array( array( $this, 'get_product' ), WC_API_Server::READABLE ),
 		);
 
 		# GET /products/<id>/reviews
@@ -61,14 +60,13 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get all products
 	 *
 	 * @since 2.1
-	 * @param string $fields
-	 * @param string $type
-	 * @param array $filter
-	 * @param int $page
+	 * @param  string $fields
+	 * @param  string $type
+	 * @param  array  $filter
+	 * @param  int    $page
 	 * @return array
 	 */
 	public function get_products( $fields = null, $type = null, $filter = array(), $page = 1 ) {
-
 		if ( ! empty( $type ) ) {
 			$filter['type'] = $type;
 		}
@@ -97,12 +95,11 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the product for the given ID
 	 *
 	 * @since 2.1
-	 * @param int $id the product ID
-	 * @param string $fields
+	 * @param  int            $id     the product ID
+	 * @param  string         $fields
 	 * @return array|WP_Error
 	 */
 	public function get_product( $id, $fields = null ) {
-
 		$id = $this->validate_request( $id, 'product', 'read' );
 
 		if ( is_wp_error( $id ) ) {
@@ -132,13 +129,12 @@ class WC_API_Products extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 *
-	 * @param string $type
-	 * @param array $filter
+	 * @param  string         $type
+	 * @param  array          $filter
 	 *
 	 * @return array|WP_Error
 	 */
 	public function get_products_count( $type = null, $filter = array() ) {
-
 		if ( ! empty( $type ) ) {
 			$filter['type'] = $type;
 		}
@@ -155,12 +151,11 @@ class WC_API_Products extends WC_API_Resource {
 	/**
 	 * Edit a product
 	 *
-	 * @param int $id the product ID
-	 * @param array $data
+	 * @param  int            $id   the product ID
+	 * @param  array          $data
 	 * @return array|WP_Error
 	 */
 	public function edit_product( $id, $data ) {
-
 		$id = $this->validate_request( $id, 'product', 'edit' );
 
 		if ( is_wp_error( $id ) ) {
@@ -173,12 +168,11 @@ class WC_API_Products extends WC_API_Resource {
 	/**
 	 * Delete a product
 	 *
-	 * @param int $id the product ID
-	 * @param bool $force true to permanently delete order, false to move to trash
+	 * @param  int            $id    the product ID
+	 * @param  bool           $force true to permanently delete order, false to move to trash
 	 * @return array|WP_Error
 	 */
 	public function delete_product( $id, $force = false ) {
-
 		$id = $this->validate_request( $id, 'product', 'delete' );
 
 		if ( is_wp_error( $id ) ) {
@@ -192,12 +186,11 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the reviews for a product
 	 *
 	 * @since 2.1
-	 * @param int $id the product ID to get reviews for
-	 * @param string $fields fields to include in response
+	 * @param  int            $id     the product ID to get reviews for
+	 * @param  string         $fields fields to include in response
 	 * @return array|WP_Error
 	 */
 	public function get_product_reviews( $id, $fields = null ) {
-
 		$id = $this->validate_request( $id, 'product', 'read' );
 
 		if ( is_wp_error( $id ) ) {
@@ -233,11 +226,10 @@ class WC_API_Products extends WC_API_Resource {
 	 * Helper method to get product post objects
 	 *
 	 * @since 2.1
-	 * @param array $args request arguments for filtering query
+	 * @param  array    $args request arguments for filtering query
 	 * @return WP_Query
 	 */
 	private function query_products( $args ) {
-
 		// set base query arguments
 		$query_args = array(
 			'fields'      => 'ids',
@@ -270,7 +262,7 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get standard product data that applies to every product type
 	 *
 	 * @since 2.1
-	 * @param WC_Product|int $product
+	 * @param  WC_Product|int $product
 	 * @return array
 	 */
 	private function get_product_data( $product ) {
@@ -350,7 +342,7 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get an individual variation's data
 	 *
 	 * @since 2.1
-	 * @param WC_Product $product
+	 * @param  WC_Product $product
 	 * @return array
 	 */
 	private function get_variation_data( $product ) {
@@ -407,7 +399,7 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the images for a product or product variation
 	 *
 	 * @since 2.1
-	 * @param WC_Product|WC_Product_Variation $product
+	 * @param  WC_Product|WC_Product_Variation $product
 	 * @return array
 	 */
 	private function get_images( $product ) {
@@ -468,8 +460,8 @@ class WC_API_Products extends WC_API_Resource {
 	/**
 	 * Get attribute options.
 	 *
-	 * @param int $product_id
-	 * @param array $attribute
+	 * @param  int   $product_id
+	 * @param  array $attribute
 	 * @return array
 	 */
 	protected function get_attribute_options( $product_id, $attribute ) {
@@ -486,11 +478,10 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the attributes for a product or product variation
 	 *
 	 * @since 2.1
-	 * @param WC_Product|WC_Product_Variation $product
+	 * @param  WC_Product|WC_Product_Variation $product
 	 * @return array
 	 */
 	private function get_attributes( $product ) {
-
 		$attributes = array();
 
 		if ( $product->is_type( 'variation' ) ) {
@@ -524,11 +515,10 @@ class WC_API_Products extends WC_API_Resource {
 	 * Get the downloads for a product or product variation
 	 *
 	 * @since 2.1
-	 * @param WC_Product|WC_Product_Variation $product
+	 * @param  WC_Product|WC_Product_Variation $product
 	 * @return array
 	 */
 	private function get_downloads( $product ) {
-
 		$downloads = array();
 
 		if ( $product->is_downloadable() ) {
@@ -545,4 +535,5 @@ class WC_API_Products extends WC_API_Resource {
 
 		return $downloads;
 	}
+
 }

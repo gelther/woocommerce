@@ -136,11 +136,11 @@ class WC_Tests_Account_Functions extends WC_Unit_Test_Case {
 		$order = WC_Helper_Order::create_order();
 
 		$this->assertEquals( array(
-			'view' => array(
+			'view'   => array(
 				'url'  => $order->get_view_order_url(),
 				'name' => 'View',
 			),
-			'pay' => array(
+			'pay'    => array(
 				'url'  => $order->get_checkout_payment_url(),
 				'name' => 'Pay',
 			),
@@ -227,7 +227,7 @@ class WC_Tests_Account_Functions extends WC_Unit_Test_Case {
 		$token->save();
 
 		$this->assertEquals( array(
-			'method' => array(
+			'method'  => array(
 				'last4' => '1234',
 				'brand' => 'Mastercard',
 			),
@@ -258,4 +258,5 @@ class WC_Tests_Account_Functions extends WC_Unit_Test_Case {
 
 		$token->delete( true );
 	}
+
 }

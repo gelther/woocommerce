@@ -33,8 +33,8 @@ class WC_Admin_Duplicate_Product {
 	/**
 	 * Show the "Duplicate" link in admin products list.
 	 *
-	 * @param array   $actions Array of actions.
-	 * @param WP_Post $post Post object.
+	 * @param  array   $actions Array of actions.
+	 * @param  WP_Post $post    Post object.
 	 * @return array
 	 */
 	public function dupe_link( $actions, $post ) {
@@ -88,7 +88,7 @@ class WC_Admin_Duplicate_Product {
 		}
 
 		if ( isset( $_GET['post'] ) ) {
-			$notify_url = wp_nonce_url( admin_url( "edit.php?post_type=product&action=duplicate_product&post=" . absint( $_GET['post'] ) ), 'woocommerce-duplicate-product_' . $_GET['post'] );
+			$notify_url = wp_nonce_url( admin_url( 'edit.php?post_type=product&action=duplicate_product&post=' . absint( $_GET['post'] ) ), 'woocommerce-duplicate-product_' . $_GET['post'] );
 			?>
 			<div id="duplicate-action"><a class="submitduplicate duplication" href="<?php echo esc_url( $notify_url ); ?>"><?php _e( 'Copy to a new draft', 'woocommerce' ); ?></a></div>
 			<?php
@@ -128,7 +128,7 @@ class WC_Admin_Duplicate_Product {
 	/**
 	 * Function to create the duplicate of the product.
 	 *
-	 * @param WC_Product $product
+	 * @param  WC_Product $product
 	 * @return WC_Product
 	 */
 	public function product_duplicate( $product ) {
@@ -192,7 +192,7 @@ class WC_Admin_Duplicate_Product {
 	 * Get a product from the database to duplicate.
 	 *
 	 * @deprecated 3.0.0
-	 * @param mixed $id
+	 * @param  mixed       $id
 	 * @return object|bool
 	 * @see duplicate_product
 	 */
@@ -214,6 +214,7 @@ class WC_Admin_Duplicate_Product {
 
 		return $post;
 	}
+
 }
 
 return new WC_Admin_Duplicate_Product();

@@ -53,7 +53,7 @@ class WC_Meta_Box_Product_Data {
 	 */
 	private static function get_product_type_options() {
 		return apply_filters( 'product_type_options', array(
-			'virtual' => array(
+			'virtual'      => array(
 				'id'            => '_virtual',
 				'wrapper_class' => 'show_if_simple',
 				'label'         => __( 'Virtual', 'woocommerce' ),
@@ -76,19 +76,19 @@ class WC_Meta_Box_Product_Data {
 	 */
 	private static function get_product_data_tabs() {
 		$tabs = apply_filters( 'woocommerce_product_data_tabs', array(
-			'general' => array(
+			'general'        => array(
 				'label'    => __( 'General', 'woocommerce' ),
 				'target'   => 'general_product_data',
 				'class'    => array( 'hide_if_grouped' ),
 				'priority' => 10,
 			),
-			'inventory' => array(
+			'inventory'      => array(
 				'label'    => __( 'Inventory', 'woocommerce' ),
 				'target'   => 'inventory_product_data',
 				'class'    => array( 'show_if_simple', 'show_if_variable', 'show_if_grouped', 'show_if_external' ),
 				'priority' => 20,
 			),
-			'shipping' => array(
+			'shipping'       => array(
 				'label'    => __( 'Shipping', 'woocommerce' ),
 				'target'   => 'shipping_product_data',
 				'class'    => array( 'hide_if_virtual', 'hide_if_grouped', 'hide_if_external' ),
@@ -100,19 +100,19 @@ class WC_Meta_Box_Product_Data {
 				'class'    => array(),
 				'priority' => 40,
 			),
-			'attribute' => array(
+			'attribute'      => array(
 				'label'    => __( 'Attributes', 'woocommerce' ),
 				'target'   => 'product_attributes',
 				'class'    => array(),
 				'priority' => 50,
 			),
-			'variations' => array(
+			'variations'     => array(
 				'label'    => __( 'Variations', 'woocommerce' ),
 				'target'   => 'variable_product_options',
 				'class'    => array( 'variations_tab', 'show_if_variable' ),
 				'priority' => 60,
 			),
-			'advanced' => array(
+			'advanced'       => array(
 				'label'    => __( 'Advanced', 'woocommerce' ),
 				'target'   => 'advanced_product_data',
 				'class'    => array(),
@@ -130,8 +130,8 @@ class WC_Meta_Box_Product_Data {
 	 * Callback to sort product data tabs on priority.
 	 *
 	 * @since 3.1.0
-	 * @param int $a First item.
-	 * @param int $b Second item.
+	 * @param  int  $a First item.
+	 * @param  int  $b Second item.
 	 *
 	 * @return bool
 	 */
@@ -174,9 +174,9 @@ class WC_Meta_Box_Product_Data {
 	/**
 	 * Prepare downloads for save.
 	 *
-	 * @param array $file_names
-	 * @param array $file_urls
-	 * @param array $file_hashes
+	 * @param  array $file_names
+	 * @param  array $file_urls
+	 * @param  array $file_hashes
 	 *
 	 * @return array
 	 */
@@ -189,9 +189,9 @@ class WC_Meta_Box_Product_Data {
 			for ( $i = 0; $i < $file_url_size; $i ++ ) {
 				if ( ! empty( $file_urls[ $i ] ) ) {
 					$downloads[] = array(
-						'name'          => wc_clean( $file_names[ $i ] ),
-						'file'          => wp_unslash( trim( $file_urls[ $i ] ) ),
-						'download_id'	=> wc_clean( $file_hashes[ $i ] ),
+						'name'        => wc_clean( $file_names[ $i ] ),
+						'file'        => wp_unslash( trim( $file_urls[ $i ] ) ),
+						'download_id' => wc_clean( $file_hashes[ $i ] ),
 					);
 				}
 			}
@@ -210,7 +210,7 @@ class WC_Meta_Box_Product_Data {
 	/**
 	 * Prepare attributes for save.
 	 *
-	 * @param array $data
+	 * @param  array $data
 	 *
 	 * @return array
 	 */
@@ -270,9 +270,9 @@ class WC_Meta_Box_Product_Data {
 
 	/**
 	 * Prepare attributes for a specific variation or defaults.
-	 * @param  array $all_attributes
+	 * @param  array  $all_attributes
 	 * @param  string $key_prefix
-	 * @param  int $index
+	 * @param  int    $index
 	 * @return array
 	 */
 	private static function prepare_set_attributes( $all_attributes, $key_prefix = 'attribute_', $index = null ) {
@@ -308,7 +308,7 @@ class WC_Meta_Box_Product_Data {
 	 * Save meta box data.
 	 *
 	 * @param int $post_id
-	 * @param $post
+	 * @param     $post
 	 */
 	public static function save( $post_id, $post ) {
 		// Process product type first so we have the correct class to run setters.
@@ -328,7 +328,7 @@ class WC_Meta_Box_Product_Data {
 			}
 		}
 
-		$errors       = $product->set_props( array(
+		$errors = $product->set_props( array(
 			'sku'                => isset( $_POST['_sku'] ) ? wc_clean( $_POST['_sku'] ) : null,
 			'purchase_note'      => wp_kses_post( stripslashes( $_POST['_purchase_note'] ) ),
 			'downloadable'       => isset( $_POST['_downloadable'] ),
@@ -389,12 +389,12 @@ class WC_Meta_Box_Product_Data {
 	/**
 	 * Save meta box data.
 	 *
-	 * @param int $post_id
+	 * @param int     $post_id
 	 * @param WP_Post $post
 	 */
 	public static function save_variations( $post_id, $post ) {
 		if ( isset( $_POST['variable_post_id'] ) ) {
-			$parent     = wc_get_product( $post_id );
+			$parent = wc_get_product( $post_id );
 			$parent->set_default_attributes( self::prepare_set_attributes( $parent->get_attributes(), 'default_attribute_' ) );
 			$parent->save();
 
@@ -421,7 +421,7 @@ class WC_Meta_Box_Product_Data {
 					}
 				}
 
-				$errors       = $variation->set_props( array(
+				$errors = $variation->set_props( array(
 					'status'            => isset( $_POST['variable_enabled'][ $i ] ) ? 'publish' : 'private',
 					'menu_order'        => wc_clean( $_POST['variation_menu_order'][ $i ] ),
 					'regular_price'     => wc_clean( $_POST['variable_regular_price'][ $i ] ),
@@ -463,4 +463,5 @@ class WC_Meta_Box_Product_Data {
 			}
 		}
 	}
+
 }

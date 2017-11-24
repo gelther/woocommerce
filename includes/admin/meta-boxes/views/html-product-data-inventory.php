@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'description'       => __( 'Stock quantity. If this is a variable product this value will be used to control stock for all variations, unless you define stock at variation level.', 'woocommerce' ),
 					'type'              => 'number',
 					'custom_attributes' => array(
-						'step'          => 'any',
+						'step' => 'any',
 					),
 					'data_type'         => 'stock',
 				) );
@@ -63,13 +63,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			}
 
 			woocommerce_wp_select( array(
-				'id'             => '_stock_status',
-				'value'          => $product_object->get_stock_status( 'edit' ),
-				'wrapper_class'  => 'hide_if_variable hide_if_external',
-				'label'          => __( 'Stock status', 'woocommerce' ),
-				'options'        => wc_get_product_stock_status_options(),
-				'desc_tip'       => true,
-				'description'    => __( 'Controls whether or not the product is listed as "in stock" or "out of stock" on the frontend.', 'woocommerce' ),
+				'id'            => '_stock_status',
+				'value'         => $product_object->get_stock_status( 'edit' ),
+				'wrapper_class' => 'hide_if_variable hide_if_external',
+				'label'         => __( 'Stock status', 'woocommerce' ),
+				'options'       => wc_get_product_stock_status_options(),
+				'desc_tip'      => true,
+				'description'   => __( 'Controls whether or not the product is listed as "in stock" or "out of stock" on the frontend.', 'woocommerce' ),
 			) );
 
 			do_action( 'woocommerce_product_options_stock_status' );

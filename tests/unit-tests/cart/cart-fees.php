@@ -13,14 +13,13 @@ class WC_Tests_WC_Cart_Fees extends WC_Unit_Test_Case {
 	 * @since 3.2.0
 	 */
 	public function test_set_get_remove_fees() {
-
 		$cart_fees = new WC_Cart_Fees( wc()->cart );
 		$cart_fees->init();
 
 		// Test add_fee.
 		$args = array(
-			'name'      => 'testfee',
-			'amount'    => 10,
+			'name'   => 'testfee',
+			'amount' => 10,
 		);
 		$cart_fees->add_fee( $args );
 		$applied_fees = $cart_fees->get_fees();
@@ -35,8 +34,8 @@ class WC_Tests_WC_Cart_Fees extends WC_Unit_Test_Case {
 		// Test set_fees.
 		$args = array(
 			array(
-				'name'      => 'newfee',
-				'amount'    => -5,
+				'name'   => 'newfee',
+				'amount' => -5,
 			),
 			array(
 				'name'      => 'newfee2',
@@ -57,4 +56,5 @@ class WC_Tests_WC_Cart_Fees extends WC_Unit_Test_Case {
 		// Test fees are removed when cart is emptied.
 		$this->assertEquals( array(), $cart_fees->get_fees() );
 	}
+
 }

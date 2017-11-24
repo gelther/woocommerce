@@ -43,7 +43,7 @@ class WC_REST_Product_Reviews_Controller extends WC_REST_Product_Reviews_V1_Cont
 		parent::register_routes();
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/batch', array(
-			'args' => array(
+			'args'   => array(
 				'product_id' => array(
 					'description' => __( 'Unique identifier for the variable product.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -62,7 +62,7 @@ class WC_REST_Product_Reviews_Controller extends WC_REST_Product_Reviews_V1_Cont
 	/**
 	 * Check if a given request has access to batch manage product reviews.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function batch_items_permissions_check( $request ) {
@@ -75,8 +75,8 @@ class WC_REST_Product_Reviews_Controller extends WC_REST_Product_Reviews_V1_Cont
 	/**
 	 * Prepare a single product review output for response.
 	 *
-	 * @param WP_Comment $review Product review object.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  WP_Comment       $review   Product review object.
+	 * @param  WP_REST_Request  $request  Request object.
 	 * @return WP_REST_Response $response Response data.
 	 */
 	public function prepare_item_for_response( $review, $request ) {
@@ -110,13 +110,12 @@ class WC_REST_Product_Reviews_Controller extends WC_REST_Product_Reviews_V1_Cont
 		return apply_filters( 'woocommerce_rest_prepare_product_review', $response, $review, $request );
 	}
 
-
 	/**
 	 * Bulk create, update and delete items.
 	 *
 	 * @since  3.0.0
-	 * @param WP_REST_Request $request Full details about the request.
-	 * @return array Of WP_Error or WP_REST_Response.
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return array                    Of WP_Error or WP_REST_Response.
 	 */
 	public function batch_items( $request ) {
 		$items       = array_filter( $request->get_params() );
@@ -151,43 +150,43 @@ class WC_REST_Product_Reviews_Controller extends WC_REST_Product_Reviews_V1_Cont
 			'title'      => 'product_review',
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'               => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'review' => array(
+				'review'           => array(
 					'description' => __( 'The content of the review.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_created' => array(
+				'date_created'     => array(
 					'description' => __( "The date the review was created, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'date_created_gmt' => array(
-					'description' => __( "The date the review was created, as GMT.", 'woocommerce' ),
+					'description' => __( 'The date the review was created, as GMT.', 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'rating' => array(
+				'rating'           => array(
 					'description' => __( 'Review rating (0 to 5).', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'name' => array(
+				'name'             => array(
 					'description' => __( 'Reviewer name.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'email' => array(
+				'email'            => array(
 					'description' => __( 'Reviewer email.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'verified' => array(
+				'verified'         => array(
 					'description' => __( 'Shows if the reviewer bought the product or not.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
@@ -198,4 +197,5 @@ class WC_REST_Product_Reviews_Controller extends WC_REST_Product_Reviews_V1_Cont
 
 		return $this->add_additional_fields_schema( $schema );
 	}
+
 }

@@ -70,14 +70,14 @@ class WC_Shipping_Free_Shipping extends WC_Shipping_Method {
 	 */
 	public function init_form_fields() {
 		$this->instance_form_fields = array(
-			'title' => array(
+			'title'      => array(
 				'title'       => __( 'Title', 'woocommerce' ),
 				'type'        => 'text',
 				'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce' ),
 				'default'     => $this->method_title,
 				'desc_tip'    => true,
 			),
-			'requires' => array(
+			'requires'   => array(
 				'title'   => __( 'Free shipping requires...', 'woocommerce' ),
 				'type'    => 'select',
 				'class'   => 'wc-enhanced-select',
@@ -141,7 +141,7 @@ class WC_Shipping_Free_Shipping extends WC_Shipping_Method {
 	/**
 	 * See if free shipping is available based on the package and cart.
 	 *
-	 * @param array $package Shipping package.
+	 * @param  array $package Shipping package.
 	 * @return bool
 	 */
 	public function is_available( $package ) {
@@ -209,4 +209,5 @@ class WC_Shipping_Free_Shipping extends WC_Shipping_Method {
 			'package' => $package,
 		) );
 	}
+
 }

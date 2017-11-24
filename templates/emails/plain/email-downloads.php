@@ -24,7 +24,7 @@ echo strtoupper( __( 'Downloads', 'woocommerce' ) ) . "\n\n";
 
 foreach ( $downloads as $download ) {
 	foreach ( $columns as $column_id => $column_name ) {
-		echo $column_name . ": ";
+		echo $column_name . ': ';
 
 		if ( has_action( 'woocommerce_email_downloads_column_' . $column_id ) ) {
 			do_action( 'woocommerce_email_downloads_column_' . $column_id, $download );

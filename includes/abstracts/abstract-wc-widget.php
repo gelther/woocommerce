@@ -54,8 +54,8 @@ abstract class WC_Widget extends WP_Widget {
 	 */
 	public function __construct() {
 		$widget_ops = array(
-			'classname'   => $this->widget_cssclass,
-			'description' => $this->widget_description,
+			'classname'                   => $this->widget_cssclass,
+			'description'                 => $this->widget_description,
 			'customize_selective_refresh' => true,
 		);
 
@@ -70,7 +70,7 @@ abstract class WC_Widget extends WP_Widget {
 	 * Get cached widget.
 	 *
 	 * @param  array $args
-	 * @return bool true if the widget is cached otherwise false
+	 * @return bool        true if the widget is cached otherwise false
 	 */
 	public function get_cached_widget( $args ) {
 		$cache = wp_cache_get( apply_filters( 'woocommerce_cached_widget_id', $this->widget_id ), 'widget' );
@@ -90,9 +90,9 @@ abstract class WC_Widget extends WP_Widget {
 	/**
 	 * Cache the widget.
 	 *
-	 * @param  array $args
+	 * @param  array  $args
 	 * @param  string $content
-	 * @return string the content that was cached
+	 * @return string          the content that was cached
 	 */
 	public function cache_widget( $args, $content ) {
 		$cache = wp_cache_get( apply_filters( 'woocommerce_cached_widget_id', $this->widget_id ), 'widget' );
@@ -132,7 +132,7 @@ abstract class WC_Widget extends WP_Widget {
 	/**
 	 * Output the html at the end of a widget.
 	 *
-	 * @param  array $args
+	 * @param array $args
 	 */
 	public function widget_end( $args ) {
 		echo $args['after_widget'];
@@ -147,7 +147,6 @@ abstract class WC_Widget extends WP_Widget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
-
 		$instance = $old_instance;
 
 		if ( empty( $this->settings ) ) {
@@ -203,7 +202,6 @@ abstract class WC_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function form( $instance ) {
-
 		if ( empty( $this->settings ) ) {
 			return;
 		}
@@ -274,4 +272,5 @@ abstract class WC_Widget extends WP_Widget {
 			}
 		}
 	}
+
 }

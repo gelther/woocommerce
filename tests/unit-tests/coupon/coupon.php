@@ -24,8 +24,8 @@ class WC_Tests_Coupon extends WC_Unit_Test_Case {
 		$coupon_2->set_code( (string) $coupon_1->get_id() );
 		$coupon_2->save();
 
-		$int_id_1 = $coupon_1->get_id();
-		$int_id_2 = $coupon_2->get_id();
+		$int_id_1      = $coupon_1->get_id();
+		$int_id_2      = $coupon_2->get_id();
 		$string_code_2 = $coupon_2->get_code();
 
 		// Test getting a coupon by integer ID.
@@ -52,7 +52,6 @@ class WC_Tests_Coupon extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_add_discount() {
-
 		// Create coupon
 		$coupon = WC_Helper_Coupon::create_coupon();
 
@@ -78,7 +77,6 @@ class WC_Tests_Coupon extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_add_discount_duplicate() {
-
 		// Create coupon
 		$coupon = WC_Helper_Coupon::create_coupon();
 
@@ -110,7 +108,6 @@ class WC_Tests_Coupon extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_fixed_cart_discount() {
-
 		// Create product
 		$product = WC_Helper_Product::create_simple_product();
 		update_post_meta( $product->get_id(), '_price', '10' );
@@ -168,7 +165,6 @@ class WC_Tests_Coupon extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_fixed_product_discount() {
-
 		// Create product
 		$product = WC_Helper_Product::create_simple_product();
 		update_post_meta( $product->get_id(), '_price', '10' );
@@ -232,7 +228,6 @@ class WC_Tests_Coupon extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_percent_discount() {
-
 		// Create product
 		$product = WC_Helper_Product::create_simple_product();
 		update_post_meta( $product->get_id(), '_price', '10' );
@@ -311,4 +306,5 @@ class WC_Tests_Coupon extends WC_Unit_Test_Case {
 		$this->assertFalse( $expired_coupon->is_valid() );
 		$this->assertEquals( $expired_coupon->get_error_message(), $expired_coupon->get_coupon_error( WC_Coupon::E_WC_COUPON_EXPIRED ) );
 	}
+
 }

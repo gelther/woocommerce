@@ -13,7 +13,6 @@ class WC_Tests_Core_Functions extends WC_Unit_Test_Case {
 	 * @since 2.2
 	 */
 	public function test_get_woocommerce_currency() {
-
 		$this->assertEquals( 'GBP', get_woocommerce_currency() );
 	}
 
@@ -23,7 +22,6 @@ class WC_Tests_Core_Functions extends WC_Unit_Test_Case {
 	 * @since 2.2
 	 */
 	public function test_get_woocommerce_currencies() {
-
 		$expected_currencies = array(
 			'AED' => 'United Arab Emirates dirham',
 			'AFN' => 'Afghan afghani',
@@ -198,7 +196,6 @@ class WC_Tests_Core_Functions extends WC_Unit_Test_Case {
 	 * @since 2.2
 	 */
 	public function test_get_woocommerce_currency_symbol() {
-
 		// default currency
 		$this->assertEquals( '&pound;', get_woocommerce_currency_symbol() );
 
@@ -217,7 +214,6 @@ class WC_Tests_Core_Functions extends WC_Unit_Test_Case {
 	 * @since 2.2
 	 */
 	public function test_get_woocommerce_api_url() {
-
 		$base_uri = get_home_url();
 
 		// base uri
@@ -371,9 +367,9 @@ class WC_Tests_Core_Functions extends WC_Unit_Test_Case {
 	 * On each successive run, an alternative is excluded from the beginning.
 	 * Eventually, no handlers are returned.
 	 *
-	 * @param array $alternatives Input array of alternatives.
-	 * @param bool $reset Optional. Default false. True to reset excluded alternatives.
-	 * @return array|bool Alternatives. True on reset.
+	 * @param  array      $alternatives Input array of alternatives.
+	 * @param  bool       $reset        Optional. Default false. True to reset excluded alternatives.
+	 * @return array|bool               Alternatives. True on reset.
 	 */
 	public function filter_wc_print_r_alternatives( $alternatives, $reset = false ) {
 		static $skip = 0;
@@ -398,4 +394,5 @@ class WC_Tests_Core_Functions extends WC_Unit_Test_Case {
 		$wildcards = array( 'GIJóN', 'GIJÓN', 'GIJÓN*', 'GIJÓ*', 'GIJ*', 'GI*', 'G*', '*' );
 		$this->assertEquals( $wildcards, wc_get_wildcard_postcodes( $postcode, $country ) );
 	}
+
 }

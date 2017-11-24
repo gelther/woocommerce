@@ -40,4 +40,5 @@ class WC_Tests_CRUD_Refunds extends WC_Unit_Test_Case {
 		$object->set_refunded_by( 1 );
 		$this->assertEquals( 1, $object->get_refunded_by() );
 	}
+
 }

@@ -75,15 +75,15 @@ class WC_Shipping {
 	/**
 	 * Magic getter.
 	 *
-	 * @param string $name Property name.
+	 * @param  string $name Property name.
 	 * @return mixed
 	 */
 	public function __get( $name ) {
 		// Grab from cart for backwards compatibility with versions prior to 3.2.
-		if ( 'shipping_total' === $name ){
+		if ( 'shipping_total' === $name ) {
 			return wc()->cart->get_shipping_total();
 		}
-		if ( 'shipping_taxes' === $name ){
+		if ( 'shipping_taxes' === $name ) {
 			return wc()->cart->get_shipping_taxes();
 		}
 	}
@@ -135,7 +135,7 @@ class WC_Shipping {
 	 * Loads all shipping methods which are hooked in.
 	 * If a $package is passed some methods may add themselves conditionally and zones will be used.
 	 *
-	 * @param array $package
+	 * @param  array $package
 	 * @return array
 	 */
 	public function load_shipping_methods( $package = array() ) {
@@ -167,7 +167,7 @@ class WC_Shipping {
 	/**
 	 * Register a shipping method.
 	 *
-	 * @param object|string $method Either the name of the method's class, or an instance of the method's class.
+	 * @param  object|string $method Either the name of the method's class, or an instance of the method's class.
 	 *
 	 * @return bool|void
 	 */
@@ -220,7 +220,7 @@ class WC_Shipping {
 
 	/**
 	 * Get the default method.
-	 * @param  array  $available_methods
+	 * @param  array   $available_methods
 	 * @param  boolean $current_chosen_method
 	 * @return string
 	 */
@@ -245,8 +245,8 @@ class WC_Shipping {
 	/**
 	 * Calculate shipping for (multiple) packages of cart items.
 	 *
-	 * @param array $packages multi-dimensional array of cart items to calc shipping for.
-	 * @return array Array of calculated packages.
+	 * @param  array $packages multi-dimensional array of cart items to calc shipping for.
+	 * @return array           Array of calculated packages.
 	 */
 	public function calculate_shipping( $packages = array() ) {
 		$this->packages = array();
@@ -278,11 +278,10 @@ class WC_Shipping {
 
 	/**
 	 * See if package is shippable.
-	 * @param  array  $package
+	 * @param  array   $package
 	 * @return boolean
 	 */
 	protected function is_package_shippable( $package ) {
-
 		// Packages are shippable until proven otherwise.
 		if ( empty( $package['destination']['country'] ) ) {
 			return true;
@@ -297,8 +296,8 @@ class WC_Shipping {
 	 *
 	 * Calculates each shipping methods cost. Rates are stored in the session based on the package hash to avoid re-calculation every page load.
 	 *
-	 * @param array $package cart items
-	 * @param int   $package_key Index of the package being calculated. Used to cache multiple package rates.
+	 * @param  array      $package     cart items
+	 * @param  int        $package_key Index of the package being calculated. Used to cache multiple package rates.
 	 *
 	 * @return array|bool
 	 */
@@ -370,4 +369,5 @@ class WC_Shipping {
 		wc_deprecated_function( 'sort_shipping_methods', '2.6' );
 		return $this->shipping_methods;
 	}
+
 }

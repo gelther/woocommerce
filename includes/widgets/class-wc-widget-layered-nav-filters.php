@@ -24,7 +24,7 @@ class WC_Widget_Layered_Nav_Filters extends WC_Widget {
 		$this->widget_id          = 'woocommerce_layered_nav_filters';
 		$this->widget_name        = __( 'Active Product Filters', 'woocommerce' );
 		$this->settings           = array(
-			'title'  => array(
+			'title' => array(
 				'type'  => 'text',
 				'std'   => __( 'Active filters', 'woocommerce' ),
 				'label' => __( 'Title', 'woocommerce' ),
@@ -50,7 +50,7 @@ class WC_Widget_Layered_Nav_Filters extends WC_Widget {
 			$link = get_term_link( get_query_var( 'product_tag' ), 'product_tag' );
 		} else {
 			$queried_object = get_queried_object();
-			$link = get_term_link( $queried_object->slug, $queried_object->taxonomy );
+			$link           = get_term_link( $queried_object->slug, $queried_object->taxonomy );
 		}
 
 		// Min/Max
@@ -136,7 +136,7 @@ class WC_Widget_Layered_Nav_Filters extends WC_Widget {
 						$filter_name    = 'filter_' . sanitize_title( str_replace( 'pa_', '', $taxonomy ) );
 						$current_filter = isset( $_GET[ $filter_name ] ) ? explode( ',', wc_clean( $_GET[ $filter_name ] ) ) : array();
 						$current_filter = array_map( 'sanitize_title', $current_filter );
-						$new_filter      = array_diff( $current_filter, array( $term_slug ) );
+						$new_filter     = array_diff( $current_filter, array( $term_slug ) );
 
 						$link = remove_query_arg( array( 'add-to-cart', $filter_name ), $base_link );
 
@@ -172,4 +172,5 @@ class WC_Widget_Layered_Nav_Filters extends WC_Widget {
 			$this->widget_end( $args );
 		}
 	}
+
 }

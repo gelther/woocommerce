@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="wc_plugin_upgrade_notice extensions_warning <?php echo esc_attr( $upgrade_type ) ?>">
-	<p><?php echo wp_kses_post( $message ) ?></p>
+<div class="wc_plugin_upgrade_notice extensions_warning <?php echo esc_attr( $upgrade_type ); ?>">
+	<p><?php echo wp_kses_post( $message ); ?></p>
 
 	<table class="plugin-details-table" cellspacing="0">
 		<thead>
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td><?php echo esc_html( $plugin['Name'] ); ?></td>
 					<td><?php echo esc_html( $plugin['WC tested up to'] ); ?></td>
 				</tr>
-			<?php endforeach ?>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
 </div>

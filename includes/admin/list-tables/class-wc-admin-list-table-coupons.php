@@ -63,8 +63,8 @@ class WC_Admin_List_Table_Coupons extends WC_Admin_List_Table {
 	/**
 	 * Get row actions to show in the list table.
 	 *
-	 * @param array   $actions Array of actions.
-	 * @param WP_Post $post Current post object.
+	 * @param  array   $actions Array of actions.
+	 * @param  WP_Post $post    Current post object.
 	 * @return array
 	 */
 	protected function get_row_actions( $actions, $post ) {
@@ -75,7 +75,7 @@ class WC_Admin_List_Table_Coupons extends WC_Admin_List_Table {
 	/**
 	 * Define which columns to show on this screen.
 	 *
-	 * @param array $columns Existing columns.
+	 * @param  array $columns Existing columns.
 	 * @return array
 	 */
 	public function define_columns( $columns ) {
@@ -132,6 +132,7 @@ class WC_Admin_List_Table_Coupons extends WC_Admin_List_Table {
 	protected function render_amount_column() {
 		echo esc_html( wc_format_localized_price( $this->object->get_amount() ) );
 	}
+
 	/**
 	 * Render columm: products.
 	 */
@@ -220,7 +221,7 @@ class WC_Admin_List_Table_Coupons extends WC_Admin_List_Table {
 	/**
 	 * Handle any custom filters.
 	 *
-	 * @param array $query_vars Query vars.
+	 * @param  array $query_vars Query vars.
 	 * @return array
 	 */
 	protected function query_filters( $query_vars ) {
@@ -232,6 +233,7 @@ class WC_Admin_List_Table_Coupons extends WC_Admin_List_Table {
 		}
 		return $query_vars;
 	}
+
 }
 
 new WC_Admin_List_Table_Coupons();

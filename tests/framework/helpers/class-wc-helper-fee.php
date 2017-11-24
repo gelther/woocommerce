@@ -44,7 +44,6 @@ class WC_Helper_Fee {
 		}
 
 		WC()->cart->add_fee( 'Dummy Negative Fee', -10 );
-
 	}
 
 	/**
@@ -104,4 +103,5 @@ class WC_Helper_Fee {
 				remove_action( 'woocommerce_cart_calculate_fees', array( __CLASS__, 'create_simple_fee' ) );
 		}
 	}
+
 }

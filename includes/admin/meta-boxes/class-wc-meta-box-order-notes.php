@@ -81,4 +81,5 @@ class WC_Meta_Box_Order_Notes {
 		</div>
 		<?php
 	}
+
 }

@@ -27,7 +27,7 @@ abstract class WC_Session {
 	/**
 	 * __get function.
 	 *
-	 * @param mixed $key
+	 * @param  mixed $key
 	 * @return mixed
 	 */
 	public function __get( $key ) {
@@ -44,12 +44,12 @@ abstract class WC_Session {
 		$this->set( $key, $value );
 	}
 
-	 /**
-	  * __isset function.
-	  *
-	  * @param mixed $key
-	  * @return bool
-	  */
+	/**
+	 * __isset function.
+	 *
+	 * @param  mixed $key
+	 * @return bool
+	 */
 	public function __isset( $key ) {
 		return isset( $this->_data[ sanitize_title( $key ) ] );
 	}
@@ -69,9 +69,9 @@ abstract class WC_Session {
 	/**
 	 * Get a session variable.
 	 *
-	 * @param string $key
-	 * @param  mixed $default used if the session variable isn't set
-	 * @return array|string value of session variable
+	 * @param  string       $key
+	 * @param  mixed        $default used if the session variable isn't set
+	 * @return array|string          value of session variable
 	 */
 	public function get( $key, $default = null ) {
 		$key = sanitize_key( $key );
@@ -82,12 +82,12 @@ abstract class WC_Session {
 	 * Set a session variable.
 	 *
 	 * @param string $key
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function set( $key, $value ) {
 		if ( $value !== $this->get( $key ) ) {
 			$this->_data[ sanitize_key( $key ) ] = maybe_serialize( $value );
-			$this->_dirty = true;
+			$this->_dirty                        = true;
 		}
 	}
 
@@ -100,4 +100,5 @@ abstract class WC_Session {
 	public function get_customer_id() {
 		return $this->_customer_id;
 	}
+
 }

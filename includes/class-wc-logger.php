@@ -31,7 +31,7 @@ class WC_Logger implements WC_Logger_Interface {
 	/**
 	 * Constructor for the logger.
 	 *
-	 * @param array $handlers Optional. Array of log handlers. If $handlers is not provided,
+	 * @param array  $handlers  Optional. Array of log handlers. If $handlers is not provided,
 	 *     the filter 'woocommerce_register_log_handlers' will be used to define the handlers.
 	 *     If $handlers is provided, the filter will not be applied and the handlers will be
 	 *     used directly.
@@ -80,8 +80,8 @@ class WC_Logger implements WC_Logger_Interface {
 	/**
 	 * Determine whether to handle or ignore log.
 	 *
-	 * @param string $level emergency|alert|critical|error|warning|notice|info|debug
-	 * @return bool True if the log should be handled.
+	 * @param  string $level emergency|alert|critical|error|warning|notice|info|debug
+	 * @return bool          True if the log should be handled.
 	 */
 	protected function should_handle( $level ) {
 		if ( null === $this->threshold ) {
@@ -96,9 +96,9 @@ class WC_Logger implements WC_Logger_Interface {
 	 * This is not the preferred method for adding log messages. Please use log() or any one of
 	 * the level methods (debug(), info(), etc.). This method may be deprecated in the future.
 	 *
-	 * @param string $handle
-	 * @param string $message
-	 * @param string $level
+	 * @param  string $handle
+	 * @param  string $message
+	 * @param  string $level
 	 *
 	 * @return bool
 	 */
@@ -112,7 +112,7 @@ class WC_Logger implements WC_Logger_Interface {
 	/**
 	 * Add a log entry.
 	 *
-	 * @param string $level One of the following:
+	 * @param string $level   One of the following:
 	 *     'emergency': System is unusable.
 	 *     'alert': Action must be taken immediately.
 	 *     'critical': Critical conditions.
@@ -122,7 +122,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 *     'info': Informational messages.
 	 *     'debug': Debug-level messages.
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function log( $level, $message, $context = array() ) {
 		if ( ! WC_Log_Levels::is_valid_level( $level ) ) {
@@ -132,7 +132,7 @@ class WC_Logger implements WC_Logger_Interface {
 
 		if ( $this->should_handle( $level ) ) {
 			$timestamp = current_time( 'timestamp' );
-			$message = apply_filters( 'woocommerce_logger_log_message', $message, $level, $context );
+			$message   = apply_filters( 'woocommerce_logger_log_message', $message, $level, $context );
 
 			foreach ( $this->handlers as $handler ) {
 				$handler->handle( $timestamp, $level, $message, $context );
@@ -148,7 +148,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 * @see WC_Logger::log
 	 *
 	 * @param string $message
-	 * @param array $context
+	 * @param array  $context
 	 */
 	public function emergency( $message, $context = array() ) {
 		$this->log( WC_Log_Levels::EMERGENCY, $message, $context );
@@ -163,7 +163,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 * @see WC_Logger::log
 	 *
 	 * @param string $message
-	 * @param array $context
+	 * @param array  $context
 	 */
 	public function alert( $message, $context = array() ) {
 		$this->log( WC_Log_Levels::ALERT, $message, $context );
@@ -178,7 +178,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 * @see WC_Logger::log
 	 *
 	 * @param string $message
-	 * @param array $context
+	 * @param array  $context
 	 */
 	public function critical( $message, $context = array() ) {
 		$this->log( WC_Log_Levels::CRITICAL, $message, $context );
@@ -193,7 +193,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 * @see WC_Logger::log
 	 *
 	 * @param string $message
-	 * @param array $context
+	 * @param array  $context
 	 */
 	public function error( $message, $context = array() ) {
 		$this->log( WC_Log_Levels::ERROR, $message, $context );
@@ -210,7 +210,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 * @see WC_Logger::log
 	 *
 	 * @param string $message
-	 * @param array $context
+	 * @param array  $context
 	 */
 	public function warning( $message, $context = array() ) {
 		$this->log( WC_Log_Levels::WARNING, $message, $context );
@@ -224,7 +224,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 * @see WC_Logger::log
 	 *
 	 * @param string $message
-	 * @param array $context
+	 * @param array  $context
 	 */
 	public function notice( $message, $context = array() ) {
 		$this->log( WC_Log_Levels::NOTICE, $message, $context );
@@ -239,7 +239,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 * @see WC_Logger::log
 	 *
 	 * @param string $message
-	 * @param array $context
+	 * @param array  $context
 	 */
 	public function info( $message, $context = array() ) {
 		$this->log( WC_Log_Levels::INFO, $message, $context );
@@ -253,7 +253,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 * @see WC_Logger::log
 	 *
 	 * @param string $message
-	 * @param array $context
+	 * @param array  $context
 	 */
 	public function debug( $message, $context = array() ) {
 		$this->log( WC_Log_Levels::DEBUG, $message, $context );
@@ -264,7 +264,7 @@ class WC_Logger implements WC_Logger_Interface {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param string $handle
+	 * @param  string $handle
 	 *
 	 * @return bool
 	 */
@@ -273,4 +273,5 @@ class WC_Logger implements WC_Logger_Interface {
 		$handler = new WC_Log_Handler_File();
 		return $handler->clear( $handle );
 	}
+
 }

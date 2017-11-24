@@ -13,7 +13,6 @@ class WC_Helper_Order {
 	 * @param int $order_id ID of the order to delete.
 	 */
 	public static function delete_order( $order_id ) {
-
 		$order = wc_get_order( $order_id );
 
 		// Delete all products in the order.
@@ -33,13 +32,12 @@ class WC_Helper_Order {
 	 * @since   2.4
 	 * @version 3.0 New parameter $product.
 	 *
-	 * @param int        $customer_id
-	 * @param WC_Product $product
+	 * @param  int        $customer_id
+	 * @param  WC_Product $product
 	 *
 	 * @return WC_Order
 	 */
 	public static function create_order( $customer_id = 1, $product = null ) {
-
 		if ( ! is_a( $product, 'WC_Product' ) ) {
 			$product = WC_Helper_Product::create_simple_product();
 		}
@@ -54,7 +52,7 @@ class WC_Helper_Order {
 		);
 
 		$_SERVER['REMOTE_ADDR'] = '127.0.0.1'; // Required, else wc_create_order throws an exception
-		$order 					= wc_create_order( $order_data );
+		$order                  = wc_create_order( $order_data );
 
 		// Add order products
 		$item = new WC_Order_Item_Product();
@@ -82,8 +80,8 @@ class WC_Helper_Order {
 
 		// Add shipping costs
 		$shipping_taxes = WC_Tax::calc_shipping_tax( '10', WC_Tax::get_shipping_tax_rates() );
-		$rate   = new WC_Shipping_Rate( 'flat_rate_shipping', 'Flat rate shipping', '10', $shipping_taxes, 'flat_rate' );
-		$item   = new WC_Order_Item_Shipping();
+		$rate           = new WC_Shipping_Rate( 'flat_rate_shipping', 'Flat rate shipping', '10', $shipping_taxes, 'flat_rate' );
+		$item           = new WC_Order_Item_Shipping();
 		$item->set_props( array(
 			'method_title' => $rate->label,
 			'method_id'    => $rate->id,
@@ -110,4 +108,5 @@ class WC_Helper_Order {
 
 		return $order;
 	}
+
 }

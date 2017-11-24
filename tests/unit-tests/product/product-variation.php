@@ -78,4 +78,5 @@ class WC_Tests_Product_Variation extends WC_Unit_Test_Case {
 		$this->assertEquals( 'parent', $variation->get_tax_class( 'edit' ) );
 		$this->assertEquals( 'zero-rate', $variation->get_tax_class( 'view' ) );
 	}
+
 }

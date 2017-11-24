@@ -27,7 +27,7 @@ class WC_Meta_Box_Order_Downloads {
 		<div class="order_download_permissions wc-metaboxes-wrapper">
 
 			<div class="wc-metaboxes"><?php
-				$data_store = WC_Data_Store::load( 'customer-download' );
+				$data_store           = WC_Data_Store::load( 'customer-download' );
 				$download_permissions = $data_store->get_downloads( array(
 					'order_id' => $post->ID,
 					'orderby'  => 'product_id',
@@ -76,7 +76,7 @@ class WC_Meta_Box_Order_Downloads {
 	/**
 	 * Save meta box data.
 	 *
-	 * @param int $post_id
+	 * @param int     $post_id
 	 * @param WP_Post $post
 	 */
 	public static function save( $post_id, $post ) {
@@ -97,4 +97,5 @@ class WC_Meta_Box_Order_Downloads {
 			}
 		}
 	}
+
 }

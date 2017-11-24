@@ -78,7 +78,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
-			'args' => array(
+			'args'   => array(
 				'id' => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -130,7 +130,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	 * Get object.
 	 *
 	 * @since  3.0.0
-	 * @param  int $id Object ID.
+	 * @param  int     $id Object ID.
 	 * @return WC_Data
 	 */
 	protected function get_object( $id ) {
@@ -141,13 +141,13 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	 * Prepare a single product output for response.
 	 *
 	 * @since  3.0.0
-	 * @param  WC_Data         $object  Object data.
-	 * @param  WP_REST_Request $request Request object.
+	 * @param  WC_Data          $object  Object data.
+	 * @param  WP_REST_Request  $request Request object.
 	 * @return WP_REST_Response
 	 */
 	public function prepare_object_for_response( $object, $request ) {
-		$context  = ! empty( $request['context'] ) ? $request['context'] : 'view';
-		$data = $this->get_product_data( $object, $context );
+		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
+		$data    = $this->get_product_data( $object, $context );
 
 		// Add variations to variable products.
 		if ( $object->is_type( 'variable' ) && $object->has_child() ) {
@@ -305,7 +305,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Get the downloads for a product or product variation.
 	 *
-	 * @param WC_Product|WC_Product_Variation $product Product instance.
+	 * @param  WC_Product|WC_Product_Variation $product Product instance.
 	 * @return array
 	 */
 	protected function get_downloads( $product ) {
@@ -327,8 +327,8 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Get taxonomy terms.
 	 *
-	 * @param WC_Product $product  Product instance.
-	 * @param string     $taxonomy Taxonomy slug.
+	 * @param  WC_Product $product  Product instance.
+	 * @param  string     $taxonomy Taxonomy slug.
 	 * @return array
 	 */
 	protected function get_taxonomy_terms( $product, $taxonomy = 'cat' ) {
@@ -348,11 +348,11 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Get the images for a product or product variation.
 	 *
-	 * @param WC_Product|WC_Product_Variation $product Product instance.
+	 * @param  WC_Product|WC_Product_Variation $product Product instance.
 	 * @return array
 	 */
 	protected function get_images( $product ) {
-		$images = array();
+		$images         = array();
 		$attachment_ids = array();
 
 		// Add featured image.
@@ -451,7 +451,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Get default attributes.
 	 *
-	 * @param WC_Product $product Product instance.
+	 * @param  WC_Product $product Product instance.
 	 * @return array
 	 */
 	protected function get_default_attributes( $product ) {
@@ -481,8 +481,8 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Get attribute options.
 	 *
-	 * @param int   $product_id Product ID.
-	 * @param array $attribute  Attribute data.
+	 * @param  int   $product_id Product ID.
+	 * @param  array $attribute  Attribute data.
 	 * @return array
 	 */
 	protected function get_attribute_options( $product_id, $attribute ) {
@@ -500,7 +500,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Get the attributes for a product or product variation.
 	 *
-	 * @param WC_Product|WC_Product_Variation $product Product instance.
+	 * @param  WC_Product|WC_Product_Variation $product Product instance.
 	 * @return array
 	 */
 	protected function get_attributes( $product ) {
@@ -517,7 +517,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 
 				// Taxonomy-based attributes are prefixed with `pa_`, otherwise simply `attribute_`.
 				if ( 0 === strpos( $attribute_name, 'attribute_pa_' ) ) {
-					$option_term = get_term_by( 'slug', $attribute, $name );
+					$option_term  = get_term_by( 'slug', $attribute, $name );
 					$attributes[] = array(
 						'id'     => wc_attribute_taxonomy_id_by_name( $name ),
 						'name'   => $this->get_attribute_taxonomy_name( $name, $_product ),
@@ -550,8 +550,8 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Get product data.
 	 *
-	 * @param WC_Product $product Product instance.
-	 * @param string     $context Request context.
+	 * @param  WC_Product $product Product instance.
+	 * @param  string     $context Request context.
 	 *                            Options: 'view' and 'edit'.
 	 * @return array
 	 */
@@ -634,13 +634,13 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param WC_Data         $object  Object data.
-	 * @param WP_REST_Request $request Request object.
-	 * @return array                   Links for the given post.
+	 * @param  WC_Data         $object  Object data.
+	 * @param  WP_REST_Request $request Request object.
+	 * @return array                    Links for the given post.
 	 */
 	protected function prepare_links( $object, $request ) {
 		$links = array(
-			'self' => array(
+			'self'       => array(
 				'href' => rest_url( sprintf( '/%s/%s/%d', $this->namespace, $this->rest_base, $object->get_id() ) ),
 			),
 			'collection' => array(
@@ -660,8 +660,8 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Prepare a single product for create or update.
 	 *
-	 * @param  WP_REST_Request $request Request object.
-	 * @param  bool            $creating If is creating a new object.
+	 * @param  WP_REST_Request  $request  Request object.
+	 * @param  bool             $creating If is creating a new object.
 	 * @return WP_Error|WC_Data
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
@@ -1041,8 +1041,8 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	 * Set product images.
 	 *
 	 * @throws WC_REST_Exception REST API exceptions.
-	 * @param WC_Product $product Product instance.
-	 * @param array      $images  Images data.
+	 * @param  WC_Product $product Product instance.
+	 * @param  array      $images  Images data.
 	 * @return WC_Product
 	 */
 	protected function set_product_images( $product, $images ) {
@@ -1108,8 +1108,8 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Save product shipping data.
 	 *
-	 * @param WC_Product $product Product instance.
-	 * @param array      $data    Shipping data.
+	 * @param  WC_Product $product Product instance.
+	 * @param  array      $data    Shipping data.
 	 * @return WC_Product
 	 */
 	protected function save_product_shipping_data( $product, $data ) {
@@ -1153,9 +1153,9 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Save downloadable files.
 	 *
-	 * @param WC_Product $product    Product instance.
-	 * @param array      $downloads  Downloads data.
-	 * @param int        $deprecated Deprecated since 3.0.
+	 * @param  WC_Product $product    Product instance.
+	 * @param  array      $downloads  Downloads data.
+	 * @param  int        $deprecated Deprecated since 3.0.
 	 * @return WC_Product
 	 */
 	protected function save_downloadable_files( $product, $downloads, $deprecated = 0 ) {
@@ -1173,7 +1173,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 			$download->set_id( $key );
 			$download->set_name( $file['name'] ? $file['name'] : wc_get_filename_from_url( $file['file'] ) );
 			$download->set_file( apply_filters( 'woocommerce_file_download_path', $file['file'], $product, $key ) );
-			$files[]  = $download;
+			$files[] = $download;
 		}
 		$product->set_downloads( $files );
 
@@ -1183,9 +1183,9 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Save taxonomy terms.
 	 *
-	 * @param WC_Product $product  Product instance.
-	 * @param array      $terms    Terms data.
-	 * @param string     $taxonomy Taxonomy name.
+	 * @param  WC_Product $product  Product instance.
+	 * @param  array      $terms    Terms data.
+	 * @param  string     $taxonomy Taxonomy name.
 	 * @return WC_Product
 	 */
 	protected function save_taxonomy_terms( $product, $terms, $taxonomy = 'cat' ) {
@@ -1205,8 +1205,8 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	 *
 	 * @since 3.0.0
 	 *
-	 * @param WC_Product      $product Product instance.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  WC_Product      $product Product instance.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return WC_Product
 	 */
 	protected function save_default_attributes( $product, $request ) {
@@ -1274,7 +1274,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	/**
 	 * Delete a single item.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function delete_item( $request ) {
@@ -1394,112 +1394,112 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 			'title'      => $this->post_type,
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'                    => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name' => array(
+				'name'                  => array(
 					'description' => __( 'Product name.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'slug' => array(
+				'slug'                  => array(
 					'description' => __( 'Product slug.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'permalink' => array(
+				'permalink'             => array(
 					'description' => __( 'Product URL.', 'woocommerce' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created' => array(
+				'date_created'          => array(
 					'description' => __( "The date the product was created, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_created_gmt' => array(
+				'date_created_gmt'      => array(
 					'description' => __( 'The date the product was created, as GMT.', 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified' => array(
+				'date_modified'         => array(
 					'description' => __( "The date the product was last modified, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'date_modified_gmt' => array(
+				'date_modified_gmt'     => array(
 					'description' => __( 'The date the product was last modified, as GMT.', 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'type' => array(
+				'type'                  => array(
 					'description' => __( 'Product type.', 'woocommerce' ),
 					'type'        => 'string',
 					'default'     => 'simple',
 					'enum'        => array_keys( wc_get_product_types() ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'status' => array(
+				'status'                => array(
 					'description' => __( 'Product status (post status).', 'woocommerce' ),
 					'type'        => 'string',
 					'default'     => 'publish',
 					'enum'        => array_keys( get_post_statuses() ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'featured' => array(
+				'featured'              => array(
 					'description' => __( 'Featured product.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'catalog_visibility' => array(
+				'catalog_visibility'    => array(
 					'description' => __( 'Catalog visibility.', 'woocommerce' ),
 					'type'        => 'string',
 					'default'     => 'visible',
 					'enum'        => array( 'visible', 'catalog', 'search', 'hidden' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'description' => array(
+				'description'           => array(
 					'description' => __( 'Product description.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'short_description' => array(
+				'short_description'     => array(
 					'description' => __( 'Product short description.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'sku' => array(
+				'sku'                   => array(
 					'description' => __( 'Unique identifier.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'price' => array(
+				'price'                 => array(
 					'description' => __( 'Current product price.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'regular_price' => array(
+				'regular_price'         => array(
 					'description' => __( 'Product regular price.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'sale_price' => array(
+				'sale_price'            => array(
 					'description' => __( 'Product sale price.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_on_sale_from' => array(
+				'date_on_sale_from'     => array(
 					'description' => __( "Start date of sale price, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
@@ -1509,60 +1509,60 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_on_sale_to' => array(
+				'date_on_sale_to'       => array(
 					'description' => __( "End date of sale price, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'date_on_sale_to_gmt' => array(
+				'date_on_sale_to_gmt'   => array(
 					'description' => __( 'End date of sale price, as GMT.', 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'price_html' => array(
+				'price_html'            => array(
 					'description' => __( 'Price formatted in HTML.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'on_sale' => array(
+				'on_sale'               => array(
 					'description' => __( 'Shows if the product is on sale.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'purchasable' => array(
+				'purchasable'           => array(
 					'description' => __( 'Shows if the product can be bought.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'total_sales' => array(
+				'total_sales'           => array(
 					'description' => __( 'Amount of sales.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'virtual' => array(
+				'virtual'               => array(
 					'description' => __( 'If the product is virtual.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'downloadable' => array(
+				'downloadable'          => array(
 					'description' => __( 'If the product is downloadable.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'downloads' => array(
+				'downloads'             => array(
 					'description' => __( 'List of downloadable files.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'   => array(
 								'description' => __( 'File MD5 hash.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
@@ -1581,90 +1581,90 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 						),
 					),
 				),
-				'download_limit' => array(
+				'download_limit'        => array(
 					'description' => __( 'Number of times downloadable files can be downloaded after purchase.', 'woocommerce' ),
 					'type'        => 'integer',
 					'default'     => -1,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'download_expiry' => array(
+				'download_expiry'       => array(
 					'description' => __( 'Number of days until access to downloadable files expires.', 'woocommerce' ),
 					'type'        => 'integer',
 					'default'     => -1,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'external_url' => array(
+				'external_url'          => array(
 					'description' => __( 'Product external URL. Only for external products.', 'woocommerce' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'button_text' => array(
+				'button_text'           => array(
 					'description' => __( 'Product external button text. Only for external products.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'tax_status' => array(
+				'tax_status'            => array(
 					'description' => __( 'Tax status.', 'woocommerce' ),
 					'type'        => 'string',
 					'default'     => 'taxable',
 					'enum'        => array( 'taxable', 'shipping', 'none' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'tax_class' => array(
+				'tax_class'             => array(
 					'description' => __( 'Tax class.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'manage_stock' => array(
+				'manage_stock'          => array(
 					'description' => __( 'Stock management at product level.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'stock_quantity' => array(
+				'stock_quantity'        => array(
 					'description' => __( 'Stock quantity.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'in_stock' => array(
+				'in_stock'              => array(
 					'description' => __( 'Controls whether or not the product is listed as "in stock" or "out of stock" on the frontend.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'default'     => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'backorders' => array(
+				'backorders'            => array(
 					'description' => __( 'If managing stock, this controls if backorders are allowed.', 'woocommerce' ),
 					'type'        => 'string',
 					'default'     => 'no',
 					'enum'        => array( 'no', 'notify', 'yes' ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'backorders_allowed' => array(
+				'backorders_allowed'    => array(
 					'description' => __( 'Shows if backorders are allowed.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'backordered' => array(
+				'backordered'           => array(
 					'description' => __( 'Shows if the product is on backordered.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'sold_individually' => array(
+				'sold_individually'     => array(
 					'description' => __( 'Allow one item to be bought in a single order.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'default'     => false,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'weight' => array(
+				'weight'                => array(
 					/* translators: %s: weight unit */
 					'description' => sprintf( __( 'Product weight (%s).', 'woocommerce' ), $weight_unit ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'dimensions' => array(
+				'dimensions'            => array(
 					'description' => __( 'Product dimensions.', 'woocommerce' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
@@ -1675,7 +1675,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'width' => array(
+						'width'  => array(
 							/* translators: %s: dimension unit */
 							'description' => sprintf( __( 'Product width (%s).', 'woocommerce' ), $dimension_unit ),
 							'type'        => 'string',
@@ -1689,90 +1689,90 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 						),
 					),
 				),
-				'shipping_required' => array(
+				'shipping_required'     => array(
 					'description' => __( 'Shows if the product need to be shipped.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'shipping_taxable' => array(
+				'shipping_taxable'      => array(
 					'description' => __( 'Shows whether or not the product shipping is taxable.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'shipping_class' => array(
+				'shipping_class'        => array(
 					'description' => __( 'Shipping class slug.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'shipping_class_id' => array(
+				'shipping_class_id'     => array(
 					'description' => __( 'Shipping class ID.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'reviews_allowed' => array(
+				'reviews_allowed'       => array(
 					'description' => __( 'Allow reviews.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'default'     => true,
 					'context'     => array( 'view', 'edit' ),
 				),
-				'average_rating' => array(
+				'average_rating'        => array(
 					'description' => __( 'Reviews average rating.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'rating_count' => array(
+				'rating_count'          => array(
 					'description' => __( 'Amount of reviews that the product have.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'related_ids' => array(
+				'related_ids'           => array(
 					'description' => __( 'List of related products IDs.', 'woocommerce' ),
 					'type'        => 'array',
 					'items'       => array(
-						'type'    => 'integer',
+						'type' => 'integer',
 					),
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'upsell_ids' => array(
+				'upsell_ids'            => array(
 					'description' => __( 'List of up-sell products IDs.', 'woocommerce' ),
 					'type'        => 'array',
 					'items'       => array(
-						'type'    => 'integer',
+						'type' => 'integer',
 					),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'cross_sell_ids' => array(
+				'cross_sell_ids'        => array(
 					'description' => __( 'List of cross-sell products IDs.', 'woocommerce' ),
 					'type'        => 'array',
 					'items'       => array(
-						'type'    => 'integer',
+						'type' => 'integer',
 					),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'parent_id' => array(
+				'parent_id'             => array(
 					'description' => __( 'Product parent ID.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'purchase_note' => array(
+				'purchase_note'         => array(
 					'description' => __( 'Optional note to send the customer after purchase.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'categories' => array(
+				'categories'            => array(
 					'description' => __( 'List of categories.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'   => array(
 								'description' => __( 'Category ID.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
@@ -1792,14 +1792,14 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 						),
 					),
 				),
-				'tags' => array(
+				'tags'                  => array(
 					'description' => __( 'List of tags.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'   => array(
 								'description' => __( 'Tag ID.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
@@ -1819,31 +1819,31 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 						),
 					),
 				),
-				'images' => array(
+				'images'                => array(
 					'description' => __( 'List of images.', 'woocommerce' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'                => array(
 								'description' => __( 'Image ID.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'date_created' => array(
+							'date_created'      => array(
 								'description' => __( "The date the image was created, in the site's timezone.", 'woocommerce' ),
 								'type'        => 'date-time',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'date_created_gmt' => array(
+							'date_created_gmt'  => array(
 								'description' => __( 'The date the image was created, as GMT.', 'woocommerce' ),
 								'type'        => 'date-time',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'date_modified' => array(
+							'date_modified'     => array(
 								'description' => __( "The date the image was last modified, in the site's timezone.", 'woocommerce' ),
 								'type'        => 'date-time',
 								'context'     => array( 'view', 'edit' ),
@@ -1855,23 +1855,23 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'src' => array(
+							'src'               => array(
 								'description' => __( 'Image URL.', 'woocommerce' ),
 								'type'        => 'string',
 								'format'      => 'uri',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'name' => array(
+							'name'              => array(
 								'description' => __( 'Image name.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'alt' => array(
+							'alt'               => array(
 								'description' => __( 'Image alternative text.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'position' => array(
+							'position'          => array(
 								'description' => __( 'Image position. 0 means that the image is featured.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
@@ -1879,29 +1879,29 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 						),
 					),
 				),
-				'attributes' => array(
+				'attributes'            => array(
 					'description' => __( 'List of attributes.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'        => array(
 								'description' => __( 'Attribute ID.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'name' => array(
+							'name'      => array(
 								'description' => __( 'Attribute name.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'position' => array(
+							'position'  => array(
 								'description' => __( 'Attribute position.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'visible' => array(
+							'visible'   => array(
 								'description' => __( "Define if the attribute is visible on the \"Additional information\" tab in the product's page.", 'woocommerce' ),
 								'type'        => 'boolean',
 								'default'     => false,
@@ -1913,7 +1913,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 								'default'     => false,
 								'context'     => array( 'view', 'edit' ),
 							),
-							'options' => array(
+							'options'   => array(
 								'description' => __( 'List of available term names of the attribute.', 'woocommerce' ),
 								'type'        => 'array',
 								'context'     => array( 'view', 'edit' ),
@@ -1924,19 +1924,19 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 						),
 					),
 				),
-				'default_attributes' => array(
+				'default_attributes'    => array(
 					'description' => __( 'Defaults variation attributes.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'     => array(
 								'description' => __( 'Attribute ID.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 							),
-							'name' => array(
+							'name'   => array(
 								'description' => __( 'Attribute name.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
@@ -1949,42 +1949,42 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 						),
 					),
 				),
-				'variations' => array(
+				'variations'            => array(
 					'description' => __( 'List of variations IDs.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'    => 'integer',
+						'type' => 'integer',
 					),
 					'readonly'    => true,
 				),
-				'grouped_products' => array(
+				'grouped_products'      => array(
 					'description' => __( 'List of grouped products ID.', 'woocommerce' ),
 					'type'        => 'array',
 					'items'       => array(
-						'type'    => 'integer',
+						'type' => 'integer',
 					),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'menu_order' => array(
+				'menu_order'            => array(
 					'description' => __( 'Menu order, used to custom sort products.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'meta_data' => array(
+				'meta_data'             => array(
 					'description' => __( 'Meta data.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
 						'type'       => 'object',
 						'properties' => array(
-							'id' => array(
+							'id'    => array(
 								'description' => __( 'Meta ID.', 'woocommerce' ),
 								'type'        => 'integer',
 								'context'     => array( 'view', 'edit' ),
 								'readonly'    => true,
 							),
-							'key' => array(
+							'key'   => array(
 								'description' => __( 'Meta key.', 'woocommerce' ),
 								'type'        => 'string',
 								'context'     => array( 'view', 'edit' ),
@@ -2011,12 +2011,12 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['slug'] = array(
+		$params['slug']           = array(
 			'description'       => __( 'Limit result set to products with a specific slug.', 'woocommerce' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['status'] = array(
+		$params['status']         = array(
 			'default'           => 'any',
 			'description'       => __( 'Limit result set to products assigned a specific status.', 'woocommerce' ),
 			'type'              => 'string',
@@ -2024,32 +2024,32 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['type'] = array(
+		$params['type']           = array(
 			'description'       => __( 'Limit result set to products assigned a specific type.', 'woocommerce' ),
 			'type'              => 'string',
 			'enum'              => array_keys( wc_get_product_types() ),
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['sku'] = array(
+		$params['sku']            = array(
 			'description'       => __( 'Limit result set to products with specific SKU(s). Use commas to separate.', 'woocommerce' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_text_field',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['featured'] = array(
+		$params['featured']       = array(
 			'description'       => __( 'Limit result set to featured products.', 'woocommerce' ),
 			'type'              => 'boolean',
 			'sanitize_callback' => 'wc_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['category'] = array(
+		$params['category']       = array(
 			'description'       => __( 'Limit result set to products assigned a specific category ID.', 'woocommerce' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['tag'] = array(
+		$params['tag']            = array(
 			'description'       => __( 'Limit result set to products assigned a specific tag ID.', 'woocommerce' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
@@ -2061,7 +2061,7 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['attribute'] = array(
+		$params['attribute']      = array(
 			'description'       => __( 'Limit result set to products with a specific attribute.', 'woocommerce' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_text_field',
@@ -2084,13 +2084,13 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 			);
 		}
 
-		$params['in_stock'] = array(
+		$params['in_stock']  = array(
 			'description'       => __( 'Limit result set to products in stock or out of stock.', 'woocommerce' ),
 			'type'              => 'boolean',
 			'sanitize_callback' => 'wc_string_to_bool',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['on_sale'] = array(
+		$params['on_sale']   = array(
 			'description'       => __( 'Limit result set to products on sale.', 'woocommerce' ),
 			'type'              => 'boolean',
 			'sanitize_callback' => 'wc_string_to_bool',
@@ -2111,4 +2111,5 @@ class WC_REST_Products_Controller extends WC_REST_Legacy_Products_Controller {
 
 		return $params;
 	}
+
 }

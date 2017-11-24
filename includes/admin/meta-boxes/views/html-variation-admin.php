@@ -109,7 +109,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'wrapper_class' => 'form-row form-row-first',
 						'placeholder'   => __( 'Variation price (required)', 'woocommerce' ),
 					) );
-				
+
 					$label = sprintf(
 						/* translators: %s: currency symbol */
 						__( 'Sale price (%s)', 'woocommerce' ),
@@ -164,7 +164,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							'description'       => __( "Enter a quantity to enable stock management at variation level, or leave blank to use the parent product's options.", 'woocommerce' ),
 							'type'              => 'number',
 							'custom_attributes' => array(
-								'step'          => 'any',
+								'step' => 'any',
 							),
 							'data_type'         => 'stock',
 							'wrapper_class'     => 'form-row form-row-first',
@@ -368,8 +368,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'type'              => 'number',
 						'desc_tip'          => true,
 						'custom_attributes' => array(
-							'step' 	        => '1',
-							'min'	        => '0',
+							'step' => '1',
+							'min'  => '0',
 						),
 						'wrapper_class'     => 'form-row form-row-first',
 					) );
@@ -384,8 +384,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'type'              => 'number',
 						'desc_tip'          => true,
 						'custom_attributes' => array(
-							'step' 	        => '1',
-							'min'	        => '0',
+							'step' => '1',
+							'min'  => '0',
 						),
 						'wrapper_class'     => 'form-row form-row-last',
 					) );

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since  2.4
  *
- * @param string $raw_attributes
+ * @param  string $raw_attributes
  *
  * @return array
  */
@@ -38,7 +38,7 @@ function wc_get_text_attributes_filter_callback( $value ) {
 /**
  * Implode an array of attributes using WC_DELIMITER.
  * @since  3.0.0
- * @param  array $attributes
+ * @param  array  $attributes
  * @return string
  */
 function wc_implode_text_attributes( $attributes ) {
@@ -54,7 +54,7 @@ function wc_get_attribute_taxonomies() {
 	if ( false === ( $attribute_taxonomies = get_transient( 'wc_attribute_taxonomies' ) ) ) {
 		global $wpdb;
 
-		$attribute_taxonomies = $wpdb->get_results( "SELECT * FROM " . $wpdb->prefix . "woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC;" );
+		$attribute_taxonomies = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . "woocommerce_attribute_taxonomies WHERE attribute_name != '' ORDER BY attribute_name ASC;" );
 
 		set_transient( 'wc_attribute_taxonomies', $attribute_taxonomies );
 	}
@@ -65,7 +65,7 @@ function wc_get_attribute_taxonomies() {
 /**
  * Get a product attribute name.
  *
- * @param string $attribute_name Attribute name.
+ * @param  string $attribute_name Attribute name.
  * @return string
  */
 function wc_attribute_taxonomy_name( $attribute_name ) {
@@ -76,7 +76,7 @@ function wc_attribute_taxonomy_name( $attribute_name ) {
  * Get the attribute name used when storing values in post meta.
  *
  * @since 2.6.0
- * @param string $attribute_name Attribute name.
+ * @param  string $attribute_name Attribute name.
  * @return string
  */
 function wc_variation_attribute_name( $attribute_name ) {
@@ -87,8 +87,8 @@ function wc_variation_attribute_name( $attribute_name ) {
  * Get a product attribute name by ID.
  *
  * @since  2.4.0
- * @param int $attribute_id Attribute ID.
- * @return string Return an empty string if attribute doesn't exist.
+ * @param  int    $attribute_id Attribute ID.
+ * @return string               Return an empty string if attribute doesn't exist.
  */
 function wc_attribute_taxonomy_name_by_id( $attribute_id ) {
 	global $wpdb;
@@ -110,7 +110,7 @@ function wc_attribute_taxonomy_name_by_id( $attribute_id ) {
  * Get a product attribute ID by name.
  *
  * @since  2.6.0
- * @param string $name Attribute name.
+ * @param  string $name Attribute name.
  * @return int
  */
 function wc_attribute_taxonomy_id_by_name( $name ) {
@@ -123,8 +123,8 @@ function wc_attribute_taxonomy_id_by_name( $name ) {
 /**
  * Get a product attributes label.
  *
- * @param string $name
- * @param object $product object Optional
+ * @param  string $name
+ * @param  object $product object Optional
  * @return string
  */
 function wc_attribute_label( $name, $product = '' ) {
@@ -152,7 +152,7 @@ function wc_attribute_label( $name, $product = '' ) {
 /**
  * Get a product attributes orderby setting.
  *
- * @param mixed $name
+ * @param  mixed  $name
  * @return string
  */
 function wc_attribute_orderby( $name ) {
@@ -163,7 +163,7 @@ function wc_attribute_orderby( $name ) {
 	if ( isset( $wc_product_attributes[ 'pa_' . $name ] ) ) {
 		$orderby = $wc_product_attributes[ 'pa_' . $name ]->attribute_orderby;
 	} else {
-		$orderby = $wpdb->get_var( $wpdb->prepare( "SELECT attribute_orderby FROM " . $wpdb->prefix . "woocommerce_attribute_taxonomies WHERE attribute_name = %s;", $name ) );
+		$orderby = $wpdb->get_var( $wpdb->prepare( 'SELECT attribute_orderby FROM ' . $wpdb->prefix . 'woocommerce_attribute_taxonomies WHERE attribute_name = %s;', $name ) );
 	}
 
 	return apply_filters( 'woocommerce_attribute_orderby', $orderby, $name );
@@ -175,7 +175,7 @@ function wc_attribute_orderby( $name ) {
  * @return array
  */
 function wc_get_attribute_taxonomy_names() {
-	$taxonomy_names = array();
+	$taxonomy_names       = array();
 	$attribute_taxonomies = wc_get_attribute_taxonomies();
 	if ( ! empty( $attribute_taxonomies ) ) {
 		foreach ( $attribute_taxonomies as $tax ) {
@@ -341,7 +341,7 @@ function wc_is_attribute_in_product_name( $attribute, $name ) {
  * class PHP FALSE equivalents normally.
  *
  * @since 3.1.0
- * @param mixed $attribute  Attribute being considered for exclusion from parent array.
+ * @param  mixed $attribute Attribute being considered for exclusion from parent array.
  * @return bool
  */
 function wc_array_filter_default_attributes( $attribute ) {
@@ -352,7 +352,7 @@ function wc_array_filter_default_attributes( $attribute ) {
  * Get attribute data by ID.
  *
  * @since  3.2.0
- * @param  int $id Attribute ID.
+ * @param  int           $id Attribute ID.
  * @return stdClass|null
  */
 function wc_get_attribute( $id ) {
@@ -362,7 +362,7 @@ function wc_get_attribute( $id ) {
 		SELECT *
 		FROM {$wpdb->prefix}woocommerce_attribute_taxonomies
 		WHERE attribute_id = %d
-	 ", $id ) );
+	", $id ) );
 
 	if ( is_wp_error( $data ) || is_null( $data ) ) {
 		return null;
@@ -383,7 +383,7 @@ function wc_get_attribute( $id ) {
  * Create attribute.
  *
  * @since  3.2.0
- * @param  array $args Attribute arguments {
+ * @param array $args Attribute arguments {
  *     Array of attribute parameters.
  *
  *     @type int    $id           Unique identifier, used to update an attribute.
@@ -485,9 +485,9 @@ function wc_create_attribute( $args ) {
 		/**
 		 * Attribute updated.
 		 *
-		 * @param int    $id        Added attribute ID.
-		 * @param array  $data      Attribute data.
-		 * @param string $old_slug  Attribute old name.
+		 * @param int    $id       Added attribute ID.
+		 * @param array  $data     Attribute data.
+		 * @param string $old_slug Attribute old name.
 		 */
 		do_action( 'woocommerce_attribute_updated', $id, $data, $args['old_slug'] );
 
@@ -538,8 +538,8 @@ function wc_create_attribute( $args ) {
  * For available args see wc_create_attribute().
  *
  * @since  3.2.0
- * @param  int $id Attribute ID.
- * @param  array $args Attribute arguments.
+ * @param  int          $id   Attribute ID.
+ * @param  array        $args Attribute arguments.
  * @return int|WP_Error
  */
 function wc_update_attribute( $id, $args ) {
@@ -567,7 +567,7 @@ function wc_update_attribute( $id, $args ) {
  * Delete attribute by ID.
  *
  * @since  3.2.0
- * @param  int $id Attribute ID.
+ * @param  int  $id Attribute ID.
  * @return bool
  */
 function wc_delete_attribute( $id ) {

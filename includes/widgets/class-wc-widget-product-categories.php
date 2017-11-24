@@ -42,31 +42,31 @@ class WC_Widget_Product_Categories extends WC_Widget {
 		$this->widget_id          = 'woocommerce_product_categories';
 		$this->widget_name        = __( 'Product Categories', 'woocommerce' );
 		$this->settings           = array(
-			'title'  => array(
+			'title'              => array(
 				'type'  => 'text',
 				'std'   => __( 'Product categories', 'woocommerce' ),
 				'label' => __( 'Title', 'woocommerce' ),
 			),
-			'orderby' => array(
-				'type'  => 'select',
-				'std'   => 'name',
-				'label' => __( 'Order by', 'woocommerce' ),
+			'orderby'            => array(
+				'type'    => 'select',
+				'std'     => 'name',
+				'label'   => __( 'Order by', 'woocommerce' ),
 				'options' => array(
 					'order' => __( 'Category order', 'woocommerce' ),
 					'name'  => __( 'Name', 'woocommerce' ),
 				),
 			),
-			'dropdown' => array(
+			'dropdown'           => array(
 				'type'  => 'checkbox',
 				'std'   => 0,
 				'label' => __( 'Show as dropdown', 'woocommerce' ),
 			),
-			'count' => array(
+			'count'              => array(
 				'type'  => 'checkbox',
 				'std'   => 0,
 				'label' => __( 'Show product counts', 'woocommerce' ),
 			),
-			'hierarchical' => array(
+			'hierarchical'       => array(
 				'type'  => 'checkbox',
 				'std'   => 1,
 				'label' => __( 'Show hierarchy', 'woocommerce' ),
@@ -76,12 +76,12 @@ class WC_Widget_Product_Categories extends WC_Widget {
 				'std'   => 0,
 				'label' => __( 'Only show children of the current category', 'woocommerce' ),
 			),
-			'hide_empty' => array(
+			'hide_empty'         => array(
 				'type'  => 'checkbox',
 				'std'   => 0,
 				'label' => __( 'Hide empty categories', 'woocommerce' ),
 			),
-			'max_depth'  => array(
+			'max_depth'          => array(
 				'type'  => 'text',
 				'std'   => '',
 				'label' => __( 'Maximum depth', 'woocommerce' ),
@@ -125,7 +125,7 @@ class WC_Widget_Product_Categories extends WC_Widget {
 		if ( 'order' === $orderby ) {
 			$list_args['menu_order'] = 'asc';
 		} else {
-			$list_args['orderby']    = 'title';
+			$list_args['orderby'] = 'title';
 		}
 
 		$this->current_cat   = false;
@@ -257,4 +257,5 @@ class WC_Widget_Product_Categories extends WC_Widget {
 
 		$this->widget_end( $args );
 	}
+
 }

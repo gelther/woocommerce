@@ -128,9 +128,9 @@ class WC_Structured_Data {
 	/**
 	 * Makes sure email structured data only outputs on non-plain text versions.
 	 *
-	 * @param WP_Order  $order         Order data.
-	 * @param bool	    $sent_to_admin Send to admin (default: false).
-	 * @param bool	    $plain_text    Plain text email (default: false).
+	 * @param WP_Order $order         Order data.
+	 * @param bool     $sent_to_admin Send to admin (default: false).
+	 * @param bool     $plain_text    Plain text email (default: false).
 	 */
 	public function output_email_structured_data( $order, $sent_to_admin = false, $plain_text = false ) {
 		if ( $plain_text ) {
@@ -213,8 +213,8 @@ class WC_Structured_Data {
 
 		if ( '' !== $product->get_price() ) {
 			if ( $product->is_type( 'variable' ) ) {
-				$prices = $product->get_variation_prices();
-				$lowest = reset( $prices['price'] );
+				$prices  = $product->get_variation_prices();
+				$lowest  = reset( $prices['price'] );
 				$highest = end( $prices['price'] );
 
 				if ( $lowest === $highest ) {
@@ -280,7 +280,7 @@ class WC_Structured_Data {
 			'name'  => get_the_title( $comment->comment_post_ID ),
 		);
 		if ( $rating = get_comment_meta( $comment->comment_ID, 'rating', true ) ) {
-			$markup['reviewRating']  = array(
+			$markup['reviewRating'] = array(
 				'@type'       => 'rating',
 				'ratingValue' => $rating,
 			);
@@ -290,7 +290,7 @@ class WC_Structured_Data {
 			return;
 		}
 
-		$markup['author']        = array(
+		$markup['author'] = array(
 			'@type' => 'Person',
 			'name'  => get_comment_author( $comment->comment_ID ),
 		);
@@ -357,9 +357,9 @@ class WC_Structured_Data {
 	 *
 	 * Hooked into `woocommerce_email_order_details` action hook.
 	 *
-	 * @param WP_Order  $order         Order data.
-	 * @param bool	    $sent_to_admin Send to admin (default: false).
-	 * @param bool	    $plain_text    Plain text email (default: false).
+	 * @param WP_Order $order         Order data.
+	 * @param bool     $sent_to_admin Send to admin (default: false).
+	 * @param bool     $plain_text    Plain text email (default: false).
 	 */
 	public function generate_order_data( $order, $sent_to_admin = false, $plain_text = false ) {
 		if ( $plain_text || ! is_a( $order, 'WC_Order' ) ) {
@@ -389,7 +389,7 @@ class WC_Structured_Data {
 			$product_exists = is_object( $product );
 			$is_visible     = $product_exists && $product->is_visible();
 
-			$markup_offers[]  = array(
+			$markup_offers[] = array(
 				'@type'              => 'Offer',
 				'price'              => $order->get_line_subtotal( $item ),
 				'priceCurrency'      => $order->get_currency(),
@@ -461,4 +461,5 @@ class WC_Structured_Data {
 
 		$this->set_data( apply_filters( 'woocommerce_structured_data_order', $markup, $sent_to_admin, $order ), true );
 	}
+
 }

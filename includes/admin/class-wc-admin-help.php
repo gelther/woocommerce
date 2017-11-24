@@ -39,63 +39,63 @@ class WC_Admin_Help {
 		}
 
 		$video_map = array(
-			'wc-settings' => array(
+			'wc-settings'                                => array(
 				'title' => __( 'General Settings', 'woocommerce' ),
 				'id'    => 'ZD5Cc2xqvCM',
 			),
-			'wc-settings-general' => array(
+			'wc-settings-general'                        => array(
 				'title' => __( 'General Settings', 'woocommerce' ),
 				'id'    => 'ZD5Cc2xqvCM',
 			),
-			'wc-settings-products' => array(
+			'wc-settings-products'                       => array(
 				'title' => __( 'Product Settings', 'woocommerce' ),
 				'id'    => 'FEmwJsE8xDY',
 			),
-			'wc-settings-tax' => array(
+			'wc-settings-tax'                            => array(
 				'title' => __( 'Tax Settings', 'woocommerce' ),
 				'id'    => '0aPtye5ba4A',
 			),
-			'wc-settings-tax-standard' => array(
+			'wc-settings-tax-standard'                   => array(
 				'title' => __( 'Tax Rate Example', 'woocommerce' ),
 				'id'    => 'HC2IUnJSJro',
 			),
-			'wc-settings-tax-reduced-rate' => array(
+			'wc-settings-tax-reduced-rate'               => array(
 				'title' => __( 'Tax Rate Example', 'woocommerce' ),
 				'id'    => 'HC2IUnJSJro',
 			),
-			'wc-settings-tax-zero-rate' => array(
+			'wc-settings-tax-zero-rate'                  => array(
 				'title' => __( 'Tax Rate Example', 'woocommerce' ),
 				'id'    => 'HC2IUnJSJro',
 			),
-			'wc-settings-shipping' => array(
+			'wc-settings-shipping'                       => array(
 				'title' => __( 'Shipping Zones', 'woocommerce' ),
 				'id'    => '1HhBEbIMqAQ',
 			),
-			'wc-settings-shipping-options' => array(
+			'wc-settings-shipping-options'               => array(
 				'title' => __( 'Shipping Options', 'woocommerce' ),
 				'id'    => '468Z4s01e3M',
 			),
-			'wc-settings-shipping-classes' => array(
+			'wc-settings-shipping-classes'               => array(
 				'title' => __( 'Shipping Classes', 'woocommerce' ),
 				'id'    => 'Vyt5xIewlOs',
 			),
-			'wc-settings-checkout' => array(
+			'wc-settings-checkout'                       => array(
 				'title' => __( 'Checkout Settings', 'woocommerce' ),
 				'id'    => 'zoejwJfXops',
 			),
-			'wc-settings-checkout-bacs' => array(
+			'wc-settings-checkout-bacs'                  => array(
 				'title' => __( 'Bank Transfer (BACS) Payment Method', 'woocommerce' ),
 				'id'    => 'K4Lpaq9aS2Q',
 			),
-			'wc-settings-checkout-cheque' => array(
+			'wc-settings-checkout-cheque'                => array(
 				'title' => __( 'Check Payment Method', 'woocommerce' ),
 				'id'    => 'LwxRxCkfofg',
 			),
-			'wc-settings-checkout-cod' => array(
+			'wc-settings-checkout-cod'                   => array(
 				'title' => __( 'Cash on Delivery (COD) Payment Method', 'woocommerce' ),
 				'id'    => 'aioOdPELH4M',
 			),
-			'wc-settings-checkout-paypal' => array(
+			'wc-settings-checkout-paypal'                => array(
 				'title' => __( 'PayPal Standard Method', 'woocommerce' ),
 				'id'    => 'FwHT5UDdkdY',
 			),
@@ -103,59 +103,59 @@ class WC_Admin_Help {
 				'title' => __( 'PayPal by Braintree Payment Method', 'woocommerce' ),
 				'id'    => 'hubcUWq2NAc',
 			),
-			'wc-settings-checkout-stripe' => array(
+			'wc-settings-checkout-stripe'                => array(
 				'title' => __( 'Stripe Payment Method', 'woocommerce' ),
 				'id'    => '5rMDGdkmSGU',
 			),
-			'wc-settings-account' => array(
+			'wc-settings-account'                        => array(
 				'title' => __( 'Account Settings', 'woocommerce' ),
 				'id'    => 'AGZSeX5I-wo',
 			),
-			'wc-settings-email' => array(
+			'wc-settings-email'                          => array(
 				'title' => __( 'Email Settings', 'woocommerce' ),
 				'id'    => '2vtzGc92tFU',
 			),
-			'wc-settings-api' => array(
+			'wc-settings-api'                            => array(
 				'title' => __( 'API Settings', 'woocommerce' ),
 				'id'    => 'SjJUmgfLS4A',
 			),
-			'product' => array(
+			'product'                                    => array(
 				'title' => __( 'Creating Products', 'woocommerce' ),
 				'id'    => 'sFtXa00Jf_o',
 			),
-			'edit-product_cat' => array(
+			'edit-product_cat'                           => array(
 				'title' => __( 'Product Categories', 'woocommerce' ),
 				'id'    => 'PeFsOTrN1u8',
 			),
-			'edit-product_tag' => array(
+			'edit-product_tag'                           => array(
 				'title' => __( 'Product Tags', 'woocommerce' ),
 				'id'    => 'PeFsOTrN1u8',
 			),
-			'product_attributes' => array(
+			'product_attributes'                         => array(
 				'title' => __( 'Product Attributes', 'woocommerce' ),
 				'id'    => 'PeFsOTrN1u8',
 			),
-			'wc-status' => array(
+			'wc-status'                                  => array(
 				'title' => __( 'System Status', 'woocommerce' ),
 				'id'    => 'C8F6_sAr4CE',
 			),
-			'wc-reports' => array(
+			'wc-reports'                                 => array(
 				'title' => __( 'Reports', 'woocommerce' ),
 				'id'    => '69adRkRqOk0',
 			),
-			'edit-shop_coupon' => array(
+			'edit-shop_coupon'                           => array(
 				'title' => __( 'Coupons', 'woocommerce' ),
 				'id'    => 'k-GKjRs59UM',
 			),
-			'shop_coupon' => array(
+			'shop_coupon'                                => array(
 				'title' => __( 'Coupons', 'woocommerce' ),
 				'id'    => 'k-GKjRs59UM',
 			),
-			'edit-shop_order' => array(
+			'edit-shop_order'                            => array(
 				'title' => __( 'Managing Orders', 'woocommerce' ),
 				'id'    => 'rjS3mbiLN_c',
 			),
-			'shop_order' => array(
+			'shop_order'                                 => array(
 				'title' => __( 'Managing Orders', 'woocommerce' ),
 				'id'    => 'rjS3mbiLN_c',
 			),
@@ -190,12 +190,12 @@ class WC_Admin_Help {
 		}
 
 		$screen->add_help_tab( array(
-			'id'        => 'woocommerce_support_tab',
-			'title'     => __( 'Help &amp; Support', 'woocommerce' ),
-			'content'   =>
+			'id'      => 'woocommerce_support_tab',
+			'title'   => __( 'Help &amp; Support', 'woocommerce' ),
+			'content' =>
 				'<h2>' . __( 'Help &amp; Support', 'woocommerce' ) . '</h2>' .
 				'<p>' . sprintf(
-					__( 'Should you need help understanding, using, or extending WooCommerce, <a href="%s">please read our documentation</a>. You will find all kinds of resources including snippets, tutorials and much more.' , 'woocommerce' ),
+					__( 'Should you need help understanding, using, or extending WooCommerce, <a href="%s">please read our documentation</a>. You will find all kinds of resources including snippets, tutorials and much more.', 'woocommerce' ),
 					'https://docs.woocommerce.com/documentation/plugins/woocommerce/?utm_source=helptab&utm_medium=product&utm_content=docs&utm_campaign=woocommerceplugin'
 				) . '</p>' .
 				'<p>' . sprintf(
@@ -208,9 +208,9 @@ class WC_Admin_Help {
 		) );
 
 		$screen->add_help_tab( array(
-			'id'        => 'woocommerce_bugs_tab',
-			'title'     => __( 'Found a bug?', 'woocommerce' ),
-			'content'   =>
+			'id'      => 'woocommerce_bugs_tab',
+			'title'   => __( 'Found a bug?', 'woocommerce' ),
+			'content' =>
 				'<h2>' . __( 'Found a bug?', 'woocommerce' ) . '</h2>' .
 				'<p>' . sprintf( __( 'If you find a bug within WooCommerce core you can create a ticket via <a href="%1$s">Github issues</a>. Ensure you read the <a href="%2$s">contribution guide</a> prior to submitting your report. To help us solve your issue, please be as descriptive as possible and include your <a href="%3$s">system status report</a>.', 'woocommerce' ), 'https://github.com/woocommerce/woocommerce/issues?state=open', 'https://github.com/woocommerce/woocommerce/blob/master/.github/CONTRIBUTING.md', admin_url( 'admin.php?page=wc-status' ) ) . '</p>' .
 				'<p><a href="' . 'https://github.com/woocommerce/woocommerce/issues?state=open' . '" class="button button-primary">' . __( 'Report a bug', 'woocommerce' ) . '</a> <a href="' . admin_url( 'admin.php?page=wc-status' ) . '" class="button">' . __( 'System status', 'woocommerce' ) . '</a></p>',
@@ -218,18 +218,18 @@ class WC_Admin_Help {
 		) );
 
 		$screen->add_help_tab( array(
-			'id'        => 'woocommerce_education_tab',
-			'title'     => __( 'Education', 'woocommerce' ),
-			'content'   =>
+			'id'      => 'woocommerce_education_tab',
+			'title'   => __( 'Education', 'woocommerce' ),
+			'content' =>
 				'<h2>' . __( 'Education', 'woocommerce' ) . '</h2>' .
 				'<p>' . __( 'If you would like to learn about using WooCommerce from an expert, consider following a WooCommerce course offered by one of our educational partners.', 'woocommerce' ) . '</p>' .
 				'<p><a href="' . 'https://woocommerce.com/educational-partners/?utm_source=helptab&utm_medium=product&utm_content=edupartners&utm_campaign=woocommerceplugin' . '" class="button button-primary">' . __( 'View education partners', 'woocommerce' ) . '</a></p>',
 		) );
 
 		$screen->add_help_tab( array(
-			'id'        => 'woocommerce_onboard_tab',
-			'title'     => __( 'Setup wizard', 'woocommerce' ),
-			'content'   =>
+			'id'      => 'woocommerce_onboard_tab',
+			'title'   => __( 'Setup wizard', 'woocommerce' ),
+			'content' =>
 				'<h2>' . __( 'Setup wizard', 'woocommerce' ) . '</h2>' .
 				'<p>' . __( 'If you need to access the setup wizard again, please click on the button below.', 'woocommerce' ) . '</p>' .
 				'<p><a href="' . admin_url( 'index.php?page=wc-setup' ) . '" class="button button-primary">' . __( 'Setup wizard', 'woocommerce' ) . '</a></p>',
@@ -245,6 +245,7 @@ class WC_Admin_Help {
 			'<p><a href="' . 'https://woocommerce.com/product-category/woocommerce-extensions/?utm_source=helptab&utm_medium=product&utm_content=wcextensions&utm_campaign=woocommerceplugin' . '" target="_blank">' . __( 'Official extensions', 'woocommerce' ) . '</a></p>'
 		);
 	}
+
 }
 
 return new WC_Admin_Help();

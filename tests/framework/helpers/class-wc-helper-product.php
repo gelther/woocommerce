@@ -79,7 +79,7 @@ class WC_Helper_Product {
 	 */
 	public static function create_grouped_product() {
 		// Create the product
-		$product = wp_insert_post( array(
+		$product          = wp_insert_post( array(
 			'post_title'  => 'Dummy Grouped Product',
 			'post_type'   => 'product',
 			'post_status' => 'publish',
@@ -308,9 +308,9 @@ class WC_Helper_Product {
 	 * Creates a new product review on a specific product.
 	 *
 	 * @since 3.0
-	 * @param $product_id integer Product ID that the review is for
-	 * @param $revieww_content string Content to use for the product review
-	 * @return integer Product Review ID
+	 * @param          $product_id      integer Product ID that the review is for
+	 * @param          $revieww_content string Content to use for the product review
+	 * @return integer                  Product Review ID
 	 */
 	public static function create_product_review( $product_id, $review_content = 'Review content here' ) {
 		$data = array(
@@ -334,4 +334,5 @@ class WC_Helper_Product {
 	public static function save_post_test_update_meta_data_direct( $id ) {
 		update_post_meta( $id, '_test2', 'world' );
 	}
+
 }

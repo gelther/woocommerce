@@ -109,7 +109,7 @@ class WC_Payment_Token_CC extends WC_Payment_Token {
 	 *
 	 * @since  2.6.0
 	 * @param  string $context
-	 * @return string Card type
+	 * @return string          Card type
 	 */
 	public function get_card_type( $context = 'view' ) {
 		return $this->get_prop( 'card_type', $context );
@@ -129,7 +129,7 @@ class WC_Payment_Token_CC extends WC_Payment_Token {
 	 *
 	 * @since  2.6.0
 	 * @param  string $context
-	 * @return string Expiration year
+	 * @return string          Expiration year
 	 */
 	public function get_expiry_year( $context = 'view' ) {
 		return $this->get_prop( 'expiry_year', $context );
@@ -149,7 +149,7 @@ class WC_Payment_Token_CC extends WC_Payment_Token {
 	 *
 	 * @since  2.6.0
 	 * @param  string $context
-	 * @return string Expiration month
+	 * @return string          Expiration month
 	 */
 	public function get_expiry_month( $context = 'view' ) {
 		return $this->get_prop( 'expiry_month', $context );
@@ -169,7 +169,7 @@ class WC_Payment_Token_CC extends WC_Payment_Token {
 	 *
 	 * @since  2.6.0
 	 * @param  string $context
-	 * @return string Last 4 digits
+	 * @return string          Last 4 digits
 	 */
 	public function get_last4( $context = 'view' ) {
 		return $this->get_prop( 'last4', $context );
@@ -183,4 +183,5 @@ class WC_Payment_Token_CC extends WC_Payment_Token {
 	public function set_last4( $last4 ) {
 		$this->set_prop( 'last4', $last4 );
 	}
+
 }

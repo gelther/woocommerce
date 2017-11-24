@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				'description'       => __( 'Custom ordering position.', 'woocommerce' ),
 				'type'              => 'number',
 				'custom_attributes' => array(
-					'step' 	=> '1',
+					'step' => '1',
 				),
 			) );
 		?>

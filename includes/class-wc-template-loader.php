@@ -35,7 +35,7 @@ class WC_Template_Loader {
 	 * this to the theme (containing a woocommerce() inside) this will be used for all.
 	 * woocommerce templates.
 	 *
-	 * @param mixed $template
+	 * @param  mixed  $template
 	 * @return string
 	 */
 	public static function template_loader( $template ) {
@@ -90,7 +90,7 @@ class WC_Template_Loader {
 	 * Get an array of filenames to search for a given template.
 	 *
 	 * @since  3.0.0
-	 * @param  string $default_file The default file name.
+	 * @param  string   $default_file The default file name.
 	 * @return string[]
 	 */
 	private static function get_template_loader_files( $default_file ) {
@@ -102,7 +102,7 @@ class WC_Template_Loader {
 		}
 
 		if ( is_product_taxonomy() ) {
-			$term   = get_queried_object();
+			$term           = get_queried_object();
 			$search_files[] = 'taxonomy-' . $term->taxonomy . '-' . $term->slug . '.php';
 			$search_files[] = WC()->template_path() . 'taxonomy-' . $term->taxonomy . '-' . $term->slug . '.php';
 			$search_files[] = 'taxonomy-' . $term->taxonomy . '.php';
@@ -118,7 +118,7 @@ class WC_Template_Loader {
 	/**
 	 * Load comments template.
 	 *
-	 * @param mixed $template
+	 * @param  mixed  $template
 	 * @return string
 	 */
 	public static function comments_template_loader( $template ) {
@@ -144,6 +144,7 @@ class WC_Template_Loader {
 			}
 		}
 	}
+
 }
 
 WC_Template_Loader::init();

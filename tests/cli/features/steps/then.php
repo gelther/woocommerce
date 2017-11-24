@@ -1,7 +1,7 @@
 <?php
 
 use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
+	Behat\Gherkin\Node\TableNode;
 
 $steps->Then( '/^the return code should be (\d+)$/',
 	function ( $world, $return_code ) {
@@ -66,8 +66,9 @@ $steps->Then( '/^STDOUT should end with a table containing rows:$/',
 
 		$start = array_search( $expected_rows[0], $actual_rows );
 
-		if ( false === $start )
+		if ( false === $start ) {
 			throw new \Exception( $world->result );
+		}
 
 		compareTables( $expected_rows, array_slice( $actual_rows, $start ), $output );
 	}
@@ -78,10 +79,10 @@ $steps->Then( '/^STDOUT should be JSON containing:$/',
 		$output = $world->result->stdout;
 		$expected = $world->replace_variables( (string) $expected );
 
-		if ( !checkThatJsonStringContainsJsonString( $output, $expected ) ) {
+		if ( ! checkThatJsonStringContainsJsonString( $output, $expected ) ) {
 			throw new \Exception( $world->result );
 		}
-});
+} );
 
 $steps->Then( '/^STDOUT should be a JSON array containing:$/',
 	function ( $world, PyStringNode $expected ) {
@@ -92,10 +93,10 @@ $steps->Then( '/^STDOUT should be a JSON array containing:$/',
 		$expectedValues = json_decode( $expected );
 
 		$missing = array_diff( $expectedValues, $actualValues );
-		if ( !empty( $missing ) ) {
+		if ( ! empty( $missing ) ) {
 			throw new \Exception( $world->result );
 		}
-});
+} );
 
 $steps->Then( '/^STDOUT should be CSV containing:$/',
 	function ( $world, TableNode $expected ) {
@@ -108,8 +109,9 @@ $steps->Then( '/^STDOUT should be CSV containing:$/',
 			}
 		}
 
-		if ( ! checkThatCsvStringContainsValues( $output, $expected_rows ) )
+		if ( ! checkThatCsvStringContainsValues( $output, $expected_rows ) ) {
 			throw new \Exception( $world->result );
+		}
 	}
 );
 
@@ -118,17 +120,17 @@ $steps->Then( '/^STDOUT should be YAML containing:$/',
 		$output = $world->result->stdout;
 		$expected = $world->replace_variables( (string) $expected );
 
-		if ( !checkThatYamlStringContainsYamlString( $output, $expected ) ) {
+		if ( ! checkThatYamlStringContainsYamlString( $output, $expected ) ) {
 			throw new \Exception( $world->result );
 		}
-});
+} );
 
 $steps->Then( '/^(STDOUT|STDERR) should be empty$/',
 	function ( $world, $stream ) {
 
 		$stream = strtolower( $stream );
 
-		if ( !empty( $world->result->$stream ) ) {
+		if ( ! empty( $world->result->$stream ) ) {
 			throw new \Exception( $world->result );
 		}
 	}
@@ -150,12 +152,13 @@ $steps->Then( '/^the (.+) (file|directory) should (exist|not exist|be:|contain:|
 		$path = $world->replace_variables( $path );
 
 		// If it's a relative path, make it relative to the current test dir
-		if ( '/' !== $path[0] )
+		if ( '/' !== $path[0] ) {
 			$path = $world->variables['RUN_DIR'] . "/$path";
+		}
 
 		if ( 'file' == $type ) {
 			$test = 'file_exists';
-		} else if ( 'directory' == $type ) {
+		} elseif ( 'directory' == $type ) {
 			$test = 'is_dir';
 		}
 
@@ -178,9 +181,9 @@ $steps->Then( '/^the (.+) (file|directory) should (exist|not exist|be:|contain:|
 			$expected = $world->replace_variables( (string) $expected );
 			if ( 'file' == $type ) {
 				$contents = file_get_contents( $path );
-			} else if ( 'directory' == $type ) {
+			} elseif ( 'directory' == $type ) {
 				$files = glob( rtrim( $path, '/' ) . '/*' );
-				foreach( $files as &$file ) {
+				foreach ( $files as &$file ) {
 					$file = str_replace( $path . '/', '', $file );
 				}
 				$contents = implode( PHP_EOL, $files );
@@ -189,4 +192,3 @@ $steps->Then( '/^the (.+) (file|directory) should (exist|not exist|be:|contain:|
 		}
 	}
 );
-

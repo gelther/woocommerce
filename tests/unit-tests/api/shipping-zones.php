@@ -21,10 +21,10 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 	public function setUp() {
 		parent::setUp();
 		$this->endpoint = new WC_REST_Shipping_Zones_Controller();
-		$this->user = $this->factory->user->create( array(
+		$this->user     = $this->factory->user->create( array(
 			'role' => 'administrator',
 		) );
-		$this->zones = array();
+		$this->zones    = array();
 	}
 
 	/**
@@ -40,8 +40,8 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 	/**
 	 * Helper method to create a Shipping Zone.
 	 *
-	 * @param string $name Zone name.
-	 * @param int    $order Optional. Zone sort order.
+	 * @param  string           $name  Zone name.
+	 * @param  int              $order Optional. Zone sort order.
 	 * @return WC_Shipping_Zone
 	 */
 	protected function create_shipping_zone( $name, $order = 0, $locations = array() ) {
@@ -78,7 +78,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 
 		// "Rest of the World" zone exists by default
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/shipping/zones' ) );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 200, $response->get_status() );
 		$this->assertEquals( count( $data ), 1 );
@@ -87,12 +87,12 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			'name'   => 'Locations not covered by your other zones',
 			'order'  => 0,
 			'_links' => array(
-				'self'       => array(
+				'self'        => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones/0' ),
 					),
 				),
-				'collection' => array(
+				'collection'  => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones' ),
 					),
@@ -109,7 +109,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 		$this->create_shipping_zone( 'Zone 1' );
 
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/shipping/zones' ) );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 200, $response->get_status() );
 		$this->assertEquals( count( $data ), 2 );
@@ -118,12 +118,12 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			'name'   => 'Zone 1',
 			'order'  => 0,
 			'_links' => array(
-				'self'       => array(
+				'self'        => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones/1' ),
 					),
 				),
-				'collection' => array(
+				'collection'  => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones' ),
 					),
@@ -168,9 +168,9 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 	 * @since 3.0.0
 	 */
 	public function test_get_shipping_zone_schema() {
-		$request = new WP_REST_Request( 'OPTIONS', '/wc/v2/shipping/zones' );
-		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$request    = new WP_REST_Request( 'OPTIONS', '/wc/v2/shipping/zones' );
+		$response   = $this->server->dispatch( $request );
+		$data       = $response->get_data();
 		$properties = $data['schema']['properties'];
 		$this->assertEquals( 3, count( $properties ) );
 		$this->assertArrayHasKey( 'id', $properties );
@@ -192,7 +192,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			'order' => 1,
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 201, $response->get_status() );
 		$this->assertEquals( array(
@@ -200,12 +200,12 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			'name'   => 'Test Zone',
 			'order'  => 1,
 			'_links' => array(
-				'self'       => array(
+				'self'        => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones/' . $data['id'] ),
 					),
 				),
-				'collection' => array(
+				'collection'  => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones' ),
 					),
@@ -250,7 +250,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			'order' => 2,
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 200, $response->get_status() );
 		$this->assertEquals( array(
@@ -258,12 +258,12 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			'name'   => 'Zone Test',
 			'order'  => 2,
 			'_links' => array(
-				'self'       => array(
+				'self'        => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() ),
 					),
 				),
-				'collection' => array(
+				'collection'  => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones' ),
 					),
@@ -302,7 +302,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 		wp_set_current_user( $this->user );
 		$zone = $this->create_shipping_zone( 'Zone 1' );
 
-		$request  = new WP_REST_Request( 'DELETE', '/wc/v2/shipping/zones/' . $zone->get_id() );
+		$request = new WP_REST_Request( 'DELETE', '/wc/v2/shipping/zones/' . $zone->get_id() );
 		$request->set_param( 'force', true );
 		$response = $this->server->dispatch( $request );
 		$data     = $response->get_data();
@@ -352,12 +352,12 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			'name'   => 'Test Zone',
 			'order'  => 0,
 			'_links' => array(
-				'self'       => array(
+				'self'        => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() ),
 					),
 				),
-				'collection' => array(
+				'collection'  => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones' ),
 					),
@@ -399,7 +399,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 		) );
 
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/shipping/zones/' . $zone->get_id() . '/locations' ) );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 200, $response->get_status() );
 		$this->assertEquals( count( $data ), 1 );
@@ -413,7 +413,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 							'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() . '/locations' ),
 						),
 					),
-					'describes' => array(
+					'describes'  => array(
 						array(
 							'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() ),
 						),
@@ -463,7 +463,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			),
 		) ) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 3, count( $data ) );
 		$this->assertEquals( array(
@@ -476,7 +476,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 							'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() . '/locations' ),
 						),
 					),
-					'describes' => array(
+					'describes'  => array(
 						array(
 							'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() ),
 						),
@@ -484,7 +484,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 				),
 			),
 			array(
-				'code' => 'US',
+				'code'   => 'US',
 				'type'   => 'country',
 				'_links' => array(
 					'collection' => array(
@@ -492,7 +492,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 							'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() . '/locations' ),
 						),
 					),
-					'describes' => array(
+					'describes'  => array(
 						array(
 							'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() ),
 						),
@@ -508,7 +508,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 							'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() . '/locations' ),
 						),
 					),
-					'describes' => array(
+					'describes'  => array(
 						array(
 							'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() ),
 						),
@@ -585,7 +585,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 						'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() . '/methods' ),
 					),
 				),
-				'describes' => array(
+				'describes'  => array(
 					array(
 						'href' => rest_url( '/wc/v2/shipping/zones/' . $zone->get_id() ),
 					),
@@ -646,9 +646,9 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 		$method      = $methods[ $instance_id ];
 
 		// Test defaults
-		$request = new WP_REST_Request( 'GET', '/wc/v2/shipping/zones/' . $zone->get_id() . '/methods/' . $instance_id );
+		$request  = new WP_REST_Request( 'GET', '/wc/v2/shipping/zones/' . $zone->get_id() . '/methods/' . $instance_id );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertArrayHasKey( 'title', $data['settings'] );
 		$this->assertEquals( 'Flat rate', $data['settings']['title']['value'] );
@@ -665,7 +665,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			),
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertArrayHasKey( 'title', $data['settings'] );
 		$this->assertEquals( 'Flat rate', $data['settings']['title']['value'] );
@@ -683,7 +683,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			),
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertArrayHasKey( 'title', $data['settings'] );
 		$this->assertEquals( 'Flat rate', $data['settings']['title']['value'] );
@@ -713,7 +713,7 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 			'order'   => 2,
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertFalse( $data['enabled'] );
 		$this->assertEquals( 2, $data['order'] );
@@ -731,8 +731,8 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 		$request = new WP_REST_Request( 'POST', '/wc/v2/shipping/zones/' . $zone->get_id() . '/methods' );
 		$request->set_body_params( array(
 			'method_id' => 'flat_rate',
-			'enabled' => false,
-			'order' => 2,
+			'enabled'   => false,
+			'order'     => 2,
 		) );
 		$response = $this->server->dispatch( $request );
 		$data     = $response->get_data();
@@ -755,7 +755,8 @@ class WC_Tests_API_Shipping_Zones extends WC_REST_Unit_Test_Case {
 		$method      = $methods[ $instance_id ];
 		$request     = new WP_REST_Request( 'DELETE', '/wc/v2/shipping/zones/' . $zone->get_id() . '/methods/' . $instance_id );
 		$request->set_param( 'force', true );
-		$response    = $this->server->dispatch( $request );
+		$response = $this->server->dispatch( $request );
 		$this->assertEquals( 200, $response->get_status() );
 	}
+
 }

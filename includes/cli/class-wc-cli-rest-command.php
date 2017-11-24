@@ -67,7 +67,7 @@ class WC_CLI_REST_Command {
 	 * @param array  $schema Schema object
 	 */
 	public function __construct( $name, $route, $schema ) {
-		$this->name   = $name;
+		$this->name = $name;
 
 		preg_match_all( '#\([^\)]+\)#', $route, $matches );
 		$first_match  = $matches[0];
@@ -241,9 +241,9 @@ class WC_CLI_REST_Command {
 	/**
 	 * Do a REST Request
 	 *
-	 * @param string $method
-	 * @param string $route
-	 * @param array  $assoc_args
+	 * @param  string $method
+	 * @param  string $route
+	 * @param  array  $assoc_args
 	 *
 	 * @return array
 	 */
@@ -275,9 +275,9 @@ class WC_CLI_REST_Command {
 					return 0;
 				}
 				return ( $a[1] > $b[1] ) ? -1 : 1;
-			});
+			} );
 
-			$query_count = count( $performed_queries );
+			$query_count      = count( $performed_queries );
 			$query_total_time = 0;
 			foreach ( $performed_queries as $query ) {
 				$query_total_time += $query[1];
@@ -287,9 +287,9 @@ class WC_CLI_REST_Command {
 				$slow_query_message .= '. Ordered by slowness, the queries are:' . PHP_EOL;
 				foreach ( $performed_queries as $i => $query ) {
 					$i++;
-					$bits = explode( ', ', $query[2] );
-					$backtrace = implode( ', ', array_slice( $bits, 13 ) );
-					$seconds = round( $query[1], 6 );
+					$bits                = explode( ', ', $query[2] );
+					$backtrace           = implode( ', ', array_slice( $bits, 13 ) );
+					$seconds             = round( $query[1], 6 );
 					$slow_query_message .= <<<EOT
 {$i}:
 - {$seconds} seconds
@@ -321,7 +321,7 @@ EOT;
 	/**
 	 * Get Formatter object based on supplied parameters.
 	 *
-	 * @param array $assoc_args Parameters passed to command. Determines formatting.
+	 * @param  array             $assoc_args Parameters passed to command. Determines formatting.
 	 * @return \WP_CLI\Formatter
 	 */
 	protected function get_formatter( &$assoc_args ) {
@@ -344,7 +344,7 @@ EOT;
 	/**
 	 * Get a list of fields present in a given context
 	 *
-	 * @param string $context
+	 * @param  string $context
 	 * @return array
 	 */
 	private function get_context_fields( $context ) {
@@ -360,7 +360,7 @@ EOT;
 	/**
 	 * Get the route for this resource
 	 *
-	 * @param  array $args
+	 * @param  array  $args
 	 * @return string
 	 */
 	private function get_filled_route( $args = array() ) {
@@ -403,7 +403,7 @@ EOT;
 	/**
 	 * Output a line that's appropriately nested
 	 *
-	 * @param string $line
+	 * @param string      $line
 	 * @param bool|string $change
 	 */
 	private function nested_line( $line, $change = false ) {
@@ -417,7 +417,7 @@ EOT;
 
 		$spaces = ( $this->output_nesting_level * 2 ) + 2;
 		if ( $label ) {
-			$line = $label . $line;
+			$line   = $label . $line;
 			$spaces = $spaces - 2;
 		}
 		WP_CLI::line( str_pad( ' ', $spaces ) . $line );
@@ -426,7 +426,7 @@ EOT;
 	/**
 	 * Whether or not this is an associative array
 	 *
-	 * @param array
+	 * @param  array
 	 * @return bool
 	 */
 	private function is_assoc_array( $array ) {
@@ -462,7 +462,7 @@ EOT;
 	 * JSON can be passed in some more complicated objects, like the payment gateway settings array.
 	 * This function decodes the json (if present) and tries to get it's value.
 	 *
-	 * @param array $arr
+	 * @param  array $arr
 	 *
 	 * @return array
 	 */
@@ -476,5 +476,4 @@ EOT;
 		}
 		return $arr;
 	}
-
 }

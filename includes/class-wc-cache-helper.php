@@ -133,7 +133,7 @@ class WC_Cache_Helper {
 	 *
 	 * @param  string  $group   Name for the group of transients we need to invalidate.
 	 * @param  boolean $refresh true to force a new version.
-	 * @return string transient version based on time(), 10 digits.
+	 * @return string           transient version based on time(), 10 digits.
 	 */
 	public static function get_transient_version( $group, $refresh = false ) {
 		$transient_name  = $group . '-transient-version';
@@ -201,6 +201,7 @@ class WC_Cache_Helper {
 			<?php
 		}
 	}
+
 }
 
 WC_Cache_Helper::init();

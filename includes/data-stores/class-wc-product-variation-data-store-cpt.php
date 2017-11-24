@@ -15,8 +15,8 @@ class WC_Product_Variation_Data_Store_CPT extends WC_Product_Data_Store_CPT impl
 	/**
 	 * Callback to remove unwanted meta data.
 	 *
-	 * @param object $meta
-	 * @return bool false if excluded.
+	 * @param  object $meta
+	 * @return bool         false if excluded.
 	 */
 	protected function exclude_internal_meta_keys( $meta ) {
 		return ! in_array( $meta->meta_key, $this->internal_meta_keys ) && 0 !== stripos( $meta->meta_key, 'attribute_' ) && 0 !== stripos( $meta->meta_key, 'wp_' );
@@ -220,7 +220,7 @@ class WC_Product_Variation_Data_Store_CPT extends WC_Product_Data_Store_CPT impl
 	 * Products will get a title of the form "Name - Value, Value" or just "Name".
 	 *
 	 * @since 3.0.0
-	 * @param WC_Product
+	 * @param  WC_Product
 	 * @return string
 	 */
 	protected function generate_product_title( $product ) {
@@ -343,7 +343,7 @@ class WC_Product_Variation_Data_Store_CPT extends WC_Product_Data_Store_CPT impl
 	 *
 	 * @since 3.0.0
 	 * @param WC_Product
-	 * @param bool Force update. Used during create.
+	 * @param bool       Force update. Used during create.
 	 */
 	protected function update_terms( &$product, $force = false ) {
 		$changes = $product->get_changes();
@@ -359,7 +359,7 @@ class WC_Product_Variation_Data_Store_CPT extends WC_Product_Data_Store_CPT impl
 	 * @since 3.0.0
 	 *
 	 * @param WC_Product $product
-	 * @param bool $force Force update. Used during create.
+	 * @param bool       $force   Force update. Used during create.
 	 */
 	protected function update_visibility( &$product, $force = false ) {
 		$changes = $product->get_changes();
@@ -380,7 +380,7 @@ class WC_Product_Variation_Data_Store_CPT extends WC_Product_Data_Store_CPT impl
 	 *
 	 * @since 3.0.0
 	 * @param WC_Product
-	 * @param bool Force update. Used during create.
+	 * @param bool       Force update. Used during create.
 	 */
 	protected function update_attributes( &$product, $force = false ) {
 		$changes = $product->get_changes();
@@ -408,7 +408,7 @@ class WC_Product_Variation_Data_Store_CPT extends WC_Product_Data_Store_CPT impl
 	 *
 	 * @since 3.0.0
 	 * @param WC_Product
-	 * @param bool Force update. Used during create.
+	 * @param bool       Force update. Used during create.
 	 */
 	public function update_post_meta( &$product, $force = false ) {
 		$meta_key_to_props = array(
@@ -427,4 +427,5 @@ class WC_Product_Variation_Data_Store_CPT extends WC_Product_Data_Store_CPT impl
 
 		parent::update_post_meta( $product, $force );
 	}
+
 }

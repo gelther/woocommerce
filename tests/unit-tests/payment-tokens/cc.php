@@ -85,18 +85,18 @@ class WC_Tests_Payment_Token_CC extends WC_Unit_Test_Case {
 		$this->assertEquals( '1111', $token->get_last4() );
 	}
 
-	/*
+	/**
 	 * Test reading/getting a token from DB correctly sets meta.
 	 * @since 2.6.0
 	 */
 	public function test_wc_payment_token_cc_read_pulls_meta() {
-		$token = WC_Helper_Payment_Token::create_cc_token();
-		$token_id = $token->get_id();
+		$token      = WC_Helper_Payment_Token::create_cc_token();
+		$token_id   = $token->get_id();
 		$token_read = new WC_Payment_Token_CC( $token_id );
 		$this->assertEquals( '1234', $token_read->get_last4() );
 	}
 
-	/*
+	/**
 	 * Test saving a new value in a token after it has been created.
 	 * @since 3.0.0
 	 */
@@ -111,4 +111,5 @@ class WC_Tests_Payment_Token_CC extends WC_Unit_Test_Case {
 		$this->assertEquals( '4321', $token->get_last4() );
 		$this->assertEquals( 3, $token->get_user_id() );
 	}
+
 }

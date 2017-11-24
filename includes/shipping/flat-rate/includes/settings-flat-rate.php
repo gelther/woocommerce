@@ -10,30 +10,30 @@ $cost_desc = __( 'Enter a cost (excl. tax) or sum, e.g. <code>10.00 * [qty]</cod
  * Settings for flat rate shipping.
  */
 $settings = array(
-	'title' => array(
-		'title' 		=> __( 'Method title', 'woocommerce' ),
-		'type' 			=> 'text',
-		'description' 	=> __( 'This controls the title which the user sees during checkout.', 'woocommerce' ),
-		'default'		=> __( 'Flat rate', 'woocommerce' ),
-		'desc_tip'		=> true,
+	'title'      => array(
+		'title'       => __( 'Method title', 'woocommerce' ),
+		'type'        => 'text',
+		'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce' ),
+		'default'     => __( 'Flat rate', 'woocommerce' ),
+		'desc_tip'    => true,
 	),
 	'tax_status' => array(
-		'title' 		=> __( 'Tax status', 'woocommerce' ),
-		'type' 			=> 'select',
-		'class'         => 'wc-enhanced-select',
-		'default' 		=> 'taxable',
-		'options'		=> array(
-			'taxable' 	=> __( 'Taxable', 'woocommerce' ),
-			'none' 		=> _x( 'None', 'Tax status', 'woocommerce' ),
+		'title'   => __( 'Tax status', 'woocommerce' ),
+		'type'    => 'select',
+		'class'   => 'wc-enhanced-select',
+		'default' => 'taxable',
+		'options' => array(
+			'taxable' => __( 'Taxable', 'woocommerce' ),
+			'none'    => _x( 'None', 'Tax status', 'woocommerce' ),
 		),
 	),
-	'cost' => array(
-		'title' 		=> __( 'Cost', 'woocommerce' ),
-		'type' 			=> 'text',
-		'placeholder'	=> '',
-		'description'	=> $cost_desc,
-		'default'		=> '0',
-		'desc_tip'		=> true,
+	'cost'       => array(
+		'title'       => __( 'Cost', 'woocommerce' ),
+		'type'        => 'text',
+		'placeholder' => '',
+		'description' => $cost_desc,
+		'default'     => '0',
+		'desc_tip'    => true,
 	),
 );
 
@@ -41,10 +41,10 @@ $shipping_classes = WC()->shipping->get_shipping_classes();
 
 if ( ! empty( $shipping_classes ) ) {
 	$settings['class_costs'] = array(
-		'title'			 => __( 'Shipping class costs', 'woocommerce' ),
-		'type'			 => 'title',
-		'default'        => '',
-		'description'    => sprintf( __( 'These costs can optionally be added based on the <a href="%s">product shipping class</a>.', 'woocommerce' ), admin_url( 'admin.php?page=wc-settings&tab=shipping&section=classes' ) ),
+		'title'       => __( 'Shipping class costs', 'woocommerce' ),
+		'type'        => 'title',
+		'default'     => '',
+		'description' => sprintf( __( 'These costs can optionally be added based on the <a href="%s">product shipping class</a>.', 'woocommerce' ), admin_url( 'admin.php?page=wc-settings&tab=shipping&section=classes' ) ),
 	);
 	foreach ( $shipping_classes as $shipping_class ) {
 		if ( ! isset( $shipping_class->term_id ) ) {
@@ -68,14 +68,14 @@ if ( ! empty( $shipping_classes ) ) {
 		'default'     => '',
 		'desc_tip'    => true,
 	);
-	$settings['type'] = array(
-		'title' 		=> __( 'Calculation type', 'woocommerce' ),
-		'type' 			=> 'select',
-		'class'         => 'wc-enhanced-select',
-		'default' 		=> 'class',
-		'options' 		=> array(
-			'class' 	=> __( 'Per class: Charge shipping for each shipping class individually', 'woocommerce' ),
-			'order' 	=> __( 'Per order: Charge shipping for the most expensive shipping class', 'woocommerce' ),
+	$settings['type']          = array(
+		'title'   => __( 'Calculation type', 'woocommerce' ),
+		'type'    => 'select',
+		'class'   => 'wc-enhanced-select',
+		'default' => 'class',
+		'options' => array(
+			'class' => __( 'Per class: Charge shipping for each shipping class individually', 'woocommerce' ),
+			'order' => __( 'Per order: Charge shipping for the most expensive shipping class', 'woocommerce' ),
 		),
 	);
 }

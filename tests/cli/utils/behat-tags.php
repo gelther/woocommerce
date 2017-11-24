@@ -4,18 +4,18 @@
  *
  * Require a minimum version of WordPress:
  *
- *   @require-wp-4.0
- *   Scenario: Core translation CRUD
+ * @require-wp-4.0
+ * Scenario: Core translation CRUD
  *
  * Then use in bash script:
  *
- *   BEHAT_TAGS=$(php behat-tags.php)
- *   vendor/bin/behat --format progress $BEHAT_TAGS
+ * BEHAT_TAGS=$(php behat-tags.php)
+ * vendor/bin/behat --format progress $BEHAT_TAGS
  */
-
 function version_tags( $prefix, $current, $operator = '<' ) {
-	if ( ! $current )
+	if ( ! $current ) {
 		return;
+	}
 
 	exec( "grep '@{$prefix}-[0-9\.]*' -h -o features/*.feature | uniq", $existing_tags );
 
@@ -37,10 +37,9 @@ $skip_tags = array_merge(
 	version_tags( 'less-than-php', PHP_VERSION, '>' )
 );
 
-# Skip Github API tests by default because of rate limiting. See https://github.com/wp-cli/wp-cli/issues/1612
+# Skip Github API tests by default because of rate limiting . See https://github.com/wp-cli/wp-cli/issues/1612
 $skip_tags[] = '@github-api';
 
-if ( !empty( $skip_tags ) ) {
+if ( ! empty( $skip_tags ) ) {
 	echo '--tags=~' . implode( '&&~', $skip_tags );
 }
-

@@ -17,17 +17,17 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 *
 	 * @since  3.0.0
 	 * @param  int   $order_id
-	 * @param  array $item order_item_name and order_item_type.
-	 * @return int Order Item ID
+	 * @param  array $item     order_item_name and order_item_type.
+	 * @return int             Order Item ID
 	 */
 	public function add_order_item( $order_id, $item ) {
 		global $wpdb;
 		$wpdb->insert(
-			$wpdb->prefix . "woocommerce_order_items",
+			$wpdb->prefix . 'woocommerce_order_items',
 			array(
-				'order_item_name'       => $item['order_item_name'],
-				'order_item_type'       => $item['order_item_type'],
-				'order_id'              => $order_id,
+				'order_item_name' => $item['order_item_name'],
+				'order_item_type' => $item['order_item_type'],
+				'order_id'        => $order_id,
 			),
 			array(
 				'%s',
@@ -43,8 +43,8 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 * Update an order item.
 	 *
 	 * @since  3.0.0
-	 * @param  int   $item_id
-	 * @param  array $item order_item_name or order_item_type.
+	 * @param  int     $item_id
+	 * @param  array   $item    order_item_name or order_item_type.
 	 * @return boolean
 	 */
 	public function update_order_item( $item_id, $item ) {
@@ -56,7 +56,7 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 * Delete an order item.
 	 *
 	 * @since  3.0.0
-	 * @param  int   $item_id
+	 * @param int $item_id
 	 */
 	public function delete_order_item( $item_id ) {
 		global $wpdb;
@@ -85,8 +85,8 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 * @param  int    $item_id
 	 * @param  string $meta_key
 	 * @param  mixed  $meta_value
-	 * @param  bool   $unique (default: false)
-	 * @return int    New row ID or 0
+	 * @param  bool   $unique     (default: false)
+	 * @return int                New row ID or 0
 	 */
 	public function add_metadata( $item_id, $meta_key, $meta_value, $unique = false ) {
 		return add_metadata( 'order_item', $item_id, $meta_key, is_string( $meta_value ) ? wp_slash( $meta_value ) : $meta_value, $unique );
@@ -112,7 +112,7 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 * @since  3.0.0
 	 * @param  int    $item_id
 	 * @param  string $key
-	 * @param  bool   $single (default: true)
+	 * @param  bool   $single  (default: true)
 	 * @return mixed
 	 */
 	public function get_metadata( $item_id, $key, $single = true ) {
@@ -138,7 +138,7 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 * Get the order item type based on Item ID.
 	 *
 	 * @since 3.0.0
-	 * @param int $item_id
+	 * @param  int    $item_id
 	 * @return string
 	 */
 	public function get_order_item_type( $item_id ) {
@@ -146,4 +146,5 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 		$item_data = $wpdb->get_row( $wpdb->prepare( "SELECT order_item_type FROM {$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d LIMIT 1;", $item_id ) );
 		return $item_data->order_item_type;
 	}
+
 }

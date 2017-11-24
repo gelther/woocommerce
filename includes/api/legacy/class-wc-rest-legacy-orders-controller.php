@@ -34,8 +34,8 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0
 	 *
-	 * @param array $args
-	 * @param WP_REST_Request $request
+	 * @param  array           $args
+	 * @param  WP_REST_Request $request
 	 * @return array
 	 */
 	public function query_args( $args, $request ) {
@@ -67,7 +67,7 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 				FROM {$wpdb->prefix}woocommerce_order_items
 				WHERE order_item_id IN ( SELECT order_item_id FROM {$wpdb->prefix}woocommerce_order_itemmeta WHERE meta_key = '_product_id' AND meta_value = %d )
 				AND order_item_type = 'line_item'
-			 ", $request['product'] ) );
+			", $request['product'] ) );
 
 			// Force WP_Query return empty if don't found any order.
 			$order_ids = ! empty( $order_ids ) ? $order_ids : array( 0 );
@@ -93,8 +93,8 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0
 	 *
-	 * @param WP_Post $post Post object.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  WP_Post          $post    Post object.
+	 * @param  WP_REST_Request  $request Request object.
 	 * @return WP_REST_Response $data
 	 */
 	public function prepare_item_for_response( $post, $request ) {
@@ -147,9 +147,9 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 		 * The dynamic portion of the hook name, $this->post_type, refers to post_type of the post being
 		 * prepared for the response.
 		 *
-		 * @param WP_REST_Response   $response   The response object.
-		 * @param WP_Post            $post       Post object.
-		 * @param WP_REST_Request    $request    Request object.
+		 * @param WP_REST_Response $response The response object.
+		 * @param WP_Post          $post     Post object.
+		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "woocommerce_rest_prepare_{$this->post_type}", $response, $post, $request );
 	}
@@ -159,8 +159,8 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0
 	 *
-	 * @param  WP_REST_Request $request Request object.
-	 * @return WP_Error|WC_Order $data Object.
+	 * @param  WP_REST_Request   $request Request object.
+	 * @return WP_Error|WC_Order $data    Object.
 	 */
 	protected function prepare_item_for_database( $request ) {
 		$id        = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -216,8 +216,8 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 		 * The dynamic portion of the hook name, $this->post_type, refers to post_type of the post being
 		 * prepared for the response.
 		 *
-		 * @param WC_Order           $order      The Order object.
-		 * @param WP_REST_Request    $request    Request object.
+		 * @param WC_Order        $order   The Order object.
+		 * @param WP_REST_Request $request Request object.
 		 */
 		return apply_filters( "woocommerce_rest_pre_insert_{$this->post_type}", $order, $request );
 	}
@@ -227,7 +227,7 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param array $data
+	 * @param  array    $data
 	 * @return WC_Order
 	 */
 	protected function create_base_order( $data ) {
@@ -239,14 +239,14 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return int|WP_Error
 	 */
 	protected function create_order( $request ) {
 		try {
 			// Make sure customer exists.
 			if ( ! is_null( $request['customer_id'] ) && 0 !== $request['customer_id'] && false === get_user_by( 'id', $request['customer_id'] ) ) {
-				throw new WC_REST_Exception( 'woocommerce_rest_invalid_customer_id',__( 'Customer ID is invalid.', 'woocommerce' ), 400 );
+				throw new WC_REST_Exception( 'woocommerce_rest_invalid_customer_id', __( 'Customer ID is invalid.', 'woocommerce' ), 400 );
 			}
 
 			$order = $this->prepare_item_for_database( $request );
@@ -273,7 +273,7 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return int|WP_Error
 	 */
 	protected function update_order( $request ) {
@@ -298,4 +298,5 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 			return new WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => $e->getCode() ) );
 		}
 	}
+
 }

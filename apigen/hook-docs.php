@@ -11,7 +11,6 @@ class WC_HookFinder {
 	private static $custom_hooks_found     = '';
 
 	private static function get_files( $pattern, $flags = 0, $path = '' ) {
-
 		if ( ! $path && ( $dir = dirname( $pattern ) ) != '.' ) {
 
 			if ( '\\' == $dir || '/' == $dir ) {
@@ -59,15 +58,15 @@ class WC_HookFinder {
 
 	public static function process_hooks() {
 		// If we have one, get the PHP files from it.
-		$template_files 	= self::get_files( '*.php', GLOB_MARK, '../templates/' );
-		$template_files[]	= '../includes/wc-template-functions.php';
-		$template_files[]	= '../includes/wc-template-hooks.php';
+		$template_files   = self::get_files( '*.php', GLOB_MARK, '../templates/' );
+		$template_files[] = '../includes/wc-template-functions.php';
+		$template_files[] = '../includes/wc-template-hooks.php';
 
-		$shortcode_files 	= self::get_files( '*.php', GLOB_MARK, '../includes/shortcodes/' );
-		$widget_files	 	= self::get_files( '*.php', GLOB_MARK, '../includes/widgets/' );
-		$admin_files 		= self::get_files( '*.php', GLOB_MARK, '../includes/admin/' );
-		$class_files 		= self::get_files( '*.php', GLOB_MARK, '../includes/' );
-		$other_files		= array(
+		$shortcode_files = self::get_files( '*.php', GLOB_MARK, '../includes/shortcodes/' );
+		$widget_files    = self::get_files( '*.php', GLOB_MARK, '../includes/widgets/' );
+		$admin_files     = self::get_files( '*.php', GLOB_MARK, '../includes/admin/' );
+		$class_files     = self::get_files( '*.php', GLOB_MARK, '../includes/' );
+		$other_files     = array(
 			'../woocommerce.php'
 		);
 
@@ -129,11 +128,11 @@ class WC_HookFinder {
 
 									if ( '_' === substr( $hook, '-1', 1 ) ) {
 										$hook .= '{';
-										$open = true;
+										$open  = true;
 										// Keep adding to hook until we find a comma or colon
 										while ( 1 ) {
 											$loop ++;
-											$next_hook  = trim( trim( is_string( $tokens[ $index + $loop ] ) ? $tokens[ $index + $loop ] : $tokens[ $index + $loop ][1], '"' ), "'" );
+											$next_hook = trim( trim( is_string( $tokens[ $index + $loop ] ) ? $tokens[ $index + $loop ] : $tokens[ $index + $loop ][1], '"' ), "'" );
 
 											if ( in_array( $next_hook, array( '.', '{', '}', '"', "'", ' ' ) ) ) {
 												continue;
@@ -145,19 +144,19 @@ class WC_HookFinder {
 											if ( in_array( $next_hook, array( ',', ';' ) ) ) {
 												if ( $open ) {
 													$hook .= '}';
-													$open = false;
+													$open  = false;
 												}
 												break;
 											}
 
 											if ( '_' === $hook_first ) {
 												$next_hook = '}' . $next_hook;
-												$open = false;
+												$open      = false;
 											}
 
 											if ( '_' === $hook_last ) {
 												$next_hook .= '{';
-												$open = true;
+												$open       = true;
 											}
 
 											$hook .= $next_hook;
@@ -220,6 +219,7 @@ class WC_HookFinder {
 		file_put_contents( '../wc-apidocs/hook-docs.html', $header . ob_get_clean() . end( $footer ) );
 		echo "Hook docs generated :)\n";
 	}
+
 }
 
 WC_HookFinder::process_hooks();

@@ -39,7 +39,7 @@ class WC_Meta_Box_Coupon_Data {
 			<ul class="coupon_data_tabs wc-tabs" style="display:none;">
 				<?php
 					$coupon_data_tabs = apply_filters( 'woocommerce_coupon_data_tabs', array(
-						'general' => array(
+						'general'           => array(
 							'label'  => __( 'General', 'woocommerce' ),
 							'target' => 'general_coupon_data',
 							'class'  => 'general_coupon_data',
@@ -49,7 +49,7 @@ class WC_Meta_Box_Coupon_Data {
 							'target' => 'usage_restriction_coupon_data',
 							'class'  => '',
 						),
-						'usage_limit' => array(
+						'usage_limit'       => array(
 							'label'  => __( 'Usage limits', 'woocommerce' ),
 							'target' => 'usage_limit_coupon_data',
 							'class'  => '',
@@ -57,7 +57,7 @@ class WC_Meta_Box_Coupon_Data {
 					) );
 
 					foreach ( $coupon_data_tabs as $key => $tab ) {
-						?><li class="<?php echo $key; ?>_options <?php echo $key; ?>_tab <?php echo implode( ' ' , (array) $tab['class'] ); ?>">
+						?><li class="<?php echo $key; ?>_options <?php echo $key; ?>_tab <?php echo implode( ' ', (array) $tab['class'] ); ?>">
 							<a href="#<?php echo $tab['target']; ?>"><span><?php echo esc_html( $tab['label'] ); ?></span></a>
 						</li><?php
 					}
@@ -231,7 +231,7 @@ class WC_Meta_Box_Coupon_Data {
 					'type'              => 'email',
 					'class'             => '',
 					'custom_attributes' => array(
-						'multiple' 	=> 'multiple',
+						'multiple' => 'multiple',
 					),
 				) );
 
@@ -254,10 +254,10 @@ class WC_Meta_Box_Coupon_Data {
 					'desc_tip'          => true,
 					'class'             => 'short',
 					'custom_attributes' => array(
-						'step' 	=> 1,
-						'min'	=> 0,
+						'step' => 1,
+						'min'  => 0,
 					),
-					'value' => $coupon->get_usage_limit() ? $coupon->get_usage_limit() : '',
+					'value'             => $coupon->get_usage_limit() ? $coupon->get_usage_limit() : '',
 				) );
 
 				// Usage limit per product
@@ -270,10 +270,10 @@ class WC_Meta_Box_Coupon_Data {
 					'class'             => 'short',
 					'type'              => 'number',
 					'custom_attributes' => array(
-						'step' 	=> 1,
-						'min'	=> 0,
+						'step' => 1,
+						'min'  => 0,
 					),
-					'value' => $coupon->get_limit_usage_to_x_items() ? $coupon->get_limit_usage_to_x_items() : '',
+					'value'             => $coupon->get_limit_usage_to_x_items() ? $coupon->get_limit_usage_to_x_items() : '',
 				) );
 
 				// Usage limit per users
@@ -286,10 +286,10 @@ class WC_Meta_Box_Coupon_Data {
 					'class'             => 'short',
 					'type'              => 'number',
 					'custom_attributes' => array(
-						'step' 	=> 1,
-						'min'	=> 0,
+						'step' => 1,
+						'min'  => 0,
 					),
-					'value' => $coupon->get_usage_limit_per_user() ? $coupon->get_usage_limit_per_user() : '',
+					'value'             => $coupon->get_usage_limit_per_user() ? $coupon->get_usage_limit_per_user() : '',
 				) );
 
 				echo '</div>';
@@ -306,7 +306,7 @@ class WC_Meta_Box_Coupon_Data {
 	/**
 	 * Save meta box data.
 	 *
-	 * @param int $post_id
+	 * @param int     $post_id
 	 * @param WP_Post $post
 	 */
 	public static function save( $post_id, $post ) {
@@ -344,4 +344,5 @@ class WC_Meta_Box_Coupon_Data {
 		$coupon->save();
 		do_action( 'woocommerce_coupon_options_save', $post_id, $coupon );
 	}
+
 }

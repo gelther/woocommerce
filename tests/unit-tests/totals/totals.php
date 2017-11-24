@@ -34,7 +34,7 @@ class WC_Tests_Totals extends WC_Unit_Test_Case {
 			define( 'WOOCOMMERCE_CHECKOUT', 1 );
 		}
 
-		$tax_rate = array(
+		$tax_rate    = array(
 			'tax_rate_country'  => '',
 			'tax_rate_state'    => '',
 			'tax_rate'          => '20.0000',
@@ -51,10 +51,10 @@ class WC_Tests_Totals extends WC_Unit_Test_Case {
 		update_option( 'woocommerce_default_customer_address', 'base' );
 		update_option( 'woocommerce_tax_based_on', 'base' );
 
-		$product  = WC_Helper_Product::create_simple_product();
-		$product2 = WC_Helper_Product::create_simple_product();
+		$product    = WC_Helper_Product::create_simple_product();
+		$product2   = WC_Helper_Product::create_simple_product();
 		// Variations with parent tax class.
-		$product3 = WC_Helper_Product::create_variation_product();
+		$product3   = WC_Helper_Product::create_variation_product();
 		$variations = $product3->get_available_variations();
 
 		// Update product3 so that each variation has the parent tax class.
@@ -177,4 +177,5 @@ class WC_Tests_Totals extends WC_Unit_Test_Case {
 		$this->assertEquals( 10, $cart->shipping_total );
 		$this->assertEquals( 2, $cart->shipping_tax_total );
 	}
+
 }

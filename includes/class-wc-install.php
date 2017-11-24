@@ -371,17 +371,17 @@ class WC_Install {
 		include_once( dirname( __FILE__ ) . '/admin/wc-admin-functions.php' );
 
 		$pages = apply_filters( 'woocommerce_create_pages', array(
-			'shop' => array(
+			'shop'      => array(
 				'name'    => _x( 'shop', 'Page slug', 'woocommerce' ),
 				'title'   => _x( 'Shop', 'Page title', 'woocommerce' ),
 				'content' => '',
 			),
-			'cart' => array(
+			'cart'      => array(
 				'name'    => _x( 'cart', 'Page slug', 'woocommerce' ),
 				'title'   => _x( 'Cart', 'Page title', 'woocommerce' ),
 				'content' => '[' . apply_filters( 'woocommerce_cart_shortcode_tag', 'woocommerce_cart' ) . ']',
 			),
-			'checkout' => array(
+			'checkout'  => array(
 				'name'    => _x( 'checkout', 'Page slug', 'woocommerce' ),
 				'title'   => _x( 'Checkout', 'Page title', 'woocommerce' ),
 				'content' => '[' . apply_filters( 'woocommerce_checkout_shortcode_tag', 'woocommerce_checkout' ) . ']',
@@ -433,7 +433,7 @@ class WC_Install {
 	 */
 	public static function create_terms() {
 		$taxonomies = array(
-			'product_type' => array(
+			'product_type'       => array(
 				'simple',
 				'grouped',
 				'variable',
@@ -527,158 +527,158 @@ class WC_Install {
 
 		$tables = "
 CREATE TABLE {$wpdb->prefix}woocommerce_sessions (
-  session_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  session_key char(32) NOT NULL,
-  session_value longtext NOT NULL,
-  session_expiry BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY  (session_key),
-  UNIQUE KEY session_id (session_id)
+	session_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	session_key char(32) NOT NULL,
+	session_value longtext NOT NULL,
+	session_expiry BIGINT UNSIGNED NOT NULL,
+	PRIMARY KEY  (session_key),
+	UNIQUE KEY session_id (session_id)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_api_keys (
-  key_id BIGINT UNSIGNED NOT NULL auto_increment,
-  user_id BIGINT UNSIGNED NOT NULL,
-  description varchar(200) NULL,
-  permissions varchar(10) NOT NULL,
-  consumer_key char(64) NOT NULL,
-  consumer_secret char(43) NOT NULL,
-  nonces longtext NULL,
-  truncated_key char(7) NOT NULL,
-  last_access datetime NULL default null,
-  PRIMARY KEY  (key_id),
-  KEY consumer_key (consumer_key),
-  KEY consumer_secret (consumer_secret)
+	key_id BIGINT UNSIGNED NOT NULL auto_increment,
+	user_id BIGINT UNSIGNED NOT NULL,
+	description varchar(200) NULL,
+	permissions varchar(10) NOT NULL,
+	consumer_key char(64) NOT NULL,
+	consumer_secret char(43) NOT NULL,
+	nonces longtext NULL,
+	truncated_key char(7) NOT NULL,
+	last_access datetime NULL default null,
+	PRIMARY KEY  (key_id),
+	KEY consumer_key (consumer_key),
+	KEY consumer_secret (consumer_secret)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_attribute_taxonomies (
-  attribute_id BIGINT UNSIGNED NOT NULL auto_increment,
-  attribute_name varchar(200) NOT NULL,
-  attribute_label varchar(200) NULL,
-  attribute_type varchar(20) NOT NULL,
-  attribute_orderby varchar(20) NOT NULL,
-  attribute_public int(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY  (attribute_id),
-  KEY attribute_name (attribute_name(20))
+	attribute_id BIGINT UNSIGNED NOT NULL auto_increment,
+	attribute_name varchar(200) NOT NULL,
+	attribute_label varchar(200) NULL,
+	attribute_type varchar(20) NOT NULL,
+	attribute_orderby varchar(20) NOT NULL,
+	attribute_public int(1) NOT NULL DEFAULT 1,
+	PRIMARY KEY  (attribute_id),
+	KEY attribute_name (attribute_name(20))
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_downloadable_product_permissions (
-  permission_id BIGINT UNSIGNED NOT NULL auto_increment,
-  download_id varchar(36) NOT NULL,
-  product_id BIGINT UNSIGNED NOT NULL,
-  order_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
-  order_key varchar(200) NOT NULL,
-  user_email varchar(200) NOT NULL,
-  user_id BIGINT UNSIGNED NULL,
-  downloads_remaining varchar(9) NULL,
-  access_granted datetime NOT NULL default '0000-00-00 00:00:00',
-  access_expires datetime NULL default null,
-  download_count BIGINT UNSIGNED NOT NULL DEFAULT 0,
-  PRIMARY KEY  (permission_id),
-  KEY download_order_key_product (product_id,order_id,order_key(16),download_id),
-  KEY download_order_product (download_id,order_id,product_id),
-  KEY order_id (order_id)
+	permission_id BIGINT UNSIGNED NOT NULL auto_increment,
+	download_id varchar(36) NOT NULL,
+	product_id BIGINT UNSIGNED NOT NULL,
+	order_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	order_key varchar(200) NOT NULL,
+	user_email varchar(200) NOT NULL,
+	user_id BIGINT UNSIGNED NULL,
+	downloads_remaining varchar(9) NULL,
+	access_granted datetime NOT NULL default '0000-00-00 00:00:00',
+	access_expires datetime NULL default null,
+	download_count BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	PRIMARY KEY  (permission_id),
+	KEY download_order_key_product (product_id,order_id,order_key(16),download_id),
+	KEY download_order_product (download_id,order_id,product_id),
+	KEY order_id (order_id)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_order_items (
-  order_item_id BIGINT UNSIGNED NOT NULL auto_increment,
-  order_item_name TEXT NOT NULL,
-  order_item_type varchar(200) NOT NULL DEFAULT '',
-  order_id BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY  (order_item_id),
-  KEY order_id (order_id)
+	order_item_id BIGINT UNSIGNED NOT NULL auto_increment,
+	order_item_name TEXT NOT NULL,
+	order_item_type varchar(200) NOT NULL DEFAULT '',
+	order_id BIGINT UNSIGNED NOT NULL,
+	PRIMARY KEY  (order_item_id),
+	KEY order_id (order_id)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_order_itemmeta (
-  meta_id BIGINT UNSIGNED NOT NULL auto_increment,
-  order_item_id BIGINT UNSIGNED NOT NULL,
-  meta_key varchar(255) default NULL,
-  meta_value longtext NULL,
-  PRIMARY KEY  (meta_id),
-  KEY order_item_id (order_item_id),
-  KEY meta_key (meta_key(32))
+	meta_id BIGINT UNSIGNED NOT NULL auto_increment,
+	order_item_id BIGINT UNSIGNED NOT NULL,
+	meta_key varchar(255) default NULL,
+	meta_value longtext NULL,
+	PRIMARY KEY  (meta_id),
+	KEY order_item_id (order_item_id),
+	KEY meta_key (meta_key(32))
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_tax_rates (
-  tax_rate_id BIGINT UNSIGNED NOT NULL auto_increment,
-  tax_rate_country varchar(2) NOT NULL DEFAULT '',
-  tax_rate_state varchar(200) NOT NULL DEFAULT '',
-  tax_rate varchar(8) NOT NULL DEFAULT '',
-  tax_rate_name varchar(200) NOT NULL DEFAULT '',
-  tax_rate_priority BIGINT UNSIGNED NOT NULL,
-  tax_rate_compound int(1) NOT NULL DEFAULT 0,
-  tax_rate_shipping int(1) NOT NULL DEFAULT 1,
-  tax_rate_order BIGINT UNSIGNED NOT NULL,
-  tax_rate_class varchar(200) NOT NULL DEFAULT '',
-  PRIMARY KEY  (tax_rate_id),
-  KEY tax_rate_country (tax_rate_country),
-  KEY tax_rate_state (tax_rate_state(2)),
-  KEY tax_rate_class (tax_rate_class(10)),
-  KEY tax_rate_priority (tax_rate_priority)
+	tax_rate_id BIGINT UNSIGNED NOT NULL auto_increment,
+	tax_rate_country varchar(2) NOT NULL DEFAULT '',
+	tax_rate_state varchar(200) NOT NULL DEFAULT '',
+	tax_rate varchar(8) NOT NULL DEFAULT '',
+	tax_rate_name varchar(200) NOT NULL DEFAULT '',
+	tax_rate_priority BIGINT UNSIGNED NOT NULL,
+	tax_rate_compound int(1) NOT NULL DEFAULT 0,
+	tax_rate_shipping int(1) NOT NULL DEFAULT 1,
+	tax_rate_order BIGINT UNSIGNED NOT NULL,
+	tax_rate_class varchar(200) NOT NULL DEFAULT '',
+	PRIMARY KEY  (tax_rate_id),
+	KEY tax_rate_country (tax_rate_country),
+	KEY tax_rate_state (tax_rate_state(2)),
+	KEY tax_rate_class (tax_rate_class(10)),
+	KEY tax_rate_priority (tax_rate_priority)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_tax_rate_locations (
-  location_id BIGINT UNSIGNED NOT NULL auto_increment,
-  location_code varchar(200) NOT NULL,
-  tax_rate_id BIGINT UNSIGNED NOT NULL,
-  location_type varchar(40) NOT NULL,
-  PRIMARY KEY  (location_id),
-  KEY tax_rate_id (tax_rate_id),
-  KEY location_type_code (location_type(10),location_code(20))
+	location_id BIGINT UNSIGNED NOT NULL auto_increment,
+	location_code varchar(200) NOT NULL,
+	tax_rate_id BIGINT UNSIGNED NOT NULL,
+	location_type varchar(40) NOT NULL,
+	PRIMARY KEY  (location_id),
+	KEY tax_rate_id (tax_rate_id),
+	KEY location_type_code (location_type(10),location_code(20))
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_shipping_zones (
-  zone_id BIGINT UNSIGNED NOT NULL auto_increment,
-  zone_name varchar(200) NOT NULL,
-  zone_order BIGINT UNSIGNED NOT NULL,
-  PRIMARY KEY  (zone_id)
+	zone_id BIGINT UNSIGNED NOT NULL auto_increment,
+	zone_name varchar(200) NOT NULL,
+	zone_order BIGINT UNSIGNED NOT NULL,
+	PRIMARY KEY  (zone_id)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_shipping_zone_locations (
-  location_id BIGINT UNSIGNED NOT NULL auto_increment,
-  zone_id BIGINT UNSIGNED NOT NULL,
-  location_code varchar(200) NOT NULL,
-  location_type varchar(40) NOT NULL,
-  PRIMARY KEY  (location_id),
-  KEY location_id (location_id),
-  KEY location_type_code (location_type(10),location_code(20))
+	location_id BIGINT UNSIGNED NOT NULL auto_increment,
+	zone_id BIGINT UNSIGNED NOT NULL,
+	location_code varchar(200) NOT NULL,
+	location_type varchar(40) NOT NULL,
+	PRIMARY KEY  (location_id),
+	KEY location_id (location_id),
+	KEY location_type_code (location_type(10),location_code(20))
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_shipping_zone_methods (
-  zone_id BIGINT UNSIGNED NOT NULL,
-  instance_id BIGINT UNSIGNED NOT NULL auto_increment,
-  method_id varchar(200) NOT NULL,
-  method_order BIGINT UNSIGNED NOT NULL,
-  is_enabled tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY  (instance_id)
+	zone_id BIGINT UNSIGNED NOT NULL,
+	instance_id BIGINT UNSIGNED NOT NULL auto_increment,
+	method_id varchar(200) NOT NULL,
+	method_order BIGINT UNSIGNED NOT NULL,
+	is_enabled tinyint(1) NOT NULL DEFAULT '1',
+	PRIMARY KEY  (instance_id)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_payment_tokens (
-  token_id BIGINT UNSIGNED NOT NULL auto_increment,
-  gateway_id varchar(200) NOT NULL,
-  token text NOT NULL,
-  user_id BIGINT UNSIGNED NOT NULL DEFAULT '0',
-  type varchar(200) NOT NULL,
-  is_default tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY  (token_id),
-  KEY user_id (user_id)
+	token_id BIGINT UNSIGNED NOT NULL auto_increment,
+	gateway_id varchar(200) NOT NULL,
+	token text NOT NULL,
+	user_id BIGINT UNSIGNED NOT NULL DEFAULT '0',
+	type varchar(200) NOT NULL,
+	is_default tinyint(1) NOT NULL DEFAULT '0',
+	PRIMARY KEY  (token_id),
+	KEY user_id (user_id)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_payment_tokenmeta (
-  meta_id BIGINT UNSIGNED NOT NULL auto_increment,
-  payment_token_id BIGINT UNSIGNED NOT NULL,
-  meta_key varchar(255) NULL,
-  meta_value longtext NULL,
-  PRIMARY KEY  (meta_id),
-  KEY payment_token_id (payment_token_id),
-  KEY meta_key (meta_key(32))
+	meta_id BIGINT UNSIGNED NOT NULL auto_increment,
+	payment_token_id BIGINT UNSIGNED NOT NULL,
+	meta_key varchar(255) NULL,
+	meta_value longtext NULL,
+	PRIMARY KEY  (meta_id),
+	KEY payment_token_id (payment_token_id),
+	KEY meta_key (meta_key(32))
 ) $collate;
 CREATE TABLE {$wpdb->prefix}woocommerce_log (
-  log_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  timestamp datetime NOT NULL,
-  level smallint(4) NOT NULL,
-  source varchar(200) NOT NULL,
-  message longtext NOT NULL,
-  context longtext NULL,
-  PRIMARY KEY (log_id),
-  KEY level (level)
+	log_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	timestamp datetime NOT NULL,
+	level smallint(4) NOT NULL,
+	source varchar(200) NOT NULL,
+	message longtext NOT NULL,
+	context longtext NULL,
+	PRIMARY KEY (log_id),
+	KEY level (level)
 ) $collate;
 CREATE TABLE {$wpdb->prefix}wc_download_log (
-  download_log_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  timestamp datetime NOT NULL,
-  permission_id BIGINT UNSIGNED NOT NULL,
-  user_id BIGINT UNSIGNED NULL,
-  user_ip_address VARCHAR(100) NULL DEFAULT '',
-  PRIMARY KEY (download_log_id),
-  KEY permission_id (permission_id),
-  KEY timestamp (timestamp)
+	download_log_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	timestamp datetime NOT NULL,
+	permission_id BIGINT UNSIGNED NOT NULL,
+	user_id BIGINT UNSIGNED NULL,
+	user_ip_address VARCHAR(100) NULL DEFAULT '',
+	PRIMARY KEY (download_log_id),
+	KEY permission_id (permission_id),
+	KEY timestamp (timestamp)
 ) $collate;
 		";
 
@@ -688,13 +688,13 @@ CREATE TABLE {$wpdb->prefix}wc_download_log (
 		if ( ! function_exists( 'get_term_meta' ) ) {
 			$tables .= "
 CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
-  meta_id BIGINT UNSIGNED NOT NULL auto_increment,
-  woocommerce_term_id BIGINT UNSIGNED NOT NULL,
-  meta_key varchar(255) default NULL,
-  meta_value longtext NULL,
-  PRIMARY KEY  (meta_id),
-  KEY woocommerce_term_id (woocommerce_term_id),
-  KEY meta_key (meta_key(32))
+	meta_id BIGINT UNSIGNED NOT NULL auto_increment,
+	woocommerce_term_id BIGINT UNSIGNED NOT NULL,
+	meta_key varchar(255) default NULL,
+	meta_value longtext NULL,
+	PRIMARY KEY  (meta_id),
+	KEY woocommerce_term_id (woocommerce_term_id),
+	KEY meta_key (meta_key(32))
 ) $collate;
 			";
 		}
@@ -718,7 +718,7 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 
 		// Customer role
 		add_role( 'customer', __( 'Customer', 'woocommerce' ), array(
-			'read' 					=> true,
+			'read' => true,
 		) );
 
 		// Shop manager role
@@ -779,7 +779,7 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 	 *
 	 * @return array
 	 */
-	 private static function get_core_capabilities() {
+	private static function get_core_capabilities() {
 		$capabilities = array();
 
 		$capabilities['core'] = array(
@@ -860,27 +860,27 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 
 		$files = array(
 			array(
-				'base' 		=> $upload_dir['basedir'] . '/woocommerce_uploads',
-				'file' 		=> 'index.html',
-				'content' 	=> '',
+				'base'    => $upload_dir['basedir'] . '/woocommerce_uploads',
+				'file'    => 'index.html',
+				'content' => '',
 			),
 			array(
-				'base' 		=> WC_LOG_DIR,
-				'file' 		=> '.htaccess',
-				'content' 	=> 'deny from all',
+				'base'    => WC_LOG_DIR,
+				'file'    => '.htaccess',
+				'content' => 'deny from all',
 			),
 			array(
-				'base' 		=> WC_LOG_DIR,
-				'file' 		=> 'index.html',
-				'content' 	=> '',
+				'base'    => WC_LOG_DIR,
+				'file'    => 'index.html',
+				'content' => '',
 			),
 		);
 
 		if ( 'redirect' !== $download_method ) {
 			$files[] = array(
-				'base' 		=> $upload_dir['basedir'] . '/woocommerce_uploads',
-				'file' 		=> '.htaccess',
-				'content' 	=> 'deny from all',
+				'base'    => $upload_dir['basedir'] . '/woocommerce_uploads',
+				'file'    => '.htaccess',
+				'content' => 'deny from all',
 			);
 		}
 
@@ -897,8 +897,8 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 	/**
 	 * Show action links on the plugin screen.
 	 *
-	 * @param	mixed $links Plugin Action links
-	 * @return	array
+	 * @param  mixed $links Plugin Action links
+	 * @return array
 	 */
 	public static function plugin_action_links( $links ) {
 		$action_links = array(
@@ -911,9 +911,9 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 	/**
 	 * Show row meta on the plugin screen.
 	 *
-	 * @param	mixed $links Plugin Row Meta
-	 * @param	mixed $file  Plugin Base file
-	 * @return	array
+	 * @param  mixed $links Plugin Row Meta
+	 * @param  mixed $file  Plugin Base file
+	 * @return array
 	 */
 	public static function plugin_row_meta( $links, $file ) {
 		if ( WC_PLUGIN_BASENAME == $file ) {
@@ -931,7 +931,7 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 
 	/**
 	 * Uninstall tables when MU blog is deleted.
-	 * @param  array $tables
+	 * @param  array    $tables
 	 * @return string[]
 	 */
 	public static function wpmu_drop_tables( $tables ) {
@@ -969,7 +969,7 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 	 * Install a plugin from .org in the background via a cron job (used by
 	 * installer - opt in).
 	 * @param string $plugin_to_install_id
-	 * @param array $plugin_to_install
+	 * @param array  $plugin_to_install
 	 * @since 2.6.0
 	 */
 	public static function background_installer( $plugin_to_install_id, $plugin_to_install ) {
@@ -1156,6 +1156,7 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 			ob_end_clean();
 		}
 	}
+
 }
 
 WC_Install::init();

@@ -66,7 +66,7 @@ abstract class WC_Admin_List_Table {
 		if ( $post_type === $this->list_table_type && 'bottom' === $which ) {
 			$counts = (array) wp_count_posts( $post_type );
 			unset( $counts['auto-draft'] );
-			$count  = array_sum( $counts );
+			$count = array_sum( $counts );
 
 			if ( 0 < $count ) {
 				return;
@@ -110,7 +110,7 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Handle any filters.
 	 *
-	 * @param array $query_vars Query vars.
+	 * @param  array $query_vars Query vars.
 	 * @return array
 	 */
 	public function request_query( $query_vars ) {
@@ -131,7 +131,7 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Handle any custom filters.
 	 *
-	 * @param array $query_vars Query vars.
+	 * @param  array $query_vars Query vars.
 	 * @return array
 	 */
 	protected function query_filters( $query_vars ) {
@@ -141,8 +141,8 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Set row actions.
 	 *
-	 * @param array   $actions Array of actions.
-	 * @param WP_Post $post Current post object.
+	 * @param  array   $actions Array of actions.
+	 * @param  WP_Post $post    Current post object.
 	 * @return array
 	 */
 	public function row_actions( $actions, $post ) {
@@ -155,8 +155,8 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Get row actions to show in the list table.
 	 *
-	 * @param array   $actions Array of actions.
-	 * @param WP_Post $post Current post object.
+	 * @param  array   $actions Array of actions.
+	 * @param  WP_Post $post    Current post object.
 	 * @return array
 	 */
 	protected function get_row_actions( $actions, $post ) {
@@ -166,8 +166,8 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Adjust which columns are displayed by default.
 	 *
-	 * @param array  $hidden Current hidden columns.
-	 * @param object $screen Current screen.
+	 * @param  array  $hidden Current hidden columns.
+	 * @param  object $screen Current screen.
 	 * @return array
 	 */
 	public function default_hidden_columns( $hidden, $screen ) {
@@ -180,7 +180,7 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Set list table primary column.
 	 *
-	 * @param  string $default Default value.
+	 * @param  string $default   Default value.
 	 * @param  string $screen_id Current screen ID.
 	 * @return string
 	 */
@@ -212,7 +212,7 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Define which columns are sortable.
 	 *
-	 * @param array $columns Existing columns.
+	 * @param  array $columns Existing columns.
 	 * @return array
 	 */
 	public function define_sortable_columns( $columns ) {
@@ -222,7 +222,7 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Define which columns to show on this screen.
 	 *
-	 * @param array $columns Existing columns.
+	 * @param  array $columns Existing columns.
 	 * @return array
 	 */
 	public function define_columns( $columns ) {
@@ -232,7 +232,7 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Define bulk actions.
 	 *
-	 * @param array $actions Existing actions.
+	 * @param  array $actions Existing actions.
 	 * @return array
 	 */
 	public function define_bulk_actions( $actions ) {
@@ -249,7 +249,7 @@ abstract class WC_Admin_List_Table {
 	/**
 	 * Render individual columns.
 	 *
-	 * @param string $column Column ID to render.
+	 * @param string $column  Column ID to render.
 	 * @param int    $post_id Post ID being shown.
 	 */
 	public function render_columns( $column, $post_id ) {
@@ -275,4 +275,5 @@ abstract class WC_Admin_List_Table {
 	public function handle_bulk_actions( $redirect_to, $action, $ids ) {
 		return esc_url_raw( $redirect_to );
 	}
+
 }

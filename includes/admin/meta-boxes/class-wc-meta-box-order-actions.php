@@ -80,7 +80,7 @@ class WC_Meta_Box_Order_Actions {
 	 * Save meta box data.
 	 *
 	 * @param int     $post_id Post ID.
-	 * @param WP_Post $post Post Object.
+	 * @param WP_Post $post    Post Object.
 	 */
 	public static function save( $post_id, $post ) {
 		// Order data saved, now get it so we can manipulate status.
@@ -146,4 +146,5 @@ class WC_Meta_Box_Order_Actions {
 	public static function set_email_sent_message( $location ) {
 		return add_query_arg( 'message', 11, $location );
 	}
+
 }

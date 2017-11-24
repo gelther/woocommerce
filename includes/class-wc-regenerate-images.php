@@ -51,10 +51,10 @@ class WC_Regenerate_Images {
 	/**
 	 * Check if we should maybe generate a new image size if not already there.
 	 *
-	 * @param array        $image Properties of the image.
-	 * @param int          $attachment_id Attachment ID.
-	 * @param string|array $size Image size.
-	 * @param bool         $icon If icon or not.
+	 * @param  array        $image         Properties of the image.
+	 * @param  int          $attachment_id Attachment ID.
+	 * @param  string|array $size          Image size.
+	 * @param  bool         $icon          If icon or not.
 	 * @return array
 	 */
 	public static function maybe_resize_image( $image, $attachment_id, $size, $icon ) {
@@ -79,10 +79,10 @@ class WC_Regenerate_Images {
 	/**
 	 * Regenerate the image according to the required size
 	 *
-	 * @param int    $attachment_id Attachment ID.
-	 * @param array  $image Original Image.
-	 * @param string $size Size to return for new URL.
-	 * @param bool   $icon If icon or not.
+	 * @param  int    $attachment_id Attachment ID.
+	 * @param  array  $image         Original Image.
+	 * @param  string $size          Size to return for new URL.
+	 * @param  bool   $icon          If icon or not.
 	 * @return string
 	 */
 	private static function resize_and_return_image( $attachment_id, $image, $size, $icon ) {
@@ -99,14 +99,14 @@ class WC_Regenerate_Images {
 		$wp_uploads_dir = $wp_uploads['basedir'];
 		$wp_uploads_url = $wp_uploads['baseurl'];
 
-		$original_image_file_path   = get_attached_file( $attachment->ID );
+		$original_image_file_path = get_attached_file( $attachment->ID );
 
 		if ( ! file_exists( $original_image_file_path ) || ! getimagesize( $original_image_file_path ) ) {
 			return $image;
 		}
 
 		$info = pathinfo( $original_image_file_path );
-		$ext = $info['extension'];
+		$ext  = $info['extension'];
 		list( $orig_w, $orig_h ) = getimagesize( $original_image_file_path );
 		// Get image size after cropping.
 		$image_size = wc_get_image_size( $size );
@@ -154,7 +154,7 @@ class WC_Regenerate_Images {
 	 *
 	 * @param mixed  $old_value Old option value.
 	 * @param mixed  $new_value New option value.
-	 * @param string $option Option name.
+	 * @param string $option    Option name.
 	 */
 	public static function maybe_regenerate_images_option_update( $old_value, $new_value, $option ) {
 		if ( $new_value === $old_value ) {
@@ -206,5 +206,6 @@ class WC_Regenerate_Images {
 		// Lets dispatch the queue to start processing.
 		self::$background_process->save()->dispatch();
 	}
+
 }
 WC_Regenerate_Images::init();

@@ -15,9 +15,10 @@ class WC_Tests_Product_Variable extends WC_Unit_Test_Case {
 		$product_id = $product->save();
 		$prices     = $product->get_variation_prices();
 
-		$this->assertArrayHasKey( 'regular_price', $prices  );
-		$this->assertArrayHasKey( 'sale_price', $prices  );
-		$this->assertArrayHasKey( 'price', $prices  );
+		$this->assertArrayHasKey( 'regular_price', $prices );
+		$this->assertArrayHasKey( 'sale_price', $prices );
+		$this->assertArrayHasKey( 'price', $prices );
 		$this->assertTrue( $product_id > 0 );
 	}
+
 }

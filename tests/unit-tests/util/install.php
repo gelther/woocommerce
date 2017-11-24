@@ -104,4 +104,5 @@ class WC_Tests_Install extends WC_Unit_Test_Case {
 		$this->assertNull( get_role( 'customer' ) );
 		$this->assertNull( get_role( 'shop_manager' ) );
 	}
+
 }

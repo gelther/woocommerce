@@ -52,4 +52,5 @@ class WC_Tests_WooCommerce_Functions extends WC_Unit_Test_Case {
 		) );
 		$this->assertEquals( $new_currency, $order->get_currency() );
 	}
+
 }

@@ -44,15 +44,14 @@ class WC_Email_Customer_Reset_Password extends WC_Email {
 	 * Constructor.
 	 */
 	public function __construct() {
+		$this->id             = 'customer_reset_password';
+		$this->customer_email = true;
 
-		$this->id               = 'customer_reset_password';
-		$this->customer_email   = true;
+		$this->title       = __( 'Reset password', 'woocommerce' );
+		$this->description = __( 'Customer "reset password" emails are sent when customers reset their passwords.', 'woocommerce' );
 
-		$this->title            = __( 'Reset password', 'woocommerce' );
-		$this->description      = __( 'Customer "reset password" emails are sent when customers reset their passwords.', 'woocommerce' );
-
-		$this->template_html    = 'emails/customer-reset-password.php';
-		$this->template_plain   = 'emails/plain/customer-reset-password.php';
+		$this->template_html  = 'emails/customer-reset-password.php';
+		$this->template_plain = 'emails/plain/customer-reset-password.php';
 
 		// Trigger
 		add_action( 'woocommerce_reset_password_notification', array( $this, 'trigger' ), 10, 2 );
@@ -119,7 +118,7 @@ class WC_Email_Customer_Reset_Password extends WC_Email {
 			'blogname'      => $this->get_blogname(),
 			'sent_to_admin' => false,
 			'plain_text'    => false,
-			'email'			=> $this,
+			'email'         => $this,
 		) );
 	}
 
@@ -137,9 +136,10 @@ class WC_Email_Customer_Reset_Password extends WC_Email {
 			'blogname'      => $this->get_blogname(),
 			'sent_to_admin' => false,
 			'plain_text'    => true,
-			'email'			=> $this,
+			'email'         => $this,
 		) );
 	}
+
 }
 
 endif;

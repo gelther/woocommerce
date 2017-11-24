@@ -67,14 +67,14 @@ class WC_Admin_List_Table_Products extends WC_Admin_List_Table {
 	/**
 	 * Define which columns are sortable.
 	 *
-	 * @param array $columns Existing columns.
+	 * @param  array $columns Existing columns.
 	 * @return array
 	 */
 	public function define_sortable_columns( $columns ) {
 		$custom = array(
-			'price'    => 'price',
-			'sku'      => 'sku',
-			'name'     => 'title',
+			'price' => 'price',
+			'sku'   => 'sku',
+			'name'  => 'title',
 		);
 		return wp_parse_args( $custom, $columns );
 	}
@@ -82,7 +82,7 @@ class WC_Admin_List_Table_Products extends WC_Admin_List_Table {
 	/**
 	 * Define which columns to show on this screen.
 	 *
-	 * @param array $columns Existing columns.
+	 * @param  array $columns Existing columns.
 	 * @return array
 	 */
 	public function define_columns( $columns ) {
@@ -287,7 +287,7 @@ class WC_Admin_List_Table_Products extends WC_Admin_List_Table {
 	/**
 	 * Query vars for custom searches.
 	 *
-	 * @param mixed $public_query_vars Array of query vars.
+	 * @param  mixed $public_query_vars Array of query vars.
 	 * @return array
 	 */
 	public function add_custom_query_var( $public_query_vars ) {
@@ -302,7 +302,7 @@ class WC_Admin_List_Table_Products extends WC_Admin_List_Table {
 		$current_category_slug = isset( $_REQUEST['product_cat'] ) ? wc_clean( wp_unslash( $_REQUEST['product_cat'] ) )             : false; // WPCS: input var ok, sanitization ok.
 		$current_product_type  = isset( $_REQUEST['product_type'] ) ? wc_clean( wp_unslash( $_REQUEST['product_type'] ) )           : false; // WPCS: input var ok, sanitization ok.
 		// @codingStandardsIgnoreStart
-		$current_category      = $current_category_slug ? get_term_by( 'slug', $current_category_slug, 'product_cat' ): false;
+		$current_category = $current_category_slug ? get_term_by( 'slug', $current_category_slug, 'product_cat' ): false;
 		// @codingStandardsIgnoreEnd
 		?>
 		<select class="wc-category-search" name="product_cat" data-placeholder="<?php esc_attr_e( 'Filter by category', 'woocommerce' ); ?>" data-allow_clear="true">
@@ -368,7 +368,7 @@ class WC_Admin_List_Table_Products extends WC_Admin_List_Table {
 	/**
 	 * Handle any custom filters.
 	 *
-	 * @param array $query_vars Query vars.
+	 * @param  array $query_vars Query vars.
 	 * @return array
 	 */
 	protected function query_filters( $query_vars ) {
@@ -376,16 +376,16 @@ class WC_Admin_List_Table_Products extends WC_Admin_List_Table {
 			if ( 'price' === $vars['orderby'] ) {
 				// @codingStandardsIgnoreStart
 				$query_vars = array_merge( $query_vars, array(
-					'meta_key'  => '_price',
-					'orderby'   => 'meta_value_num',
+					'meta_key' => '_price',
+					'orderby'  => 'meta_value_num',
 				) );
 				// @codingStandardsIgnoreEnd
 			}
 			if ( 'sku' === $query_vars['orderby'] ) {
 				// @codingStandardsIgnoreStart
 				$query_vars = array_merge( $query_vars, array(
-					'meta_key'  => '_sku',
-					'orderby'   => 'meta_value',
+					'meta_key' => '_sku',
+					'orderby'  => 'meta_value',
 				) );
 				// @codingStandardsIgnoreEnd
 			}
@@ -420,7 +420,7 @@ class WC_Admin_List_Table_Products extends WC_Admin_List_Table {
 	/**
 	 * Search by SKU or ID for products.
 	 *
-	 * @param string $where Where clause SQL.
+	 * @param  string $where Where clause SQL.
 	 * @return string
 	 */
 	public function sku_search( $where ) {
@@ -477,6 +477,7 @@ class WC_Admin_List_Table_Products extends WC_Admin_List_Table {
 
 		return $views;
 	}
+
 }
 
 new WC_Admin_List_Table_Products();

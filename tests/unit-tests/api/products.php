@@ -73,7 +73,7 @@ class Products_API extends WC_REST_Unit_Test_Case {
 		wp_set_current_user( $this->user );
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products' ) );
 		$products = $response->get_data();
-		$product = wc_get_product( $products[0]['id'] );
+		$product  = wc_get_product( $products[0]['id'] );
 		$product->delete( true );
 	}
 
@@ -206,7 +206,7 @@ class Products_API extends WC_REST_Unit_Test_Case {
 
 		$request = new WP_REST_Request( 'PUT', '/wc/v2/products/' . $product->get_id() );
 		$request->set_body_params( array(
-			'attributes'  => array(
+			'attributes' => array(
 				array( 'id' => 0, 'name' => 'pa_color', 'options' => array( 'red', 'yellow' ), 'visible' => false, 'variation' => 1 ),
 				array( 'name' => 'pa_size', 'options' => array( 'small' ), 'visible' => false, 'variation' => 1 ),
 			),
@@ -312,12 +312,12 @@ class Products_API extends WC_REST_Unit_Test_Case {
 		// Create external
 		$request = new WP_REST_Request( 'POST', '/wc/v2/products' );
 		$request->set_body_params( array(
-			'type'           => 'external',
-			'name'           => 'Test External Product',
-			'sku'            => 'DUMMY SKU EXTERNAL API',
-			'regular_price'  => '10',
-			'button_text'    => 'Test Button',
-			'external_url'   => 'https://wordpress.org',
+			'type'          => 'external',
+			'name'          => 'Test External Product',
+			'sku'           => 'DUMMY SKU EXTERNAL API',
+			'regular_price' => '10',
+			'button_text'   => 'Test Button',
+			'external_url'  => 'https://wordpress.org',
 		) );
 		$response = $this->server->dispatch( $request );
 		$data     = $response->get_data();
@@ -334,10 +334,10 @@ class Products_API extends WC_REST_Unit_Test_Case {
 		// Create variable
 		$request = new WP_REST_Request( 'POST', '/wc/v2/products' );
 		$request->set_body_params( array(
-			'type'           => 'variable',
-			'name'           => 'Test Variable Product',
-			'sku'            => 'DUMMY SKU VARIABLE API',
-			'attributes'     => array(
+			'type'       => 'variable',
+			'name'       => 'Test Variable Product',
+			'sku'        => 'DUMMY SKU VARIABLE API',
+			'attributes' => array(
 				array(
 					'id'        => 0,
 					'name'      => 'pa_size',
@@ -373,8 +373,8 @@ class Products_API extends WC_REST_Unit_Test_Case {
 
 		$request = new WP_REST_Request( 'POST', '/wc/v2/products' );
 		$request->set_body_params( array(
-			'name'           => 'Test Product',
-			'regular_price'  => '12',
+			'name'          => 'Test Product',
+			'regular_price' => '12',
 		) );
 		$response = $this->server->dispatch( $request );
 		$this->assertEquals( 401, $response->get_status() );
@@ -400,17 +400,17 @@ class Products_API extends WC_REST_Unit_Test_Case {
 			),
 			'create' => array(
 				array(
-					'sku'            => 'DUMMY SKU BATCH TEST 1',
-					'regular_price'  => '10',
-					'name'           => 'Test Batch Create 1',
-					'type'           => 'external',
-					'button_text'    => 'Test Button',
+					'sku'           => 'DUMMY SKU BATCH TEST 1',
+					'regular_price' => '10',
+					'name'          => 'Test Batch Create 1',
+					'type'          => 'external',
+					'button_text'   => 'Test Button',
 				),
 				array(
-					'sku'            => 'DUMMY SKU BATCH TEST 2',
-					'regular_price'  => '20',
-					'name'           => 'Test Batch Create 2',
-					'type'           => 'simple',
+					'sku'           => 'DUMMY SKU BATCH TEST 2',
+					'regular_price' => '20',
+					'name'          => 'Test Batch Create 2',
+					'type'          => 'simple',
 				),
 			),
 		) );
@@ -434,7 +434,7 @@ class Products_API extends WC_REST_Unit_Test_Case {
 		$product_2->delete( true );
 	}
 
-	/*
+	/**
 	 * Tests to make sure you can filter products post statuses by both
 	 * the status query arg and WP_Query.
 	 *
@@ -446,7 +446,7 @@ class Products_API extends WC_REST_Unit_Test_Case {
 			$product = WC_Helper_Product::create_simple_product();
 			if ( 0 === $i % 2 ) {
 				wp_update_post( array(
-					'ID'		  => $product->get_id(),
+					'ID'          => $product->get_id(),
 					'post_status' => 'draft',
 				) );
 			}

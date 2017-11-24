@@ -39,7 +39,7 @@ abstract class WC_REST_Shipping_Zones_Controller_Base extends WC_REST_Controller
 	/**
 	 * Retrieve a Shipping Zone by it's ID.
 	 *
-	 * @param int $zone_id Shipping Zone ID.
+	 * @param  int                       $zone_id Shipping Zone ID.
 	 * @return WC_Shipping_Zone|WP_Error
 	 */
 	protected function get_zone( $zone_id ) {
@@ -55,7 +55,7 @@ abstract class WC_REST_Shipping_Zones_Controller_Base extends WC_REST_Controller
 	/**
 	 * Check whether a given request has permission to read Shipping Zones.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function get_items_permissions_check( $request ) {
@@ -73,7 +73,7 @@ abstract class WC_REST_Shipping_Zones_Controller_Base extends WC_REST_Controller
 	/**
 	 * Check if a given request has access to create Shipping Zones.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function create_item_permissions_check( $request ) {
@@ -91,7 +91,7 @@ abstract class WC_REST_Shipping_Zones_Controller_Base extends WC_REST_Controller
 	/**
 	 * Check whether a given request has permission to edit Shipping Zones.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function update_items_permissions_check( $request ) {
@@ -109,7 +109,7 @@ abstract class WC_REST_Shipping_Zones_Controller_Base extends WC_REST_Controller
 	/**
 	 * Check whether a given request has permission to delete Shipping Zones.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function delete_items_permissions_check( $request ) {

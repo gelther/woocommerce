@@ -147,6 +147,7 @@ class WC_Admin_Exporters {
 			) );
 		}
 	}
+
 }
 
 new WC_Admin_Exporters();

@@ -51,7 +51,7 @@ class WC_HTTPS {
 	/**
 	 * Force https for urls.
 	 *
-	 * @param mixed $content
+	 * @param  mixed  $content
 	 * @return string
 	 */
 	public static function force_https_url( $content ) {
@@ -68,8 +68,8 @@ class WC_HTTPS {
 	/**
 	 * Force a post link to be SSL if needed.
 	 *
-	 * @param string $link
-	 * @param int $page_id
+	 * @param  string $link
+	 * @param  int    $page_id
 	 *
 	 * @return string
 	 */
@@ -125,7 +125,7 @@ class WC_HTTPS {
 	 *        https://www.paypal-knowledge.com/infocenter/index?page=content&widgetview=true&id=FAQ1914&viewlocale=en_US
 	 *
 	 * @param string $handle
-	 * @param mixed $r
+	 * @param mixed  $r
 	 * @param string $url
 	 */
 	public static function http_api_curl( $handle, $r, $url ) {
@@ -133,6 +133,7 @@ class WC_HTTPS {
 			curl_setopt( $handle, CURLOPT_SSLVERSION, 6 );
 		}
 	}
+
 }
 
 WC_HTTPS::init();

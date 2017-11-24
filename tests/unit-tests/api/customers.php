@@ -132,7 +132,7 @@ class Customers extends WC_REST_Unit_Test_Case {
 			'email'    => 'create_customer_test@woo.local',
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 201, $response->get_status() );
 		$this->assertEquals( array(
@@ -180,22 +180,22 @@ class Customers extends WC_REST_Unit_Test_Case {
 		// Test extra data
 		$request = new WP_REST_Request( 'POST', '/wc/v2/customers' );
 		$request->set_body_params( array(
-			'username' => 'create_customer_test2',
-			'password' => 'test123',
-			'email'    => 'create_customer_test2@woo.local',
+			'username'   => 'create_customer_test2',
+			'password'   => 'test123',
+			'email'      => 'create_customer_test2@woo.local',
 			'first_name' => 'Test',
-			'last_name' => 'McTestFace',
-			'billing' => array(
+			'last_name'  => 'McTestFace',
+			'billing'    => array(
 				'country' => 'US',
 				'state'   => 'WA',
 			),
-			'shipping' => array(
+			'shipping'   => array(
 				'state'   => 'CA',
 				'country' => 'US',
 			),
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 201, $response->get_status() );
 		$this->assertEquals( array(
@@ -243,12 +243,12 @@ class Customers extends WC_REST_Unit_Test_Case {
 		// Test without required field
 		$request = new WP_REST_Request( 'POST', '/wc/v2/customers' );
 		$request->set_body_params( array(
-			'username' => 'create_customer_test3',
+			'username'   => 'create_customer_test3',
 			'first_name' => 'Test',
-			'last_name' => 'McTestFace',
+			'last_name'  => 'McTestFace',
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 400, $response->get_status() );
 	}
@@ -279,7 +279,7 @@ class Customers extends WC_REST_Unit_Test_Case {
 		wp_set_current_user( 1 );
 		$customer = WC_Helper_Customer::create_customer( 'get_customer_test', 'test123', 'get_customer_test@woo.local' );
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/customers/' . $customer->get_id() ) );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( array(
 			'id'                 => $data['id'],
@@ -396,7 +396,6 @@ class Customers extends WC_REST_Unit_Test_Case {
 		$this->assertEquals( 404, $response->get_status() );
 	}
 
-
 	/**
 	 * Test deleting a customer.
 	 *
@@ -418,7 +417,7 @@ class Customers extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_delete_customer_invalid_id() {
 		wp_set_current_user( 1 );
-		$request  = new WP_REST_Request( 'DELETE', '/wc/v2/customers/0' );
+		$request = new WP_REST_Request( 'DELETE', '/wc/v2/customers/0' );
 		$request->set_param( 'force', true );
 		$response = $this->server->dispatch( $request );
 		$this->assertEquals( 400, $response->get_status() );
@@ -466,13 +465,13 @@ class Customers extends WC_REST_Unit_Test_Case {
 			'create' => array(
 				array(
 					'username' => 'newuser',
-					'password'   => 'test123',
-					'email'  => 'newuser@woo.local',
+					'password' => 'test123',
+					'email'    => 'newuser@woo.local',
 				),
 			),
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 'McTest', $data['update'][0]['last_name'] );
 		$this->assertEquals( 'newuser', $data['create'][0]['username'] );
@@ -480,9 +479,9 @@ class Customers extends WC_REST_Unit_Test_Case {
 		$this->assertEquals( $customer_2->get_id(), $data['delete'][0]['id'] );
 		$this->assertEquals( $customer_3->get_id(), $data['delete'][1]['id'] );
 
-		$request = new WP_REST_Request( 'GET', '/wc/v2/customers' );
+		$request  = new WP_REST_Request( 'GET', '/wc/v2/customers' );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 3, count( $data ) );
 	}
@@ -494,9 +493,9 @@ class Customers extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_customer_schema() {
 		wp_set_current_user( 1 );
-		$request = new WP_REST_Request( 'OPTIONS', '/wc/v2/customers' );
-		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$request    = new WP_REST_Request( 'OPTIONS', '/wc/v2/customers' );
+		$response   = $this->server->dispatch( $request );
+		$data       = $response->get_data();
 		$properties = $data['schema']['properties'];
 
 		$this->assertEquals( 18, count( $properties ) );
@@ -537,4 +536,5 @@ class Customers extends WC_REST_Unit_Test_Case {
 		$this->assertArrayHasKey( 'postcode', $properties['shipping']['properties'] );
 		$this->assertArrayHasKey( 'country', $properties['shipping']['properties'] );
 	}
+
 }

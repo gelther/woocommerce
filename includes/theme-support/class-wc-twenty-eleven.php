@@ -47,6 +47,7 @@ class WC_Twenty_Eleven {
 	public static function output_content_wrapper_end() {
 		echo '</div></div>';
 	}
+
 }
 
 WC_Twenty_Eleven::init();

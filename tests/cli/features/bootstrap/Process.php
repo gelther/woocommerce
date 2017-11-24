@@ -9,15 +9,15 @@ class Process {
 
 	/**
 	 * @param string $command Command to execute.
-	 * @param string $cwd Directory to execute the command in.
-	 * @param array $env Environment variables to set when running the command.
+	 * @param string $cwd     Directory to execute the command in.
+	 * @param array  $env     Environment variables to set when running the command.
 	 */
 	public static function create( $command, $cwd = null, $env = array() ) {
 		$proc = new self;
 
 		$proc->command = $command;
-		$proc->cwd = $cwd;
-		$proc->env = $env;
+		$proc->cwd     = $cwd;
+		$proc->env     = $env;
 
 		return $proc;
 	}
@@ -49,12 +49,12 @@ class Process {
 		fclose( $pipes[2] );
 
 		return new ProcessRun( array(
-			'stdout' => $stdout,
-			'stderr' => $stderr,
+			'stdout'      => $stdout,
+			'stderr'      => $stderr,
 			'return_code' => proc_close( $proc ),
-			'command' => $this->command,
-			'cwd' => $cwd,
-			'env' => $this->env
+			'command'     => $this->command,
+			'cwd'         => $cwd,
+			'env'         => $this->env
 		) );
 	}
 
@@ -66,12 +66,13 @@ class Process {
 	public function run_check() {
 		$r = $this->run();
 
-		if ( $r->return_code || !empty( $r->STDERR ) ) {
+		if ( $r->return_code || ! empty( $r->STDERR ) ) {
 			throw new \RuntimeException( $r );
 		}
 
 		return $r;
 	}
+
 }
 
 /**

@@ -20,18 +20,18 @@ interface WC_Logger_Interface {
 	 * This is not the preferred method for adding log messages. Please use log() or any one of
 	 * the level methods (debug(), info(), etc.). This method may be deprecated in the future.
 	 *
-	 * @param string $handle
-	 * @param string $message
-	 * @param string $level
+	 * @param  string $handle
+	 * @param  string $message
+	 * @param  string $level
 	 *
-	 * @return bool True if log was added, otherwise false.
+	 * @return bool            True if log was added, otherwise false.
 	 */
 	public function add( $handle, $message, $level = WC_Log_Levels::NOTICE );
 
 	/**
 	 * Add a log entry.
 	 *
-	 * @param string $level One of the following:
+	 * @param string $level   One of the following:
 	 *     'emergency': System is unusable.
 	 *     'alert': Action must be taken immediately.
 	 *     'critical': Critical conditions.
@@ -41,7 +41,7 @@ interface WC_Logger_Interface {
 	 *     'info': Informational messages.
 	 *     'debug': Debug-level messages.
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function log( $level, $message, $context = array() );
 
@@ -51,7 +51,7 @@ interface WC_Logger_Interface {
 	 * System is unusable.
 	 *
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function emergency( $message, $context = array() );
 
@@ -62,7 +62,7 @@ interface WC_Logger_Interface {
 	 * Example: Entire website down, database unavailable, etc.
 	 *
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function alert( $message, $context = array() );
 
@@ -73,7 +73,7 @@ interface WC_Logger_Interface {
 	 * Example: Application component unavailable, unexpected exception.
 	 *
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function critical( $message, $context = array() );
 
@@ -84,7 +84,7 @@ interface WC_Logger_Interface {
 	 * and monitored.
 	 *
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function error( $message, $context = array() );
 
@@ -97,7 +97,7 @@ interface WC_Logger_Interface {
 	 * necessarily wrong.
 	 *
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function warning( $message, $context = array() );
 
@@ -107,7 +107,7 @@ interface WC_Logger_Interface {
 	 * Normal but significant events.
 	 *
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function notice( $message, $context = array() );
 
@@ -118,7 +118,7 @@ interface WC_Logger_Interface {
 	 * Example: User logs in, SQL logs.
 	 *
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function info( $message, $context = array() );
 
@@ -128,7 +128,7 @@ interface WC_Logger_Interface {
 	 * Detailed debug information.
 	 *
 	 * @param string $message Log message.
-	 * @param array $context Optional. Additional information for log handlers.
+	 * @param array  $context Optional. Additional information for log handlers.
 	 */
 	public function debug( $message, $context = array() );
 }

@@ -48,7 +48,7 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d-]+)', array(
-			'args' => array(
+			'args'   => array(
 				'id' => array(
 					'description' => __( 'Unique ID for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -84,7 +84,7 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 	/**
 	 * Get a single Shipping Zone.
 	 *
-	 * @param WP_REST_Request $request
+	 * @param  WP_REST_Request           $request
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function get_item( $request ) {
@@ -104,7 +104,7 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 	/**
 	 * Get all Shipping Zones.
 	 *
-	 * @param WP_REST_Request $request
+	 * @param  WP_REST_Request  $request
 	 * @return WP_REST_Response
 	 */
 	public function get_items( $request ) {
@@ -112,7 +112,7 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 
 		$zones = WC_Shipping_Zones::get_zones();
 		array_unshift( $zones, $rest_of_the_world->get_data() );
-		$data  = array();
+		$data = array();
 
 		foreach ( $zones as $zone_obj ) {
 			$zone   = $this->prepare_item_for_response( $zone_obj, $request );
@@ -126,7 +126,7 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 	/**
 	 * Create a single Shipping Zone.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request          $request Full details about the request.
 	 * @return WP_REST_Request|WP_Error
 	 */
 	public function create_item( $request ) {
@@ -156,7 +156,7 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 	/**
 	 * Update a single Shipping Zone.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request          $request Full details about the request.
 	 * @return WP_REST_Request|WP_Error
 	 */
 	public function update_item( $request ) {
@@ -167,7 +167,7 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 		}
 
 		if ( 0 === $zone->get_id() ) {
-			return new WP_Error( "woocommerce_rest_shipping_zone_invalid_zone", __( 'The "locations not covered by your other zones" zone cannot be updated.', 'woocommerce' ), array( 'status' => 403 ) );
+			return new WP_Error( 'woocommerce_rest_shipping_zone_invalid_zone', __( 'The "locations not covered by your other zones" zone cannot be updated.', 'woocommerce' ), array( 'status' => 403 ) );
 		}
 
 		$zone_changed = false;
@@ -192,7 +192,7 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 	/**
 	 * Delete a single Shipping Zone.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request          $request Full details about the request.
 	 * @return WP_REST_Request|WP_Error
 	 */
 	public function delete_item( $request ) {
@@ -218,8 +218,8 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 	/**
 	 * Prepare the Shipping Zone for the REST response.
 	 *
-	 * @param array $item Shipping Zone.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  array            $item     Shipping Zone.
+	 * @param  WP_REST_Request  $request  Request object.
 	 * @return WP_REST_Response $response
 	 */
 	public function prepare_item_for_response( $item, $request ) {
@@ -244,16 +244,16 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param int $zone_id Given Shipping Zone ID.
-	 * @return array Links for the given Shipping Zone.
+	 * @param  int   $zone_id Given Shipping Zone ID.
+	 * @return array          Links for the given Shipping Zone.
 	 */
 	protected function prepare_links( $zone_id ) {
 		$base  = '/' . $this->namespace . '/' . $this->rest_base;
 		$links = array(
-			'self'       => array(
+			'self'        => array(
 				'href' => rest_url( trailingslashit( $base ) . $zone_id ),
 			),
-			'collection' => array(
+			'collection'  => array(
 				'href' => rest_url( $base ),
 			),
 			'describedby' => array(
@@ -275,13 +275,13 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 			'title'      => 'shipping_zone',
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'    => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name' => array(
+				'name'  => array(
 					'description' => __( 'Shipping zone name.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -299,4 +299,5 @@ class WC_REST_Shipping_Zones_Controller extends WC_REST_Shipping_Zones_Controlle
 
 		return $this->add_additional_fields_schema( $schema );
 	}
+
 }

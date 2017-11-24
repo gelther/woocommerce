@@ -113,4 +113,5 @@ class WC_Tests_Attributes_Functions extends WC_Unit_Test_Case {
 		$result = wc_delete_attribute( 9999999 );
 		$this->assertFalse( $result );
 	}
+
 }

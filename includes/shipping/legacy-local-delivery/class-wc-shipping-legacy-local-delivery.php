@@ -51,7 +51,6 @@ class WC_Shipping_Legacy_Local_Delivery extends WC_Shipping_Local_Pickup {
 	 * init function.
 	 */
 	public function init() {
-
 		// Load the settings.
 		$this->init_form_fields();
 		$this->init_settings();
@@ -107,33 +106,33 @@ class WC_Shipping_Legacy_Local_Delivery extends WC_Shipping_Local_Pickup {
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
-			'enabled' => array(
+			'enabled'      => array(
 				'title'   => __( 'Enable', 'woocommerce' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Once disabled, this legacy method will no longer be available.', 'woocommerce' ),
 				'default' => 'no',
 			),
-			'title' => array(
+			'title'        => array(
 				'title'       => __( 'Title', 'woocommerce' ),
 				'type'        => 'text',
 				'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce' ),
 				'default'     => __( 'Local delivery', 'woocommerce' ),
 				'desc_tip'    => true,
 			),
-			'type' => array(
+			'type'         => array(
 				'title'       => __( 'Fee type', 'woocommerce' ),
 				'type'        => 'select',
 				'class'       => 'wc-enhanced-select',
 				'description' => __( 'How to calculate delivery charges', 'woocommerce' ),
 				'default'     => 'fixed',
 				'options'     => array(
-				'fixed'       => __( 'Fixed amount', 'woocommerce' ),
-					'percent'     => __( 'Percentage of cart total', 'woocommerce' ),
-					'product'     => __( 'Fixed amount per product', 'woocommerce' ),
+				'fixed'   => __( 'Fixed amount', 'woocommerce' ),
+					'percent' => __( 'Percentage of cart total', 'woocommerce' ),
+					'product' => __( 'Fixed amount per product', 'woocommerce' ),
 				),
 				'desc_tip'    => true,
 			),
-			'fee' => array(
+			'fee'          => array(
 				'title'       => __( 'Delivery fee', 'woocommerce' ),
 				'type'        => 'price',
 				'description' => __( 'What fee do you want to charge for local delivery, disregarded if you choose free. Leave blank to disable.', 'woocommerce' ),
@@ -141,7 +140,7 @@ class WC_Shipping_Legacy_Local_Delivery extends WC_Shipping_Local_Pickup {
 				'desc_tip'    => true,
 				'placeholder' => wc_format_localized_price( 0 ),
 			),
-			'codes' => array(
+			'codes'        => array(
 				'title'       => __( 'Allowed ZIP/post codes', 'woocommerce' ),
 				'type'        => 'text',
 				'desc_tip'    => __( 'What ZIP/post codes are available for local delivery?', 'woocommerce' ),
@@ -150,26 +149,27 @@ class WC_Shipping_Legacy_Local_Delivery extends WC_Shipping_Local_Pickup {
 				'placeholder' => 'e.g. 12345, 56789',
 			),
 			'availability' => array(
-				'title'       => __( 'Method availability', 'woocommerce' ),
-				'type'        => 'select',
-				'default'     => 'all',
-				'class'       => 'availability wc-enhanced-select',
-				'options'     => array(
-					'all'         => __( 'All allowed countries', 'woocommerce' ),
-					'specific'    => __( 'Specific Countries', 'woocommerce' ),
+				'title'   => __( 'Method availability', 'woocommerce' ),
+				'type'    => 'select',
+				'default' => 'all',
+				'class'   => 'availability wc-enhanced-select',
+				'options' => array(
+					'all'      => __( 'All allowed countries', 'woocommerce' ),
+					'specific' => __( 'Specific Countries', 'woocommerce' ),
 				),
 			),
-			'countries' => array(
-				'title'       => __( 'Specific countries', 'woocommerce' ),
-				'type'        => 'multiselect',
-				'class'       => 'wc-enhanced-select',
-				'css'         => 'width: 400px;',
-				'default'     => '',
-				'options'     => WC()->countries->get_shipping_countries(),
+			'countries'    => array(
+				'title'             => __( 'Specific countries', 'woocommerce' ),
+				'type'              => 'multiselect',
+				'class'             => 'wc-enhanced-select',
+				'css'               => 'width: 400px;',
+				'default'           => '',
+				'options'           => WC()->countries->get_shipping_countries(),
 				'custom_attributes' => array(
 					'data-placeholder' => __( 'Select some countries', 'woocommerce' ),
 				),
 			),
 		);
 	}
+
 }

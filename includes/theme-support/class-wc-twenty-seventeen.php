@@ -74,8 +74,8 @@ class WC_Twenty_Seventeen {
 	/**
 	 * Custom colors.
 	 *
-	 * @param  string $css Styles.
-	 * @param  string $hue Color.
+	 * @param  string $css        Styles.
+	 * @param  string $hue        Color.
 	 * @param  string $saturation Saturation.
 	 * @return string
 	 */
@@ -102,6 +102,7 @@ class WC_Twenty_Seventeen {
 		';
 		return $css;
 	}
+
 }
 
 WC_Twenty_Seventeen::init();

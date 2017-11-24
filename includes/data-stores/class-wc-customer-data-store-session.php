@@ -142,7 +142,7 @@ class WC_Customer_Data_Store_Session extends WC_Data_Store_WP implements WC_Cust
 	 *
 	 * @since 3.0.0
 	 * @param WC_Customer $customer
-	 * @param array $args Array of args to pass to the delete method.
+	 * @param array       $args     Array of args to pass to the delete method.
 	 */
 	public function delete( &$customer, $args = array() ) {
 		WC()->session->set( 'customer', null );
@@ -152,7 +152,7 @@ class WC_Customer_Data_Store_Session extends WC_Data_Store_WP implements WC_Cust
 	 * Gets the customers last order.
 	 *
 	 * @since 3.0.0
-	 * @param WC_Customer
+	 * @param  WC_Customer
 	 * @return WC_Order|false
 	 */
 	public function get_last_order( &$customer ) {
@@ -163,7 +163,7 @@ class WC_Customer_Data_Store_Session extends WC_Data_Store_WP implements WC_Cust
 	 * Return the number of orders this customer has.
 	 *
 	 * @since 3.0.0
-	 * @param WC_Customer
+	 * @param  WC_Customer
 	 * @return integer
 	 */
 	public function get_order_count( &$customer ) {
@@ -174,10 +174,11 @@ class WC_Customer_Data_Store_Session extends WC_Data_Store_WP implements WC_Cust
 	 * Return how much money this customer has spent.
 	 *
 	 * @since 3.0.0
-	 * @param WC_Customer
+	 * @param  WC_Customer
 	 * @return float
 	 */
 	public function get_total_spent( &$customer ) {
 		return 0;
 	}
+
 }

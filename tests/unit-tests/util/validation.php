@@ -171,4 +171,5 @@ class WC_Tests_Validation extends WC_Unit_Test_Case {
 		$this->assertEquals( '+00-000-00-00-000', WC_Validation::format_phone( '+00.000.00.00.000' ) );
 		$this->assertEquals( '+00 000 00 00 000', WC_Validation::format_phone( '+00 000 00 00 000' ) );
 	}
+
 }

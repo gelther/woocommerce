@@ -27,7 +27,7 @@ class WC_Shipping_Zones {
 		$zones      = array();
 
 		foreach ( $raw_zones as $raw_zone ) {
-			$zone                                                     = new WC_Shipping_Zone( $raw_zone );
+			$zone                                                = new WC_Shipping_Zone( $raw_zone );
 			$zones[ $zone->get_id() ]                            = $zone->get_data();
 			$zones[ $zone->get_id() ]['zone_id']                 = $zone->get_id();
 			$zones[ $zone->get_id() ]['formatted_zone_location'] = $zone->get_formatted_location();
@@ -40,7 +40,7 @@ class WC_Shipping_Zones {
 	/**
 	 * Get shipping zone using it's ID
 	 * @since 2.6.0
-	 * @param int $zone_id
+	 * @param  int                   $zone_id
 	 * @return WC_Shipping_Zone|bool
 	 */
 	public static function get_zone( $zone_id ) {
@@ -50,8 +50,8 @@ class WC_Shipping_Zones {
 	/**
 	 * Get shipping zone by an ID.
 	 * @since 2.6.0
-	 * @param string $by zone_id or instance_id
-	 * @param int $id
+	 * @param  string                $by zone_id or instance_id
+	 * @param  int                   $id
 	 * @return WC_Shipping_Zone|bool
 	 */
 	public static function get_zone_by( $by = 'zone_id', $id = 0 ) {
@@ -80,7 +80,7 @@ class WC_Shipping_Zones {
 	 * Get shipping zone using it's ID
 	 * @since 2.6.0
 	 *
-	 * @param $instance_id
+	 * @param                          $instance_id
 	 *
 	 * @return bool|WC_Shipping_Method
 	 */
@@ -114,7 +114,7 @@ class WC_Shipping_Zones {
 	 * Find a matching zone for a given package.
 	 * @since  2.6.0
 	 * @uses   wc_make_numeric_postcode()
-	 * @param  object $package
+	 * @param  object           $package
 	 * @return WC_Shipping_Zone
 	 */
 	public static function get_zone_matching_package( $package ) {
@@ -132,4 +132,5 @@ class WC_Shipping_Zones {
 
 		return new WC_Shipping_Zone( $matching_zone_id ? $matching_zone_id : 0 );
 	}
+
 }

@@ -39,7 +39,7 @@ add_filter( 'the_title', 'wc_page_endpoint_title' );
 /**
  * Retrieve page ids - used for myaccount, edit_address, shop, cart, checkout, pay, view_order, terms. returns -1 if no page is found.
  *
- * @param string $page Page slug.
+ * @param  string $page Page slug.
  * @return int
  */
 function wc_get_page_id( $page ) {
@@ -62,7 +62,7 @@ function wc_get_page_id( $page ) {
 /**
  * Retrieve page permalink.
  *
- * @param string $page page slug.
+ * @param  string $page page slug.
  * @return string
  */
 function wc_get_page_permalink( $page ) {
@@ -110,7 +110,7 @@ function wc_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 /**
  * Hide menu items conditionally.
  *
- * @param array $items Navigation items.
+ * @param  array $items Navigation items.
  * @return array
  */
 function wc_nav_menu_items( $items ) {
@@ -136,11 +136,10 @@ function wc_nav_menu_items( $items ) {
 }
 add_filter( 'wp_nav_menu_objects', 'wc_nav_menu_items', 10 );
 
-
 /**
  * Fix active class in nav for shop page.
  *
- * @param array $menu_items Menu items.
+ * @param  array $menu_items Menu items.
  * @return array
  */
 function wc_nav_menu_item_classes( $menu_items ) {
@@ -170,8 +169,8 @@ function wc_nav_menu_item_classes( $menu_items ) {
 			} elseif ( is_shop() && $shop_page === $menu_id && 'page' === $menu_item->object ) {
 				// Set active state if this is the shop page link.
 				$menu_items[ $key ]->current = true;
-				$classes[] = 'current-menu-item';
-				$classes[] = 'current_page_item';
+				$classes[]                   = 'current-menu-item';
+				$classes[]                   = 'current_page_item';
 
 			} elseif ( is_singular( 'product' ) && $shop_page === $menu_id ) {
 				// Set parent state if this is a product page.
@@ -186,19 +185,18 @@ function wc_nav_menu_item_classes( $menu_items ) {
 }
 add_filter( 'wp_nav_menu_objects', 'wc_nav_menu_item_classes', 2 );
 
-
 /**
  * Fix active class in wp_list_pages for shop page.
  *
  * See details in https://github.com/woocommerce/woocommerce/issues/177.
  *
- * @param string $pages Pages list.
+ * @param  string $pages Pages list.
  * @return string
  */
 function wc_list_pages( $pages ) {
 	if ( is_woocommerce() ) {
 		// Remove current_page_parent class from any item.
-		$pages = str_replace( 'current_page_parent', '', $pages );
+		$pages     = str_replace( 'current_page_parent', '', $pages );
 		// Find shop_page_id through woocommerce options.
 		$shop_page = 'page-item-' . wc_get_page_id( 'shop' );
 

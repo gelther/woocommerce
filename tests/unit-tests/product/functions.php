@@ -92,7 +92,7 @@ class WC_Tests_Product_Functions extends WC_Unit_Test_Case {
 		$this->assertEquals( 5, count( $products ) );
 
 		// Test offset.
-		$products = wc_get_products( array( 'return' => 'ids', 'limit' => 2 ) );
+		$products        = wc_get_products( array( 'return' => 'ids', 'limit' => 2 ) );
 		$products_offset = wc_get_products( array( 'return' => 'ids', 'limit' => 2, 'offset' => 2 ) );
 		$this->assertEquals( 2, count( $products ) );
 		$this->assertEquals( 2, count( $products_offset ) );
@@ -423,7 +423,6 @@ class WC_Tests_Product_Functions extends WC_Unit_Test_Case {
 	 * @since 2.3
 	 */
 	public function test_wc_get_product() {
-
 		// Create product
 		$product = WC_Helper_Product::create_simple_product();
 
@@ -669,4 +668,5 @@ class WC_Tests_Product_Functions extends WC_Unit_Test_Case {
 		$this->assertFalse( wc_is_attribute_in_product_name( 'L', 'Product L Thing' ) );
 		$this->assertFalse( wc_is_attribute_in_product_name( 'Blue', 'Product &ndash; Large, Blueish' ) );
 	}
+
 }

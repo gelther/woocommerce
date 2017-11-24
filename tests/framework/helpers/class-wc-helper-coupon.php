@@ -46,7 +46,7 @@ class WC_Helper_Coupon {
 	/**
 	 * Delete a coupon.
 	 *
-	 * @param $coupon_id
+	 * @param       $coupon_id
 	 *
 	 * @return bool
 	 */
@@ -54,4 +54,5 @@ class WC_Helper_Coupon {
 		wp_delete_post( $coupon_id, true );
 		return true;
 	}
+
 }

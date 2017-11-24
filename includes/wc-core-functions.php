@@ -72,7 +72,7 @@ function wc_maybe_define_constant( $name, $value ) {
  *
  * Returns a new order object on success which can then be used to add additional data.
  *
- * @param  array $args
+ * @param  array             $args
  * @return WC_Order|WP_Error
  */
 function wc_create_order( $args = array() ) {
@@ -135,8 +135,8 @@ function wc_create_order( $args = array() ) {
 /**
  * Update an order. Uses wc_create_order.
  *
- * @param  array $args
- * @return string | WC_Order
+ * @param  array  $args
+ * @return string       | WC_Order
  */
 function wc_update_order( $args ) {
 	if ( empty( $args['order_id'] ) ) {
@@ -151,7 +151,7 @@ function wc_update_order( $args ) {
  * WC_TEMPLATE_DEBUG_MODE will prevent overrides in themes from taking priority.
  *
  * @access public
- * @param mixed $slug
+ * @param mixed  $slug
  * @param string $name (default: '')
  */
 function wc_get_template_part( $slug, $name = '' ) {
@@ -185,9 +185,9 @@ function wc_get_template_part( $slug, $name = '' ) {
  *
  * @access public
  * @param string $template_name
- * @param array $args (default: array())
+ * @param array  $args          (default: array())
  * @param string $template_path (default: '')
- * @param string $default_path (default: '')
+ * @param string $default_path  (default: '')
  */
 function wc_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 	if ( ! empty( $args ) && is_array( $args ) ) {
@@ -211,16 +211,15 @@ function wc_get_template( $template_name, $args = array(), $template_path = '', 
 	do_action( 'woocommerce_after_template_part', $template_name, $template_path, $located, $args );
 }
 
-
 /**
  * Like wc_get_template, but returns the HTML instead of outputting.
  *
  * @see wc_get_template
  * @since 2.5.0
- * @param string $template_name
- * @param array $args
- * @param string $template_path
- * @param string $default_path
+ * @param  string $template_name
+ * @param  array  $args
+ * @param  string $template_path
+ * @param  string $default_path
  *
  * @return string
  */
@@ -229,6 +228,7 @@ function wc_get_template_html( $template_name, $args = array(), $template_path =
 	wc_get_template( $template_name, $args, $template_path, $default_path );
 	return ob_get_clean();
 }
+
 /**
  * Locate a template and return the path for inclusion.
  *
@@ -239,9 +239,9 @@ function wc_get_template_html( $template_name, $args = array(), $template_path =
  *		$default_path	/	$template_name
  *
  * @access public
- * @param string $template_name
- * @param string $template_path (default: '')
- * @param string $default_path (default: '')
+ * @param  string $template_name
+ * @param  string $template_path (default: '')
+ * @param  string $default_path  (default: '')
  * @return string
  */
 function wc_locate_template( $template_name, $template_path = '', $default_path = '' ) {
@@ -461,11 +461,10 @@ function get_woocommerce_currencies() {
 	return $currencies;
 }
 
-
 /**
  * Get Currency symbol.
  *
- * @param string $currency (default: '')
+ * @param  string $currency (default: '')
  * @return string
  */
 function get_woocommerce_currency_symbol( $currency = '' ) {
@@ -473,7 +472,7 @@ function get_woocommerce_currency_symbol( $currency = '' ) {
 		$currency = get_woocommerce_currency();
 	}
 
-	$symbols = apply_filters( 'woocommerce_currency_symbols', array(
+	$symbols         = apply_filters( 'woocommerce_currency_symbols', array(
 		'AED' => '&#x62f;.&#x625;',
 		'AFN' => '&#x60b;',
 		'ALL' => 'L',
@@ -646,13 +645,13 @@ function get_woocommerce_currency_symbol( $currency = '' ) {
 /**
  * Send HTML emails from WooCommerce.
  *
- * @param mixed $to
- * @param mixed $subject
- * @param mixed $message
- * @param string $headers (default: "Content-Type: text/html\r\n")
+ * @param mixed  $to
+ * @param mixed  $subject
+ * @param mixed  $message
+ * @param string $headers     (default: "Content-Type: text/html\r\n")
  * @param string $attachments (default: "")
  */
-function wc_mail( $to, $subject, $message, $headers = "Content-Type: text/html\r\n", $attachments = "" ) {
+function wc_mail( $to, $subject, $message, $headers = "Content-Type: text/html\r\n", $attachments = '' ) {
 	$mailer = WC()->mailer();
 
 	$mailer->send( $to, $subject, $message, $headers, $attachments );
@@ -667,8 +666,8 @@ function wc_mail( $to, $subject, $message, $headers = "Content-Type: text/html\r
  * Sizes defined by the theme take priority over settings. Settings are hidden when a theme
  * defines sizes.
  *
- * @param array|string $image_size Name of the image size to get, or an array of dimensions.
- * @return array Array of dimensions including width, height, and cropping mode. Cropping mode is 0 for no crop, and 1 for hard crop.
+ * @param  array|string $image_size Name of the image size to get, or an array of dimensions.
+ * @return array                    Array of dimensions including width, height, and cropping mode. Cropping mode is 0 for no crop, and 1 for hard crop.
  */
 function wc_get_image_size( $image_size ) {
 	$theme_support = get_theme_support( 'woocommerce' );
@@ -680,7 +679,7 @@ function wc_get_image_size( $image_size ) {
 	);
 
 	if ( is_array( $image_size ) ) {
-		$size = array(
+		$size       = array(
 			'width'  => isset( $image_size[0] ) ? $image_size[0] : 600,
 			'height' => isset( $image_size[1] ) ? $image_size[1] : 600,
 			'crop'   => isset( $image_size[2] ) ? $image_size[2] : 1,
@@ -688,8 +687,8 @@ function wc_get_image_size( $image_size ) {
 		$image_size = $size['width'] . '_' . $size['height'];
 	} elseif ( in_array( $image_size, array( 'single', 'shop_single', 'woocommerce_single' ), true ) ) {
 		// If the theme supports woocommerce, take image sizes from that definition.
-		if ( isset( $theme_support[ 'single_image_width' ] ) ) {
-			$size['width'] = $theme_support[ 'single_image_width' ];
+		if ( isset( $theme_support['single_image_width'] ) ) {
+			$size['width'] = $theme_support['single_image_width'];
 		} else {
 			$size['width'] = get_option( 'woocommerce_single_image_width', 600 );
 		}
@@ -698,8 +697,8 @@ function wc_get_image_size( $image_size ) {
 		$image_size     = 'single';
 	} elseif ( in_array( $image_size, array( 'thumbnail', 'shop_thumbnail', 'shop_catalog', 'woocommerce_thumbnail' ), true ) ) {
 		// If the theme supports woocommerce, take image sizes from that definition.
-		if ( isset( $theme_support[ 'thumbnail_image_width' ] ) ) {
-			$size['width'] = $theme_support[ 'thumbnail_image_width' ];
+		if ( isset( $theme_support['thumbnail_image_width'] ) ) {
+			$size['width'] = $theme_support['thumbnail_image_width'];
 		} else {
 			$size['width'] = get_option( 'woocommerce_thumbnail_image_width', 300 );
 		}
@@ -766,10 +765,10 @@ function wc_print_js() {
 /**
  * Set a cookie - wrapper for setcookie using WP constants.
  *
- * @param  string  $name   Name of the cookie being set.
- * @param  string  $value  Value of the cookie.
- * @param  integer $expire Expiry of the cookie.
- * @param  bool    $secure Whether the cookie should be served only over https.
+ * @param string  $name   Name of the cookie being set.
+ * @param string  $value  Value of the cookie.
+ * @param integer $expire Expiry of the cookie.
+ * @param bool    $secure Whether the cookie should be served only over https.
  */
 function wc_setcookie( $name, $value, $expire = 0, $secure = false ) {
 	if ( ! headers_sent() ) {
@@ -784,11 +783,11 @@ function wc_setcookie( $name, $value, $expire = 0, $secure = false ) {
  * Get the URL to the WooCommerce REST API.
  *
  * @since 2.1
- * @param string $path an endpoint to include in the URL.
- * @return string the URL.
+ * @param  string $path an endpoint to include in the URL.
+ * @return string       the URL.
  */
 function get_woocommerce_api_url( $path ) {
-	$version  = defined( 'WC_API_REQUEST_VERSION' ) ? WC_API_REQUEST_VERSION : substr( WC_API::VERSION, 0, 1 );
+	$version = defined( 'WC_API_REQUEST_VERSION' ) ? WC_API_REQUEST_VERSION : substr( WC_API::VERSION, 0, 1 );
 
 	$url = get_home_url( null, "wc-api/v{$version}/", is_ssl() ? 'https' : 'http' );
 
@@ -804,8 +803,8 @@ function get_woocommerce_api_url( $path ) {
  *
  * @since 2.2
  *
- * @param string $handle name.
- * @return string the log file path.
+ * @param  string $handle name.
+ * @return string         the log file path.
  */
 function wc_get_log_file_path( $handle ) {
 	return WC_Log_Handler_File::get_log_file_path( $handle );
@@ -813,7 +812,7 @@ function wc_get_log_file_path( $handle ) {
 
 /**
  * Recursively get page children.
- * @param  int $page_id
+ * @param  int   $page_id
  * @return int[]
  */
 function wc_get_page_children( $page_id ) {
@@ -864,7 +863,7 @@ add_action( 'admin_footer', 'flush_rewrite_rules_on_shop_page_save' );
  * Various rewrite rule fixes.
  *
  * @since 2.2
- * @param array $rules
+ * @param  array $rules
  * @return array
  */
 function wc_fix_rewrite_rules( $rules ) {
@@ -873,7 +872,7 @@ function wc_fix_rewrite_rules( $rules ) {
 	$permalinks = wc_get_permalink_structure();
 
 	// Fix the rewrite rules when the product permalink have %product_cat% flag.
-	if ( preg_match( '`/(.+)(/%product_cat%)`' , $permalinks['product_rewrite_slug'], $matches ) ) {
+	if ( preg_match( '`/(.+)(/%product_cat%)`', $permalinks['product_rewrite_slug'], $matches ) ) {
 		foreach ( $rules as $rule => $rewrite ) {
 			if ( preg_match( '`^' . preg_quote( $matches[1], '`' ) . '/\(`', $rule ) && preg_match( '/^(index\.php\?product_cat)(?!(.*product))/', $rewrite ) ) {
 				unset( $rules[ $rule ] );
@@ -888,7 +887,7 @@ function wc_fix_rewrite_rules( $rules ) {
 
 		// Subpage rules
 		foreach ( $subpages as $subpage ) {
-			$uri = get_page_uri( $subpage );
+			$uri                                = get_page_uri( $subpage );
 			$page_rewrite_rules[ $uri . '/?$' ] = 'index.php?pagename=' . $uri;
 			$wp_generated_rewrite_rules         = $wp_rewrite->generate_rewrite_rules( $uri, EP_PAGES, true, true, false, false );
 			foreach ( $wp_generated_rewrite_rules as $key => $value ) {
@@ -909,7 +908,7 @@ add_filter( 'rewrite_rules_array', 'wc_fix_rewrite_rules' );
  * Prevent product attachment links from breaking when using complex rewrite structures.
  *
  * @param  string $link
- * @param  id $post_id
+ * @param  id     $post_id
  * @return string
  */
 function wc_fix_product_attachment_link( $link, $post_id ) {
@@ -924,7 +923,7 @@ add_filter( 'attachment_link', 'wc_fix_product_attachment_link', 10, 2 );
 /**
  * Protect downloads from ms-files.php in multisite.
  *
- * @param string $rewrite rewrite rules.
+ * @param  string $rewrite rewrite rules.
  * @return string
  */
 function wc_ms_protect_download_rewite_rules( $rewrite ) {
@@ -948,11 +947,10 @@ add_filter( 'mod_rewrite_rules', 'wc_ms_protect_download_rewite_rules' );
  * hook, see WC_Webhook::process().
  *
  * @since 2.2
- * @param int $webhook_id webhook ID to deliver.
- * @param mixed $arg hook argument.
+ * @param int   $webhook_id webhook ID to deliver.
+ * @param mixed $arg        hook argument.
  */
 function wc_deliver_webhook_async( $webhook_id, $arg ) {
-
 	$webhook = new WC_Webhook( $webhook_id );
 
 	$webhook->deliver( $arg );
@@ -1048,9 +1046,9 @@ if ( ! function_exists( 'hash_equals' ) ) :
 	 *
 	 * @since 3.9.2
 	 *
-	 * @param string $a Expected string.
-	 * @param string $b Actual string.
-	 * @return bool Whether strings are equal.
+	 * @param  string $a Expected string.
+	 * @param  string $b Actual string.
+	 * @return bool      Whether strings are equal.
 	 */
 	function hash_equals( $a, $b ) {
 		$a_length = strlen( $a );
@@ -1066,6 +1064,7 @@ if ( ! function_exists( 'hash_equals' ) ) :
 
 		return 0 === $result;
 	}
+
 endif;
 
 /**
@@ -1096,7 +1095,7 @@ function wc_api_hash( $data ) {
 /**
  * Find all possible combinations of values from the input array and return in a logical order.
  * @since 2.5.0
- * @param array $input
+ * @param  array $input
  * @return array
  */
 function wc_array_cartesian( $input ) {
@@ -1232,12 +1231,13 @@ if ( ! function_exists( 'wc_get_shipping_zone' ) ) {
 	 *
 	 * @since  2.6.0
 	 * @uses   WC_Shipping_Zones::get_zone_matching_package
-	 * @param  array $package
+	 * @param  array            $package
 	 * @return WC_Shipping_Zone
 	 */
 	function wc_get_shipping_zone( $package ) {
 		return WC_Shipping_Zones::get_zone_matching_package( $package );
 	}
+
 }
 
 /**
@@ -1297,8 +1297,8 @@ function wc_help_tip( $tip, $allow_html = false ) {
 /**
  * Return a list of potential postcodes for wildcard searching.
  * @since 2.6.0
- * @param  string $postcode
- * @param  string $country to format postcode for matching.
+ * @param  string   $postcode
+ * @param  string   $country  to format postcode for matching.
  * @return string[]
  */
 function wc_get_wildcard_postcodes( $postcode, $country = '' ) {
@@ -1321,12 +1321,12 @@ function wc_get_wildcard_postcodes( $postcode, $country = '' ) {
  * Used by shipping zones and taxes to compare a given $postcode to stored
  * postcodes to find matches for numerical ranges, and wildcards.
  * @since 2.6.0
- * @param string $postcode Postcode you want to match against stored postcodes
- * @param array  $objects Array of postcode objects from Database
- * @param string $object_id_key DB column name for the ID.
- * @param string $object_compare_key DB column name for the value.
- * @param string $country Country from which this postcode belongs. Allows for formatting.
- * @return array Array of matching object ID and matching values.
+ * @param  string $postcode           Postcode you want to match against stored postcodes
+ * @param  array  $objects            Array of postcode objects from Database
+ * @param  string $object_id_key      DB column name for the ID.
+ * @param  string $object_compare_key DB column name for the value.
+ * @param  string $country            Country from which this postcode belongs. Allows for formatting.
+ * @return array                      Array of matching object ID and matching values.
  */
 function wc_postcode_location_matcher( $postcode, $objects, $object_id_key, $object_compare_key, $country = '' ) {
 	$postcode           = wc_normalize_postcode( $postcode );
@@ -1431,8 +1431,8 @@ function wc_nocache_headers() {
  * Used to sort products attributes with uasort.
  * @since 2.6.0
  *
- * @param array $a
- * @param array $b
+ * @param  array $a
+ * @param  array $b
  *
  * @return int
  */
@@ -1447,8 +1447,8 @@ function wc_product_attribute_uasort_comparison( $a, $b ) {
  * Used to sort shipping zone methods with uasort.
  * @since 3.0.0
  *
- * @param array $a
- * @param array $b
+ * @param  array $a
+ * @param  array $b
  *
  * @return int
  */
@@ -1494,8 +1494,8 @@ function wc_get_rounding_precision() {
  * Add precision to a number and return an int.
  *
  * @since  3.2.0
- * @param  float $value Number to add precision to.
- * @param  bool $round Should we round after adding precision?
+ * @param  float     $value Number to add precision to.
+ * @param  bool      $round Should we round after adding precision?
  * @return int|float
  */
 function wc_add_number_precision( $value, $round = true ) {
@@ -1521,7 +1521,7 @@ function wc_remove_number_precision( $value ) {
  *
  * @since  3.2.0
  * @param  array $value Number to add precision to.
- * @param  bool $round Should we round after adding precision?
+ * @param  bool  $round Should we round after adding precision?
  * @return int
  */
 function wc_add_number_precision_deep( $value, $round = true ) {
@@ -1568,7 +1568,7 @@ function wc_remove_number_precision_deep( $value ) {
 function wc_get_logger() {
 	static $logger = null;
 	if ( null === $logger ) {
-		$class = apply_filters( 'woocommerce_logging_class', 'WC_Logger' );
+		$class      = apply_filters( 'woocommerce_logging_class', 'WC_Logger' );
 		$implements = class_implements( $class );
 		if ( is_array( $implements ) && in_array( 'WC_Logger_Interface', $implements ) ) {
 			if ( is_object( $class ) ) {
@@ -1602,9 +1602,9 @@ function wc_get_logger() {
  *
  * @since 3.0
  *
- * @param mixed $expression The expression to be printed.
- * @param bool $return Optional. Default false. Set to true to return the human-readable string.
- * @return string|bool False if expression could not be printed. True if the expression was printed.
+ * @param  mixed       $expression The expression to be printed.
+ * @param  bool        $return     Optional. Default false. Set to true to return the human-readable string.
+ * @return string|bool             False if expression could not be printed. True if the expression was printed.
  *     If $return is true, a string representation will be returned.
  */
 function wc_print_r( $expression, $return = false ) {
@@ -1636,13 +1636,12 @@ function wc_print_r( $expression, $return = false ) {
  * Registers the default log handler.
  *
  * @since 3.0
- * @param array $handlers
+ * @param  array $handlers
  * @return array
  */
 function wc_register_default_log_handler( $handlers ) {
-
 	if ( defined( 'WC_LOG_HANDLER' ) && class_exists( WC_LOG_HANDLER ) ) {
-		$handler_class = WC_LOG_HANDLER;
+		$handler_class   = WC_LOG_HANDLER;
 		$default_handler = new $handler_class();
 	} else {
 		$default_handler = new WC_Log_Handler_File();
@@ -1674,11 +1673,11 @@ add_action( 'wp_login', 'wc_maybe_store_user_agent', 10, 2 );
  * Based on wp_list_pluck, this calls a method instead of returning a property.
  *
  * @since 3.0.0
- * @param array      $list      List of objects or arrays
- * @param int|string $callback_or_field     Callback method from the object to place instead of the entire object
- * @param int|string $index_key Optional. Field from the object to use as keys for the new array.
+ * @param  array      $list              List of objects or arrays
+ * @param  int|string $callback_or_field Callback method from the object to place instead of the entire object
+ * @param  int|string $index_key         Optional. Field from the object to use as keys for the new array.
  *                              Default null.
- * @return array Array of values.
+ * @return array                         Array of values.
  */
 function wc_list_pluck( $list, $callback_or_field, $index_key = null ) {
 	// Use wp_list_pluck if this isn't a callback
@@ -1687,7 +1686,7 @@ function wc_list_pluck( $list, $callback_or_field, $index_key = null ) {
 		return wp_list_pluck( $list, $callback_or_field, $index_key );
 	}
 	if ( ! $index_key ) {
-		/*
+		/**
 		 * This is simple. Could at some point wrap array_column()
 		 * if we knew we had an array of arrays.
 		 */
@@ -1697,7 +1696,7 @@ function wc_list_pluck( $list, $callback_or_field, $index_key = null ) {
 		return $list;
 	}
 
-	/*
+	/**
 	 * When index_key is not set for a particular item, push the value
 	 * to the end of the stack. This is how array_column() behaves.
 	 */
@@ -1791,8 +1790,8 @@ function wc_restore_locale() {
  *
  * @since 3.1.0
  *
- * @param string $phone Content to convert phone number.
- * @return string Content with converted phone number.
+ * @param  string $phone Content to convert phone number.
+ * @return string        Content with converted phone number.
  */
 function wc_make_phone_clickable( $phone ) {
 	$number = trim( preg_replace( '/[^\d|\+]/', '', $phone ) );
@@ -1806,7 +1805,7 @@ function wc_make_phone_clickable( $phone ) {
  * @since  3.0.9
  * @param  string $key
  * @param  string $default
- * @return mixed value sanitized by wc_clean
+ * @return mixed           value sanitized by wc_clean
  */
 function wc_get_post_data_by_key( $key, $default = '' ) {
 	return wc_clean( wc_get_var( $_POST[ $key ], $default ) );
@@ -1816,9 +1815,9 @@ function wc_get_post_data_by_key( $key, $default = '' ) {
  * Get data if set, otherwise return a default value or null. Prevents notices when data is not set.
  *
  * @since  3.2.0
- * @param  mixed $var
+ * @param  mixed  $var
  * @param  string $default
- * @return mixed value sanitized by wc_clean
+ * @return mixed           value sanitized by wc_clean
  */
 function wc_get_var( &$var, $default = null ) {
 	return isset( $var ) ? $var : $default;
@@ -1828,7 +1827,7 @@ function wc_get_var( &$var, $default = null ) {
  * Read in WooCommerce headers when reading plugin headers.
  *
  * @since 3.2.0
- * @param array $headers
+ * @param  array $headers
  * @return array $headers
  */
 function wc_enable_wc_plugin_headers( $headers ) {
@@ -1846,8 +1845,8 @@ add_filter( 'extra_plugin_headers', 'wc_enable_wc_plugin_headers' );
  * Prevent auto-updating the WooCommerce plugin on major releases if there are untested extensions active.
  *
  * @since 3.2.0
- * @param bool $should_update
- * @param object $plugin
+ * @param  bool   $should_update
+ * @param  object $plugin
  * @return bool
  */
 function wc_prevent_dangerous_auto_updates( $should_update, $plugin ) {
@@ -1859,8 +1858,8 @@ function wc_prevent_dangerous_auto_updates( $should_update, $plugin ) {
 		include_once( dirname( __FILE__ ) . '/admin/plugin-updates/class-wc-plugin-updates.php' );
 	}
 
-	$new_version = wc_clean( $plugin->new_version );
-	$plugin_updates = new WC_Plugin_Updates;
+	$new_version      = wc_clean( $plugin->new_version );
+	$plugin_updates   = new WC_Plugin_Updates;
 	$untested_plugins = $plugin_updates->get_untested_plugins( $new_version, 'major' );
 	if ( ! empty( $untested_plugins ) ) {
 		return false;
@@ -1885,14 +1884,14 @@ add_filter( 'auto_update_plugin', 'wc_prevent_dangerous_auto_updates', 99, 2 );
 function wc_delete_expired_transients() {
 	global $wpdb;
 
-	$sql = "DELETE a, b FROM $wpdb->options a, $wpdb->options b
+	$sql  = "DELETE a, b FROM $wpdb->options a, $wpdb->options b
 		WHERE a.option_name LIKE %s
 		AND a.option_name NOT LIKE %s
 		AND b.option_name = CONCAT( '_transient_timeout_', SUBSTRING( a.option_name, 12 ) )
 		AND b.option_value < %d";
 	$rows = $wpdb->query( $wpdb->prepare( $sql, $wpdb->esc_like( '_transient_' ) . '%', $wpdb->esc_like( '_transient_timeout_' ) . '%', time() ) );
 
-	$sql = "DELETE a, b FROM $wpdb->options a, $wpdb->options b
+	$sql   = "DELETE a, b FROM $wpdb->options a, $wpdb->options b
 		WHERE a.option_name LIKE %s
 		AND a.option_name NOT LIKE %s
 		AND b.option_name = CONCAT( '_site_transient_timeout_', SUBSTRING( a.option_name, 17 ) )
@@ -1907,7 +1906,7 @@ add_action( 'woocommerce_installed', 'wc_delete_expired_transients' );
  * Make a URL relative, if possible.
  *
  * @since 3.2.0
- * @param string $url URL to make relative.
+ * @param  string $url URL to make relative.
  * @return string
  */
 function wc_get_relative_url( $url ) {
@@ -1918,7 +1917,7 @@ function wc_get_relative_url( $url ) {
  * See if a resource is remote.
  *
  * @since 3.2.0
- * @param string $url URL to check.
+ * @param  string $url URL to check.
  * @return bool
  */
 function wc_is_external_resource( $url ) {

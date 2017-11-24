@@ -38,8 +38,8 @@ class WC_Meta_Box_Product_Reviews {
 	/**
 	 * Save meta box data
 	 *
-	 * @param mixed $location
-	 * @param int $comment_id
+	 * @param  mixed $location
+	 * @param  int   $comment_id
 	 *
 	 * @return mixed
 	 */
@@ -59,4 +59,5 @@ class WC_Meta_Box_Product_Reviews {
 		// Return regular value after updating
 		return $location;
 	}
+
 }

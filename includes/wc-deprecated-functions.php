@@ -37,8 +37,8 @@ function wc_do_deprecated_action( $tag, $args, $version, $replacement = null, $m
  * Wrapper for deprecated functions so we can apply some extra logic.
  *
  * @since 3.0.0
- * @param string $function Function used.
- * @param string $version Version the message was added in.
+ * @param string $function    Function used.
+ * @param string $version     Version the message was added in.
  * @param string $replacement Replacement for the called function.
  */
 function wc_deprecated_function( $function, $version, $replacement = null ) {
@@ -68,8 +68,8 @@ function wc_deprecated_hook( $hook, $version, $replacement = null, $message = nu
 	if ( is_ajax() ) {
 		do_action( 'deprecated_hook_run', $hook, $replacement, $version, $message );
 
-		$message    = empty( $message ) ? '' : ' ' . $message;
-		$log_string = "{$hook} is deprecated since version {$version}";
+		$message     = empty( $message ) ? '' : ' ' . $message;
+		$log_string  = "{$hook} is deprecated since version {$version}";
 		$log_string .= $replacement ? "! Use {$replacement} instead." : ' with no alternative available.';
 
 		error_log( $log_string . $message );
@@ -84,8 +84,8 @@ function wc_deprecated_hook( $hook, $version, $replacement = null, $message = nu
  *
  * @since 3.3.0
  * @param Exception $exception_object The exception object.
- * @param string    $function The function which threw exception.
- * @param array     $args The args passed to the function.
+ * @param string    $function         The function which threw exception.
+ * @param array     $args             The args passed to the function.
  */
 function wc_caught_exception( $exception_object, $function = '', $args = array() ) {
 	// @codingStandardsIgnoreStart
@@ -102,8 +102,8 @@ function wc_caught_exception( $exception_object, $function = '', $args = array()
  *
  * @since  3.0.0
  * @param string $function Function used.
- * @param string $message Message to log.
- * @param string $version Version the message was added in.
+ * @param string $message  Message to log.
+ * @param string $version  Version the message was added in.
  */
 function wc_doing_it_wrong( $function, $message, $version ) {
 	// @codingStandardsIgnoreStart
@@ -122,9 +122,9 @@ function wc_doing_it_wrong( $function, $message, $version ) {
  * Wrapper for deprecated arguments so we can apply some extra logic.
  *
  * @since  3.0.0
- * @param  string $argument
- * @param  string $version
- * @param  string $replacement
+ * @param string $argument
+ * @param string $version
+ * @param string $replacement
  */
 function wc_deprecated_argument( $argument, $version, $message = null ) {
 	if ( is_ajax() ) {
@@ -349,7 +349,7 @@ function woocommerce_locate_template( $template_name, $template_path = '', $defa
 /**
  * @deprecated 3.0
  */
-function woocommerce_mail( $to, $subject, $message, $headers = "Content-Type: text/html\r\n", $attachments = "" ) {
+function woocommerce_mail( $to, $subject, $message, $headers = "Content-Type: text/html\r\n", $attachments = '' ) {
 	wc_deprecated_function( __FUNCTION__, '3.0', 'wc_mail' );
 	wc_mail( $to, $subject, $message, $headers, $attachments );
 }
@@ -530,6 +530,7 @@ if ( ! function_exists( 'woocommerce_rgb_from_hex' ) ) {
 		wc_deprecated_function( __FUNCTION__, '3.0', 'wc_rgb_from_hex' );
 		return wc_rgb_from_hex( $color );
 	}
+
 }
 
 if ( ! function_exists( 'woocommerce_hex_darker' ) ) {
@@ -540,6 +541,7 @@ if ( ! function_exists( 'woocommerce_hex_darker' ) ) {
 		wc_deprecated_function( __FUNCTION__, '3.0', 'wc_hex_darker' );
 		return wc_hex_darker( $color, $factor );
 	}
+
 }
 
 if ( ! function_exists( 'woocommerce_hex_lighter' ) ) {
@@ -550,6 +552,7 @@ if ( ! function_exists( 'woocommerce_hex_lighter' ) ) {
 		wc_deprecated_function( __FUNCTION__, '3.0', 'wc_hex_lighter' );
 		return wc_hex_lighter( $color, $factor );
 	}
+
 }
 
 if ( ! function_exists( 'woocommerce_light_or_dark' ) ) {
@@ -560,6 +563,7 @@ if ( ! function_exists( 'woocommerce_light_or_dark' ) ) {
 		wc_deprecated_function( __FUNCTION__, '3.0', 'wc_light_or_dark' );
 		return wc_light_or_dark( $color, $dark, $light );
 	}
+
 }
 
 if ( ! function_exists( 'woocommerce_format_hex' ) ) {
@@ -570,6 +574,7 @@ if ( ! function_exists( 'woocommerce_format_hex' ) ) {
 		wc_deprecated_function( __FUNCTION__, '3.0', 'wc_format_hex' );
 		return wc_format_hex( $hex );
 	}
+
 }
 
 /**
@@ -915,19 +920,19 @@ function woocommerce_get_product_schema() {
 
 	global $product;
 
-	$schema = "Product";
+	$schema = 'Product';
 
 	// Downloadable product schema handling
 	if ( $product->is_downloadable() ) {
 		switch ( $product->download_type ) {
 			case 'application' :
-				$schema = "SoftwareApplication";
+				$schema = 'SoftwareApplication';
 				break;
 			case 'music' :
-				$schema = "MusicAlbum";
+				$schema = 'MusicAlbum';
 				break;
 			default :
-				$schema = "Product";
+				$schema = 'Product';
 				break;
 		}
 	}
@@ -941,9 +946,9 @@ function woocommerce_get_product_schema() {
  * This is a private function (internal use ONLY) used until a data manipulation api is built.
  *
  * @deprecated 3.0.0
- * @param int $product_id
- * @param float $regular_price
- * @param float $sale_price
+ * @param int    $product_id
+ * @param float  $regular_price
+ * @param float  $sale_price
  * @param string $date_from
  * @param string $date_to
  */
@@ -991,8 +996,8 @@ function _wc_save_product_price( $product_id, $regular_price, $sale_price = '', 
  *
  * @deprecated 3.1.0
  * @since 2.6.0
- * @param string $email the customer's email.
- * @return string the URL to the customer's avatar.
+ * @param  string $email the customer's email.
+ * @return string        the URL to the customer's avatar.
  */
 function wc_get_customer_avatar_url( $email ) {
 	// Deprecated in favor of WordPress get_avatar_url() function.

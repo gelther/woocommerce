@@ -79,7 +79,7 @@ class WC_Tests_Countries extends WC_Unit_Test_Case {
 		update_option( 'woocommerce_specific_allowed_countries', array( 'US' ) );
 
 		$all_states = $countries->get_allowed_country_states();
-		$us_states = $all_states['US'];
+		$us_states  = $all_states['US'];
 
 		$this->assertEquals( 'Oregon', $us_states['OR'] );
 		$this->assertGreaterThanOrEqual( 50, count( $us_states ) );
@@ -103,7 +103,7 @@ class WC_Tests_Countries extends WC_Unit_Test_Case {
 		update_option( 'woocommerce_specific_ship_to_countries', array( 'US' ) );
 
 		$all_states = $countries->get_shipping_country_states();
-		$us_states = $all_states['US'];
+		$us_states  = $all_states['US'];
 
 		$this->assertEquals( 'Oregon', $us_states['OR'] );
 		$this->assertGreaterThanOrEqual( 50, count( $us_states ) );
@@ -167,4 +167,5 @@ class WC_Tests_Countries extends WC_Unit_Test_Case {
 		$this->assertArrayNotHasKey( 'AU', $locales );
 		$this->assertArrayHasKey( 'default', $locales );
 	}
+
 }

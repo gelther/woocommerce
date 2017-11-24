@@ -38,10 +38,10 @@ class WC_Settings_Products extends WC_Settings_Page {
 	 */
 	public function get_sections() {
 		$sections = array(
-			''          	=> __( 'General', 'woocommerce' ),
-			'display'       => __( 'Display', 'woocommerce' ),
-			'inventory' 	=> __( 'Inventory', 'woocommerce' ),
-			'downloadable' 	=> __( 'Downloadable products', 'woocommerce' ),
+			''             => __( 'General', 'woocommerce' ),
+			'display'      => __( 'Display', 'woocommerce' ),
+			'inventory'    => __( 'Inventory', 'woocommerce' ),
+			'downloadable' => __( 'Downloadable products', 'woocommerce' ),
 		);
 
 		return apply_filters( 'woocommerce_get_sections_' . $this->id, $sections );
@@ -71,7 +71,7 @@ class WC_Settings_Products extends WC_Settings_Page {
 	/**
 	 * Get settings array.
 	 *
-	 * @param string $current_section Current section name.
+	 * @param  string $current_section Current section name.
 	 * @return array
 	 */
 	public function get_settings( $current_section = '' ) {
@@ -79,9 +79,9 @@ class WC_Settings_Products extends WC_Settings_Page {
 			$settings = array(
 				array(
 					'title' => __( 'Shop &amp; product pages', 'woocommerce' ),
-					'type' 	=> 'title',
-					'desc' 	=> '',
-					'id' 	=> 'catalog_options',
+					'type'  => 'title',
+					'desc'  => '',
+					'id'    => 'catalog_options',
 				),
 				array(
 					'title'    => __( 'Shop page', 'woocommerce' ),
@@ -157,45 +157,45 @@ class WC_Settings_Products extends WC_Settings_Page {
 					'checkboxgroup' => 'end',
 				),
 				array(
-					'type' 	=> 'sectionend',
-					'id' 	=> 'catalog_options',
+					'type' => 'sectionend',
+					'id'   => 'catalog_options',
 				),
 			);
 
-			$theme_support           = get_theme_support( 'woocommerce' );
-			$theme_support           = is_array( $theme_support ) ? $theme_support[0]: false;
-			$image_settings          = array(
+			$theme_support  = get_theme_support( 'woocommerce' );
+			$theme_support  = is_array( $theme_support ) ? $theme_support[0]: false;
+			$image_settings = array(
 				array(
 					'title' => __( 'Product images', 'woocommerce' ),
-					'type' 	=> 'title',
-					'desc' 	=> __( 'These settings change how product images are displayed in your catalog.', 'woocommerce' ),
-					'id' 	=> 'image_options',
+					'type'  => 'title',
+					'desc'  => __( 'These settings change how product images are displayed in your catalog.', 'woocommerce' ),
+					'id'    => 'image_options',
 				),
-				'single_image_width' => array(
-					'title'    => __( 'Main image width', 'woocommerce' ),
-					'desc'     => __( 'This is the width used by the main image on single product pages. These images will be uncropped.', 'woocommerce' ),
-					'id'       => 'woocommerce_single_image_width',
-					'css'      => '',
-					'type'     => 'text',
+				'single_image_width'    => array(
+					'title'             => __( 'Main image width', 'woocommerce' ),
+					'desc'              => __( 'This is the width used by the main image on single product pages. These images will be uncropped.', 'woocommerce' ),
+					'id'                => 'woocommerce_single_image_width',
+					'css'               => '',
+					'type'              => 'text',
 					'custom_attributes' => array(
 						'size' => 3,
 					),
-					'suffix'   => 'px',
-					'default'  => 600,
-					'desc_tip' => true,
+					'suffix'            => 'px',
+					'default'           => 600,
+					'desc_tip'          => true,
 				),
 				'thumbnail_image_width' => array(
-					'title'    => __( 'Thumbnail width', 'woocommerce' ),
-					'desc'     => __( 'This size is used for product archives and product listings.', 'woocommerce' ),
-					'id'       => 'woocommerce_thumbnail_image_width',
-					'css'      => '',
-					'type'     => 'text',
+					'title'             => __( 'Thumbnail width', 'woocommerce' ),
+					'desc'              => __( 'This size is used for product archives and product listings.', 'woocommerce' ),
+					'id'                => 'woocommerce_thumbnail_image_width',
+					'css'               => '',
+					'type'              => 'text',
 					'custom_attributes' => array(
 						'size' => 3,
 					),
-					'suffix'   => 'px',
-					'default'  => 300,
-					'desc_tip' => true,
+					'suffix'            => 'px',
+					'default'           => 300,
+					'desc_tip'          => true,
 				),
 				array(
 					'title'    => __( 'Thumbnail cropping', 'woocommerce' ),
@@ -207,8 +207,8 @@ class WC_Settings_Products extends WC_Settings_Page {
 					'desc_tip' => false,
 				),
 				array(
-					'type' 	=> 'sectionend',
-					'id' 	=> 'image_options',
+					'type' => 'sectionend',
+					'id'   => 'image_options',
 				),
 			);
 
@@ -228,9 +228,9 @@ class WC_Settings_Products extends WC_Settings_Page {
 
 				array(
 					'title' => __( 'Inventory', 'woocommerce' ),
-					'type' 	=> 'title',
-					'desc' 	=> '',
-					'id' 	=> 'product_inventory_options',
+					'type'  => 'title',
+					'desc'  => '',
+					'id'    => 'product_inventory_options',
 				),
 
 				array(
@@ -247,8 +247,8 @@ class WC_Settings_Products extends WC_Settings_Page {
 					'id'                => 'woocommerce_hold_stock_minutes',
 					'type'              => 'number',
 					'custom_attributes' => array(
-						'min'           => 0,
-						'step'          => 1,
+						'min'  => 0,
+						'step' => 1,
 					),
 					'css'               => 'width: 80px;',
 					'default'           => '60',
@@ -296,8 +296,8 @@ class WC_Settings_Products extends WC_Settings_Page {
 					'css'               => 'width:50px;',
 					'type'              => 'number',
 					'custom_attributes' => array(
-						'min'           => 0,
-						'step'          => 1,
+						'min'  => 0,
+						'step' => 1,
 					),
 					'default'           => '2',
 					'autoload'          => false,
@@ -312,8 +312,8 @@ class WC_Settings_Products extends WC_Settings_Page {
 					'css'               => 'width:50px;',
 					'type'              => 'number',
 					'custom_attributes' => array(
-						'min'           => 0,
-						'step'          => 1,
+						'min'  => 0,
+						'step' => 1,
 					),
 					'default'           => '0',
 					'desc_tip'          => true,
@@ -321,11 +321,11 @@ class WC_Settings_Products extends WC_Settings_Page {
 				),
 
 				array(
-					'title'    => __( 'Out of stock visibility', 'woocommerce' ),
-					'desc'     => __( 'Hide out of stock items from the catalog', 'woocommerce' ),
-					'id'       => 'woocommerce_hide_out_of_stock_items',
-					'default'  => 'no',
-					'type'     => 'checkbox',
+					'title'   => __( 'Out of stock visibility', 'woocommerce' ),
+					'desc'    => __( 'Hide out of stock items from the catalog', 'woocommerce' ),
+					'id'      => 'woocommerce_hide_out_of_stock_items',
+					'default' => 'no',
+					'type'    => 'checkbox',
 				),
 
 				array(
@@ -345,18 +345,18 @@ class WC_Settings_Products extends WC_Settings_Page {
 				),
 
 				array(
-					'type' 	=> 'sectionend',
-					'id' 	=> 'product_inventory_options',
+					'type' => 'sectionend',
+					'id'   => 'product_inventory_options',
 				),
 
-			));
+			) );
 
 		} elseif ( 'downloadable' === $current_section ) {
 			$settings = apply_filters( 'woocommerce_downloadable_products_settings', array(
 				array(
 					'title' => __( 'Downloadable products', 'woocommerce' ),
-					'type' 	=> 'title',
-					'id' 	=> 'digital_download_options',
+					'type'  => 'title',
+					'id'    => 'digital_download_options',
 				),
 
 				array(
@@ -404,18 +404,18 @@ class WC_Settings_Products extends WC_Settings_Page {
 				),
 
 				array(
-					'type' 	=> 'sectionend',
-					'id' 	=> 'digital_download_options',
+					'type' => 'sectionend',
+					'id'   => 'digital_download_options',
 				),
 
-			));
+			) );
 
 		} else {
 			$settings = apply_filters( 'woocommerce_products_general_settings', array(
 				array(
-					'title' 	=> __( 'Measurements', 'woocommerce' ),
-					'type' 		=> 'title',
-					'id' 		=> 'product_measurement_options',
+					'title' => __( 'Measurements', 'woocommerce' ),
+					'type'  => 'title',
+					'id'    => 'product_measurement_options',
 				),
 
 				array(
@@ -454,15 +454,15 @@ class WC_Settings_Products extends WC_Settings_Page {
 				),
 
 				array(
-					'type' 	=> 'sectionend',
-					'id' 	=> 'product_measurement_options',
+					'type' => 'sectionend',
+					'id'   => 'product_measurement_options',
 				),
 
 				array(
 					'title' => __( 'Reviews', 'woocommerce' ),
-					'type' 	=> 'title',
-					'desc' 	=> '',
-					'id' 	=> 'product_rating_options',
+					'type'  => 'title',
+					'desc'  => '',
+					'id'    => 'product_rating_options',
 				),
 
 				array(
@@ -516,15 +516,16 @@ class WC_Settings_Products extends WC_Settings_Page {
 				),
 
 				array(
-					'type' 	=> 'sectionend',
-					'id' 	=> 'product_rating_options',
+					'type' => 'sectionend',
+					'id'   => 'product_rating_options',
 				),
 
-			));
+			) );
 		}
 
 		return apply_filters( 'woocommerce_get_settings_' . $this->id, $settings, $current_section );
 	}
+
 }
 
 return new WC_Settings_Products();

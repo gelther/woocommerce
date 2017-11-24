@@ -67,10 +67,10 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 				) ),
 			),
 			'schema' => array( $this, 'get_public_item_schema' ),
-		));
+		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
-			'args' => array(
+			'args'   => array(
 				'id' => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -81,7 +81,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 				'callback'            => array( $this, 'get_item' ),
 				'permission_callback' => array( $this, 'get_item_permissions_check' ),
 				'args'                => array(
-					'context'         => $this->get_context_param( array( 'default' => 'view' ) ),
+					'context' => $this->get_context_param( array( 'default' => 'view' ) ),
 				),
 			),
 			array(
@@ -119,7 +119,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to read the attributes.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function get_items_permissions_check( $request ) {
@@ -133,7 +133,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to create a attribute.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function create_item_permissions_check( $request ) {
@@ -147,7 +147,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to read a attribute.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function get_item_permissions_check( $request ) {
@@ -165,7 +165,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to update a attribute.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function update_item_permissions_check( $request ) {
@@ -183,7 +183,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to delete a attribute.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
@@ -216,7 +216,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Get all attributes.
 	 *
-	 * @param WP_REST_Request $request
+	 * @param  WP_REST_Request $request
 	 * @return array
 	 */
 	public function get_items( $request ) {
@@ -225,7 +225,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 		foreach ( $attributes as $attribute_obj ) {
 			$attribute = $this->prepare_item_for_response( $attribute_obj, $request );
 			$attribute = $this->prepare_response_for_collection( $attribute );
-			$data[] = $attribute;
+			$data[]    = $attribute;
 		}
 
 		return rest_ensure_response( $data );
@@ -234,7 +234,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Create a single attribute.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request          $request Full details about the request.
 	 * @return WP_REST_Request|WP_Error
 	 */
 	public function create_item( $request ) {
@@ -282,7 +282,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Get a single attribute.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request          $request Full details about the request.
 	 * @return WP_REST_Request|WP_Error
 	 */
 	public function get_item( $request ) {
@@ -300,7 +300,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Update a single term from a taxonomy.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request          $request Full details about the request.
 	 * @return WP_REST_Request|WP_Error
 	 */
 	public function update_item( $request ) {
@@ -346,7 +346,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Delete a single attribute.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function delete_item( $request ) {
@@ -375,9 +375,9 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 		/**
 		 * Fires after a single attribute is deleted via the REST API.
 		 *
-		 * @param stdObject        $attribute     The deleted attribute.
-		 * @param WP_REST_Response $response The response data.
-		 * @param WP_REST_Request  $request  The request sent to the API.
+		 * @param stdObject        $attribute The deleted attribute.
+		 * @param WP_REST_Response $response  The response data.
+		 * @param WP_REST_Request  $request   The request sent to the API.
 		 */
 		do_action( 'woocommerce_rest_delete_product_attribute', $attribute, $response, $request );
 
@@ -387,8 +387,8 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Prepare a single product attribute output for response.
 	 *
-	 * @param obj $item Term object.
-	 * @param WP_REST_Request $request
+	 * @param  obj              $item     Term object.
+	 * @param  WP_REST_Request  $request
 	 * @return WP_REST_Response $response
 	 */
 	public function prepare_item_for_response( $item, $request ) {
@@ -414,9 +414,9 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 		 *
 		 * Allows modification of the product attribute data right before it is returned.
 		 *
-		 * @param WP_REST_Response  $response  The response object.
-		 * @param object            $item      The original attribute object.
-		 * @param WP_REST_Request   $request   Request used to generate the response.
+		 * @param WP_REST_Response $response The response object.
+		 * @param object           $item     The original attribute object.
+		 * @param WP_REST_Request  $request  Request used to generate the response.
 		 */
 		return apply_filters( 'woocommerce_rest_prepare_product_attribute', $response, $item, $request );
 	}
@@ -424,13 +424,13 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param object $attribute Attribute object.
-	 * @return array Links for the given attribute.
+	 * @param  object $attribute Attribute object.
+	 * @return array             Links for the given attribute.
 	 */
 	protected function prepare_links( $attribute ) {
 		$base  = '/' . $this->namespace . '/' . $this->rest_base;
 		$links = array(
-			'self' => array(
+			'self'       => array(
 				'href' => rest_url( trailingslashit( $base ) . $attribute->attribute_id ),
 			),
 			'collection' => array(
@@ -448,17 +448,17 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	 */
 	public function get_item_schema() {
 		$schema = array(
-			'$schema'              => 'http://json-schema.org/draft-04/schema#',
-			'title'                => 'product_attribute',
-			'type'                 => 'object',
-			'properties'           => array(
-				'id' => array(
+			'$schema'    => 'http://json-schema.org/draft-04/schema#',
+			'title'      => 'product_attribute',
+			'type'       => 'object',
+			'properties' => array(
+				'id'           => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name' => array(
+				'name'         => array(
 					'description' => __( 'Attribute name.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -466,7 +466,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 						'sanitize_callback' => 'sanitize_text_field',
 					),
 				),
-				'slug' => array(
+				'slug'         => array(
 					'description' => __( 'An alphanumeric identifier for the resource unique to its type.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -474,14 +474,14 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 						'sanitize_callback' => 'sanitize_title',
 					),
 				),
-				'type' => array(
+				'type'         => array(
 					'description' => __( 'Type of attribute.', 'woocommerce' ),
 					'type'        => 'string',
 					'default'     => 'select',
 					'enum'        => array_keys( wc_get_attribute_types() ),
 					'context'     => array( 'view', 'edit' ),
 				),
-				'order_by' => array(
+				'order_by'     => array(
 					'description' => __( 'Default sort order.', 'woocommerce' ),
 					'type'        => 'string',
 					'default'     => 'menu_order',
@@ -506,7 +506,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	 * @return array
 	 */
 	public function get_collection_params() {
-		$params = array();
+		$params            = array();
 		$params['context'] = $this->get_context_param( array( 'default' => 'view' ) );
 
 		return $params;
@@ -515,7 +515,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Get attribute name.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return string
 	 */
 	protected function get_taxonomy( $request ) {
@@ -535,7 +535,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Get attribute data.
 	 *
-	 * @param int $id Attribute ID.
+	 * @param  int               $id Attribute ID.
 	 * @return stdClass|WP_Error
 	 */
 	protected function get_attribute( $id ) {
@@ -545,7 +545,7 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 			SELECT *
 			FROM {$wpdb->prefix}woocommerce_attribute_taxonomies
 			WHERE attribute_id = %d
-		 ", $id ) );
+		", $id ) );
 
 		if ( is_wp_error( $attribute ) || is_null( $attribute ) ) {
 			return new WP_Error( 'woocommerce_rest_attribute_invalid', __( 'Resource does not exist.', 'woocommerce' ), array( 'status' => 404 ) );
@@ -558,8 +558,8 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	 * Validate attribute slug.
 	 *
 	 * @deprecated 3.2.0
-	 * @param string $slug
-	 * @param bool $new_data
+	 * @param  string        $slug
+	 * @param  bool          $new_data
 	 * @return bool|WP_Error
 	 */
 	protected function validate_attribute_slug( $slug, $new_data = true ) {
@@ -583,4 +583,5 @@ class WC_REST_Product_Attributes_V1_Controller extends WC_REST_Controller {
 	protected function flush_rewrite_rules() {
 		wp_schedule_single_event( time(), 'woocommerce_flush_rewrite_rules' );
 	}
+
 }

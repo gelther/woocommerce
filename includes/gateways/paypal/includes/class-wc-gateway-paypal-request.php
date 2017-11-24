@@ -154,7 +154,7 @@ class WC_Gateway_Paypal_Request {
 			$shipping_args['country']    = $this->limit_length( $order->get_shipping_country(), 2 );
 			$shipping_args['zip']        = $this->limit_length( wc_format_postcode( $order->get_shipping_postcode(), $order->get_shipping_country() ), 32 );
 		} else {
-			$shipping_args['no_shipping']      = 1;
+			$shipping_args['no_shipping'] = 1;
 		}
 
 		return $shipping_args;
@@ -166,7 +166,6 @@ class WC_Gateway_Paypal_Request {
 	 * @return array
 	 */
 	protected function get_line_item_args( $order ) {
-
 		/**
 		 * Try passing a line item per product if supported.
 		 */
@@ -229,9 +228,9 @@ class WC_Gateway_Paypal_Request {
 		foreach ( $order->get_items() as $item ) {
 			$item_name = $item->get_name();
 			$item_meta = strip_tags( wc_display_item_meta( $item, array(
-				'before'    => "",
-				'separator' => ", ",
-				'after'     => "",
+				'before'    => '',
+				'separator' => ', ',
+				'after'     => '',
 				'echo'      => false,
 				'autop'     => false,
 			) ) );
@@ -249,15 +248,15 @@ class WC_Gateway_Paypal_Request {
 	/**
 	 * Get order item names as a string.
 	 * @param  WC_Order $order
-	 * @param  array $item
+	 * @param  array    $item
 	 * @return string
 	 */
 	protected function get_order_item_name( $order, $item ) {
 		$item_name = $item->get_name();
 		$item_meta = strip_tags( wc_display_item_meta( $item, array(
-			'before'    => "",
-			'separator' => ", ",
-			'after'     => "",
+			'before'    => '',
+			'separator' => ', ',
+			'after'     => '',
 			'echo'      => false,
 			'autop'     => false,
 		) ) );
@@ -295,14 +294,14 @@ class WC_Gateway_Paypal_Request {
 		// Products
 		foreach ( $order->get_items( array( 'line_item', 'fee' ) ) as $item ) {
 			if ( 'fee' === $item['type'] ) {
-				$item_line_total  = $this->number_format( $item['line_total'], $order );
-				$line_item        = $this->add_line_item( $item->get_name(), 1, $item_line_total );
+				$item_line_total   = $this->number_format( $item['line_total'], $order );
+				$line_item         = $this->add_line_item( $item->get_name(), 1, $item_line_total );
 				$calculated_total += $item_line_total;
 			} else {
-				$product          = $item->get_product();
-				$sku              = $product ? $product->get_sku() : '';
-				$item_line_total  = $this->number_format( $order->get_item_subtotal( $item, false ), $order );
-				$line_item        = $this->add_line_item( $this->get_order_item_name( $order, $item ), $item->get_quantity(), $item_line_total, $sku );
+				$product           = $item->get_product();
+				$sku               = $product ? $product->get_sku() : '';
+				$item_line_total   = $this->number_format( $order->get_item_subtotal( $item, false ), $order );
+				$line_item         = $this->add_line_item( $this->get_order_item_name( $order, $item ), $item->get_quantity(), $item_line_total, $sku );
 				$calculated_total += $item_line_total * $item->get_quantity();
 			}
 
@@ -321,11 +320,11 @@ class WC_Gateway_Paypal_Request {
 
 	/**
 	 * Add PayPal Line Item.
-	 * @param  string  $item_name
-	 * @param  int     $quantity
-	 * @param  float   $amount
-	 * @param  string  $item_number
-	 * @return bool successfully added or not
+	 * @param  string $item_name
+	 * @param  int    $quantity
+	 * @param  float  $amount
+	 * @param  string $item_number
+	 * @return bool                successfully added or not
 	 */
 	protected function add_line_item( $item_name, $quantity = 1, $amount = 0.0, $item_number = '' ) {
 		$index = ( sizeof( $this->line_items ) / 4 ) + 1;
@@ -384,7 +383,7 @@ class WC_Gateway_Paypal_Request {
 
 	/**
 	 * Round prices.
-	 * @param  double $price
+	 * @param  double   $price
 	 * @param  WC_Order $order
 	 * @return double
 	 */
@@ -401,7 +400,7 @@ class WC_Gateway_Paypal_Request {
 	/**
 	 * Format prices.
 	 * @param  float|int $price
-	 * @param  WC_Order $order
+	 * @param  WC_Order  $order
 	 * @return string
 	 */
 	protected function number_format( $price, $order ) {
@@ -413,4 +412,5 @@ class WC_Gateway_Paypal_Request {
 
 		return number_format( $price, $decimals, '.', '' );
 	}
+
 }

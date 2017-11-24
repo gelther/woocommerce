@@ -41,12 +41,12 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	 */
 	public function register_routes() {
 		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
-			'args' => array(
+			'args'   => array(
 				'product_id' => array(
 					'description' => __( 'Unique identifier for the variable product.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
-				'id' => array(
+				'id'         => array(
 					'description' => __( 'Unique identifier for the variation.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
@@ -67,12 +67,12 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 						'type'        => 'string',
 						'description' => __( 'Review content.', 'woocommerce' ),
 					),
-					'name' => array(
+					'name'   => array(
 						'required'    => true,
 						'type'        => 'string',
 						'description' => __( 'Name of the reviewer.', 'woocommerce' ),
 					),
-					'email' => array(
+					'email'  => array(
 						'required'    => true,
 						'type'        => 'string',
 						'description' => __( 'Email of the reviewer.', 'woocommerce' ),
@@ -83,12 +83,12 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
-			'args' => array(
+			'args'   => array(
 				'product_id' => array(
 					'description' => __( 'Unique identifier for the variable product.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
-				'id' => array(
+				'id'         => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
@@ -126,7 +126,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check whether a given request has permission to read webhook deliveries.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function get_items_permissions_check( $request ) {
@@ -140,7 +140,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to read a product review.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function get_item_permissions_check( $request ) {
@@ -156,7 +156,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to create a new product review.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function create_item_permissions_check( $request ) {
@@ -170,7 +170,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to update a product review.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function update_item_permissions_check( $request ) {
@@ -184,7 +184,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check if a given request has access to delete a product review.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
@@ -198,7 +198,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Get all reviews from a product.
 	 *
-	 * @param WP_REST_Request $request
+	 * @param  WP_REST_Request $request
 	 *
 	 * @return array|WP_Error
 	 */
@@ -223,7 +223,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Get a single product review.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_item( $request ) {
@@ -246,11 +246,10 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 		return $response;
 	}
 
-
 	/**
 	 * Create a product review.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function create_item( $request ) {
@@ -268,7 +267,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 		 * Allows modification of the comment right before it is inserted via `wp_insert_comment`.
 		 *
 		 * @param array           $prepared_review The prepared comment data for `wp_insert_comment`.
-		 * @param WP_REST_Request $request          Request used to insert the comment.
+		 * @param WP_REST_Request $request         Request used to insert the comment.
 		 */
 		$prepared_review = apply_filters( 'rest_pre_insert_product_review', $prepared_review, $request );
 
@@ -289,7 +288,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 		 * @param WP_REST_Request $request        Request object.
 		 * @param boolean         $creating       True when creating item, false when updating.
 		 */
-		do_action( "woocommerce_rest_insert_product_review", $product_review, $request, true );
+		do_action( 'woocommerce_rest_insert_product_review', $product_review, $request, true );
 
 		$request->set_param( 'context', 'edit' );
 		$response = $this->prepare_item_for_response( $product_review, $request );
@@ -304,7 +303,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Update a single product review.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function update_item( $request ) {
@@ -338,11 +337,11 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 		/**
 		 * Fires after a single item is created or updated via the REST API.
 		 *
-		 * @param WP_Comment         $comment      Inserted object.
-		 * @param WP_REST_Request $request   Request object.
-		 * @param boolean         $creating  True when creating item, false when updating.
+		 * @param WP_Comment      $comment  Inserted object.
+		 * @param WP_REST_Request $request  Request object.
+		 * @param boolean         $creating True when creating item, false when updating.
 		 */
-		do_action( "woocommerce_rest_insert_product_review", $product_review, $request, true );
+		do_action( 'woocommerce_rest_insert_product_review', $product_review, $request, true );
 
 		$request->set_param( 'context', 'edit' );
 		$response = $this->prepare_item_for_response( $product_review, $request );
@@ -353,7 +352,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Delete a product review.
 	 *
-	 * @param WP_REST_Request $request Full details about the request
+	 * @param  WP_REST_Request                $request Full details about the request
 	 *
 	 * @return bool|WP_Error|WP_REST_Response
 	 */
@@ -371,8 +370,8 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 		 *
 		 * Return false to disable trash support for the product review.
 		 *
-		 * @param boolean $supports_trash        Whether the object supports trashing.
-		 * @param WP_Post $product_review        The object being considered for trashing support.
+		 * @param boolean $supports_trash Whether the object supports trashing.
+		 * @param WP_Post $product_review The object being considered for trashing support.
 		 */
 		$supports_trash = apply_filters( 'rest_product_review_trashable', ( EMPTY_TRASH_DAYS > 0 ), $product_review );
 
@@ -400,9 +399,9 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 		/**
 		 * Fires after a product review is deleted via the REST API.
 		 *
-		 * @param object           $product_review  The deleted item.
-		 * @param WP_REST_Response $response        The response data.
-		 * @param WP_REST_Request  $request         The request sent to the API.
+		 * @param object           $product_review The deleted item.
+		 * @param WP_REST_Response $response       The response data.
+		 * @param WP_REST_Request  $request        The request sent to the API.
 		 */
 		do_action( 'rest_delete_product_review', $product_review, $response, $request );
 
@@ -412,8 +411,8 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Prepare a single product review output for response.
 	 *
-	 * @param WP_Comment $review Product review object.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  WP_Comment       $review   Product review object.
+	 * @param  WP_REST_Request  $request  Request object.
 	 * @return WP_REST_Response $response Response data.
 	 */
 	public function prepare_item_for_response( $review, $request ) {
@@ -449,7 +448,7 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Prepare a single product review to be inserted into the database.
 	 *
-	 * @param  WP_REST_Request $request Request object.
+	 * @param  WP_REST_Request $request         Request object.
 	 * @return array|WP_Error  $prepared_review
 	 */
 	protected function prepare_item_for_database( $request ) {
@@ -481,21 +480,21 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param WP_Comment $review Product review object.
-	 * @param WP_REST_Request $request Request object.
-	 * @return array Links for the given product review.
+	 * @param  WP_Comment      $review  Product review object.
+	 * @param  WP_REST_Request $request Request object.
+	 * @return array                    Links for the given product review.
 	 */
 	protected function prepare_links( $review, $request ) {
 		$product_id = (int) $request['product_id'];
 		$base       = str_replace( '(?P<product_id>[\d]+)', $product_id, $this->rest_base );
 		$links      = array(
-			'self' => array(
+			'self'       => array(
 				'href' => rest_url( sprintf( '/%s/%s/%d', $this->namespace, $base, $review->comment_ID ) ),
 			),
 			'collection' => array(
 				'href' => rest_url( sprintf( '/%s/%s', $this->namespace, $base ) ),
 			),
-			'up' => array(
+			'up'         => array(
 				'href' => rest_url( sprintf( '/%s/products/%d', $this->namespace, $product_id ) ),
 			),
 		);
@@ -514,13 +513,13 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 			'title'      => 'product_review',
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'           => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'review' => array(
+				'review'       => array(
 					'description' => __( 'The content of the review.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -530,22 +529,22 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'rating' => array(
+				'rating'       => array(
 					'description' => __( 'Review rating (0 to 5).', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'name' => array(
+				'name'         => array(
 					'description' => __( 'Reviewer name.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'email' => array(
+				'email'        => array(
 					'description' => __( 'Reviewer email.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'verified' => array(
+				'verified'     => array(
 					'description' => __( 'Shows if the reviewer bought the product or not.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
@@ -567,4 +566,5 @@ class WC_REST_Product_Reviews_V1_Controller extends WC_REST_Controller {
 			'context' => $this->get_context_param( array( 'default' => 'view' ) ),
 		);
 	}
+
 }

@@ -68,7 +68,7 @@ class WC_Order_Refund extends WC_Abstract_Order {
 	/**
 	 * Get refunded amount.
 	 *
-	 * @param  string $context
+	 * @param  string    $context
 	 * @return int|float
 	 */
 	public function get_amount( $context = 'view' ) {
@@ -79,7 +79,7 @@ class WC_Order_Refund extends WC_Abstract_Order {
 	 * Get refund reason.
 	 *
 	 * @since 2.2
-	 * @param  string $context
+	 * @param  string    $context
 	 * @return int|float
 	 */
 	public function get_reason( $context = 'view' ) {
@@ -95,7 +95,6 @@ class WC_Order_Refund extends WC_Abstract_Order {
 	 */
 	public function get_refunded_by( $context = 'view' ) {
 		return $this->get_prop( 'refunded_by', $context );
-
 	}
 
 	/**
@@ -141,7 +140,7 @@ class WC_Order_Refund extends WC_Abstract_Order {
 	/**
 	 * Magic __get method for backwards compatibility.
 	 *
-	 * @param string $key
+	 * @param  string $key
 	 * @return mixed
 	 */
 	public function __get( $key ) {
@@ -160,7 +159,7 @@ class WC_Order_Refund extends WC_Abstract_Order {
 	/**
 	 * Gets an refund from the database.
 	 * @deprecated 3.0
-	 * @param int $id (default: 0).
+	 * @param  int  $id (default: 0).
 	 * @return bool
 	 */
 	public function get_refund( $id = 0 ) {
@@ -194,4 +193,5 @@ class WC_Order_Refund extends WC_Abstract_Order {
 		wc_deprecated_function( 'get_refund_reason', '3.0', 'get_reason' );
 		return $this->get_reason();
 	}
+
 }
