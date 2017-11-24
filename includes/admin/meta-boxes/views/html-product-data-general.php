@@ -105,8 +105,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				'description'       => __( 'Leave blank for unlimited re-downloads.', 'woocommerce' ),
 				'type'              => 'number',
 				'custom_attributes' => array(
-					'step' 	=> '1',
-					'min'	=> '0',
+					'step' => '1',
+					'min'  => '0',
 				),
 			) );
 
@@ -118,8 +118,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				'description'       => __( 'Enter the number of days before a download link expires, or leave blank.', 'woocommerce' ),
 				'type'              => 'number',
 				'custom_attributes' => array(
-					'step' 	=> '1',
-					'min'	=> '0',
+					'step' => '1',
+					'min'  => '0',
 				),
 			) );
 
@@ -131,16 +131,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="options_group show_if_simple show_if_external show_if_variable">
 			<?php
 				woocommerce_wp_select( array(
-					'id'             => '_tax_status',
-					'value'          => $product_object->get_tax_status( 'edit' ),
-					'label'          => __( 'Tax status', 'woocommerce' ),
-					'options'        => array(
-						'taxable' 	 => __( 'Taxable', 'woocommerce' ),
-						'shipping' 	 => __( 'Shipping only', 'woocommerce' ),
-						'none' 		 => _x( 'None', 'Tax status', 'woocommerce' ),
+					'id'          => '_tax_status',
+					'value'       => $product_object->get_tax_status( 'edit' ),
+					'label'       => __( 'Tax status', 'woocommerce' ),
+					'options'     => array(
+						'taxable'  => __( 'Taxable', 'woocommerce' ),
+						'shipping' => __( 'Shipping only', 'woocommerce' ),
+						'none'     => _x( 'None', 'Tax status', 'woocommerce' ),
 					),
-					'desc_tip'       => 'true',
-					'description'    => __( 'Define whether or not the entire product is taxable, or just the cost of shipping it.', 'woocommerce' ),
+					'desc_tip'    => 'true',
+					'description' => __( 'Define whether or not the entire product is taxable, or just the cost of shipping it.', 'woocommerce' ),
 				) );
 
 				woocommerce_wp_select( array(
