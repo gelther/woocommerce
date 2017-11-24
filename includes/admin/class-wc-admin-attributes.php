@@ -166,11 +166,11 @@ class WC_Admin_Attributes {
 
 		$edit = absint( $_GET['edit'] );
 
-		$attribute_to_edit = $wpdb->get_row( "SELECT attribute_type, attribute_label, attribute_name, attribute_orderby, attribute_public FROM " . $wpdb->prefix . "woocommerce_attribute_taxonomies WHERE attribute_id = '$edit'" );
+		$attribute_to_edit = $wpdb->get_row( 'SELECT attribute_type, attribute_label, attribute_name, attribute_orderby, attribute_public FROM ' . $wpdb->prefix . "woocommerce_attribute_taxonomies WHERE attribute_id = '$edit'" );
 
 		?>
 		<div class="wrap woocommerce">
-			<h1><?php esc_html_e( 'Edit attribute', 'woocommerce' ) ?></h1>
+			<h1><?php esc_html_e( 'Edit attribute', 'woocommerce' ); ?></h1>
 
 			<?php
 			if ( ! $attribute_to_edit ) {
@@ -249,7 +249,7 @@ class WC_Admin_Attributes {
 									<p class="description"><?php esc_html_e( 'Determines the sort order of the terms on the frontend shop product pages. If using custom ordering, you can drag and drop the terms in this attribute.', 'woocommerce' ); ?></p>
 								</td>
 							</tr>
-							<?php do_action( 'woocommerce_after_edit_attribute_fields' ) ?>
+							<?php do_action( 'woocommerce_after_edit_attribute_fields' ); ?>
 						</tbody>
 					</table>
 					<p class="submit"><button type="submit" name="save_attribute" id="submit" class="button-primary" value="<?php esc_attr_e( 'Update', 'woocommerce' ); ?>"><?php esc_html_e( 'Update', 'woocommerce' ); ?></button></p>
@@ -349,7 +349,7 @@ class WC_Admin_Attributes {
 											<?php
 										endforeach;
 									else :
-										?><tr><td colspan="6"><?php esc_html_e( 'No attributes currently exist.', 'woocommerce' ) ?></td></tr><?php
+										?><tr><td colspan="6"><?php esc_html_e( 'No attributes currently exist.', 'woocommerce' ); ?></td></tr><?php
 									endif;
 								?>
 							</tbody>
@@ -362,7 +362,7 @@ class WC_Admin_Attributes {
 							<h2><?php esc_html_e( 'Add new attribute', 'woocommerce' ); ?></h2>
 							<p><?php esc_html_e( 'Attributes let you define extra product data, such as size or color. You can use these attributes in the shop sidebar using the "layered nav" widgets. Please note: you cannot rename an attribute later on.', 'woocommerce' ); ?></p>
 							<form action="edit.php?post_type=product&amp;page=product_attributes" method="post">
-								<?php do_action( 'woocommerce_before_add_attribute_fields' ) ?>
+								<?php do_action( 'woocommerce_before_add_attribute_fields' ); ?>
 
 								<div class="form-field">
 									<label for="attribute_label"><?php esc_html_e( 'Name', 'woocommerce' ); ?></label>
@@ -413,7 +413,7 @@ class WC_Admin_Attributes {
 									<p class="description"><?php esc_html_e( 'Determines the sort order of the terms on the frontend shop product pages. If using custom ordering, you can drag and drop the terms in this attribute.', 'woocommerce' ); ?></p>
 								</div>
 
-								<?php do_action( 'woocommerce_after_add_attribute_fields' ) ?>
+								<?php do_action( 'woocommerce_after_add_attribute_fields' ); ?>
 
 								<p class="submit"><button type="submit" name="add_new_attribute" id="submit" class="button button-primary" value="<?php esc_attr_e( 'Add attribute', 'woocommerce' ); ?>"><?php esc_html_e( 'Add attribute', 'woocommerce' ); ?></button></p>
 								<?php wp_nonce_field( 'woocommerce-add-new_attribute' ); ?>
@@ -437,4 +437,5 @@ class WC_Admin_Attributes {
 		</div>
 		<?php
 	}
+
 }
