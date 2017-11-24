@@ -290,12 +290,12 @@ class WC_Geolocation {
 	 * Check file size
 	 * Check the file size, if empty file also delete it.
 	 *
-	 * @param string $filename Name of the file to check.
+	 * @param  string   $filename Name of the file to check.
 	 * @return bool|int
 	 */
 	private static function get_file_size( $filename ) {
-		$handle   = @fopen( $filename, 'r' );  // @codingStandardsIgnoreLine
-		$s_array  = fstat( $handle );  // @codingStandardsIgnoreLine
+		$handle  = @fopen( $filename, 'r' );  // @codingStandardsIgnoreLine
+		$s_array = fstat( $handle );  // @codingStandardsIgnoreLine
 		@fclose( $handle );  // @codingStandardsIgnoreLine
 		if ( ! isset( $s_array['size'] ) || 0 === $s_array['size'] ) {
 			$logger = wc_get_logger();
@@ -310,7 +310,7 @@ class WC_Geolocation {
 	/**
 	 * Use APIs to Geolocate the user.
 	 *
-	 * @param  string $ip_address IP address.
+	 * @param  string      $ip_address IP address.
 	 * @return string|bool
 	 */
 	private static function geolocate_via_api( $ip_address ) {
@@ -369,6 +369,7 @@ class WC_Geolocation {
 	private static function is_ipv6( $ip_address ) {
 		return false !== filter_var( $ip_address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 );
 	}
+
 }
 
 WC_Geolocation::init();
