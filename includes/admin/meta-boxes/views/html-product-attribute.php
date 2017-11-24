@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 								<select multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select terms', 'woocommerce' ); ?>" class="multiselect attribute_values wc-enhanced-select" name="attribute_values[<?php echo esc_attr( $i ); ?>][]">
 									<?php
-									$args = array(
+									$args      = array(
 										'orderby'    => 'name',
 										'hide_empty' => 0,
 									);
