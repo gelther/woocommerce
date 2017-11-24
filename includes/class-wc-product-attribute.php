@@ -259,7 +259,7 @@ class WC_Product_Attribute implements ArrayAccess {
 	/**
 	 * offsetGet.
 	 *
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return mixed
 	 */
 	public function offsetGet( $offset ) {
@@ -289,7 +289,7 @@ class WC_Product_Attribute implements ArrayAccess {
 	 * offsetSet.
 	 *
 	 * @param string $offset
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function offsetSet( $offset, $value ) {
 		switch ( $offset ) {
@@ -320,10 +320,11 @@ class WC_Product_Attribute implements ArrayAccess {
 	/**
 	 * offsetExists.
 	 *
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return bool
 	 */
 	public function offsetExists( $offset ) {
 		return in_array( $offset, array_merge( array( 'is_variation', 'is_visible', 'is_taxonomy', 'value' ), array_keys( $this->data ) ) );
 	}
+
 }
