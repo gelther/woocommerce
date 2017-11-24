@@ -36,64 +36,64 @@ class WC_Admin_Profile {
 	 * @return array Fields to display which are filtered through woocommerce_customer_meta_fields before being returned
 	 */
 	public function get_customer_meta_fields() {
-		$show_fields = apply_filters('woocommerce_customer_meta_fields', array(
-			'billing' => array(
-				'title' => __( 'Customer billing address', 'woocommerce' ),
+		$show_fields = apply_filters( 'woocommerce_customer_meta_fields', array(
+			'billing'  => array(
+				'title'  => __( 'Customer billing address', 'woocommerce' ),
 				'fields' => array(
 					'billing_first_name' => array(
 						'label'       => __( 'First name', 'woocommerce' ),
 						'description' => '',
 					),
-					'billing_last_name' => array(
+					'billing_last_name'  => array(
 						'label'       => __( 'Last name', 'woocommerce' ),
 						'description' => '',
 					),
-					'billing_company' => array(
+					'billing_company'    => array(
 						'label'       => __( 'Company', 'woocommerce' ),
 						'description' => '',
 					),
-					'billing_address_1' => array(
+					'billing_address_1'  => array(
 						'label'       => __( 'Address line 1', 'woocommerce' ),
 						'description' => '',
 					),
-					'billing_address_2' => array(
+					'billing_address_2'  => array(
 						'label'       => __( 'Address line 2', 'woocommerce' ),
 						'description' => '',
 					),
-					'billing_city' => array(
+					'billing_city'       => array(
 						'label'       => __( 'City', 'woocommerce' ),
 						'description' => '',
 					),
-					'billing_postcode' => array(
+					'billing_postcode'   => array(
 						'label'       => __( 'Postcode / ZIP', 'woocommerce' ),
 						'description' => '',
 					),
-					'billing_country' => array(
+					'billing_country'    => array(
 						'label'       => __( 'Country', 'woocommerce' ),
 						'description' => '',
 						'class'       => 'js_field-country',
 						'type'        => 'select',
 						'options'     => array( '' => __( 'Select a country&hellip;', 'woocommerce' ) ) + WC()->countries->get_allowed_countries(),
 					),
-					'billing_state' => array(
+					'billing_state'      => array(
 						'label'       => __( 'State / County', 'woocommerce' ),
 						'description' => __( 'State / County or state code', 'woocommerce' ),
 						'class'       => 'js_field-state',
 					),
-					'billing_phone' => array(
+					'billing_phone'      => array(
 						'label'       => __( 'Phone', 'woocommerce' ),
 						'description' => '',
 					),
-					'billing_email' => array(
+					'billing_email'      => array(
 						'label'       => __( 'Email address', 'woocommerce' ),
 						'description' => '',
 					),
 				),
 			),
 			'shipping' => array(
-				'title' => __( 'Customer shipping address', 'woocommerce' ),
+				'title'  => __( 'Customer shipping address', 'woocommerce' ),
 				'fields' => array(
-					'copy_billing' => array(
+					'copy_billing'        => array(
 						'label'       => __( 'Copy from billing address', 'woocommerce' ),
 						'description' => '',
 						'class'       => 'js_copy-billing',
@@ -104,38 +104,38 @@ class WC_Admin_Profile {
 						'label'       => __( 'First name', 'woocommerce' ),
 						'description' => '',
 					),
-					'shipping_last_name' => array(
+					'shipping_last_name'  => array(
 						'label'       => __( 'Last name', 'woocommerce' ),
 						'description' => '',
 					),
-					'shipping_company' => array(
+					'shipping_company'    => array(
 						'label'       => __( 'Company', 'woocommerce' ),
 						'description' => '',
 					),
-					'shipping_address_1' => array(
+					'shipping_address_1'  => array(
 						'label'       => __( 'Address line 1', 'woocommerce' ),
 						'description' => '',
 					),
-					'shipping_address_2' => array(
+					'shipping_address_2'  => array(
 						'label'       => __( 'Address line 2', 'woocommerce' ),
 						'description' => '',
 					),
-					'shipping_city' => array(
+					'shipping_city'       => array(
 						'label'       => __( 'City', 'woocommerce' ),
 						'description' => '',
 					),
-					'shipping_postcode' => array(
+					'shipping_postcode'   => array(
 						'label'       => __( 'Postcode / ZIP', 'woocommerce' ),
 						'description' => '',
 					),
-					'shipping_country' => array(
+					'shipping_country'    => array(
 						'label'       => __( 'Country', 'woocommerce' ),
 						'description' => '',
 						'class'       => 'js_field-country',
 						'type'        => 'select',
 						'options'     => array( '' => __( 'Select a country&hellip;', 'woocommerce' ) ) + WC()->countries->get_allowed_countries(),
 					),
-					'shipping_state' => array(
+					'shipping_state'      => array(
 						'label'       => __( 'State / County', 'woocommerce' ),
 						'description' => __( 'State / County or state code', 'woocommerce' ),
 						'class'       => 'js_field-state',
@@ -220,22 +220,23 @@ class WC_Admin_Profile {
 	 * Get user meta for a given key, with fallbacks to core user info for pre-existing fields.
 	 *
 	 * @since 3.1.0
-	 * @param int    $user_id User ID of the user being edited
-	 * @param string $key     Key for user meta field
+	 * @param  int    $user_id User ID of the user being edited
+	 * @param  string $key     Key for user meta field
 	 * @return string
 	 */
 	protected function get_user_meta( $user_id, $key ) {
-		$value = get_user_meta( $user_id, $key, true );
+		$value           = get_user_meta( $user_id, $key, true );
 		$existing_fields = array( 'billing_first_name', 'billing_last_name' );
 		if ( ! $value && in_array( $key, $existing_fields ) ) {
 			$value = get_user_meta( $user_id, str_replace( 'billing_', '', $key ), true );
 		} elseif ( ! $value && ( 'billing_email' === $key ) ) {
-			$user = get_userdata( $user_id );
+			$user  = get_userdata( $user_id );
 			$value = $user->user_email;
 		}
 
 		return $value;
 	}
+
 }
 
 endif;
