@@ -44,7 +44,7 @@ class WC_Settings_Payment_Gateways extends WC_Settings_Page {
 			$payment_gateways = WC()->payment_gateways->payment_gateways();
 
 			foreach ( $payment_gateways as $gateway ) {
-				$title = empty( $gateway->method_title ) ? ucfirst( $gateway->id ) : $gateway->method_title;
+				$title                                  = empty( $gateway->method_title ) ? ucfirst( $gateway->id ) : $gateway->method_title;
 				$sections[ strtolower( $gateway->id ) ] = esc_html( $title );
 			}
 		}
@@ -55,7 +55,7 @@ class WC_Settings_Payment_Gateways extends WC_Settings_Page {
 	/**
 	 * Get settings array.
 	 *
-	 * @param string $current_section
+	 * @param  string $current_section
 	 *
 	 * @return array
 	 */
@@ -123,7 +123,7 @@ class WC_Settings_Payment_Gateways extends WC_Settings_Page {
 
 				array(
 					'type' => 'sectionend',
-					'id' => 'checkout_process_options',
+					'id'   => 'checkout_process_options',
 				),
 
 				array(
@@ -170,7 +170,7 @@ class WC_Settings_Payment_Gateways extends WC_Settings_Page {
 
 				array(
 					'type' => 'sectionend',
-					'id' => 'checkout_page_options',
+					'id'   => 'checkout_page_options',
 				),
 
 				array( 'title' => __( 'Checkout endpoints', 'woocommerce' ), 'type' => 'title', 'desc' => __( 'Endpoints are appended to your page URLs to handle specific actions during the checkout process. They should be unique.', 'woocommerce' ), 'id' => 'account_endpoint_options' ),
@@ -222,7 +222,7 @@ class WC_Settings_Payment_Gateways extends WC_Settings_Page {
 
 				array(
 					'type' => 'sectionend',
-					'id' => 'checkout_endpoint_options',
+					'id'   => 'checkout_endpoint_options',
 				),
 
 				array(
@@ -238,7 +238,7 @@ class WC_Settings_Payment_Gateways extends WC_Settings_Page {
 
 				array(
 					'type' => 'sectionend',
-					'id' => 'payment_gateways_options',
+					'id'   => 'payment_gateways_options',
 				),
 
 			) );
@@ -280,17 +280,17 @@ class WC_Settings_Payment_Gateways extends WC_Settings_Page {
 	public function payment_gateways_setting() {
 		?>
 		<tr valign="top">
-			<th scope="row" class="titledesc"><?php _e( 'Gateway display order', 'woocommerce' ) ?></th>
+			<th scope="row" class="titledesc"><?php _e( 'Gateway display order', 'woocommerce' ); ?></th>
 			<td class="forminp">
 				<table class="wc_gateways widefat" cellspacing="0">
 					<thead>
 						<tr>
 							<?php
 								$columns = apply_filters( 'woocommerce_payment_gateways_setting_columns', array(
-									'sort'     => '',
-									'name'     => __( 'Gateway', 'woocommerce' ),
-									'id'       => __( 'Gateway ID', 'woocommerce' ),
-									'status'   => __( 'Enabled', 'woocommerce' ),
+									'sort'   => '',
+									'name'   => __( 'Gateway', 'woocommerce' ),
+									'id'     => __( 'Gateway ID', 'woocommerce' ),
+									'status' => __( 'Enabled', 'woocommerce' ),
 								) );
 
 								foreach ( $columns as $key => $column ) {
@@ -374,6 +374,7 @@ class WC_Settings_Payment_Gateways extends WC_Settings_Page {
 			}
 		}
 	}
+
 }
 
 endif;
