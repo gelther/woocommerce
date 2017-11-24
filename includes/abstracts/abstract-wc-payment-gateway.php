@@ -162,13 +162,13 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 	 */
 	public function init_settings() {
 		parent::init_settings();
-		$this->enabled  = ! empty( $this->settings['enabled'] ) && 'yes' === $this->settings['enabled'] ? 'yes' : 'no';
+		$this->enabled = ! empty( $this->settings['enabled'] ) && 'yes' === $this->settings['enabled'] ? 'yes' : 'no';
 	}
 
 	/**
 	 * Get the return url (thank you page).
 	 *
-	 * @param WC_Order $order
+	 * @param  WC_Order $order
 	 * @return string
 	 */
 	public function get_return_url( $order = null ) {
@@ -189,11 +189,10 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 	 * Get a link to the transaction on the 3rd party gateway size (if applicable).
 	 *
 	 * @param  WC_Order $order the order object.
-	 * @return string transaction URL, or empty string.
+	 * @return string          transaction URL, or empty string.
 	 */
 	public function get_transaction_url( $order ) {
-
-		$return_url = '';
+		$return_url     = '';
 		$transaction_id = $order->get_transaction_id();
 
 		if ( ! empty( $this->view_transaction_url ) && ! empty( $transaction_id ) ) {
@@ -209,8 +208,7 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 	 * @return float
 	 */
 	protected function get_order_total() {
-
-		$total = 0;
+		$total    = 0;
 		$order_id = absint( get_query_var( 'order-pay' ) );
 
 		// Gets order total from "pay for order" page.
@@ -274,7 +272,6 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 	 * @return string
 	 */
 	public function get_icon() {
-
 		$icon = $this->icon ? '<img src="' . WC_HTTPS::force_https_url( $this->icon ) . '" alt="' . esc_attr( $this->get_title() ) . '" />' : '';
 
 		return apply_filters( 'woocommerce_gateway_icon', $icon, $this->id );
@@ -300,7 +297,7 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 	 *            'redirect' => $this->get_return_url( $order )
 	 *        );
 	 *
-	 * @param int $order_id
+	 * @param  int   $order_id
 	 * @return array
 	 */
 	public function process_payment( $order_id ) {
@@ -313,10 +310,10 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 	 * If the gateway declares 'refunds' support, this will allow it to refund.
 	 * a passed in amount.
 	 *
-	 * @param  int $order_id
-	 * @param  float $amount
-	 * @param  string $reason
-	 * @return boolean True or false based on success, or a WP_Error object.
+	 * @param  int     $order_id
+	 * @param  float   $amount
+	 * @param  string  $reason
+	 * @return boolean           True or false based on success, or a WP_Error object.
 	 */
 	public function process_refund( $order_id, $amount = null, $reason = '' ) {
 		return false;
@@ -329,7 +326,7 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 	 *
 	 * @return bool
 	 */
-	public function validate_fields() { return true; }
+	public function validate_fields() {return true; }
 
 	/**
 	 * If There are no payment fields show the description if set.
@@ -351,8 +348,8 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 	 * Gateways should override this to declare support (or lack of support) for a feature.
 	 * For backward compatibility, gateways support 'products' by default, but nothing else.
 	 *
-	 * @param string $feature string The name of a feature to test support for.
-	 * @return bool True if the gateway supports the feature, false otherwise.
+	 * @param  string $feature string The name of a feature to test support for.
+	 * @return bool            True if the gateway supports the feature, false otherwise.
 	 * @since 1.5.7
 	 */
 	public function supports( $feature ) {
@@ -361,12 +358,12 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 
 	/**
 	 * Core credit card form which gateways can used if needed. Deprecated - inherit WC_Payment_Gateway_CC instead.
-	 * @param  array $args
-	 * @param  array $fields
+	 * @param array $args
+	 * @param array $fields
 	 */
 	public function credit_card_form( $args = array(), $fields = array() ) {
 		wc_deprecated_function( 'credit_card_form', '2.6', 'WC_Payment_Gateway_CC->form' );
-		$cc_form = new WC_Payment_Gateway_CC;
+		$cc_form           = new WC_Payment_Gateway_CC;
 		$cc_form->id       = $this->id;
 		$cc_form->supports = $this->supports;
 		$cc_form->form();
@@ -469,4 +466,5 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 			'redirect' => wc_get_endpoint_url( 'payment-methods' ),
 		);
 	}
+
 }
