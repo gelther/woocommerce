@@ -209,4 +209,5 @@ final class WC_Cart_Session {
 		}
 		do_action( 'woocommerce_set_cart_cookies', $set );
 	}
+
 }
