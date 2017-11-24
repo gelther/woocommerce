@@ -118,7 +118,7 @@ class WC_Order_Item_Coupon extends WC_Order_Item {
 	/**
 	 * Get discounted tax amount.
 	 *
-	 * @param string $context
+	 * @param  string $context
 	 *
 	 * @return string
 	 */
@@ -138,7 +138,7 @@ class WC_Order_Item_Coupon extends WC_Order_Item {
 	/**
 	 * offsetGet for ArrayAccess/Backwards compatibility.
 	 * @deprecated Add deprecation notices in future release.
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return mixed
 	 */
 	public function offsetGet( $offset ) {
@@ -154,7 +154,7 @@ class WC_Order_Item_Coupon extends WC_Order_Item {
 	 * offsetSet for ArrayAccess/Backwards compatibility.
 	 * @deprecated Add deprecation notices in future release.
 	 * @param string $offset
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function offsetSet( $offset, $value ) {
 		if ( 'discount_amount' === $offset ) {
@@ -167,7 +167,7 @@ class WC_Order_Item_Coupon extends WC_Order_Item {
 
 	/**
 	 * offsetExists for ArrayAccess
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return bool
 	 */
 	public function offsetExists( $offset ) {
@@ -176,4 +176,5 @@ class WC_Order_Item_Coupon extends WC_Order_Item {
 		}
 		return parent::offsetExists( $offset );
 	}
+
 }
