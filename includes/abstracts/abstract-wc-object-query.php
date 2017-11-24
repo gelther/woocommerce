@@ -39,9 +39,9 @@ abstract class WC_Object_Query {
 
 	/**
 	 * Get the value of a query variable.
-	 * @param string $query_var Query variable to get value for.
-	 * @param mixed $default Default value if query variable is not set.
-	 * @return mixed Query variable value if set, otherwise default.
+	 * @param  string $query_var Query variable to get value for.
+	 * @param  mixed  $default   Default value if query variable is not set.
+	 * @return mixed             Query variable value if set, otherwise default.
 	 */
 	public function get( $query_var, $default = '' ) {
 		if ( isset( $this->query_vars[ $query_var ] ) ) {
@@ -53,7 +53,7 @@ abstract class WC_Object_Query {
 	/**
 	 * Set a query variable.
 	 * @param string $query_var Query variable to set.
-	 * @param mixed $value Value to set for query variable.
+	 * @param mixed  $value     Value to set for query variable.
 	 */
 	public function set( $query_var, $value ) {
 		$this->query_vars[ $query_var ] = $value;
@@ -64,7 +64,6 @@ abstract class WC_Object_Query {
 	 * @return array
 	 */
 	protected function get_default_query_vars() {
-
 		return array(
 			'name'           => '',
 			'parent'         => '',
@@ -82,4 +81,5 @@ abstract class WC_Object_Query {
 			'return'         => 'objects',
 		);
 	}
+
 }
