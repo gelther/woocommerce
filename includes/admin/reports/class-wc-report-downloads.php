@@ -32,11 +32,10 @@ class WC_Report_Downloads extends WP_List_Table {
 	 * Constructor.
 	 */
 	public function __construct() {
-
 		parent::__construct( array(
-			'singular'  => 'download',
-			'plural'    => 'downloads',
-			'ajax'      => false,
+			'singular' => 'download',
+			'plural'   => 'downloads',
+			'ajax'     => false,
 		) );
 	}
 
@@ -55,7 +54,6 @@ class WC_Report_Downloads extends WP_List_Table {
 	 * Output the report.
 	 */
 	public function output_report() {
-
 		$this->prepare_items();
 
 		// Subtitle for permission if set.
@@ -63,12 +61,12 @@ class WC_Report_Downloads extends WP_List_Table {
 			$permission_id = absint( $_GET['permission_id'] ); // WPCS: input var ok.
 
 			// Load the permission, order, etc. so we can render more information.
-			$permission	= null;
-			$product	= null;
+			$permission = null;
+			$product    = null;
 
 			try {
-				$permission	= new WC_Customer_Download( $permission_id );
-				$product	= wc_get_product( $permission->product_id );
+				$permission = new WC_Customer_Download( $permission_id );
+				$product    = wc_get_product( $permission->product_id );
 			} catch ( Exception $e ) {
 				wp_die( sprintf( esc_html__( 'Permission #%d not found.', 'woocommerce' ), esc_html( $permission_id ) ) );
 			}
@@ -94,7 +92,7 @@ class WC_Report_Downloads extends WP_List_Table {
 			switch ( $key ) {
 				case 'order_id' :
 					$order = wc_get_order( $value );
-					if ( $order  ) {
+					if ( $order ) {
 						$display_value = _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number();
 					} else {
 						break 2;
@@ -102,7 +100,7 @@ class WC_Report_Downloads extends WP_List_Table {
 					break;
 				case 'product_id' :
 					$product = wc_get_product( $value );
-					if ( $product  ) {
+					if ( $product ) {
 						$display_value = $product->get_formatted_name();
 					} else {
 						break 2;
@@ -126,15 +124,15 @@ class WC_Report_Downloads extends WP_List_Table {
 	/**
 	 * Get column value.
 	 *
-	 * @param mixed  $item Item being displayed.
+	 * @param mixed  $item        Item being displayed.
 	 * @param string $column_name Column name.
 	 */
 	public function column_default( $item, $column_name ) {
 		$permission = null;
 		$product    = null;
 		try {
-			$permission	= new WC_Customer_Download( $item->permission_id );
-			$product	= wc_get_product( $permission->product_id );
+			$permission = new WC_Customer_Download( $item->permission_id );
+			$product    = wc_get_product( $permission->product_id );
 		} catch ( Exception $e ) {
 			// Ok to continue rendering other information even if permission and/or product is not found.
 			return;
@@ -158,7 +156,7 @@ class WC_Report_Downloads extends WP_List_Table {
 					// File information.
 					$file = $product->get_file( $permission->get_download_id() );
 
-					echo esc_html( $file->get_name() .  ' - ' . basename( $file->get_file() ) );
+					echo esc_html( $file->get_name() . ' - ' . basename( $file->get_file() ) );
 
 					echo '<div class="row-actions">';
 					echo '<a href="' . esc_url( add_query_arg( 'download_id', $permission->get_download_id() ) ) . '">' . esc_html__( 'Filter by file', 'woocommerce' ) . '</a>';
@@ -220,7 +218,6 @@ class WC_Report_Downloads extends WP_List_Table {
 	 * Prepare download list items.
 	 */
 	public function prepare_items() {
-
 		$this->_column_headers = array( $this->get_columns(), array(), $this->get_sortable_columns() );
 		$current_page          = absint( $this->get_pagenum() );
 		// Allow filtering per_page value, but ensure it's at least 1.
@@ -272,7 +269,7 @@ class WC_Report_Downloads extends WP_List_Table {
 	 * Get downloads matching criteria.
 	 *
 	 * @param int $current_page Current viewed page.
-	 * @param int $per_page How many results to show per page.
+	 * @param int $per_page     How many results to show per page.
 	 */
 	public function get_items( $current_page, $per_page ) {
 		global $wpdb;
@@ -321,4 +318,5 @@ class WC_Report_Downloads extends WP_List_Table {
 		$this->items     = $wpdb->get_results( "SELECT * {$query_from} {$query_order}" ); // WPCS: cache ok, db call ok, unprepared SQL ok.
 		$this->max_items = $wpdb->get_var( "SELECT COUNT( DISTINCT download_log_id ) {$query_from};" ); // WPCS: cache ok, db call ok, unprepared SQL ok.
 	}
+
 }
