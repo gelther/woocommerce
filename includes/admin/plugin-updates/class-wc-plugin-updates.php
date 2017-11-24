@@ -169,9 +169,9 @@ class WC_Plugin_Updates {
 	/**
 	 * Get active plugins that have a tested version lower than the input version.
 	 *
-	 * @param string $new_version
-	 * @param string $release 'major' or 'minor'.
-	 * @return array of plugin info arrays
+	 * @param  string $new_version
+	 * @param  string $release     'major' or 'minor'.
+	 * @return array               of plugin info arrays
 	 */
 	public function get_untested_plugins( $new_version, $release ) {
 		$extensions        = array_merge( $this->get_plugins_with_header( self::VERSION_TESTED_HEADER ), $this->get_plugins_for_woocommerce() );
@@ -214,7 +214,7 @@ class WC_Plugin_Updates {
 				}
 			} else {
 				$plugin[ self::VERSION_TESTED_HEADER ] = __( 'unknown', 'woocommerce' );
-				$untested[ $file ] = $plugin;
+				$untested[ $file ]                     = $plugin;
 			}
 		}
 
@@ -224,8 +224,8 @@ class WC_Plugin_Updates {
 	/**
 	 * Get plugins that have a valid value for a specific header.
 	 *
-	 * @param string $header
-	 * @return array of plugin info arrays
+	 * @param  string $header
+	 * @return array          of plugin info arrays
 	 */
 	protected function get_plugins_with_header( $header ) {
 		$plugins = get_plugins();
@@ -257,4 +257,5 @@ class WC_Plugin_Updates {
 
 		return apply_filters( 'woocommerce_get_plugins_for_woocommerce', $matches, $plugins );
 	}
+
 }
