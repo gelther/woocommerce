@@ -57,7 +57,7 @@ class WC_REST_Tax_Classes_V1_Controller extends WC_REST_Controller {
 		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<slug>\w[\w\s\-]*)', array(
-			'args' => array(
+			'args'   => array(
 				'slug' => array(
 					'description' => __( 'Unique slug for the resource.', 'woocommerce' ),
 					'type'        => 'string',
@@ -82,7 +82,7 @@ class WC_REST_Tax_Classes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Check whether a given request has permission to read tax classes.
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request  $request Full details about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function get_items_permissions_check( $request ) {
@@ -126,7 +126,7 @@ class WC_REST_Tax_Classes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Get all tax classes.
 	 *
-	 * @param WP_REST_Request $request
+	 * @param  WP_REST_Request $request
 	 * @return array
 	 */
 	public function get_items( $request ) {
@@ -160,7 +160,7 @@ class WC_REST_Tax_Classes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Create a single tax.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function create_item( $request ) {
@@ -212,7 +212,7 @@ class WC_REST_Tax_Classes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Delete a single tax class.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function delete_item( $request ) {
@@ -229,8 +229,8 @@ class WC_REST_Tax_Classes_V1_Controller extends WC_REST_Controller {
 			'slug' => sanitize_title( $request['slug'] ),
 			'name' => '',
 		);
-		$classes = WC_Tax::get_tax_classes();
-		$deleted = false;
+		$classes   = WC_Tax::get_tax_classes();
+		$deleted   = false;
 
 		foreach ( $classes as $key => $class ) {
 			if ( sanitize_title( $class ) === $tax_class['slug'] ) {
@@ -278,9 +278,9 @@ class WC_REST_Tax_Classes_V1_Controller extends WC_REST_Controller {
 	/**
 	 * Prepare a single tax class output for response.
 	 *
-	 * @param array $tax_class Tax class data.
-	 * @param WP_REST_Request $request Request object.
-	 * @return WP_REST_Response $response Response data.
+	 * @param  array            $tax_class Tax class data.
+	 * @param  WP_REST_Request  $request   Request object.
+	 * @return WP_REST_Response $response  Response data.
 	 */
 	public function prepare_item_for_response( $tax_class, $request ) {
 		$data = $tax_class;
@@ -361,4 +361,5 @@ class WC_REST_Tax_Classes_V1_Controller extends WC_REST_Controller {
 			'context' => $this->get_context_param( array( 'default' => 'view' ) ),
 		);
 	}
+
 }
