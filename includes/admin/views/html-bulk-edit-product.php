@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<select class="change_regular_price change_to" name="change_regular_price">
 					<?php
 						$options = array(
-							'' 	=> __( '— No change —', 'woocommerce' ),
+							''  => __( '— No change —', 'woocommerce' ),
 							'1' => __( 'Change to:', 'woocommerce' ),
 							'2' => __( 'Increase existing price by (fixed amount or %):', 'woocommerce' ),
 							'3' => __( 'Decrease existing price by (fixed amount or %):', 'woocommerce' ),
@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<select class="change_sale_price change_to" name="change_sale_price">
 					<?php
 						$options = array(
-							'' 	=> __( '— No change —', 'woocommerce' ),
+							''  => __( '— No change —', 'woocommerce' ),
 							'1' => __( 'Change to:', 'woocommerce' ),
 							'2' => __( 'Increase existing sale price by (fixed amount or %):', 'woocommerce' ),
 							'3' => __( 'Decrease existing sale price by (fixed amount or %):', 'woocommerce' ),
@@ -120,7 +120,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<select class="change_weight change_to" name="change_weight">
 						<?php
 							$options = array(
-								'' 	=> __( '— No change —', 'woocommerce' ),
+								''  => __( '— No change —', 'woocommerce' ),
 								'1' => __( 'Change to:', 'woocommerce' ),
 							);
 							foreach ( $options as $key => $value ) {
@@ -144,7 +144,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<select class="change_dimensions change_to" name="change_dimensions">
 						<?php
 							$options = array(
-								'' 	=> __( '— No change —', 'woocommerce' ),
+								''  => __( '— No change —', 'woocommerce' ),
 								'1' => __( 'Change to:', 'woocommerce' ),
 							);
 							foreach ( $options as $key => $value ) {
@@ -255,7 +255,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<select class="change_stock change_to" name="change_stock">
 						<?php
 							$options = array(
-								'' 	=> __( '— No change —', 'woocommerce' ),
+								''  => __( '— No change —', 'woocommerce' ),
 								'1' => __( 'Change to:', 'woocommerce' ),
 							);
 							foreach ( $options as $key => $value ) {
