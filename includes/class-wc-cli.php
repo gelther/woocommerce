@@ -37,6 +37,7 @@ class WC_CLI {
 		WP_CLI::add_hook( 'after_wp_load', 'WC_CLI_Tool_Command::register_commands' );
 		WP_CLI::add_hook( 'after_wp_load', 'WC_CLI_Update_Command::register_commands' );
 	}
+
 }
 
 new WC_CLI;
