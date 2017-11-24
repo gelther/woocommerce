@@ -45,8 +45,8 @@ class WC_Email_Customer_Completed_Order extends WC_Email {
 	/**
 	 * Trigger the sending of this email.
 	 *
-	 * @param int $order_id The order ID.
-	 * @param WC_Order $order Order object.
+	 * @param int      $order_id The order ID.
+	 * @param WC_Order $order    Order object.
 	 */
 	public function trigger( $order_id, $order = false ) {
 		$this->setup_locale();
@@ -101,7 +101,7 @@ class WC_Email_Customer_Completed_Order extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => false,
 			'plain_text'    => false,
-			'email'			=> $this,
+			'email'         => $this,
 		) );
 	}
 
@@ -116,7 +116,7 @@ class WC_Email_Customer_Completed_Order extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => false,
 			'plain_text'    => true,
-			'email'			=> $this,
+			'email'         => $this,
 		) );
 	}
 
@@ -125,41 +125,42 @@ class WC_Email_Customer_Completed_Order extends WC_Email {
 	 */
 	public function init_form_fields() {
 		$this->form_fields = array(
-			'enabled' => array(
-				'title'         => __( 'Enable/Disable', 'woocommerce' ),
-				'type'          => 'checkbox',
-				'label'         => __( 'Enable this email notification', 'woocommerce' ),
-				'default'       => 'yes',
+			'enabled'    => array(
+				'title'   => __( 'Enable/Disable', 'woocommerce' ),
+				'type'    => 'checkbox',
+				'label'   => __( 'Enable this email notification', 'woocommerce' ),
+				'default' => 'yes',
 			),
-			'subject' => array(
-				'title'         => __( 'Subject', 'woocommerce' ),
-				'type'          => 'text',
-				'desc_tip'      => true,
+			'subject'    => array(
+				'title'       => __( 'Subject', 'woocommerce' ),
+				'type'        => 'text',
+				'desc_tip'    => true,
 				/* translators: %s: list of placeholders */
-				'description'   => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>{site_title}, {order_date}, {order_number}</code>' ),
-				'placeholder'   => $this->get_default_subject(),
-				'default'       => '',
+				'description' => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>{site_title}, {order_date}, {order_number}</code>' ),
+				'placeholder' => $this->get_default_subject(),
+				'default'     => '',
 			),
-			'heading' => array(
-				'title'         => __( 'Email heading', 'woocommerce' ),
-				'type'          => 'text',
-				'desc_tip'      => true,
+			'heading'    => array(
+				'title'       => __( 'Email heading', 'woocommerce' ),
+				'type'        => 'text',
+				'desc_tip'    => true,
 				/* translators: %s: list of placeholders */
-				'description'   => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>{site_title}, {order_date}, {order_number}</code>' ),
-				'placeholder'   => $this->get_default_heading(),
-				'default'       => '',
+				'description' => sprintf( __( 'Available placeholders: %s', 'woocommerce' ), '<code>{site_title}, {order_date}, {order_number}</code>' ),
+				'placeholder' => $this->get_default_heading(),
+				'default'     => '',
 			),
 			'email_type' => array(
-				'title'         => __( 'Email type', 'woocommerce' ),
-				'type'          => 'select',
-				'description'   => __( 'Choose which format of email to send.', 'woocommerce' ),
-				'default'       => 'html',
-				'class'         => 'email_type wc-enhanced-select',
-				'options'       => $this->get_email_type_options(),
-				'desc_tip'      => true,
+				'title'       => __( 'Email type', 'woocommerce' ),
+				'type'        => 'select',
+				'description' => __( 'Choose which format of email to send.', 'woocommerce' ),
+				'default'     => 'html',
+				'class'       => 'email_type wc-enhanced-select',
+				'options'     => $this->get_email_type_options(),
+				'desc_tip'    => true,
 			),
 		);
 	}
+
 }
 
 endif;
