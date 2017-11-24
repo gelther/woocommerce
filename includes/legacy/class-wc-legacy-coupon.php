@@ -69,7 +69,7 @@ abstract class WC_Legacy_Coupon extends WC_Data {
 			break;
 			case 'coupon_custom_fields' :
 				$legacy_custom_fields = array();
-				$custom_fields = $this->get_id() ? $this->get_meta_data() : array();
+				$custom_fields        = $this->get_id() ? $this->get_meta_data() : array();
 				if ( ! empty( $custom_fields ) ) {
 					foreach ( $custom_fields as  $cf_value ) {
 						// legacy only supports 1 key
@@ -153,7 +153,6 @@ abstract class WC_Legacy_Coupon extends WC_Data {
 		return array_filter( array_map( 'trim', array_map( 'strtolower', $array ) ) );
 	}
 
-
 	/**
 	 * Check if coupon needs applying before tax.
 	 *
@@ -201,4 +200,5 @@ abstract class WC_Legacy_Coupon extends WC_Data {
 	public function dcr_usage_count( $used_by = '' ) {
 		$this->decrease_usage_count( $used_by );
 	}
+
 }
