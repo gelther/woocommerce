@@ -86,7 +86,6 @@ class WC_Admin_Status {
 	 * Show the log page contents for file log handler.
 	 */
 	public static function status_logs_file() {
-
 		$logs = self::scan_log_files();
 
 		if ( ! empty( $_REQUEST['log_file'] ) && isset( $logs[ sanitize_title( $_REQUEST['log_file'] ) ] ) ) {
@@ -108,7 +107,6 @@ class WC_Admin_Status {
 	 * Show the log page contents for db log handler.
 	 */
 	public static function status_logs_db() {
-
 		// Flush
 		if ( ! empty( $_REQUEST['flush-logs'] ) ) {
 			self::flush_db_logs();
@@ -132,7 +130,6 @@ class WC_Admin_Status {
 	 * @return string
 	 */
 	public static function get_file_version( $file ) {
-
 		// Avoid notices if file does not exist
 		if ( ! file_exists( $file ) ) {
 			return '';
@@ -161,7 +158,7 @@ class WC_Admin_Status {
 	/**
 	 * Return the log file handle.
 	 *
-	 * @param string $filename
+	 * @param  string $filename
 	 * @return string
 	 */
 	public static function get_log_file_handle( $filename ) {
@@ -174,7 +171,6 @@ class WC_Admin_Status {
 	 * @return array
 	 */
 	public static function scan_template_files( $template_path ) {
-
 		$files  = @scandir( $template_path );
 		$result = array();
 
@@ -182,7 +178,7 @@ class WC_Admin_Status {
 
 			foreach ( $files as $key => $value ) {
 
-				if ( ! in_array( $value, array( ".", ".." ) ) ) {
+				if ( ! in_array( $value, array( '.', '..' ) ) ) {
 
 					if ( is_dir( $template_path . DIRECTORY_SEPARATOR . $value ) ) {
 						$sub_files = self::scan_template_files( $template_path . DIRECTORY_SEPARATOR . $value );
@@ -224,14 +220,14 @@ class WC_Admin_Status {
 	/**
 	 * Get latest version of a theme by slug.
 	 * @param  object $theme WP_Theme object.
-	 * @return string Version number if found.
+	 * @return string        Version number if found.
 	 */
 	public static function get_latest_theme_version( $theme ) {
 		include_once( ABSPATH . 'wp-admin/includes/theme.php' );
 
 		$api = themes_api( 'theme_information', array(
-			'slug'     => $theme->get_stylesheet(),
-			'fields'   => array(
+			'slug'   => $theme->get_stylesheet(),
+			'fields' => array(
 				'sections' => false,
 				'tags'     => false,
 			),
@@ -245,19 +241,19 @@ class WC_Admin_Status {
 
 		// Check WooThemes Theme Version.
 		} elseif ( strstr( $theme->{'Author URI'}, 'woothemes' ) ) {
-			$theme_dir = substr( strtolower( str_replace( ' ','', $theme->Name ) ), 0, 45 );
+			$theme_dir = substr( strtolower( str_replace( ' ', '', $theme->Name ) ), 0, 45 );
 
 			if ( false === ( $theme_version_data = get_transient( $theme_dir . '_version_data' ) ) ) {
 				$theme_changelog = wp_safe_remote_get( 'http://dzv365zjfbd8v.cloudfront.net/changelogs/' . $theme_dir . '/changelog.txt' );
-				$cl_lines  = explode( "\n", wp_remote_retrieve_body( $theme_changelog ) );
+				$cl_lines        = explode( "\n", wp_remote_retrieve_body( $theme_changelog ) );
 				if ( ! empty( $cl_lines ) ) {
 					foreach ( $cl_lines as $line_num => $cl_line ) {
 						if ( preg_match( '/^[0-9]/', $cl_line ) ) {
-							$theme_date         = str_replace( '.' , '-' , trim( substr( $cl_line , 0 , strpos( $cl_line , '-' ) ) ) );
-							$theme_version      = preg_replace( '~[^0-9,.]~' , '' ,stristr( $cl_line , "version" ) );
-							$theme_update       = trim( str_replace( "*" , "" , $cl_lines[ $line_num + 1 ] ) );
-							$theme_version_data = array( 'date' => $theme_date , 'version' => $theme_version , 'update' => $theme_update , 'changelog' => $theme_changelog );
-							set_transient( $theme_dir . '_version_data', $theme_version_data , DAY_IN_SECONDS );
+							$theme_date         = str_replace( '.', '-', trim( substr( $cl_line, 0, strpos( $cl_line, '-' ) ) ) );
+							$theme_version      = preg_replace( '~[^0-9,.]~', '', stristr( $cl_line, 'version' ) );
+							$theme_update       = trim( str_replace( '*', '', $cl_lines[ $line_num + 1 ] ) );
+							$theme_version_data = array( 'date' => $theme_date, 'version' => $theme_version, 'update' => $theme_update, 'changelog' => $theme_changelog );
+							set_transient( $theme_dir . '_version_data', $theme_version_data, DAY_IN_SECONDS );
 							break;
 						}
 					}
@@ -323,4 +319,5 @@ class WC_Admin_Status {
 			exit();
 		}
 	}
+
 }
