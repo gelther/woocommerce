@@ -14,7 +14,6 @@ class WC_Tests_Cart_Functions extends WC_Unit_Test_Case {
 	 * @return string
 	 */
 	private function get_checkout_url() {
-
 		// Get the checkout URL
 		$checkout_page_id = wc_get_page_id( 'checkout' );
 
@@ -57,7 +56,6 @@ class WC_Tests_Cart_Functions extends WC_Unit_Test_Case {
 
 		// Restore option
 		update_option( 'woocommerce_force_ssl_checkout', $o_setting );
-
 	}
 
 	/**
@@ -79,7 +77,6 @@ class WC_Tests_Cart_Functions extends WC_Unit_Test_Case {
 
 		// Restore option
 		update_option( 'woocommerce_force_ssl_checkout', $o_setting );
-
 	}
 
 	/**
@@ -178,4 +175,5 @@ class WC_Tests_Cart_Functions extends WC_Unit_Test_Case {
 		$message = wc_add_to_cart_message( $product->get_id(), true, true );
 		$this->assertEquals( '<a href="http://example.org" class="button wc-forward">View cart</a> &ldquo;Dummy Product&rdquo; has been added to your cart.', $message );
 	}
+
 }
