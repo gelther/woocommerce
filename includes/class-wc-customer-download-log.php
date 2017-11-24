@@ -72,8 +72,8 @@ class WC_Customer_Download_Log extends WC_Data {
 	/**
 	 * Get timestamp.
 	 *
-	 * @param  string $context Get context.
-	 * @return WC_DateTime|null Object if the date is set or null if there is no date.
+	 * @param  string           $context Get context.
+	 * @return WC_DateTime|null          Object if the date is set or null if there is no date.
 	 */
 	public function get_timestamp( $context = 'view' ) {
 		return $this->get_prop( 'timestamp', $context );
@@ -82,7 +82,7 @@ class WC_Customer_Download_Log extends WC_Data {
 	/**
 	 * Get permission id.
 	 *
-	 * @param  string $context Get context.
+	 * @param  string  $context Get context.
 	 * @return integer
 	 */
 	public function get_permission_id( $context = 'view' ) {
@@ -92,7 +92,7 @@ class WC_Customer_Download_Log extends WC_Data {
 	/**
 	 * Get user id.
 	 *
-	 * @param  string $context Get context.
+	 * @param  string  $context Get context.
 	 * @return integer
 	 */
 	public function get_user_id( $context = 'view' ) {
@@ -150,4 +150,5 @@ class WC_Customer_Download_Log extends WC_Data {
 	public function set_user_ip_address( $value ) {
 		$this->set_prop( 'user_ip_address', $value );
 	}
+
 }
