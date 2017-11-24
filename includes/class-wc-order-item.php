@@ -61,7 +61,7 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 			$this->set_object_read( true );
 		}
 
-		$type = 'line_item' === $this->get_type() ? 'product' : $this->get_type();
+		$type             = 'line_item' === $this->get_type() ? 'product' : $this->get_type();
 		$this->data_store = WC_Data_Store::load( 'order-item-' . $type );
 		if ( $this->get_id() > 0 ) {
 			$this->data_store->read( $this );
@@ -165,7 +165,7 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 	/**
 	 * Set order ID.
 	 *
-	 * @param  int $value
+	 * @param int $value
 	 * @throws WC_Data_Exception
 	 */
 	public function set_order_id( $value ) {
@@ -175,7 +175,7 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 	/**
 	 * Set order item name.
 	 *
-	 * @param  string $value
+	 * @param string $value
 	 * @throws WC_Data_Exception
 	 */
 	public function set_name( $value ) {
@@ -191,7 +191,7 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 	/**
 	 * Type checking.
 	 *
-	 * @param  string|array  $type
+	 * @param  string|array $type
 	 * @return boolean
 	 */
 	public function is_type( $type ) {
@@ -203,7 +203,7 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 	 *
 	 * @since  3.2.0
 	 * @param  array $calculate_tax_for Location data to get taxes for. Required.
-	 * @return bool  True if taxes were calculated.
+	 * @return bool                     True if taxes were calculated.
 	 */
 	public function calculate_taxes( $calculate_tax_for = array() ) {
 		if ( ! isset( $calculate_tax_for['country'], $calculate_tax_for['state'], $calculate_tax_for['postcode'], $calculate_tax_for['city'] ) ) {
@@ -238,8 +238,8 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 	/**
 	 * Expands things like term slugs before return.
 	 *
-	 * @param string $hideprefix  Meta data prefix, (default: _).
-	 * @param bool   $include_all Include all meta data, this stop skip items with values already in the product name.
+	 * @param  string $hideprefix  Meta data prefix, (default: _).
+	 * @param  bool   $include_all Include all meta data, this stop skip items with values already in the product name.
 	 * @return array
 	 */
 	public function get_formatted_meta_data( $hideprefix = '_', $include_all = false ) {
@@ -295,7 +295,7 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 	/**
 	 * offsetSet for ArrayAccess
 	 * @param string $offset
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function offsetSet( $offset, $value ) {
 		if ( 'item_meta_array' === $offset ) {
@@ -341,7 +341,7 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 
 	/**
 	 * offsetExists for ArrayAccess
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return bool
 	 */
 	public function offsetExists( $offset ) {
@@ -354,7 +354,7 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 
 	/**
 	 * offsetGet for ArrayAccess
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return mixed
 	 */
 	public function offsetGet( $offset ) {
@@ -390,4 +390,5 @@ class WC_Order_Item extends WC_Data implements ArrayAccess {
 
 		return null;
 	}
+
 }
