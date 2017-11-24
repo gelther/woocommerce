@@ -111,7 +111,7 @@ abstract class WC_CSV_Exporter {
 	 * See if a column is to be exported or not.
 	 *
 	 * @since 3.1.0
-	 * @param  string $column_id
+	 * @param  string  $column_id
 	 * @return boolean
 	 */
 	public function is_column_exporting( $column_id ) {
@@ -321,7 +321,7 @@ abstract class WC_CSV_Exporter {
 	 * @see https://hackerone.com/reports/72785
 	 *
 	 * @since 3.1.0
-	 * @param string $field CSV field to escape
+	 * @param  string $field CSV field to escape
 	 * @return string
 	 */
 	public function escape_data( $data ) {
@@ -362,7 +362,7 @@ abstract class WC_CSV_Exporter {
 	 * Format term ids to names.
 	 *
 	 * @since 3.1.0
-	 * @param  array $term_ids
+	 * @param  array  $term_ids
 	 * @param  string $taxonomy
 	 * @return array
 	 */
@@ -417,7 +417,7 @@ abstract class WC_CSV_Exporter {
 	 * @return string
 	 */
 	protected function implode_values( $values ) {
-		$values_to_implode  = array();
+		$values_to_implode = array();
 
 		foreach ( $values as $value ) {
 			$value               = (string) is_scalar( $value ) ? $value : '';
@@ -426,4 +426,5 @@ abstract class WC_CSV_Exporter {
 
 		return implode( ', ', $values_to_implode );
 	}
+
 }
