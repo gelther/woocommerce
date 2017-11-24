@@ -47,7 +47,7 @@ class WC_API extends WC_Legacy_API {
 	 * Add new query vars.
 	 *
 	 * @since 2.0
-	 * @param array $vars Query vars.
+	 * @param  array    $vars Query vars.
 	 * @return string[]
 	 */
 	public function add_query_vars( $vars ) {
