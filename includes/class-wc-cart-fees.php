@@ -77,8 +77,8 @@ final class WC_Cart_Fees {
 	 * Add a fee. Fee IDs must be unique.
 	 *
 	 * @since 3.2.0
-	 * @param array $args Array of fee properties.
-	 * @return object Either a fee object if added, or a WP_Error if it failed.
+	 * @param  array  $args Array of fee properties.
+	 * @return object       Either a fee object if added, or a WP_Error if it failed.
 	 */
 	public function add_fee( $args = array() ) {
 		$fee_props            = (object) wp_parse_args( $args, $this->default_fee_props );
@@ -134,8 +134,8 @@ final class WC_Cart_Fees {
 	/**
 	 * Sort fees by amount.
 	 *
-	 * @param WC_Coupon $a Coupon object.
-	 * @param WC_Coupon $b Coupon object.
+	 * @param  WC_Coupon $a Coupon object.
+	 * @param  WC_Coupon $b Coupon object.
 	 * @return int
 	 */
 	protected function sort_fees_callback( $a, $b ) {
@@ -145,10 +145,11 @@ final class WC_Cart_Fees {
 	/**
 	 * Generate a unique ID for the fee being added.
 	 *
-	 * @param string $fee Fee object.
-	 * @return string fee key.
+	 * @param  string $fee Fee object.
+	 * @return string      fee key.
 	 */
 	private function generate_id( $fee ) {
 		return sanitize_title( $fee->name );
 	}
+
 }
