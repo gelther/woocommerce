@@ -14,7 +14,7 @@ class WC_Tests_Product_Data extends WC_Unit_Test_Case {
 		global $wpdb;
 
 		$attributes = array();
-		$attribute = new WC_Product_Attribute();
+		$attribute  = new WC_Product_Attribute();
 		$attribute->set_id( 0 );
 		$attribute->set_name( 'Test Attribute' );
 		$attribute->set_options( array( 'Fish', 'Fingers' ) );
@@ -57,8 +57,8 @@ class WC_Tests_Product_Data extends WC_Unit_Test_Case {
 			'download_expiry'    => -1,
 			'download_limit'     => 5,
 			'attributes'         => $attributes,
-		 );
-		$product = new WC_Product();
+		);
+		$product             = new WC_Product();
 		foreach ( $getters_and_setters as $function => $value ) {
 			$product->{"set_{$function}"}( $value );
 		}
@@ -72,13 +72,13 @@ class WC_Tests_Product_Data extends WC_Unit_Test_Case {
 		$this->assertEquals( $product->get_date_on_sale_from()->getTimestamp(), 1475798400 );
 		$this->assertEquals( $product->get_date_on_sale_to()->getTimestamp(), 1477267200 );
 
-		$image_url = media_sideload_image( "https://cldup.com/Dr1Bczxq4q.png", $product->get_id(), '', 'src' );
+		$image_url = media_sideload_image( 'https://cldup.com/Dr1Bczxq4q.png', $product->get_id(), '', 'src' );
 		$image_id  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE guid='%s';", $image_url ) );
 		$product->set_image_id( $image_id[0] );
 		$product->save();
 		$this->assertEquals( $image_id[0], $product->get_image_id() );
 		$product->delete( true );
-	 }
+	}
 
 	/**
 	 * Test product term setters and getters
@@ -95,7 +95,7 @@ class WC_Tests_Product_Data extends WC_Unit_Test_Case {
 			'tag_ids'      => array( $test_tag_1['term_id'], $test_tag_2['term_id'] ),
 			'category_ids' => array( $test_cat_1['term_id'], $test_cat_2['term_id'] ),
 		);
-		$product = new WC_Product_Simple;
+		$product             = new WC_Product_Simple;
 		foreach ( $getters_and_setters as $function => $value ) {
 			$product->{"set_{$function}"}( $value );
 		}
@@ -110,33 +110,33 @@ class WC_Tests_Product_Data extends WC_Unit_Test_Case {
 	 *
 	 * @since 3.0.0
 	 */
-	 public function test_grouped_product_getters_and_setters() {
+	public function test_grouped_product_getters_and_setters() {
 		$getters_and_setters = array(
 			'children' => array( 1, 2, 3 ),
 		);
-		$product = new WC_Product_Grouped;
+		$product             = new WC_Product_Grouped;
 		foreach ( $getters_and_setters as $function => $value ) {
 			$product->{"set_{$function}"}( $value );
 			$this->assertEquals( $value, $product->{"get_{$function}"}(), $function );
 		}
-	 }
+	}
 
 	/**
 	 * Test external product setters and getters
 	 *
 	 * @since 3.0.0
 	 */
-	 public function test_external_product_getters_and_setters() {
-		 $time = time();
-		 $getters_and_setters = array(
-			 'button_text' => 'Test Button Text',
-			 'product_url' => 'https://wordpress.org',
-		 );
-		 $product = new WC_Product_External;
-		  foreach ( $getters_and_setters as $function => $value ) {
-			 $product->{"set_{$function}"}( $value );
-			 $this->assertEquals( $value, $product->{"get_{$function}"}(), $function );
-		 }
-	 }
+	public function test_external_product_getters_and_setters() {
+		$time                = time();
+		$getters_and_setters = array(
+			'button_text' => 'Test Button Text',
+			'product_url' => 'https://wordpress.org',
+		);
+		$product             = new WC_Product_External;
+			foreach ( $getters_and_setters as $function => $value ) {
+			$product->{"set_{$function}"}( $value );
+			$this->assertEquals( $value, $product->{"get_{$function}"}(), $function );
+		}
+	}
 
 }
