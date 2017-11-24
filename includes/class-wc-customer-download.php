@@ -43,7 +43,7 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	 *
 	 * @param int|object|array $download
 	 */
-	 public function __construct( $download = 0 ) {
+	public function __construct( $download = 0 ) {
 		parent::__construct( $download );
 
 		if ( is_numeric( $download ) && $download > 0 ) {
@@ -63,7 +63,7 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 		if ( $this->get_id() > 0 ) {
 			$this->data_store->read( $this );
 		}
- 	}
+	}
 
 	/*
 	|--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	/**
 	 * Get product id.
 	 *
-	 * @param  string $context
+	 * @param  string  $context
 	 * @return integer
 	 */
 	public function get_product_id( $context = 'view' ) {
@@ -94,7 +94,7 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	/**
 	 * Get user id.
 	 *
-	 * @param  string $context
+	 * @param  string  $context
 	 * @return integer
 	 */
 	public function get_user_id( $context = 'view' ) {
@@ -114,7 +114,7 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	/**
 	 * Get order_id.
 	 *
-	 * @param  string $context
+	 * @param  string  $context
 	 * @return integer
 	 */
 	public function get_order_id( $context = 'view' ) {
@@ -134,7 +134,7 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	/**
 	 * Get downloads_remaining.
 	 *
-	 * @param  string $context
+	 * @param  string         $context
 	 * @return integer|string
 	 */
 	public function get_downloads_remaining( $context = 'view' ) {
@@ -144,8 +144,8 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	/**
 	 * Get access_granted.
 	 *
-	 * @param  string $context
-	 * @return WC_DateTime|null Object if the date is set or null if there is no date.
+	 * @param  string           $context
+	 * @return WC_DateTime|null          Object if the date is set or null if there is no date.
 	 */
 	public function get_access_granted( $context = 'view' ) {
 		return $this->get_prop( 'access_granted', $context );
@@ -154,8 +154,8 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	/**
 	 * Get access_expires.
 	 *
-	 * @param  string $context
-	 * @return WC_DateTime|null Object if the date is set or null if there is no date.
+	 * @param  string           $context
+	 * @return WC_DateTime|null          Object if the date is set or null if there is no date.
 	 */
 	public function get_access_expires( $context = 'view' ) {
 		return $this->get_prop( 'access_expires', $context );
@@ -164,12 +164,12 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	/**
 	 * Get download_count.
 	 *
-	 * @param  string $context
+	 * @param  string  $context
 	 * @return integer
 	 */
 	public function get_download_count( $context = 'view' ) {
 		// Check for count of download logs.
-		$data_store = WC_Data_Store::load( 'customer-download-log' );
+		$data_store       = WC_Data_Store::load( 'customer-download-log' );
 		$download_log_ids = $data_store->get_download_logs_for_permission( $this->get_id() );
 
 		$download_log_count = 0;
@@ -200,6 +200,7 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	public function set_download_id( $value ) {
 		$this->set_prop( 'download_id', $value );
 	}
+
 	/**
 	 * Set product id.
 	 *
@@ -285,7 +286,7 @@ class WC_Customer_Download extends WC_Data implements ArrayAccess {
 	 * Track a download on this permission.
 	 *
 	 * @since 3.3.0
-	 * @param int user_id Id of the user performing the download
+	 * @param int    user_id Id of the user performing the download
 	 * @param string user_ip_address IP Address of the user performing the download
 	 */
 	public function track_download( $user_id = null, $user_ip_address = null ) {
@@ -308,7 +309,7 @@ WHERE permission_id = %d",
 			$this->get_id()
 		);
 		$wpdb->query( $query );
-		
+
 		// Re-read this download from the data store to pull updated counts.
 		$this->data_store->read( $this );
 
@@ -361,7 +362,7 @@ WHERE permission_id = %d",
 
 	/**
 	 * offsetGet
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return mixed
 	 */
 	public function offsetGet( $offset ) {
@@ -373,7 +374,7 @@ WHERE permission_id = %d",
 	/**
 	 * offsetSet
 	 * @param string $offset
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function offsetSet( $offset, $value ) {
 		if ( is_callable( array( $this, "set_$offset" ) ) ) {
@@ -393,7 +394,7 @@ WHERE permission_id = %d",
 
 	/**
 	 * offsetExists
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return bool
 	 */
 	public function offsetExists( $offset ) {
@@ -421,4 +422,5 @@ WHERE permission_id = %d",
 			return $this->{"get_$key"}( '' );
 		}
 	}
+
 }
