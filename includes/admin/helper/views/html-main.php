@@ -15,10 +15,10 @@
 	<ul class="subscription-filter">
 		<label><?php _e( 'Sort by:', 'woocommerce' ); ?> <span class="chevron dashicons dashicons-arrow-up-alt2"></span></label>
 		<?php
-			$filters = array_keys( WC_Helper::get_filters() );
-			$last_filter = array_pop( $filters );
+			$filters        = array_keys( WC_Helper::get_filters() );
+			$last_filter    = array_pop( $filters );
 			$current_filter = WC_Helper::get_current_filter();
-			$counts = WC_Helper::get_filters_counts();
+			$counts         = WC_Helper::get_filters_counts();
 		?>
 
 		<?php foreach ( WC_Helper::get_filters() as $key => $label ) : ?>
@@ -28,7 +28,7 @@
 					continue;
 				}
 
-				$url = admin_url( 'admin.php?page=wc-addons&section=helper&filter=' . $key );
+				$url        = admin_url( 'admin.php?page=wc-addons&section=helper&filter=' . $key );
 				$class_html = $current_filter === $key ? 'class="current"' : '';
 			?>
 			<li>
