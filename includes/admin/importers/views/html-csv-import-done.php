@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wc-progress-form-content woocommerce-importer">
 	<section class="woocommerce-importer-done">
 		<?php
-			$results   = array();
+			$results = array();
 
 			if ( 0 < $imported ) {
 				$results[] = sprintf(
