@@ -58,8 +58,8 @@ class WC_Post_Data {
 	/**
 	 * Link to parent products when getting permalink for variation.
 	 *
-	 * @param string $permalink
-	 * @param object $post
+	 * @param  string $permalink
+	 * @param  object $post
 	 *
 	 * @return string
 	 */
@@ -84,7 +84,7 @@ class WC_Post_Data {
 
 	/**
 	 * Sync a product.
-	 * @param  int $product_id
+	 * @param int $product_id
 	 */
 	public static function deferred_product_sync( $product_id ) {
 		$product = wc_get_product( $product_id );
@@ -97,12 +97,12 @@ class WC_Post_Data {
 	/**
 	 * Delete transients when terms are set.
 	 *
-	 * @param int $object_id
-	 * @param mixed $terms
-	 * @param array $tt_ids
+	 * @param int    $object_id
+	 * @param mixed  $terms
+	 * @param array  $tt_ids
 	 * @param string $taxonomy
-	 * @param mixed $append
-	 * @param array $old_tt_ids
+	 * @param mixed  $append
+	 * @param array  $old_tt_ids
 	 */
 	public static function set_object_terms( $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids ) {
 		foreach ( array_merge( $tt_ids, $old_tt_ids ) as $id ) {
@@ -152,8 +152,8 @@ class WC_Post_Data {
 	 *
 	 * @since 3.0.0
 	 * @param WC_Product $product
-	 * @param string $from
-	 * @param string $to
+	 * @param string     $from
+	 * @param string     $to
 	 */
 	public static function product_type_changed( $product, $from, $to ) {
 		if ( 'variable' === $from && 'variable' !== $to ) {
@@ -165,9 +165,9 @@ class WC_Post_Data {
 
 	/**
 	 * When editing a term, check for product attributes.
-	 * @param  id $term_id
-	 * @param  id $tt_id
-	 * @param  string $taxonomy
+	 * @param id     $term_id
+	 * @param id     $tt_id
+	 * @param string $taxonomy
 	 */
 	public static function edit_term( $term_id, $tt_id, $taxonomy ) {
 		if ( strpos( $taxonomy, 'pa_' ) === 0 ) {
@@ -179,9 +179,9 @@ class WC_Post_Data {
 
 	/**
 	 * When a term is edited, check for product attributes and update variations.
-	 * @param  id $term_id
-	 * @param  id $tt_id
-	 * @param  string $taxonomy
+	 * @param id     $term_id
+	 * @param id     $tt_id
+	 * @param string $taxonomy
 	 */
 	public static function edited_term( $term_id, $tt_id, $taxonomy ) {
 		if ( ! is_null( self::$editing_term ) && strpos( $taxonomy, 'pa_' ) === 0 ) {
@@ -200,11 +200,11 @@ class WC_Post_Data {
 	/**
 	 * Ensure floats are correctly converted to strings based on PHP locale.
 	 *
-	 * @param  null $check
-	 * @param  int $object_id
-	 * @param  string $meta_key
-	 * @param  mixed $meta_value
-	 * @param  mixed $prev_value
+	 * @param  null      $check
+	 * @param  int       $object_id
+	 * @param  string    $meta_key
+	 * @param  mixed     $meta_value
+	 * @param  mixed     $prev_value
 	 * @return null|bool
 	 */
 	public static function update_order_item_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
@@ -225,11 +225,11 @@ class WC_Post_Data {
 	/**
 	 * Ensure floats are correctly converted to strings based on PHP locale.
 	 *
-	 * @param  null $check
-	 * @param  int $object_id
-	 * @param  string $meta_key
-	 * @param  mixed $meta_value
-	 * @param  mixed $prev_value
+	 * @param  null      $check
+	 * @param  int       $object_id
+	 * @param  string    $meta_key
+	 * @param  mixed     $meta_value
+	 * @param  mixed     $prev_value
 	 * @return null|bool
 	 */
 	public static function update_post_metadata( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
@@ -254,10 +254,10 @@ class WC_Post_Data {
 
 	/**
 	 * When setting stock level, ensure the stock status is kept in sync.
-	 * @param  int $meta_id
-	 * @param  int $object_id
-	 * @param  string $meta_key
-	 * @param  mixed $meta_value
+	 * @param int    $meta_id
+	 * @param int    $object_id
+	 * @param string $meta_key
+	 * @param mixed  $meta_value
 	 * @deprecated
 	 */
 	public static function sync_product_stock_status( $meta_id, $object_id, $meta_key, $meta_value ) {}
@@ -266,7 +266,7 @@ class WC_Post_Data {
 	 * Forces the order posts to have a title in a certain format (containing the date).
 	 * Forces certain product data based on the product's type, e.g. grouped products cannot have a parent.
 	 *
-	 * @param array $data
+	 * @param  array $data
 	 * @return array
 	 */
 	public static function wp_insert_post_data( $data ) {
@@ -295,8 +295,8 @@ class WC_Post_Data {
 	 * Change embed data for certain post types.
 	 *
 	 * @since 3.2.0
-	 * @param array   $data The response data.
-	 * @param WP_Post $post The post object.
+	 * @param  array   $data The response data.
+	 * @param  WP_Post $post The post object.
 	 * @return array
 	 */
 	public static function filter_oembed_response_data( $data, $post ) {
@@ -415,7 +415,7 @@ class WC_Post_Data {
 	public static function before_delete_order( $order_id ) {
 		if ( in_array( get_post_type( $order_id ), wc_get_order_types() ) ) {
 			// Clean up user.
-			$order       = wc_get_order( $order_id );
+			$order = wc_get_order( $order_id );
 
 			// Check for `get_customer_id`, since this may be e.g. a refund order (which doesn't implement it).
 			$customer_id = is_callable( array( $order, 'get_customer_id' ) ) ? $order->get_customer_id() : 0;
@@ -482,9 +482,9 @@ class WC_Post_Data {
 	 * Update changed downloads.
 	 *
 	 * @deprecated 3.3.0 No action is necessary on changes to download paths since download_id is no longer based on file hash.
-	 * @param int $product_id product identifier
-	 * @param int $variation_id optional product variation identifier
-	 * @param array $downloads newly set files
+	 * @param int   $product_id   product identifier
+	 * @param int   $variation_id optional product variation identifier
+	 * @param array $downloads    newly set files
 	 */
 	public static function process_product_file_download_paths( $product_id, $variation_id, $downloads ) {
 		wc_deprecated_function( __FUNCTION__, '3.3' );
@@ -492,14 +492,15 @@ class WC_Post_Data {
 
 	/**
 	 * Flush meta cache for CRUD objects on direct update.
-	 * @param  int $meta_id
-	 * @param  int $object_id
-	 * @param  string $meta_key
-	 * @param  string $meta_value
+	 * @param int    $meta_id
+	 * @param int    $object_id
+	 * @param string $meta_key
+	 * @param string $meta_value
 	 */
 	public static function flush_object_meta_cache( $meta_id, $object_id, $meta_key, $meta_value ) {
 		WC_Cache_Helper::incr_cache_prefix( 'object_' . $object_id );
 	}
+
 }
 
 WC_Post_Data::init();
