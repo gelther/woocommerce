@@ -36,8 +36,8 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 	 *
 	 * @see WP_Widget->update
 	 *
-	 * @param array $new_instance New Instance.
-	 * @param array $old_instance Old Instance.
+	 * @param  array $new_instance New Instance.
+	 * @param  array $old_instance Old Instance.
 	 *
 	 * @return array
 	 */
@@ -74,12 +74,12 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 		}
 
 		$this->settings = array(
-			'title' => array(
+			'title'        => array(
 				'type'  => 'text',
 				'std'   => __( 'Filter by', 'woocommerce' ),
 				'label' => __( 'Title', 'woocommerce' ),
 			),
-			'attribute' => array(
+			'attribute'    => array(
 				'type'    => 'select',
 				'std'     => '',
 				'label'   => __( 'Attribute', 'woocommerce' ),
@@ -94,7 +94,7 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 					'dropdown' => __( 'Dropdown', 'woocommerce' ),
 				),
 			),
-			'query_type' => array(
+			'query_type'   => array(
 				'type'    => 'select',
 				'std'     => 'and',
 				'label'   => __( 'Query type', 'woocommerce' ),
@@ -111,7 +111,7 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 	 *
 	 * @see WP_Widget
 	 *
-	 * @param array $args Arguments.
+	 * @param array $args     Arguments.
 	 * @param array $instance Instance.
 	 */
 	public function widget( $args, $instance ) {
@@ -218,10 +218,10 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 	/**
 	 * Show dropdown layered nav.
 	 *
-	 * @param  array  $terms Terms.
-	 * @param  string $taxonomy Taxonomy.
+	 * @param  array  $terms      Terms.
+	 * @param  string $taxonomy   Taxonomy.
 	 * @param  string $query_type Query Type.
-	 * @return bool Will nav display?
+	 * @return bool               Will nav display?
 	 */
 	protected function layered_nav_dropdown( $terms, $taxonomy, $query_type ) {
 		global $wp;
@@ -254,8 +254,8 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 				}
 
 				// Get count based on current view.
-				$option_is_set  = in_array( $term->slug, $current_values );
-				$count          = isset( $term_counts[ $term->term_id ] ) ? $term_counts[ $term->term_id ] : 0;
+				$option_is_set = in_array( $term->slug, $current_values );
+				$count         = isset( $term_counts[ $term->term_id ] ) ? $term_counts[ $term->term_id ] : 0;
 
 				// Only show options with count > 0.
 				if ( 0 < $count ) {
@@ -319,7 +319,7 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 	/**
 	 * Get current page URL for layered nav items.
 	 *
-	 * @param string $taxonomy Taxonomy.
+	 * @param  string $taxonomy Taxonomy.
 	 *
 	 * @return string
 	 */
@@ -334,7 +334,7 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 			$link = get_term_link( get_query_var( 'product_tag' ), 'product_tag' );
 		} else {
 			$queried_object = get_queried_object();
-			$link = get_term_link( $queried_object->slug, $queried_object->taxonomy );
+			$link           = get_term_link( $queried_object->slug, $queried_object->taxonomy );
 		}
 
 		// Min/Max.
@@ -393,8 +393,8 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 	 *
 	 * This query allows counts to be generated based on the viewed products, not all products.
 	 *
-	 * @param  array  $term_ids Term IDs.
-	 * @param  string $taxonomy Taxonomy.
+	 * @param  array  $term_ids   Term IDs.
+	 * @param  string $taxonomy   Taxonomy.
 	 * @param  string $query_type Query Type.
 	 * @return array
 	 */
@@ -412,10 +412,10 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 			}
 		}
 
-		$meta_query      = new WP_Meta_Query( $meta_query );
-		$tax_query       = new WP_Tax_Query( $tax_query );
-		$meta_query_sql  = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
-		$tax_query_sql   = $tax_query->get_sql( $wpdb->posts, 'ID' );
+		$meta_query     = new WP_Meta_Query( $meta_query );
+		$tax_query      = new WP_Tax_Query( $tax_query );
+		$meta_query_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
+		$tax_query_sql  = $tax_query->get_sql( $wpdb->posts, 'ID' );
 
 		// Generate query.
 		$query           = array();
@@ -427,7 +427,7 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 			INNER JOIN {$wpdb->terms} AS terms USING( term_id )
 			" . $tax_query_sql['join'] . $meta_query_sql['join'];
 
-		$query['where']   = "
+		$query['where'] = "
 			WHERE {$wpdb->posts}.post_type IN ( 'product' )
 			AND {$wpdb->posts}.post_status = 'publish'"
 			. $tax_query_sql['where'] . $meta_query_sql['where'] .
@@ -458,10 +458,10 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 	/**
 	 * Show list based layered nav.
 	 *
-	 * @param  array  $terms Terms.
-	 * @param  string $taxonomy Taxonomy.
+	 * @param  array  $terms      Terms.
+	 * @param  string $taxonomy   Taxonomy.
 	 * @param  string $query_type Query Type.
-	 * @return bool   Will nav display?
+	 * @return bool               Will nav display?
 	 */
 	protected function layered_nav_list( $terms, $taxonomy, $query_type ) {
 		// List display.
@@ -541,4 +541,5 @@ class WC_Widget_Layered_Nav extends WC_Widget {
 
 		return $found;
 	}
+
 }
