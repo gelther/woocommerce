@@ -48,6 +48,7 @@ class WC_Twenty_Fourteen {
 		echo '</div></div></div>';
 		get_sidebar( 'content' );
 	}
+
 }
 
 WC_Twenty_Fourteen::init();
