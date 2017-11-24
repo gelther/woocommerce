@@ -32,19 +32,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<td><?php echo esc_html( $plugin['Name'] ); ?></td>
 								<td><?php echo esc_html( $plugin['WC tested up to'] ); ?></td>
 							</tr>
-						<?php endforeach ?>
+						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
 
 			<p><?php esc_html_e( 'As this is a major update, we strongly recommend creating a backup of your site before updating.', 'woocommerce' ); ?> <a href="https://woocommerce.com/2017/05/create-use-backups-woocommerce/" target="_blank"><?php _e( 'Learn more', 'woocommerce' ); ?></a></p>
 
-			<?php if ( current_user_can( 'update_plugins' ) ): ?>
+			<?php if ( current_user_can( 'update_plugins' ) ) : ?>
 				<div class="actions">
 					<a href="#" class="button button-secondary cancel"><?php esc_html_e( 'Cancel', 'woocommerce' ); ?></a>
 					<a class="button button-primary accept" href="#"><?php esc_html_e( 'Update now', 'woocommerce' ); ?></a>
 				</div>
-			<?php endif ?>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
