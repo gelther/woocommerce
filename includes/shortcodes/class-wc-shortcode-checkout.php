@@ -19,7 +19,7 @@ class WC_Shortcode_Checkout {
 	/**
 	 * Get the shortcode content.
 	 *
-	 * @param array $atts
+	 * @param  array  $atts
 	 * @return string
 	 */
 	public static function get( $atts ) {
@@ -76,7 +76,6 @@ class WC_Shortcode_Checkout {
 	 * @param int $order_id
 	 */
 	private static function order_pay( $order_id ) {
-
 		do_action( 'before_woocommerce_pay' );
 
 		wc_print_notices();
@@ -150,15 +149,15 @@ class WC_Shortcode_Checkout {
 		} elseif ( $order_id ) {
 
 			// Pay for order after checkout step
-			$order_key            = isset( $_GET['key'] ) ? wc_clean( $_GET['key'] ) : '';
-			$order                = wc_get_order( $order_id );
+			$order_key = isset( $_GET['key'] ) ? wc_clean( $_GET['key'] ) : '';
+			$order     = wc_get_order( $order_id );
 
 			if ( $order && $order->get_id() === $order_id && $order->get_order_key() === $order_key ) {
 
 				if ( $order->needs_payment() ) {
 
 					wc_get_template( 'checkout/order-receipt.php', array( 'order' => $order ) );
-					
+
 				} else {
 					wc_add_notice( sprintf( __( 'This order&rsquo;s status is &ldquo;%s&rdquo;&mdash;it cannot be paid for. Please contact us if you need assistance.', 'woocommerce' ), wc_get_order_status_name( $order->get_status() ) ), 'error' );
 				}
@@ -180,7 +179,6 @@ class WC_Shortcode_Checkout {
 	 * @param int $order_id
 	 */
 	private static function order_received( $order_id = 0 ) {
-
 		wc_print_notices();
 
 		$order = false;
@@ -209,7 +207,6 @@ class WC_Shortcode_Checkout {
 	 * Show the checkout.
 	 */
 	private static function checkout() {
-
 		// Show non-cart errors
 		wc_print_notices();
 
@@ -243,4 +240,5 @@ class WC_Shortcode_Checkout {
 
 		}
 	}
+
 }
