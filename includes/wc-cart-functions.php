@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Prevent password protected products being added to the cart.
  *
  * @param  bool $passed
- * @param  int $product_id
+ * @param  int  $product_id
  * @return bool
  */
 function wc_protected_product_add_to_cart( $passed, $product_id ) {
@@ -43,7 +43,7 @@ function wc_empty_cart() {
 /**
  * Load the persistent cart.
  *
- * @param string $user_login
+ * @param string  $user_login
  * @param WP_User $user
  * @deprecated 2.3
  */
@@ -82,9 +82,9 @@ function wc_get_raw_referer() {
 /**
  * Add to cart messages.
  *
- * @param int|array $products
- * @param bool $show_qty Should qty's be shown? Added in 2.6.0
- * @param bool $return Return message rather than add it.
+ * @param  int|array  $products
+ * @param  bool       $show_qty Should qty's be shown? Added in 2.6.0
+ * @param  bool       $return   Return message rather than add it.
  *
  * @return mixed|void
  */
@@ -102,8 +102,8 @@ function wc_add_to_cart_message( $products, $show_qty = false, $return = false )
 	}
 
 	foreach ( $products as $product_id => $qty ) {
-		$titles[] = ( $qty > 1 ? absint( $qty ) . ' &times; ' : '' ) . sprintf( _x( '&ldquo;%s&rdquo;', 'Item name in quotes', 'woocommerce' ), strip_tags( get_the_title( $product_id ) ) );
-		$count += $qty;
+		$titles[]  = ( $qty > 1 ? absint( $qty ) . ' &times; ' : '' ) . sprintf( _x( '&ldquo;%s&rdquo;', 'Item name in quotes', 'woocommerce' ), strip_tags( get_the_title( $product_id ) ) );
+		$count    += $qty;
 	}
 
 	$titles     = array_filter( $titles );
@@ -114,7 +114,7 @@ function wc_add_to_cart_message( $products, $show_qty = false, $return = false )
 		$return_to = apply_filters( 'woocommerce_continue_shopping_redirect', wc_get_raw_referer() ? wp_validate_redirect( wc_get_raw_referer(), false ) : wc_get_page_permalink( 'shop' ) );
 		$message   = sprintf( '<a href="%s" class="button wc-forward">%s</a> %s', esc_url( $return_to ), esc_html__( 'Continue shopping', 'woocommerce' ), esc_html( $added_text ) );
 	} else {
-		$message   = sprintf( '<a href="%s" class="button wc-forward">%s</a> %s', esc_url( wc_get_page_permalink( 'cart' ) ), esc_html__( 'View cart', 'woocommerce' ), esc_html( $added_text ) );
+		$message = sprintf( '<a href="%s" class="button wc-forward">%s</a> %s', esc_url( wc_get_page_permalink( 'cart' ) ), esc_html__( 'View cart', 'woocommerce' ), esc_html( $added_text ) );
 	}
 
 	if ( has_filter( 'wc_add_to_cart_message' ) ) {
@@ -133,7 +133,7 @@ function wc_add_to_cart_message( $products, $show_qty = false, $return = false )
 
 /**
  * Comma separate a list of item names, and replace final comma with 'and'
- * @param  array $items
+ * @param  array  $items
  * @return string
  */
 function wc_format_list_of_items( $items ) {
@@ -247,8 +247,8 @@ function wc_cart_totals_taxes_total_html() {
  *
  * @access public
  *
- * @param string $coupon
- * @param bool $echo or return
+ * @param  string $coupon
+ * @param  bool   $echo   or return
  *
  * @return string
  */
@@ -312,11 +312,11 @@ function wc_cart_totals_order_total_html() {
 		}
 
 		if ( ! empty( $tax_string_array ) ) {
-			$taxable_address = WC()->customer->get_taxable_address();
-			$estimated_text  = WC()->customer->is_customer_outside_base() && ! WC()->customer->has_calculated_shipping()
+			$taxable_address  = WC()->customer->get_taxable_address();
+			$estimated_text   = WC()->customer->is_customer_outside_base() && ! WC()->customer->has_calculated_shipping()
 				? sprintf( ' ' . __( 'estimated for %s', 'woocommerce' ), WC()->countries->estimated_for_prefix( $taxable_address[0] ) . WC()->countries->countries[ $taxable_address[0] ] )
 				: '';
-			$value .= '<small class="includes_tax">' . sprintf( __( '(includes %s)', 'woocommerce' ), implode( ', ', $tax_string_array ) . $estimated_text ) . '</small>';
+			$value           .= '<small class="includes_tax">' . sprintf( __( '(includes %s)', 'woocommerce' ), implode( ', ', $tax_string_array ) . $estimated_text ) . '</small>';
 		}
 	}
 
@@ -363,7 +363,7 @@ function wc_cart_totals_shipping_method_label( $method ) {
  * Round discount.
  *
  * @param  float $value
- * @param  int $precision
+ * @param  int   $precision
  * @return float
  */
 function wc_cart_round_discount( $value, $precision ) {
@@ -382,7 +382,7 @@ function wc_cart_round_discount( $value, $precision ) {
 			}
 			$value = floatval( $value );
 		}
-    	return round( $value, $precision );
+		return round( $value, $precision );
 	}
 }
 
@@ -405,8 +405,8 @@ function wc_get_chosen_shipping_method_ids() {
  * Get chosen method for package from session.
  *
  * @since  3.2.0
- * @param  int   $key Key of package.
- * @param  array $package Package data array.
+ * @param  int         $key     Key of package.
+ * @param  array       $package Package data array.
  * @return string|bool
  */
 function wc_get_chosen_shipping_method_for_package( $key, $package ) {
@@ -415,7 +415,7 @@ function wc_get_chosen_shipping_method_for_package( $key, $package ) {
 	$changed        = wc_shipping_methods_have_changed( $key, $package );
 
 	// This is deprecated but here for BW compat. TODO: Remove in 4.0.0
-	$method_counts  = WC()->session->get( 'shipping_method_counts' );
+	$method_counts = WC()->session->get( 'shipping_method_counts' );
 
 	if ( ! empty( $method_counts[ $key ] ) ) {
 		$method_count = absint( $method_counts[ $key ] );
@@ -441,8 +441,8 @@ function wc_get_chosen_shipping_method_for_package( $key, $package ) {
  * Choose the default method for a package.
  *
  * @since  3.2.0
- * @param  int    $key Key of package.
- * @param  array  $package Package data array.
+ * @param  int    $key           Key of package.
+ * @param  array  $package       Package data array.
  * @param  string $chosen_method Cgosen method id.
  * @return string
  */
@@ -468,16 +468,16 @@ function wc_get_default_shipping_method_for_package( $key, $package, $chosen_met
  * See if the methods have changed since the last request.
  *
  * @since  3.2.0
- * @param  int   $key Key of package.
+ * @param  int   $key     Key of package.
  * @param  array $package Package data array.
  * @return bool
  */
 function wc_shipping_methods_have_changed( $key, $package ) {
 	// Lookup previous methods from session.
-	$previous_shipping_methods = WC()->session->get( 'previous_shipping_methods' );
+	$previous_shipping_methods         = WC()->session->get( 'previous_shipping_methods' );
 	// Get new and old rates.
-	$new_rates  = array_keys( $package['rates'] );
-	$prev_rates = isset( $previous_shipping_methods[ $key ] ) ? $previous_shipping_methods[ $key ] : false;
+	$new_rates                         = array_keys( $package['rates'] );
+	$prev_rates                        = isset( $previous_shipping_methods[ $key ] ) ? $previous_shipping_methods[ $key ] : false;
 	// Update session.
 	$previous_shipping_methods[ $key ] = $new_rates;
 	WC()->session->set( 'previous_shipping_methods', $previous_shipping_methods );
