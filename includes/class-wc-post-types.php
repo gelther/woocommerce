@@ -37,7 +37,6 @@ class WC_Post_types {
 	 * Register core taxonomies.
 	 */
 	public static function register_taxonomies() {
-
 		if ( ! is_blog_installed() ) {
 			return;
 		}
@@ -80,7 +79,7 @@ class WC_Post_types {
 				'hierarchical'          => true,
 				'update_count_callback' => '_wc_term_recount',
 				'label'                 => __( 'Categories', 'woocommerce' ),
-				'labels' => array(
+				'labels'                => array(
 						'name'              => __( 'Product categories', 'woocommerce' ),
 						'singular_name'     => __( 'Category', 'woocommerce' ),
 						'menu_name'         => _x( 'Categories', 'Admin menu name', 'woocommerce' ),
@@ -102,7 +101,7 @@ class WC_Post_types {
 					'delete_terms' => 'delete_product_terms',
 					'assign_terms' => 'assign_product_terms',
 				),
-				'rewrite'          => array(
+				'rewrite'               => array(
 					'slug'         => $permalinks['category_rewrite_slug'],
 					'with_front'   => false,
 					'hierarchical' => true,
@@ -153,7 +152,7 @@ class WC_Post_types {
 				'hierarchical'          => false,
 				'update_count_callback' => '_update_post_term_count',
 				'label'                 => __( 'Shipping classes', 'woocommerce' ),
-				'labels' => array(
+				'labels'                => array(
 						'name'              => __( 'Product shipping classes', 'woocommerce' ),
 						'singular_name'     => __( 'Shipping class', 'woocommerce' ),
 						'menu_name'         => _x( 'Shipping classes', 'Admin menu name', 'woocommerce' ),
@@ -206,16 +205,16 @@ class WC_Post_types {
 								'new_item_name'     => sprintf( __( 'New %s', 'woocommerce' ), $label ),
 								'not_found'         => sprintf( __( 'No &quot;%s&quot; found', 'woocommerce' ), $label ),
 							),
-						'show_ui'            => true,
-						'show_in_quick_edit' => false,
-						'show_in_menu'       => false,
-						'meta_box_cb'        => false,
-						'query_var'          => 1 === $tax->attribute_public,
-						'rewrite'            => false,
-						'sort'               => false,
-						'public'             => 1 === $tax->attribute_public,
-						'show_in_nav_menus'  => 1 === $tax->attribute_public && apply_filters( 'woocommerce_attribute_show_in_nav_menus', false, $name ),
-						'capabilities'       => array(
+						'show_ui'               => true,
+						'show_in_quick_edit'    => false,
+						'show_in_menu'          => false,
+						'meta_box_cb'           => false,
+						'query_var'             => 1 === $tax->attribute_public,
+						'rewrite'               => false,
+						'sort'                  => false,
+						'public'                => 1 === $tax->attribute_public,
+						'show_in_nav_menus'     => 1 === $tax->attribute_public && apply_filters( 'woocommerce_attribute_show_in_nav_menus', false, $name ),
+						'capabilities'          => array(
 							'manage_terms' => 'manage_product_terms',
 							'edit_terms'   => 'edit_product_terms',
 							'delete_terms' => 'delete_product_terms',
@@ -250,7 +249,7 @@ class WC_Post_types {
 		do_action( 'woocommerce_register_post_type' );
 
 		$permalinks = wc_get_permalink_structure();
-		$supports = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'publicize', 'wpcom-markdown' );
+		$supports   = array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'publicize', 'wpcom-markdown' );
 
 		if ( 'yes' === get_option( 'woocommerce_enable_reviews', 'yes' ) ) {
 			$supports[] = 'comments';
@@ -463,7 +462,6 @@ class WC_Post_types {
 	 * Register our custom post statuses, used for order status.
 	 */
 	public static function register_post_status() {
-
 		$order_statuses = apply_filters( 'woocommerce_register_shop_order_post_statuses',
 			array(
 				'wc-pending'    => array(
@@ -569,6 +567,7 @@ class WC_Post_types {
 
 		return $post_types;
 	}
+
 }
 
 WC_Post_types::init();
