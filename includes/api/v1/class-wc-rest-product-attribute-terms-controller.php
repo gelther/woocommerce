@@ -41,7 +41,7 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 	 */
 	public function register_routes() {
 		register_rest_route( $this->namespace, '/' . $this->rest_base, array(
-			'args' => array(
+			'args'   => array(
 				'attribute_id' => array(
 					'description' => __( 'Unique identifier for the attribute of the terms.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -66,11 +66,11 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 				) ),
 			),
 			'schema' => array( $this, 'get_public_item_schema' ),
-		));
+		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
-			'args' => array(
-				'id' => array(
+			'args'   => array(
+				'id'           => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
@@ -84,7 +84,7 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 				'callback'            => array( $this, 'get_item' ),
 				'permission_callback' => array( $this, 'get_item_permissions_check' ),
 				'args'                => array(
-					'context'         => $this->get_context_param( array( 'default' => 'view' ) ),
+					'context' => $this->get_context_param( array( 'default' => 'view' ) ),
 				),
 			),
 			array(
@@ -109,7 +109,7 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/batch', array(
-			'args' => array(
+			'args'   => array(
 				'attribute_id' => array(
 					'description' => __( 'Unique identifier for the attribute of the terms.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -128,8 +128,8 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 	/**
 	 * Prepare a single product attribute term output for response.
 	 *
-	 * @param WP_Term $item Term object.
-	 * @param WP_REST_Request $request
+	 * @param  WP_Term          $item     Term object.
+	 * @param  WP_REST_Request  $request
 	 * @return WP_REST_Response $response
 	 */
 	public function prepare_item_for_response( $item, $request ) {
@@ -158,9 +158,9 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 		 *
 		 * Allows modification of the term data right before it is returned.
 		 *
-		 * @param WP_REST_Response  $response  The response object.
-		 * @param object            $item      The original term object.
-		 * @param WP_REST_Request   $request   Request used to generate the response.
+		 * @param WP_REST_Response $response The response object.
+		 * @param object           $item     The original term object.
+		 * @param WP_REST_Request  $request  Request used to generate the response.
 		 */
 		return apply_filters( "woocommerce_rest_prepare_{$this->taxonomy}", $response, $item, $request );
 	}
@@ -168,8 +168,8 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 	/**
 	 * Update term meta fields.
 	 *
-	 * @param WP_Term $term
-	 * @param WP_REST_Request $request
+	 * @param  WP_Term         $term
+	 * @param  WP_REST_Request $request
 	 * @return bool|WP_Error
 	 */
 	protected function update_term_meta_fields( $term, $request ) {
@@ -187,17 +187,17 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 	 */
 	public function get_item_schema() {
 		$schema = array(
-			'$schema'              => 'http://json-schema.org/draft-04/schema#',
-			'title'                => 'product_attribute_term',
-			'type'                 => 'object',
-			'properties'           => array(
-				'id' => array(
+			'$schema'    => 'http://json-schema.org/draft-04/schema#',
+			'title'      => 'product_attribute_term',
+			'type'       => 'object',
+			'properties' => array(
+				'id'          => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'name' => array(
+				'name'        => array(
 					'description' => __( 'Term name.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -205,7 +205,7 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 						'sanitize_callback' => 'sanitize_text_field',
 					),
 				),
-				'slug' => array(
+				'slug'        => array(
 					'description' => __( 'An alphanumeric identifier for the resource unique to its type.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -221,12 +221,12 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 						'sanitize_callback' => 'wp_filter_post_kses',
 					),
 				),
-				'menu_order' => array(
+				'menu_order'  => array(
 					'description' => __( 'Menu order, used to custom sort the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'count' => array(
+				'count'       => array(
 					'description' => __( 'Number of published products for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
@@ -237,4 +237,5 @@ class WC_REST_Product_Attribute_Terms_V1_Controller extends WC_REST_Terms_Contro
 
 		return $this->add_additional_fields_schema( $schema );
 	}
+
 }
