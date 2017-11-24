@@ -54,7 +54,7 @@ abstract class WC_Legacy_Cart {
 	/**
 	 * Map legacy variables.
 	 *
-	 * @param string $name Property name.
+	 * @param string $name  Property name.
 	 * @param mixed  $value Value to set.
 	 */
 	public function __isset( $name ) {
@@ -67,7 +67,7 @@ abstract class WC_Legacy_Cart {
 	/**
 	 * Magic getters.
 	 *
-	 * @param string $name Property name.
+	 * @param  string $name Property name.
 	 * @return mixed
 	 */
 	public function &__get( $name ) {
@@ -130,11 +130,11 @@ abstract class WC_Legacy_Cart {
 			// Arrays returned by reference to allow modification without notices. TODO: Remove in 4.0.
 			case 'taxes' :
 				wc_deprecated_function( 'WC_Cart->taxes', '3.2', sprintf( 'getters (%s) and setters (%s)', 'WC_Cart::get_cart_contents_taxes()', 'WC_Cart::set_cart_contents_taxes()' ) );
-				$value = &$this->totals[ 'cart_contents_taxes' ];
+				$value = &$this->totals['cart_contents_taxes'];
 				break;
 			case 'shipping_taxes' :
 				wc_deprecated_function( 'WC_Cart->shipping_taxes', '3.2', sprintf( 'getters (%s) and setters (%s)', 'WC_Cart::get_shipping_taxes()', 'WC_Cart::set_shipping_taxes()' ) );
-				$value = &$this->totals[ 'shipping_taxes' ];
+				$value = &$this->totals['shipping_taxes'];
 				break;
 			case 'coupon_discount_amounts' :
 				$value = &$this->coupon_discount_totals;
@@ -146,7 +146,7 @@ abstract class WC_Legacy_Cart {
 				wc_deprecated_function( 'WC_Cart->fees', '3.2', sprintf( 'the fees API (%s)', 'WC_Cart::get_fees' ) );
 
 				// Grab fees from the new API.
-				$new_fees   = $this->fees_api()->get_fees();
+				$new_fees = $this->fees_api()->get_fees();
 
 				// Add new fees to the legacy prop so it can be adjusted via legacy property.
 				$this->fees = $new_fees;
@@ -158,7 +158,7 @@ abstract class WC_Legacy_Cart {
 			case 'tax' :
 				wc_deprecated_argument( 'WC_Cart->tax', '2.3', 'Use WC_Tax directly' );
 				$this->tax = new WC_Tax();
-				$value = $this->tax;
+				$value     = $this->tax;
 				break;
 			case 'discount_total':
 				wc_deprecated_argument( 'WC_Cart->discount_total', '2.3', 'After tax coupons are no longer supported. For more information see: https://woocommerce.wordpress.com/2014/12/upcoming-coupon-changes-in-woocommerce-2-3/' );
@@ -171,7 +171,7 @@ abstract class WC_Legacy_Cart {
 	/**
 	 * Map legacy variables to setters.
 	 *
-	 * @param string $name Property name.
+	 * @param string $name  Property name.
 	 * @param mixed  $value Value to set.
 	 */
 	public function __set( $name, $value ) {
@@ -232,12 +232,17 @@ abstract class WC_Legacy_Cart {
 	/**
 	 * Methods moved to session class in 3.2.0.
 	 */
-	public function get_cart_from_session() { $this->session->get_cart_from_session(); }
-	public function maybe_set_cart_cookies() { $this->session->maybe_set_cart_cookies(); }
-	public function set_session() { $this->session->set_session(); }
-	public function get_cart_for_session() { return $this->session->get_cart_for_session(); }
-	public function persistent_cart_update() { $this->session->persistent_cart_update(); }
-	public function persistent_cart_destroy() { $this->session->persistent_cart_destroy(); }
+	public function get_cart_from_session() {$this->session->get_cart_from_session(); }
+
+	public function maybe_set_cart_cookies() {$this->session->maybe_set_cart_cookies(); }
+
+	public function set_session() {$this->session->set_session(); }
+
+	public function get_cart_for_session() {return $this->session->get_cart_for_session(); }
+
+	public function persistent_cart_update() {$this->session->persistent_cart_update(); }
+
+	public function persistent_cart_destroy() {$this->session->persistent_cart_destroy(); }
 
 	/**
 	 * Get the total of all cart discounts.
@@ -260,12 +265,13 @@ abstract class WC_Legacy_Cart {
 	/**
 	 * Renamed for consistency.
 	 *
-	 * @param string $coupon_code
-	 * @return bool	True if the coupon is applied, false if it does not exist or cannot be applied.
+	 * @param  string $coupon_code
+	 * @return bool                True if the coupon is applied, false if it does not exist or cannot be applied.
 	 */
 	public function add_discount( $coupon_code ) {
 		return $this->apply_coupon( $coupon_code );
 	}
+
 	/**
 	 * Remove taxes.
 	 *
@@ -274,6 +280,7 @@ abstract class WC_Legacy_Cart {
 	public function remove_taxes() {
 		wc_deprecated_function( 'WC_Cart::remove_taxes', '3.2', '' );
 	}
+
 	/**
 	 * Init.
 	 *
@@ -288,10 +295,10 @@ abstract class WC_Legacy_Cart {
 	 * Function to apply discounts to a product and get the discounted price (before tax is applied).
 	 *
 	 * @deprecated Calculation and coupon logic is handled in WC_Cart_Totals.
-	 * @param mixed $values Cart item.
-	 * @param mixed $price Price of item.
-	 * @param bool  $add_totals Legacy.
-	 * @return float price
+	 * @param  mixed $values     Cart item.
+	 * @param  mixed $price      Price of item.
+	 * @param  bool  $add_totals Legacy.
+	 * @return float             price
 	 */
 	public function get_discounted_price( $values, $price, $add_totals = false ) {
 		wc_deprecated_function( 'WC_Cart::get_discounted_price', '3.2', '' );
@@ -403,4 +410,5 @@ abstract class WC_Legacy_Cart {
 	public function get_discounts_after_tax() {
 		wc_deprecated_function( 'get_discounts_after_tax', '2.3' );
 	}
+
 }
