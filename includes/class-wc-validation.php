@@ -18,8 +18,8 @@ class WC_Validation {
 	/**
 	 * Validates an email using WordPress native is_email function.
 	 *
-	 * @param   string	$email Email address to validate.
-	 * @return  bool
+	 * @param  string $email Email address to validate.
+	 * @return bool
 	 */
 	public static function is_email( $email ) {
 		return is_email( $email );
@@ -28,8 +28,8 @@ class WC_Validation {
 	/**
 	 * Validates a phone number using a regular expression.
 	 *
-	 * @param   string	$phone Phone number to validate.
-	 * @return  bool
+	 * @param  string $phone Phone number to validate.
+	 * @return bool
 	 */
 	public static function is_phone( $phone ) {
 		if ( 0 < strlen( trim( preg_replace( '/[\s\#0-9_\-\+\/\(\)]/', '', $phone ) ) ) ) {
@@ -42,9 +42,9 @@ class WC_Validation {
 	/**
 	 * Checks for a valid postcode.
 	 *
-	 * @param   string	$postcode Postcode to validate.
-	 * @param	string	$country Country to validate the postcode for.
-	 * @return  bool
+	 * @param  string $postcode Postcode to validate.
+	 * @param  string $country  Country to validate the postcode for.
+	 * @return bool
 	 */
 	public static function is_postcode( $postcode, $country ) {
 		if ( strlen( trim( preg_replace( '/[\s\-A-Za-z0-9]/', '', $postcode ) ) ) > 0 ) {
@@ -104,14 +104,13 @@ class WC_Validation {
 	 * @return bool
 	 */
 	public static function is_GB_postcode( $to_check ) {
-
 		// Permitted letters depend upon their position in the postcode.
 		// https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom#Validation
-		$alpha1 = "[abcdefghijklmnoprstuwyz]"; // Character 1
-		$alpha2 = "[abcdefghklmnopqrstuvwxy]"; // Character 2
-		$alpha3 = "[abcdefghjkpstuw]";         // Character 3 == ABCDEFGHJKPSTUW
-		$alpha4 = "[abehmnprvwxy]";            // Character 4 == ABEHMNPRVWXY
-		$alpha5 = "[abdefghjlnpqrstuwxyz]";    // Character 5 != CIKMOV
+		$alpha1 = '[abcdefghijklmnoprstuwyz]'; // Character 1
+		$alpha2 = '[abcdefghklmnopqrstuvwxy]'; // Character 2
+		$alpha3 = '[abcdefghjkpstuw]';         // Character 3 == ABCDEFGHJKPSTUW
+		$alpha4 = '[abehmnprvwxy]';            // Character 4 == ABEHMNPRVWXY
+		$alpha5 = '[abdefghjlnpqrstuwxyz]';    // Character 5 != CIKMOV
 
 		$pcexp = array();
 
@@ -155,9 +154,9 @@ class WC_Validation {
 	/**
 	 * Format the postcode according to the country and length of the postcode.
 	 *
-	 * @param   string	$postcode Postcode to format.
-	 * @param	string	$country Country to format the postcode for.
-	 * @return  string	Formatted postcode.
+	 * @param  string $postcode Postcode to format.
+	 * @param  string $country  Country to format the postcode for.
+	 * @return string           Formatted postcode.
 	 */
 	public static function format_postcode( $postcode, $country ) {
 		return wc_format_postcode( $postcode, $country );
@@ -166,10 +165,11 @@ class WC_Validation {
 	/**
 	 * format_phone function.
 	 *
-	 * @param mixed $tel Phone number to format.
+	 * @param  mixed  $tel Phone number to format.
 	 * @return string
 	 */
 	public static function format_phone( $tel ) {
 		return wc_format_phone_number( $tel );
 	}
+
 }
