@@ -50,7 +50,7 @@ class WC_Settings_Integrations extends WC_Settings_Page {
 
 			if ( sizeof( $integrations ) > 1 ) {
 				foreach ( $integrations as $integration ) {
-					$title = empty( $integration->method_title ) ? ucfirst( $integration->id ) : $integration->method_title;
+					$title                                      = empty( $integration->method_title ) ? ucfirst( $integration->id ) : $integration->method_title;
 					$sections[ strtolower( $integration->id ) ] = esc_html( $title );
 				}
 			}
@@ -71,6 +71,7 @@ class WC_Settings_Integrations extends WC_Settings_Page {
 			$integrations[ $current_section ]->admin_options();
 		}
 	}
+
 }
 
 endif;
