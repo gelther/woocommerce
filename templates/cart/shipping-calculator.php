@@ -101,4 +101,4 @@ do_action( 'woocommerce_before_shipping_calculator' ); ?>
 	</section>
 </form>
 
-<?php do_action( 'woocommerce_after_shipping_calculator' ); ?>
+<?php do_action( 'woocommerce_after_shipping_calculator' );
