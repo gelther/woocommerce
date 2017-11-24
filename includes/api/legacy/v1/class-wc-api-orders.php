@@ -29,14 +29,13 @@ class WC_API_Orders extends WC_API_Resource {
 	 * GET /orders/<id>/notes
 	 *
 	 * @since 2.1
-	 * @param array $routes
+	 * @param  array $routes
 	 * @return array
 	 */
 	public function register_routes( $routes ) {
-
 		# GET /orders
 		$routes[ $this->base ] = array(
-			array( array( $this, 'get_orders' ),     WC_API_Server::READABLE ),
+			array( array( $this, 'get_orders' ), WC_API_Server::READABLE ),
 		);
 
 		# GET /orders/count
@@ -46,7 +45,7 @@ class WC_API_Orders extends WC_API_Resource {
 
 		# GET|PUT /orders/<id>
 		$routes[ $this->base . '/(?P<id>\d+)' ] = array(
-			array( array( $this, 'get_order' ),  WC_API_Server::READABLE ),
+			array( array( $this, 'get_order' ), WC_API_Server::READABLE ),
 			array( array( $this, 'edit_order' ), WC_API_Server::EDITABLE | WC_API_Server::ACCEPT_DATA ),
 		);
 
@@ -62,14 +61,13 @@ class WC_API_Orders extends WC_API_Resource {
 	 * Get all orders
 	 *
 	 * @since 2.1
-	 * @param string $fields
-	 * @param array $filter
-	 * @param string $status
-	 * @param int $page
+	 * @param  string $fields
+	 * @param  array  $filter
+	 * @param  string $status
+	 * @param  int    $page
 	 * @return array
 	 */
 	public function get_orders( $fields = null, $filter = array(), $status = null, $page = 1 ) {
-
 		if ( ! empty( $status ) ) {
 			$filter['status'] = $status;
 		}
@@ -94,17 +92,15 @@ class WC_API_Orders extends WC_API_Resource {
 		return array( 'orders' => $orders );
 	}
 
-
 	/**
 	 * Get the order for the given ID
 	 *
 	 * @since 2.1
-	 * @param int $id the order ID
-	 * @param array $fields
+	 * @param  int            $id     the order ID
+	 * @param  array          $fields
 	 * @return array|WP_Error
 	 */
 	public function get_order( $id, $fields = null ) {
-
 		// ensure order ID is valid & user has permission to read
 		$id = $this->validate_request( $id, 'shop_order', 'read' );
 
@@ -132,12 +128,12 @@ class WC_API_Orders extends WC_API_Resource {
 			'cart_discount'             => wc_format_decimal( 0, 2 ),
 			'order_discount'            => wc_format_decimal( 0, 2 ),
 			'shipping_methods'          => $order->get_shipping_method(),
-			'payment_details' => array(
+			'payment_details'           => array(
 				'method_id'    => $order->get_payment_method(),
 				'method_title' => $order->get_payment_method_title(),
 				'paid'         => ! is_null( $order->get_date_paid() ),
 			),
-			'billing_address' => array(
+			'billing_address'           => array(
 				'first_name' => $order->get_billing_first_name(),
 				'last_name'  => $order->get_billing_last_name(),
 				'company'    => $order->get_billing_company(),
@@ -150,7 +146,7 @@ class WC_API_Orders extends WC_API_Resource {
 				'email'      => $order->get_billing_email(),
 				'phone'      => $order->get_billing_phone(),
 			),
-			'shipping_address' => array(
+			'shipping_address'          => array(
 				'first_name' => $order->get_shipping_first_name(),
 				'last_name'  => $order->get_shipping_last_name(),
 				'company'    => $order->get_shipping_company(),
@@ -238,13 +234,12 @@ class WC_API_Orders extends WC_API_Resource {
 	 *
 	 * @since 2.1
 	 *
-	 * @param string $status
-	 * @param array $filter
+	 * @param  string         $status
+	 * @param  array          $filter
 	 *
 	 * @return array|WP_Error
 	 */
 	public function get_orders_count( $status = null, $filter = array() ) {
-
 		if ( ! empty( $status ) ) {
 			$filter['status'] = $status;
 		}
@@ -264,12 +259,11 @@ class WC_API_Orders extends WC_API_Resource {
 	 * API v1 only allows updating the status of an order
 	 *
 	 * @since 2.1
-	 * @param int $id the order ID
-	 * @param array $data
+	 * @param  int            $id   the order ID
+	 * @param  array          $data
 	 * @return array|WP_Error
 	 */
 	public function edit_order( $id, $data ) {
-
 		$id = $this->validate_request( $id, 'shop_order', 'edit' );
 
 		if ( is_wp_error( $id ) ) {
@@ -289,27 +283,25 @@ class WC_API_Orders extends WC_API_Resource {
 	/**
 	 * Delete an order
 	 *
-	 * @param int $id the order ID
-	 * @param bool $force true to permanently delete order, false to move to trash
+	 * @param  int   $id    the order ID
+	 * @param  bool  $force true to permanently delete order, false to move to trash
 	 * @return array
 	 */
 	public function delete_order( $id, $force = false ) {
-
 		$id = $this->validate_request( $id, 'shop_order', 'delete' );
 
-		return $this->delete( $id, 'order',  ( 'true' === $force ) );
+		return $this->delete( $id, 'order', ( 'true' === $force ) );
 	}
 
 	/**
 	 * Get the admin order notes for an order
 	 *
 	 * @since 2.1
-	 * @param int $id the order ID
-	 * @param string $fields fields to include in response
+	 * @param  int            $id     the order ID
+	 * @param  string         $fields fields to include in response
 	 * @return array|WP_Error
 	 */
 	public function get_order_notes( $id, $fields = null ) {
-
 		// ensure ID is valid order ID
 		$id = $this->validate_request( $id, 'shop_order', 'read' );
 
@@ -348,11 +340,10 @@ class WC_API_Orders extends WC_API_Resource {
 	 * Helper method to get order post objects
 	 *
 	 * @since 2.1
-	 * @param array $args request arguments for filtering query
+	 * @param  array    $args request arguments for filtering query
 	 * @return WP_Query
 	 */
 	private function query_orders( $args ) {
-
 		// set base query arguments
 		$query_args = array(
 			'fields'      => 'ids',
@@ -380,7 +371,7 @@ class WC_API_Orders extends WC_API_Resource {
 	 * Helper method to get the order subtotal
 	 *
 	 * @since 2.1
-	 * @param WC_Order $order
+	 * @param  WC_Order $order
 	 * @return float
 	 */
 	private function get_order_subtotal( $order ) {
@@ -393,4 +384,5 @@ class WC_API_Orders extends WC_API_Resource {
 
 		return $subtotal;
 	}
+
 }
