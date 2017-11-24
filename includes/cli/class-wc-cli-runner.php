@@ -108,7 +108,7 @@ class WC_CLI_Runner {
 		$rest_command->set_supported_ids( $supported_ids );
 		$positional_args = array_keys( $supported_ids );
 
-		$parent			 = "wc {$route_data['schema']['title']}";
+		$parent             = "wc {$route_data['schema']['title']}";
 		$supported_commands = array();
 
 		// Get a list of supported commands for each route.
@@ -153,25 +153,25 @@ class WC_CLI_Runner {
 						'description' => $id_desc,
 						'optional'    => false,
 					);
-					$ids[] = $id_name;
+					$ids[]      = $id_name;
 				}
 			}
-			if ( in_array( $command, array( 'delete', 'get', 'update' ) ) && ! in_array( 'id', $ids )  ) {
+			if ( in_array( $command, array( 'delete', 'get', 'update' ) ) && ! in_array( 'id', $ids ) ) {
 				$synopsis[] = array(
-					'name'		  => 'id',
-					'type'		  => 'positional',
+					'name'        => 'id',
+					'type'        => 'positional',
 					'description' => __( 'The id for the resource.', 'woocommerce' ),
-					'optional'	  => false,
+					'optional'    => false,
 				);
 			}
 
 			foreach ( $endpoint_args as $name => $args ) {
 				if ( ! in_array( $name, $positional_args ) || strpos( $route, '<' . $id_name . '>' ) === false ) {
 					$arg_regs[] = array(
-						'name'		  => $name,
-						'type'		  => 'assoc',
+						'name'        => $name,
+						'type'        => 'assoc',
 						'description' => ! empty( $args['description'] ) ? $args['description'] : '',
-						'optional'	  => empty( $args['required'] ) ? true : false,
+						'optional'    => empty( $args['required'] ) ? true : false,
 					);
 				}
 			}
@@ -182,24 +182,24 @@ class WC_CLI_Runner {
 
 			if ( in_array( $command, array( 'list', 'get' ) ) ) {
 				$synopsis[] = array(
-					'name'		  => 'fields',
-					'type'		  => 'assoc',
+					'name'        => 'fields',
+					'type'        => 'assoc',
 					'description' => __( 'Limit response to specific fields. Defaults to all fields.', 'woocommerce' ),
-					'optional'	  => true,
+					'optional'    => true,
 				);
 				$synopsis[] = array(
-					'name'		  => 'field',
-					'type'		  => 'assoc',
+					'name'        => 'field',
+					'type'        => 'assoc',
 					'description' => __( 'Get the value of an individual field.', 'woocommerce' ),
-					'optional'	  => true,
+					'optional'    => true,
 				);
 				$synopsis[] = array(
-					'name'		  => 'format',
-					'type'		  => 'assoc',
+					'name'        => 'format',
+					'type'        => 'assoc',
 					'description' => __( 'Render response in a particular format.', 'woocommerce' ),
-					'optional'	  => true,
-					'default'	  => 'table',
-					'options'	  => array(
+					'optional'    => true,
+					'default'     => 'table',
+					'options'     => array(
 						'table',
 						'json',
 						'csv',
@@ -215,10 +215,10 @@ class WC_CLI_Runner {
 
 			if ( in_array( $command, array( 'create', 'update', 'delete' ) ) ) {
 				$synopsis[] = array(
-					'name'		  => 'porcelain',
-					'type'		  => 'flag',
+					'name'        => 'porcelain',
+					'type'        => 'flag',
 					'description' => __( 'Output just the id when the operation is successful.', 'woocommerce' ),
-					'optional'	  => true,
+					'optional'    => true,
 				);
 			}
 
@@ -226,7 +226,7 @@ class WC_CLI_Runner {
 				'list'   => 'list_items',
 				'create' => 'create_item',
 				'delete' => 'delete_item',
-				'get'	 => 'get_item',
+				'get'    => 'get_item',
 				'update' => 'update_item',
 			);
 
@@ -244,4 +244,5 @@ class WC_CLI_Runner {
 			) );
 		}
 	}
+
 }
