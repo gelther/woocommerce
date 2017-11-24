@@ -52,7 +52,7 @@ class WC_Order_Item_Fee extends WC_Order_Item {
 			if ( 'taxable' !== $item->get_tax_status() ) {
 				$costs['non-taxable'] += $item->get_total();
 			} elseif ( 'inherit' === $item->get_tax_class() ) {
-				$inherit_class = reset( $order_item_tax_classes );
+				$inherit_class            = reset( $order_item_tax_classes );
 				$costs[ $inherit_class ] += $item->get_total();
 			} else {
 				$costs[ $item->get_tax_class() ] += $item->get_total();
@@ -61,12 +61,13 @@ class WC_Order_Item_Fee extends WC_Order_Item {
 
 		return array_filter( $costs );
 	}
+
 	/**
 	 * Calculate item taxes.
 	 *
 	 * @since  3.2.0
 	 * @param  array $calculate_tax_for Location data to get taxes for. Required.
-	 * @return bool  True if taxes were calculated.
+	 * @return bool                     True if taxes were calculated.
 	 */
 	public function calculate_taxes( $calculate_tax_for = array() ) {
 		if ( ! isset( $calculate_tax_for['country'], $calculate_tax_for['state'], $calculate_tax_for['postcode'], $calculate_tax_for['city'] ) ) {
@@ -288,7 +289,7 @@ class WC_Order_Item_Fee extends WC_Order_Item {
 	/**
 	 * offsetGet for ArrayAccess/Backwards compatibility.
 	 * @deprecated Add deprecation notices in future release.
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return mixed
 	 */
 	public function offsetGet( $offset ) {
@@ -306,7 +307,7 @@ class WC_Order_Item_Fee extends WC_Order_Item {
 	 * offsetSet for ArrayAccess/Backwards compatibility.
 	 * @deprecated Add deprecation notices in future release.
 	 * @param string $offset
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function offsetSet( $offset, $value ) {
 		if ( 'line_total' === $offset ) {
@@ -321,7 +322,7 @@ class WC_Order_Item_Fee extends WC_Order_Item {
 
 	/**
 	 * offsetExists for ArrayAccess
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return bool
 	 */
 	public function offsetExists( $offset ) {
@@ -330,4 +331,5 @@ class WC_Order_Item_Fee extends WC_Order_Item {
 		}
 		return parent::offsetExists( $offset );
 	}
+
 }
