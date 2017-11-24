@@ -13,7 +13,7 @@ class WC_Tests_Logger extends WC_Unit_Test_Case {
 	 * @since 2.4
 	 */
 	public function test_add() {
-		$time = time();
+		$time    = time();
 		$handler = $this
 			->getMockBuilder( 'WC_Log_Handler_Interface' )
 			->setMethods( array( 'handle' ) )
@@ -64,7 +64,7 @@ class WC_Tests_Logger extends WC_Unit_Test_Case {
 	 */
 	public function test_log() {
 		$handler = $this->create_mock_handler();
-		$log = new WC_Logger( array( $handler ), 'debug' );
+		$log     = new WC_Logger( array( $handler ), 'debug' );
 		$log->log( 'debug', 'debug message' );
 		$log->log( 'info', 'info message' );
 		$log->log( 'notice', 'notice message' );
@@ -118,7 +118,7 @@ class WC_Tests_Logger extends WC_Unit_Test_Case {
 	 */
 	public function test_level_methods() {
 		$handler = $this->create_mock_handler();
-		$log = new WC_Logger( array( $handler ), 'debug' );
+		$log     = new WC_Logger( array( $handler ), 'debug' );
 		$log->debug( 'debug message' );
 		$log->info( 'info message' );
 		$log->notice( 'notice message' );
@@ -240,7 +240,7 @@ class WC_Tests_Logger extends WC_Unit_Test_Case {
 	 * @return WC_Log_Handler mock object
 	 */
 	public function create_mock_handler() {
-		$time = time();
+		$time    = time();
 		$handler = $this
 			->getMockBuilder( 'WC_Log_Handler_Interface' )
 			->setMethods( array( 'handle' ) )
@@ -321,4 +321,5 @@ class WC_Tests_Logger extends WC_Unit_Test_Case {
 
 		return $handler;
 	}
+
 }
