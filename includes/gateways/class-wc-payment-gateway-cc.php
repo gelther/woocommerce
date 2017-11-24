@@ -89,4 +89,5 @@ class WC_Payment_Gateway_CC extends WC_Payment_Gateway {
 			echo '<fieldset>' . $cvc_field . '</fieldset>';
 		}
 	}
+
 }
