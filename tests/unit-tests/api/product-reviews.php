@@ -14,7 +14,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	public function setUp() {
 		parent::setUp();
 		$this->endpoint = new WC_REST_Product_Reviews_Controller();
-		$this->user = $this->factory->user->create( array(
+		$this->user     = $this->factory->user->create( array(
 			'role' => 'administrator',
 		) );
 	}
@@ -43,7 +43,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			$review_id = WC_Helper_Product::create_product_review( $product->get_id() );
 		}
 
-		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews' ) );
+		$response        = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews' ) );
 		$product_reviews = $response->get_data();
 
 		$this->assertEquals( 200, $response->get_status() );
@@ -57,7 +57,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			'name'             => 'admin',
 			'email'            => 'woo@woo.local',
 			'verified'         => false,
-			'_links' => array(
+			'_links'           => array(
 				'self'       => array(
 					array(
 						'href' => rest_url( '/wc/v2/products/' . $product->get_id() . '/reviews/' . $review_id ),
@@ -68,7 +68,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 						'href' => rest_url( '/wc/v2/products/' . $product->get_id() . '/reviews' ),
 					),
 				),
-				'up' => array(
+				'up'         => array(
 					array(
 						'href' => rest_url( '/wc/v2/products/' . $product->get_id() ),
 					),
@@ -86,7 +86,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_get_product_reviews_without_permission() {
 		wp_set_current_user( 0 );
-		$product = WC_Helper_Product::create_simple_product();
+		$product  = WC_Helper_Product::create_simple_product();
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews' ) );
 		$this->assertEquals( 401, $response->get_status() );
 		$product->delete( true );
@@ -110,7 +110,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_get_product_review() {
 		wp_set_current_user( $this->user );
-		$product = WC_Helper_Product::create_simple_product();
+		$product           = WC_Helper_Product::create_simple_product();
 		$product_review_id = WC_Helper_Product::create_product_review( $product->get_id() );
 
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews/' . $product_review_id ) );
@@ -137,9 +137,9 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_get_product_review_without_permission() {
 		wp_set_current_user( 0 );
-		$product = WC_Helper_Product::create_simple_product();
+		$product           = WC_Helper_Product::create_simple_product();
 		$product_review_id = WC_Helper_Product::create_product_review( $product->get_id() );
-		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews/' . $product_review_id ) );
+		$response          = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews/' . $product_review_id ) );
 		$this->assertEquals( 401, $response->get_status() );
 		$product->delete( true );
 	}
@@ -151,7 +151,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_get_product_review_invalid_id() {
 		wp_set_current_user( $this->user );
-		$product = WC_Helper_Product::create_simple_product();
+		$product  = WC_Helper_Product::create_simple_product();
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews/0' ) );
 		$this->assertEquals( 404, $response->get_status() );
 		$product->delete( true );
@@ -173,7 +173,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			'rating' => '5',
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 201, $response->get_status() );
 		$this->assertEquals( array(
@@ -201,11 +201,11 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 		// missing review
 		$request = new WP_REST_Request( 'POST', '/wc/v2/products/' . $product->get_id() . '/reviews' );
 		$request->set_body_params( array(
-			'name'   => 'Admin',
-			'email'  => 'woo@woo.local',
+			'name'  => 'Admin',
+			'email' => 'woo@woo.local',
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 400, $response->get_status() );
 
@@ -216,7 +216,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			'email'  => 'woo@woo.local',
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 400, $response->get_status() );
 
@@ -227,7 +227,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			'name'   => 'Admin',
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 400, $response->get_status() );
 		$product->delete( true );
@@ -240,7 +240,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_update_product_review() {
 		wp_set_current_user( $this->user );
-		$product = WC_Helper_Product::create_simple_product();
+		$product           = WC_Helper_Product::create_simple_product();
 		$product_review_id = WC_Helper_Product::create_product_review( $product->get_id() );
 
 		$response = $this->server->dispatch( new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews/' . $product_review_id ) );
@@ -258,7 +258,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			'rating' => 3,
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 		$this->assertEquals( 'Hello world - updated.', $data['review'] );
 		$this->assertEquals( 'Justin', $data['name'] );
 		$this->assertEquals( 'woo2@woo.local', $data['email'] );
@@ -273,7 +273,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_update_product_review_without_permission() {
 		wp_set_current_user( 0 );
-		$product = WC_Helper_Product::create_simple_product();
+		$product           = WC_Helper_Product::create_simple_product();
 		$product_review_id = WC_Helper_Product::create_product_review( $product->get_id() );
 
 		$request = new WP_REST_Request( 'PUT', '/wc/v2/products/' . $product->get_id() . '/reviews/' . $product_review_id );
@@ -283,7 +283,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			'email'  => 'woo@woo.dev',
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 401, $response->get_status() );
 		$product->delete( true );
@@ -305,7 +305,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			'email'  => 'woo@woo.dev',
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 404, $response->get_status() );
 		$product->delete( true );
@@ -318,7 +318,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_delete_product_review() {
 		wp_set_current_user( $this->user );
-		$product = WC_Helper_Product::create_simple_product();
+		$product           = WC_Helper_Product::create_simple_product();
 		$product_review_id = WC_Helper_Product::create_product_review( $product->get_id() );
 
 		$request = new WP_REST_Request( 'DELETE', '/wc/v2/products/' . $product->get_id() . '/reviews/' . $product_review_id );
@@ -335,10 +335,10 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_delete_product_without_permission() {
 		wp_set_current_user( 0 );
-		$product = WC_Helper_Product::create_simple_product();
+		$product           = WC_Helper_Product::create_simple_product();
 		$product_review_id = WC_Helper_Product::create_product_review( $product->get_id() );
 
-		$request = new WP_REST_Request( 'DELETE', '/wc/v2/products/' . $product->get_id() . '/reviews/' . $product_review_id );
+		$request  = new WP_REST_Request( 'DELETE', '/wc/v2/products/' . $product->get_id() . '/reviews/' . $product_review_id );
 		$response = $this->server->dispatch( $request );
 
 		$this->assertEquals( 401, $response->get_status() );
@@ -352,7 +352,7 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_delete_product_review_invalid_id() {
 		wp_set_current_user( $this->user );
-		$product = WC_Helper_Product::create_simple_product();
+		$product           = WC_Helper_Product::create_simple_product();
 		$product_review_id = WC_Helper_Product::create_product_review( $product->get_id() );
 
 		$request = new WP_REST_Request( 'DELETE', '/wc/v2/products/' . $product->get_id() . '/reviews/0' );
@@ -396,16 +396,16 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 			),
 		) );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 'Updated review.', $data['update'][0]['review'] );
 		$this->assertEquals( 'New review.', $data['create'][0]['review'] );
 		$this->assertEquals( $review_2_id, $data['delete'][0]['id'] );
 		$this->assertEquals( $review_3_id, $data['delete'][1]['id'] );
 
-		$request = new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews' );
+		$request  = new WP_REST_Request( 'GET', '/wc/v2/products/' . $product->get_id() . '/reviews' );
 		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$data     = $response->get_data();
 
 		$this->assertEquals( 3, count( $data ) );
 		$product->delete( true );
@@ -418,10 +418,10 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 	 */
 	public function test_product_review_schema() {
 		wp_set_current_user( $this->user );
-		$product = WC_Helper_Product::create_simple_product();
-		$request = new WP_REST_Request( 'OPTIONS', '/wc/v2/products/' . $product->get_id() . '/reviews' );
-		$response = $this->server->dispatch( $request );
-		$data = $response->get_data();
+		$product    = WC_Helper_Product::create_simple_product();
+		$request    = new WP_REST_Request( 'OPTIONS', '/wc/v2/products/' . $product->get_id() . '/reviews' );
+		$response   = $this->server->dispatch( $request );
+		$data       = $response->get_data();
 		$properties = $data['schema']['properties'];
 
 		$this->assertEquals( 8, count( $properties ) );
@@ -435,4 +435,5 @@ class Product_Reviews extends WC_REST_Unit_Test_Case {
 		$this->assertArrayHasKey( 'verified', $properties );
 		$product->delete( true );
 	}
+
 }
