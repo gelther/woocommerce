@@ -64,15 +64,15 @@ class WC_Tests_Order_Item_Fee extends WC_Unit_Test_Case {
 		$fee->set_order_id( $order->get_id() );
 
 		$fee->calculate_taxes( array(
-			'country' => 'US',
-			'state' => 'OR',
+			'country'  => 'US',
+			'state'    => 'OR',
 			'postcode' => 97266,
-			'city' => 'Portland',
+			'city'     => 'Portland',
 		) );
 
-		$taxes = $fee->get_taxes();
+		$taxes       = $fee->get_taxes();
 		$total_taxes = array_values( $taxes['total'] );
-		$expected = array( '0.5' );
+		$expected    = array( '0.5' );
 		$this->assertEquals( $expected, $total_taxes );
 		$this->assertEquals( '0.5', $fee->get_total_tax() );
 
@@ -83,15 +83,15 @@ class WC_Tests_Order_Item_Fee extends WC_Unit_Test_Case {
 		$fee->set_order_id( $order->get_id() );
 
 		$fee->calculate_taxes( array(
-			'country' => 'US',
-			'state' => 'OR',
+			'country'  => 'US',
+			'state'    => 'OR',
 			'postcode' => 97266,
-			'city' => 'Portland',
+			'city'     => 'Portland',
 		) );
 
-		$taxes = $fee->get_taxes();
+		$taxes       = $fee->get_taxes();
 		$total_taxes = array_values( $taxes['total'] );
-		$expected = array( '-0.5' );
+		$expected    = array( '-0.5' );
 		$this->assertEquals( $expected, $total_taxes );
 		$this->assertEquals( '-0.5', $fee->get_total_tax() );
 
@@ -100,4 +100,5 @@ class WC_Tests_Order_Item_Fee extends WC_Unit_Test_Case {
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}woocommerce_tax_rates" );
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}woocommerce_tax_rate_locations" );
 	}
+
 }
