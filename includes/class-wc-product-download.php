@@ -19,9 +19,9 @@ class WC_Product_Download implements ArrayAccess {
 	 * @var array
 	 */
 	protected $data = array(
-		'id'            => '',
-		'name'          => '',
-		'file'          => '',
+		'id'   => '',
+		'name' => '',
+		'file' => '',
 	);
 
 	/**
@@ -43,7 +43,7 @@ class WC_Product_Download implements ArrayAccess {
 	/**
 	 * Get type of file path set.
 	 * @param  string $file_path optional.
-	 * @return string absolute, relative, or shortcode.
+	 * @return string            absolute, relative, or shortcode.
 	 */
 	public function get_type_of_file_path( $file_path = '' ) {
 		$file_path = $file_path ? $file_path : $this->get_file();
@@ -197,7 +197,7 @@ class WC_Product_Download implements ArrayAccess {
 
 	/**
 	 * offsetGet
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return mixed
 	 */
 	public function offsetGet( $offset ) {
@@ -214,7 +214,7 @@ class WC_Product_Download implements ArrayAccess {
 	/**
 	 * offsetSet
 	 * @param string $offset
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function offsetSet( $offset, $value ) {
 		switch ( $offset ) {
@@ -234,10 +234,11 @@ class WC_Product_Download implements ArrayAccess {
 
 	/**
 	 * offsetExists
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return bool
 	 */
 	public function offsetExists( $offset ) {
 		return in_array( $offset, array_keys( $this->data ) );
 	}
+
 }
