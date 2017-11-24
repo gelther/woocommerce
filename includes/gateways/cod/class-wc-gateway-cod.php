@@ -65,28 +65,28 @@ class WC_Gateway_COD extends WC_Payment_Gateway {
 		}
 
 		$this->form_fields = array(
-			'enabled' => array(
+			'enabled'            => array(
 				'title'       => __( 'Enable/Disable', 'woocommerce' ),
 				'label'       => __( 'Enable cash on delivery', 'woocommerce' ),
 				'type'        => 'checkbox',
 				'description' => '',
 				'default'     => 'no',
 			),
-			'title' => array(
+			'title'              => array(
 				'title'       => __( 'Title', 'woocommerce' ),
 				'type'        => 'text',
 				'description' => __( 'Payment method description that the customer will see on your checkout.', 'woocommerce' ),
 				'default'     => __( 'Cash on delivery', 'woocommerce' ),
 				'desc_tip'    => true,
 			),
-			'description' => array(
+			'description'        => array(
 				'title'       => __( 'Description', 'woocommerce' ),
 				'type'        => 'textarea',
 				'description' => __( 'Payment method description that the customer will see on your website.', 'woocommerce' ),
 				'default'     => __( 'Pay with cash upon delivery.', 'woocommerce' ),
 				'desc_tip'    => true,
 			),
-			'instructions' => array(
+			'instructions'       => array(
 				'title'       => __( 'Instructions', 'woocommerce' ),
 				'type'        => 'textarea',
 				'description' => __( 'Instructions that will be added to the thank you page.', 'woocommerce' ),
@@ -107,12 +107,12 @@ class WC_Gateway_COD extends WC_Payment_Gateway {
 				),
 			),
 			'enable_for_virtual' => array(
-				'title'             => __( 'Accept for virtual orders', 'woocommerce' ),
-				'label'             => __( 'Accept COD if the order is virtual', 'woocommerce' ),
-				'type'              => 'checkbox',
-				'default'           => 'yes',
+				'title'   => __( 'Accept for virtual orders', 'woocommerce' ),
+				'label'   => __( 'Accept COD if the order is virtual', 'woocommerce' ),
+				'type'    => 'checkbox',
+				'default' => 'yes',
 			),
-	   );
+		);
 	}
 
 	/**
@@ -168,11 +168,10 @@ class WC_Gateway_COD extends WC_Payment_Gateway {
 		return parent::is_available();
 	}
 
-
 	/**
 	 * Process the payment and return the result.
 	 *
-	 * @param int $order_id
+	 * @param  int   $order_id
 	 * @return array
 	 */
 	public function process_payment( $order_id ) {
@@ -189,8 +188,8 @@ class WC_Gateway_COD extends WC_Payment_Gateway {
 
 		// Return thankyou redirect
 		return array(
-			'result' 	=> 'success',
-			'redirect'	=> $this->get_return_url( $order ),
+			'result'   => 'success',
+			'redirect' => $this->get_return_url( $order ),
 		);
 	}
 
@@ -207,8 +206,8 @@ class WC_Gateway_COD extends WC_Payment_Gateway {
 	 * Change payment complete order status to completed for COD orders.
 	 *
 	 * @since  3.1.0
-	 * @param  string $status
-	 * @param  int $order_id
+	 * @param  string   $status
+	 * @param  int      $order_id
 	 * @param  WC_Order $order
 	 * @return string
 	 */
@@ -224,12 +223,13 @@ class WC_Gateway_COD extends WC_Payment_Gateway {
 	 *
 	 * @access public
 	 * @param WC_Order $order
-	 * @param bool $sent_to_admin
-	 * @param bool $plain_text
+	 * @param bool     $sent_to_admin
+	 * @param bool     $plain_text
 	 */
 	public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
 		if ( $this->instructions && ! $sent_to_admin && $this->id === $order->get_payment_method() ) {
 			echo wpautop( wptexturize( $this->instructions ) ) . PHP_EOL;
 		}
 	}
+
 }
