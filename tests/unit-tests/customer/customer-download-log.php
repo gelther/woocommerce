@@ -12,7 +12,7 @@ class WC_Tests_Customer_Download_Log extends WC_Unit_Test_Case {
 	 */
 	function test_get_id() {
 		$object = new WC_Customer_Download_Log();
-		$id = $object->save();
+		$id     = $object->save();
 		$this->assertEquals( $id, $object->get_id() );
 	}
 
@@ -24,7 +24,7 @@ class WC_Tests_Customer_Download_Log extends WC_Unit_Test_Case {
 		$set_to = current_time( 'timestamp', true );
 
 		// Convert timestamp to WC_DateTime using ISO 8601 for PHP 5.2 compat.
-		$dt_str = date( 'c', $set_to );
+		$dt_str       = date( 'c', $set_to );
 		$wc_timestamp = new WC_DateTime( $dt_str );
 
 		$object->set_timestamp( $set_to );
@@ -78,7 +78,7 @@ class WC_Tests_Customer_Download_Log extends WC_Unit_Test_Case {
 		$timestamp = current_time( 'timestamp', true );
 
 		// Convert timestamp to WC_DateTime using ISO 8601 for PHP 5.2 compat.
-		$dt_str = date( 'c', $timestamp );
+		$dt_str       = date( 'c', $timestamp );
 		$wc_timestamp = new WC_DateTime( $dt_str );
 
 		$download_log = new WC_Customer_Download_Log;
@@ -127,7 +127,7 @@ class WC_Tests_Customer_Download_Log extends WC_Unit_Test_Case {
 		$this->assertEquals( 9, $download_1->get_downloads_remaining(), 'After download, permission downloads remaining should be 9.' );
 
 		// Make sure download log was recorded properly.
-		$data_store = WC_Data_Store::load( 'customer-download-log' );
+		$data_store    = WC_Data_Store::load( 'customer-download-log' );
 		$download_logs = $data_store->get_download_logs( array(
 			'permission_id' => $download_1->get_id()
 		) );
@@ -142,4 +142,5 @@ class WC_Tests_Customer_Download_Log extends WC_Unit_Test_Case {
 		$this->assertEquals( $customer_id_2, $download_log->get_user_id(), 'Tracked download log user ID did not match.' );
 		$this->assertEquals( $ip_address, $download_log->get_user_ip_address(), 'Tracked download log IP address did not match.' );
 	}
+
 }
