@@ -142,7 +142,7 @@ final class WooCommerce {
 	/**
 	 * Auto-load in-accessible properties on demand.
 	 *
-	 * @param mixed $key Key name.
+	 * @param  mixed $key Key name.
 	 * @return mixed
 	 */
 	public function __get( $key ) {
@@ -484,14 +484,14 @@ final class WooCommerce {
 
 		// Session class, handles session data for users - can be overwritten if custom handler is needed.
 		if ( $this->is_request( 'frontend' ) || $this->is_request( 'cron' ) ) {
-			$session_class  = apply_filters( 'woocommerce_session_handler', 'WC_Session_Handler' );
-			$this->session  = new $session_class();
+			$session_class = apply_filters( 'woocommerce_session_handler', 'WC_Session_Handler' );
+			$this->session = new $session_class();
 		}
 
 		// Classes/actions loaded for the frontend and for ajax requests.
 		if ( $this->is_request( 'frontend' ) ) {
-			$this->cart            = new WC_Cart();                                  // Cart class, stores the cart contents.
-			$this->customer        = new WC_Customer( get_current_user_id(), true ); // Customer class, handles data such as customer location.
+			$this->cart     = new WC_Cart();                                  // Cart class, stores the cart contents.
+			$this->customer = new WC_Customer( get_current_user_id(), true ); // Customer class, handles data such as customer location.
 			add_action( 'shutdown', array( $this->customer, 'save' ), 10 );          // Customer should be saved during shutdown.
 		}
 
@@ -606,8 +606,8 @@ final class WooCommerce {
 	/**
 	 * Return the WC API URL for a given request.
 	 *
-	 * @param string    $request Requested endpoint.
-	 * @param bool|null $ssl     If should use SSL, null if should auto detect. Default: null.
+	 * @param  string    $request Requested endpoint.
+	 * @param  bool|null $ssl     If should use SSL, null if should auto detect. Default: null.
 	 * @return string
 	 */
 	public function api_request_url( $request, $ssl = null ) {
@@ -636,7 +636,6 @@ final class WooCommerce {
 	 * @since 2.2
 	 */
 	private function load_webhooks() {
-
 		if ( ! is_blog_installed() ) {
 			return;
 		}
@@ -661,10 +660,10 @@ final class WooCommerce {
 	 */
 	public function wpdb_table_fix() {
 		global $wpdb;
-		$wpdb->payment_tokenmeta    = $wpdb->prefix . 'woocommerce_payment_tokenmeta';
-		$wpdb->order_itemmeta       = $wpdb->prefix . 'woocommerce_order_itemmeta';
-		$wpdb->tables[]             = 'woocommerce_payment_tokenmeta';
-		$wpdb->tables[]             = 'woocommerce_order_itemmeta';
+		$wpdb->payment_tokenmeta = $wpdb->prefix . 'woocommerce_payment_tokenmeta';
+		$wpdb->order_itemmeta    = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$wpdb->tables[]          = 'woocommerce_payment_tokenmeta';
+		$wpdb->tables[]          = 'woocommerce_order_itemmeta';
 
 		if ( get_option( 'db_version' ) < 34370 ) {
 			$wpdb->woocommerce_termmeta = $wpdb->prefix . 'woocommerce_termmeta';
@@ -707,4 +706,5 @@ final class WooCommerce {
 	public function mailer() {
 		return WC_Emails::instance();
 	}
+
 }
