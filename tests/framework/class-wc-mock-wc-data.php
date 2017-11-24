@@ -223,4 +223,5 @@ class WC_Mock_WC_Data extends WC_Data {
 		$this->save_meta_data();
 		return $this->get_id();
 	}
+
 }
