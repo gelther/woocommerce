@@ -75,7 +75,7 @@ class WC_Payment_Token_eCheck extends WC_Payment_Token {
 	 *
 	 * @since  2.6.0
 	 * @param  string $context
-	 * @return string Last 4 digits
+	 * @return string          Last 4 digits
 	 */
 	public function get_last4( $context = 'view' ) {
 		return $this->get_prop( 'last4', $context );
@@ -89,4 +89,5 @@ class WC_Payment_Token_eCheck extends WC_Payment_Token {
 	public function set_last4( $last4 ) {
 		$this->set_prop( 'last4', $last4 );
 	}
+
 }
