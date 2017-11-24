@@ -34,7 +34,7 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 *
 	 * The type of object is inferred from the passed schema.
 	 *
-	 * @param array $schema Schema array.
+	 * @param  array $schema Schema array.
 	 *
 	 * @return array
 	 */
@@ -75,7 +75,7 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	/**
 	 * Check batch limit.
 	 *
-	 * @param array $items Request items.
+	 * @param  array         $items Request items.
 	 * @return bool|WP_Error
 	 */
 	protected function check_batch_limit( $items ) {
@@ -105,8 +105,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	/**
 	 * Bulk create, update and delete items.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 * @return array Of WP_Error or WP_REST_Response.
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return array                    Of WP_Error or WP_REST_Response.
 	 */
 	public function batch_items( $request ) {
 		/** @var WP_REST_Server $wp_rest_server */
@@ -198,8 +198,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 * Validate a text value for a text based setting.
 	 *
 	 * @since 3.0.0
-	 * @param string $value
-	 * @param array  $setting
+	 * @param  string $value
+	 * @param  array  $setting
 	 * @return string
 	 */
 	public function validate_setting_text_field( $value, $setting ) {
@@ -211,8 +211,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 * Validate select based settings.
 	 *
 	 * @since 3.0.0
-	 * @param string $value
-	 * @param array  $setting
+	 * @param  string          $value
+	 * @param  array           $setting
 	 * @return string|WP_Error
 	 */
 	public function validate_setting_select_field( $value, $setting ) {
@@ -227,8 +227,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 * Validate multiselect based settings.
 	 *
 	 * @since 3.0.0
-	 * @param array $values
-	 * @param array  $setting
+	 * @param  array          $values
+	 * @param  array          $setting
 	 * @return array|WP_Error
 	 */
 	public function validate_setting_multiselect_field( $values, $setting ) {
@@ -254,8 +254,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 * Validate image_width based settings.
 	 *
 	 * @since 3.0.0
-	 * @param array $values
-	 * @param array $setting
+	 * @param  array           $values
+	 * @param  array           $setting
 	 * @return string|WP_Error
 	 */
 	public function validate_setting_image_width_field( $values, $setting ) {
@@ -280,8 +280,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 * Validate radio based settings.
 	 *
 	 * @since 3.0.0
-	 * @param string $value
-	 * @param array  $setting
+	 * @param  string          $value
+	 * @param  array           $setting
 	 * @return string|WP_Error
 	 */
 	public function validate_setting_radio_field( $value, $setting ) {
@@ -292,8 +292,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 * Validate checkbox based settings.
 	 *
 	 * @since 3.0.0
-	 * @param string $value
-	 * @param array  $setting
+	 * @param  string          $value
+	 * @param  array           $setting
 	 * @return string|WP_Error
 	 */
 	public function validate_setting_checkbox_field( $value, $setting ) {
@@ -311,8 +311,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 * Validate textarea based settings.
 	 *
 	 * @since 3.0.0
-	 * @param string $value
-	 * @param array  $setting
+	 * @param  string $value
+	 * @param  array  $setting
 	 * @return string
 	 */
 	public function validate_setting_textarea_field( $value, $setting ) {
@@ -331,8 +331,8 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 	 * Add meta query.
 	 *
 	 * @since 3.0.0
-	 * @param array $args       Query args.
-	 * @param array $meta_query Meta query.
+	 * @param  array $args       Query args.
+	 * @param  array $meta_query Meta query.
 	 * @return array
 	 */
 	protected function add_meta_query( $args, $meta_query ) {
@@ -361,7 +361,7 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'    => 'object',
+						'type' => 'object',
 					),
 				),
 				'update' => array(
@@ -369,7 +369,7 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'    => 'object',
+						'type' => 'object',
 					),
 				),
 				'delete' => array(
@@ -377,7 +377,7 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 					'type'        => 'array',
 					'context'     => array( 'view', 'edit' ),
 					'items'       => array(
-						'type'    => 'integer',
+						'type' => 'integer',
 					),
 				),
 			),
@@ -385,4 +385,5 @@ abstract class WC_REST_Controller extends WP_REST_Controller {
 
 		return $schema;
 	}
+
 }
