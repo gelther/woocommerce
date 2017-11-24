@@ -116,7 +116,7 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	/**
 	 * Loads variation child IDs.
 	 *
-	 * @param  WC_Product $product Product object.
+	 * @param  WC_Product $product    Product object.
 	 * @param  bool       $force_read True to bypass the transient.
 	 * @return array
 	 */
@@ -159,7 +159,7 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	/**
 	 * Loads an array of attributes used for variations, as well as their possible values.
 	 *
-	 * @param WC_Product $product Product object.
+	 * @param  WC_Product $product Product object.
 	 * @return array
 	 */
 	protected function read_variation_attributes( &$product ) {
@@ -229,12 +229,11 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	 * This is to ensure modified prices are not cached, unless intended.
 	 *
 	 * @since  3.0.0
-	 * @param  WC_Product $product Product object.
+	 * @param  WC_Product $product       Product object.
 	 * @param  bool       $include_taxes If taxes should be calculated or not.
-	 * @return array of prices
+	 * @return array                     of prices
 	 */
 	public function read_price_data( &$product, $include_taxes = false ) {
-
 		/**
 		 * Transient name for storing prices for this product (note: Max transient length is 45)
 		 *
@@ -320,7 +319,7 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	 * DEVELOPERS should filter this hash if offering conditional pricing to keep it unique.
 	 *
 	 * @since  3.0.0
-	 * @param  WC_Product $product Product object.
+	 * @param  WC_Product $product       Product object.
 	 * @param  bool       $include_taxes If taxes should be calculated or not.
 	 * @return string
 	 */
@@ -350,7 +349,7 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	 * Does a child have a weight set?
 	 *
 	 * @since 3.0.0
-	 * @param WC_Product $product Product object.
+	 * @param  WC_Product $product Product object.
 	 * @return boolean
 	 */
 	public function child_has_weight( $product ) {
@@ -363,7 +362,7 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	 * Does a child have dimensions set?
 	 *
 	 * @since 3.0.0
-	 * @param WC_Product $product Product object.
+	 * @param  WC_Product $product Product object.
 	 * @return boolean
 	 */
 	public function child_has_dimensions( $product ) {
@@ -376,7 +375,7 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	 * Is a child in stock?
 	 *
 	 * @since 3.0.0
-	 * @param WC_Product $product Product object.
+	 * @param  WC_Product $product Product object.
 	 * @return boolean
 	 */
 	public function child_is_in_stock( $product ) {
@@ -389,9 +388,9 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	/**
 	 * Syncs all variation names if the parent name is changed.
 	 *
-	 * @param WC_Product $product Product object.
+	 * @param WC_Product $product       Product object.
 	 * @param string     $previous_name Variation previous name.
-	 * @param string     $new_name Variation new name.
+	 * @param string     $new_name      Variation new name.
 	 * @since 3.0.0
 	 */
 	public function sync_variation_names( &$product, $previous_name = '', $new_name = '' ) {
@@ -481,7 +480,7 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 	 * Delete variations of a product.
 	 *
 	 * @since 3.0.0
-	 * @param int  $product_id Product ID.
+	 * @param int  $product_id   Product ID.
 	 * @param bool $force_delete False to trash.
 	 */
 	public function delete_variations( $product_id, $force_delete = false ) {
@@ -532,4 +531,5 @@ class WC_Product_Variable_Data_Store_CPT extends WC_Product_Data_Store_CPT imple
 
 		delete_transient( 'wc_product_children_' . $product_id );
 	}
+
 }
