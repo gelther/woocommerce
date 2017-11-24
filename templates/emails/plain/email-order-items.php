@@ -35,7 +35,7 @@ foreach ( $items as $item_id => $item ) :
 		echo strip_tags( wc_display_item_meta( $item, array(
 			'before'    => "\n- ",
 			'separator' => "\n- ",
-			'after'     => "",
+			'after'     => '',
 			'echo'      => false,
 			'autop'     => false,
 		) ) );
