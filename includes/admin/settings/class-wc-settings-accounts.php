@@ -184,6 +184,7 @@ class WC_Settings_Accounts extends WC_Settings_Page {
 
 		return apply_filters( 'woocommerce_get_settings_' . $this->id, $settings );
 	}
+
 }
 
 endif;
