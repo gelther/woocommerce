@@ -64,8 +64,8 @@ class WC_Query {
 		// Query vars to add to WP.
 		$this->query_vars = array(
 			// Checkout actions.
-			'order-pay'          => get_option( 'woocommerce_checkout_pay_endpoint', 'order-pay' ),
-			'order-received'     => get_option( 'woocommerce_checkout_order_received_endpoint', 'order-received' ),
+			'order-pay'                  => get_option( 'woocommerce_checkout_pay_endpoint', 'order-pay' ),
+			'order-received'             => get_option( 'woocommerce_checkout_order_received_endpoint', 'order-received' ),
 			// My account actions.
 			'orders'                     => get_option( 'woocommerce_myaccount_orders_endpoint', 'orders' ),
 			'view-order'                 => get_option( 'woocommerce_myaccount_view_order_endpoint', 'view-order' ),
@@ -174,7 +174,7 @@ class WC_Query {
 	 *
 	 * @access public
 	 *
-	 * @param array $vars Query vars.
+	 * @param  array $vars Query vars.
 	 * @return array
 	 */
 	public function add_query_vars( $vars ) {
@@ -227,7 +227,7 @@ class WC_Query {
 	/**
 	 * Are we currently on the front page?
 	 *
-	 * @param WP_Query $q Query instance.
+	 * @param  WP_Query $q Query instance.
 	 * @return bool
 	 */
 	private function is_showing_page_on_front( $q ) {
@@ -237,7 +237,7 @@ class WC_Query {
 	/**
 	 * Is the front page a page we define?
 	 *
-	 * @param int $page_id Page ID.
+	 * @param  int  $page_id Page ID.
 	 * @return bool
 	 */
 	private function page_on_front_is( $page_id ) {
@@ -375,7 +375,7 @@ class WC_Query {
 	 */
 	public function product_query( $q ) {
 		if ( ! is_feed() ) {
-			$ordering  = $this->get_catalog_ordering_args();
+			$ordering = $this->get_catalog_ordering_args();
 			$q->set( 'orderby', $ordering['orderby'] );
 			$q->set( 'order', $ordering['order'] );
 
@@ -423,8 +423,8 @@ class WC_Query {
 	/**
 	 * Returns an array of arguments for ordering products based on the selected values.
 	 *
-	 * @param string $orderby Order by.
-	 * @param string $order   Sorting order.
+	 * @param  string $orderby Order by.
+	 * @param  string $order   Sorting order.
 	 *
 	 * @return array
 	 */
@@ -456,11 +456,11 @@ class WC_Query {
 
 		switch ( $orderby ) {
 			case 'rand':
-				$args['orderby']  = 'rand';
+				$args['orderby'] = 'rand';
 				break;
 			case 'date':
-				$args['orderby']  = 'date ID';
-				$args['order']    = ( 'ASC' === $order ) ? 'ASC' : 'DESC';
+				$args['orderby'] = 'date ID';
+				$args['order']   = ( 'ASC' === $order ) ? 'ASC' : 'DESC';
 				break;
 			case 'price':
 				if ( 'DESC' === $order ) {
@@ -498,16 +498,16 @@ class WC_Query {
 	/**
 	 * Handle numeric price sorting.
 	 *
-	 * @param array $args Query args.
+	 * @param  array $args Query args.
 	 * @return array
 	 */
 	public function order_by_price_asc_post_clauses( $args ) {
 		global $wpdb, $wp_query;
 
 		if ( isset( $wp_query->queried_object, $wp_query->queried_object->term_taxonomy_id, $wp_query->queried_object->taxonomy ) && is_a( $wp_query->queried_object, 'WP_Term' ) ) {
-			$search_within_terms   = get_term_children( $wp_query->queried_object->term_taxonomy_id, $wp_query->queried_object->taxonomy );
-			$search_within_terms[] = $wp_query->queried_object->term_taxonomy_id;
-			$args['join'] .= " INNER JOIN (
+			$search_within_terms    = get_term_children( $wp_query->queried_object->term_taxonomy_id, $wp_query->queried_object->taxonomy );
+			$search_within_terms[]  = $wp_query->queried_object->term_taxonomy_id;
+			$args['join']          .= " INNER JOIN (
 				SELECT post_id, max( meta_value+0 ) price
 				FROM $wpdb->postmeta
 				INNER JOIN (
@@ -518,7 +518,7 @@ class WC_Query {
 				) as products_within_terms ON $wpdb->postmeta.post_id = products_within_terms.object_id
 				WHERE meta_key='_price' GROUP BY post_id ) as price_query ON $wpdb->posts.ID = price_query.post_id ";
 		} else {
-			$args['join']    .= " INNER JOIN ( SELECT post_id, min( meta_value+0 ) price FROM $wpdb->postmeta WHERE meta_key='_price' GROUP BY post_id ) as price_query ON $wpdb->posts.ID = price_query.post_id ";
+			$args['join'] .= " INNER JOIN ( SELECT post_id, min( meta_value+0 ) price FROM $wpdb->postmeta WHERE meta_key='_price' GROUP BY post_id ) as price_query ON $wpdb->posts.ID = price_query.post_id ";
 		}
 		$args['orderby'] = ' price_query.price ASC ';
 		return $args;
@@ -527,16 +527,16 @@ class WC_Query {
 	/**
 	 * Handle numeric price sorting.
 	 *
-	 * @param array $args Query args.
+	 * @param  array $args Query args.
 	 * @return array
 	 */
 	public function order_by_price_desc_post_clauses( $args ) {
 		global $wpdb, $wp_query;
 
 		if ( isset( $wp_query->queried_object, $wp_query->queried_object->term_taxonomy_id, $wp_query->queried_object->taxonomy ) && is_a( $wp_query->queried_object, 'WP_Term' ) ) {
-			$search_within_terms   = get_term_children( $wp_query->queried_object->term_taxonomy_id, $wp_query->queried_object->taxonomy );
-			$search_within_terms[] = $wp_query->queried_object->term_taxonomy_id;
-			$args['join'] .= " INNER JOIN (
+			$search_within_terms    = get_term_children( $wp_query->queried_object->term_taxonomy_id, $wp_query->queried_object->taxonomy );
+			$search_within_terms[]  = $wp_query->queried_object->term_taxonomy_id;
+			$args['join']          .= " INNER JOIN (
 				SELECT post_id, max( meta_value+0 ) price
 				FROM $wpdb->postmeta
 				INNER JOIN (
@@ -559,7 +559,7 @@ class WC_Query {
 	 *
 	 * This lets us sort by meta value desc, and have a second orderby param.
 	 *
-	 * @param array $args Query args.
+	 * @param  array $args Query args.
 	 * @return array
 	 */
 	public function order_by_popularity_post_clauses( $args ) {
@@ -572,7 +572,7 @@ class WC_Query {
 	 * Order by rating post clauses.
 	 *
 	 * @deprecated 3.0.0
-	 * @param array $args Query args.
+	 * @param  array $args Query args.
 	 * @return array
 	 */
 	public function order_by_rating_post_clauses( $args ) {
@@ -580,14 +580,14 @@ class WC_Query {
 
 		wc_deprecated_function( 'order_by_rating_post_clauses', '3.0' );
 
-		$args['fields'] .= ", AVG( $wpdb->commentmeta.meta_value ) as average_rating ";
-		$args['where']  .= " AND ( $wpdb->commentmeta.meta_key = 'rating' OR $wpdb->commentmeta.meta_key IS null ) ";
-		$args['join']   .= "
+		$args['fields']  .= ", AVG( $wpdb->commentmeta.meta_value ) as average_rating ";
+		$args['where']   .= " AND ( $wpdb->commentmeta.meta_key = 'rating' OR $wpdb->commentmeta.meta_key IS null ) ";
+		$args['join']    .= "
 			LEFT OUTER JOIN $wpdb->comments ON($wpdb->posts.ID = $wpdb->comments.comment_post_ID)
 			LEFT JOIN $wpdb->commentmeta ON($wpdb->comments.comment_ID = $wpdb->commentmeta.comment_id)
 		";
-		$args['orderby'] = "average_rating DESC, $wpdb->posts.post_date DESC";
-		$args['groupby'] = "$wpdb->posts.ID";
+		$args['orderby']  = "average_rating DESC, $wpdb->posts.post_date DESC";
+		$args['groupby']  = "$wpdb->posts.ID";
 
 		return $args;
 	}
@@ -603,7 +603,7 @@ class WC_Query {
 		if ( ! is_array( $meta_query ) ) {
 			$meta_query = array();
 		}
-		$meta_query['price_filter']  = $this->price_filter_meta_query();
+		$meta_query['price_filter'] = $this->price_filter_meta_query();
 		return array_filter( apply_filters( 'woocommerce_product_query_meta_query', $meta_query, $this ) );
 	}
 
@@ -681,7 +681,7 @@ class WC_Query {
 	 */
 	private function price_filter_meta_query() {
 		if ( isset( $_GET['max_price'] ) || isset( $_GET['min_price'] ) ) { // WPCS: input var ok, CSRF ok.
-			$meta_query = wc_get_min_max_price_meta_query( $_GET ); // WPCS: input var ok, CSRF ok.
+			$meta_query                 = wc_get_min_max_price_meta_query( $_GET ); // WPCS: input var ok, CSRF ok.
 			$meta_query['price_filter'] = true;
 
 			return $meta_query;
@@ -704,7 +704,7 @@ class WC_Query {
 	 * Returns a meta query to handle product visibility.
 	 *
 	 * @deprecated 3.0.0 Replaced with taxonomy.
-	 * @param string $compare Compare type.
+	 * @param  string $compare Compare type.
 	 * @return array
 	 */
 	public function visibility_meta_query( $compare = 'IN' ) {
@@ -715,7 +715,7 @@ class WC_Query {
 	 * Returns a meta query to handle product stock status.
 	 *
 	 * @deprecated 3.0.0 Replaced with taxonomy.
-	 * @param string $status Status.
+	 * @param  string $status Status.
 	 * @return array
 	 */
 	public function stock_status_meta_query( $status = 'instock' ) {
@@ -803,7 +803,7 @@ class WC_Query {
 						continue;
 					}
 
-					$query_type = ! empty( $_GET[ 'query_type_' . $attribute ] ) && in_array( wp_unslash( $_GET[ 'query_type_' . $attribute ] ), array( 'and', 'or' ), true ) ? wc_clean( wp_unslash( $_GET[ 'query_type_' . $attribute ] ) ) : ''; // WPCS: input var ok, CSRF ok.
+					$query_type                                          = ! empty( $_GET[ 'query_type_' . $attribute ] ) && in_array( wp_unslash( $_GET[ 'query_type_' . $attribute ] ), array( 'and', 'or' ), true ) ? wc_clean( wp_unslash( $_GET[ 'query_type_' . $attribute ] ) ) : ''; // WPCS: input var ok, CSRF ok.
 					self::$_chosen_attributes[ $taxonomy ]['terms']      = array_map( 'sanitize_title', $filter_terms ); // Ensures correct encoding.
 					self::$_chosen_attributes[ $taxonomy ]['query_type'] = $query_type ? $query_type : apply_filters( 'woocommerce_layered_nav_default_query_type', 'and' );
 				}
@@ -840,4 +840,5 @@ class WC_Query {
 	public function layered_nav_query( $deprecated ) {
 		wc_deprecated_function( 'layered_nav_query', '2.6' );
 	}
+
 }
