@@ -32,10 +32,10 @@ class WC_Register_WP_Admin_Settings {
 
 		if ( 'page' === $type ) {
 			add_filter( 'woocommerce_settings_groups', array( $this, 'register_page_group' ) );
-			add_filter( 'woocommerce_settings-' . $this->object->get_id(),  array( $this, 'register_page_settings' ) );
+			add_filter( 'woocommerce_settings-' . $this->object->get_id(), array( $this, 'register_page_settings' ) );
 		} elseif ( 'email' === $type ) {
 			add_filter( 'woocommerce_settings_groups', array( $this, 'register_email_group' ) );
-			add_filter( 'woocommerce_settings-email_' . $this->object->id,  array( $this, 'register_email_settings' ) );
+			add_filter( 'woocommerce_settings-email_' . $this->object->id, array( $this, 'register_email_settings' ) );
 		}
 	}
 
@@ -68,7 +68,7 @@ class WC_Register_WP_Admin_Settings {
 		foreach ( $this->object->form_fields as $id => $setting ) {
 			$setting['id']         = $id;
 			$setting['option_key'] = array( $this->object->get_option_key(), $id );
-			$new_setting      = $this->register_setting( $setting );
+			$new_setting           = $this->register_setting( $setting );
 			if ( $new_setting ) {
 				$settings[] = $new_setting;
 			}
@@ -131,7 +131,7 @@ class WC_Register_WP_Admin_Settings {
 	 * Register a setting into the format expected for the Settings REST API.
 	 *
 	 * @since 3.0.0
-	 * @param  array $setting
+	 * @param  array      $setting
 	 * @return array|bool
 	 */
 	public function register_setting( $setting ) {
