@@ -40,7 +40,7 @@ class WC_Settings_Tax extends WC_Settings_Page {
 	/**
 	 * Add this page to settings.
 	 *
-	 * @param array $pages Existing pages.
+	 * @param  array       $pages Existing pages.
 	 * @return array|mixed
 	 */
 	public function add_settings_page( $pages ) {
@@ -75,7 +75,7 @@ class WC_Settings_Tax extends WC_Settings_Page {
 	/**
 	 * Get settings array.
 	 *
-	 * @param string $current_section Current section being shown.
+	 * @param  string $current_section Current section being shown.
 	 * @return array
 	 */
 	public function get_settings( $current_section = '' ) {
@@ -176,9 +176,9 @@ class WC_Settings_Tax extends WC_Settings_Page {
 				'tax_rate_class'    => $current_class,
 			),
 			'strings'       => array(
-				'no_rows_selected' => __( 'No row(s) selected', 'woocommerce' ),
+				'no_rows_selected'        => __( 'No row(s) selected', 'woocommerce' ),
 				'unload_confirmation_msg' => __( 'Your changed data will be lost if you leave this page without saving.', 'woocommerce' ),
-				'csv_data_cols' => array(
+				'csv_data_cols'           => array(
 					__( 'Country code', 'woocommerce' ),
 					__( 'State code', 'woocommerce' ),
 					__( 'Postcode / ZIP', 'woocommerce' ),
@@ -220,13 +220,13 @@ class WC_Settings_Tax extends WC_Settings_Page {
 	/**
 	 * Get a posted tax rate.
 	 *
-	 * @param string $key   Key of tax rate in the post data array.
-	 * @param int    $order Position/order of rate.
-	 * @param string $class Tax class for rate.
+	 * @param  string $key   Key of tax rate in the post data array.
+	 * @param  int    $order Position/order of rate.
+	 * @param  string $class Tax class for rate.
 	 * @return array
 	 */
 	private function get_posted_tax_rate( $key, $order, $class ) {
-		$tax_rate     = array();
+		$tax_rate      = array();
 		$tax_rate_keys = array(
 			'tax_rate_country',
 			'tax_rate_state',
@@ -268,8 +268,8 @@ class WC_Settings_Tax extends WC_Settings_Page {
 
 		// Loop posted fields.
 		foreach ( $posted_countries as $key => $value ) {
-			$mode        = ( 0 === strpos( $key, 'new-' ) ) ? 'insert' : 'update';
-			$tax_rate    = $this->get_posted_tax_rate( $key, $index ++, $current_class );
+			$mode     = ( 0 === strpos( $key, 'new-' ) ) ? 'insert' : 'update';
+			$tax_rate = $this->get_posted_tax_rate( $key, $index ++, $current_class );
 
 			if ( 'insert' === $mode ) {
 				$tax_rate_id = WC_Tax::_insert_tax_rate( $tax_rate );
@@ -290,6 +290,7 @@ class WC_Settings_Tax extends WC_Settings_Page {
 			}
 		}
 	}
+
 }
 
 return new WC_Settings_Tax();
