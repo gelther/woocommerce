@@ -68,20 +68,20 @@ if ( ! comments_open() ) {
 					$commenter = wp_get_current_commenter();
 
 					$comment_form = array(
-						'title_reply'          => have_comments() ? __( 'Add a review', 'woocommerce' ) : sprintf( __( 'Be the first to review &ldquo;%s&rdquo;', 'woocommerce' ), get_the_title() ),
-						'title_reply_to'       => __( 'Leave a Reply to %s', 'woocommerce' ),
-						'title_reply_before'   => '<span id="reply-title" class="comment-reply-title">',
-						'title_reply_after'    => '</span>',
-						'comment_notes_after'  => '',
-						'fields'               => array(
+						'title_reply'         => have_comments() ? __( 'Add a review', 'woocommerce' ) : sprintf( __( 'Be the first to review &ldquo;%s&rdquo;', 'woocommerce' ), get_the_title() ),
+						'title_reply_to'      => __( 'Leave a Reply to %s', 'woocommerce' ),
+						'title_reply_before'  => '<span id="reply-title" class="comment-reply-title">',
+						'title_reply_after'   => '</span>',
+						'comment_notes_after' => '',
+						'fields'              => array(
 							'author' => '<p class="comment-form-author">' . '<label for="author">' . esc_html__( 'Name', 'woocommerce' ) . ' <span class="required">*</span></label> ' .
 										'<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" aria-required="true" required /></p>',
 							'email'  => '<p class="comment-form-email"><label for="email">' . esc_html__( 'Email', 'woocommerce' ) . ' <span class="required">*</span></label> ' .
 										'<input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" aria-required="true" required /></p>',
 						),
-						'label_submit'  => __( 'Submit', 'woocommerce' ),
-						'logged_in_as'  => '',
-						'comment_field' => '',
+						'label_submit'        => __( 'Submit', 'woocommerce' ),
+						'logged_in_as'        => '',
+						'comment_field'       => '',
 					);
 
 					if ( $account_page_url = wc_get_page_permalink( 'myaccount' ) ) {
