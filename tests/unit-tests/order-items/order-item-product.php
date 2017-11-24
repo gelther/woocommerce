@@ -127,4 +127,5 @@ class WC_Tests_Order_Item_Product extends WC_Unit_Test_Case {
 		$expected_regex = '/download_file=.*&order=wc_order_.*&email=test%40woocommerce.com&key=100/';
 		$this->assertRegexp( $expected_regex, $product_item->get_item_download_url( 100 ) );
 	}
+
 }
