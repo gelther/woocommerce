@@ -27,13 +27,13 @@ class WC_REST_Legacy_Coupons_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param array $args Query args
-	 * @param WP_REST_Request $request Request data.
+	 * @param  array           $args    Query args
+	 * @param  WP_REST_Request $request Request data.
 	 * @return array
 	 */
 	public function query_args( $args, $request ) {
 		if ( ! empty( $request['code'] ) ) {
-			$id = wc_get_coupon_id_by_code( $request['code'] );
+			$id               = wc_get_coupon_id_by_code( $request['code'] );
 			$args['post__in'] = array( $id );
 		}
 
@@ -45,8 +45,8 @@ class WC_REST_Legacy_Coupons_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param WP_Post $post Post object.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  WP_Post          $post    Post object.
+	 * @param  WP_REST_Request  $request Request object.
 	 * @return WP_REST_Response $data
 	 */
 	public function prepare_item_for_response( $post, $request ) {
@@ -84,9 +84,9 @@ class WC_REST_Legacy_Coupons_Controller extends WC_REST_CRUD_Controller {
 		 * The dynamic portion of the hook name, $this->post_type, refers to post_type of the post being
 		 * prepared for the response.
 		 *
-		 * @param WP_REST_Response   $response   The response object.
-		 * @param WP_Post            $post       Post object.
-		 * @param WP_REST_Request    $request    Request object.
+		 * @param WP_REST_Response $response The response object.
+		 * @param WP_Post          $post     Post object.
+		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "woocommerce_rest_prepare_{$this->post_type}", $response, $post, $request );
 	}
@@ -96,8 +96,8 @@ class WC_REST_Legacy_Coupons_Controller extends WC_REST_CRUD_Controller {
 	 *
 	 * @deprecated 3.0.0
 	 *
-	 * @param WP_REST_Request $request Request object.
-	 * @return WP_Error|stdClass $data Post object.
+	 * @param  WP_REST_Request   $request Request object.
+	 * @return WP_Error|stdClass $data    Post object.
 	 */
 	protected function prepare_item_for_database( $request ) {
 		global $wpdb;
@@ -121,8 +121,8 @@ class WC_REST_Legacy_Coupons_Controller extends WC_REST_CRUD_Controller {
 			if ( ! is_null( $value ) ) {
 				switch ( $key ) {
 					case 'code' :
-						$coupon_code = wc_format_coupon_code( $value );
-						$id          = $coupon->get_id() ? $coupon->get_id() : 0;
+						$coupon_code  = wc_format_coupon_code( $value );
+						$id           = $coupon->get_id() ? $coupon->get_id() : 0;
 						$id_from_code = wc_get_coupon_id_by_code( $coupon_code, $id );
 
 						if ( $id_from_code ) {
@@ -156,9 +156,10 @@ class WC_REST_Legacy_Coupons_Controller extends WC_REST_CRUD_Controller {
 		 * The dynamic portion of the hook name, $this->post_type, refers to post_type of the post being
 		 * prepared for insertion.
 		 *
-		 * @param WC_Coupon       $coupon        The coupon object.
-		 * @param WP_REST_Request $request       Request object.
+		 * @param WC_Coupon       $coupon  The coupon object.
+		 * @param WP_REST_Request $request Request object.
 		 */
 		return apply_filters( "woocommerce_rest_pre_insert_{$this->post_type}", $coupon, $request );
 	}
+
 }
