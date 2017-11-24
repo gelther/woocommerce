@@ -54,7 +54,7 @@ class WC_REST_Settings_Controller extends WC_REST_Controller {
 	 * Get all settings groups items.
 	 *
 	 * @since  3.0.0
-	 * @param  WP_REST_Request $request
+	 * @param  WP_REST_Request           $request
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_items( $request ) {
@@ -91,8 +91,8 @@ class WC_REST_Settings_Controller extends WC_REST_Controller {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param string $group_id Group ID.
-	 * @return array Links for the given group.
+	 * @param  string $group_id Group ID.
+	 * @return array            Links for the given group.
 	 */
 	protected function prepare_links( $group_id ) {
 		$base  = '/' . $this->namespace . '/' . $this->rest_base;
@@ -109,8 +109,8 @@ class WC_REST_Settings_Controller extends WC_REST_Controller {
 	 * Prepare a report sales object for serialization.
 	 *
 	 * @since  3.0.0
-	 * @param array $item Group object.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  array            $item     Group object.
+	 * @param  WP_REST_Request  $request  Request object.
 	 * @return WP_REST_Response $response Response data.
 	 */
 	public function prepare_item_for_response( $item, $request ) {
@@ -144,7 +144,7 @@ class WC_REST_Settings_Controller extends WC_REST_Controller {
 	 * Callback for allowed keys for each group response.
 	 *
 	 * @since  3.0.0
-	 * @param  string $key Key to check
+	 * @param  string  $key Key to check
 	 * @return boolean
 	 */
 	public function allowed_group_keys( $key ) {
@@ -171,7 +171,7 @@ class WC_REST_Settings_Controller extends WC_REST_Controller {
 	 * Makes sure the current user has access to READ the settings APIs.
 	 *
 	 * @since  3.0.0
-	 * @param WP_REST_Request $request Full data about the request.
+	 * @param  WP_REST_Request  $request Full data about the request.
 	 * @return WP_Error|boolean
 	 */
 	public function get_items_permissions_check( $request ) {
@@ -194,13 +194,13 @@ class WC_REST_Settings_Controller extends WC_REST_Controller {
 			'title'      => 'setting_group',
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'          => array(
 					'description' => __( 'A unique identifier that can be used to link settings together.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'label' => array(
+				'label'       => array(
 					'description' => __( 'A human readable label for the setting used in interfaces.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
@@ -212,13 +212,13 @@ class WC_REST_Settings_Controller extends WC_REST_Controller {
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'parent_id' => array(
+				'parent_id'   => array(
 					'description' => __( 'ID of parent grouping.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'sub_groups' => array(
+				'sub_groups'  => array(
 					'description' => __( 'IDs for settings sub groups.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
@@ -229,4 +229,5 @@ class WC_REST_Settings_Controller extends WC_REST_Controller {
 
 		return $this->add_additional_fields_schema( $schema );
 	}
+
 }
