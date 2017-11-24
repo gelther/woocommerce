@@ -53,4 +53,5 @@ class WC_Meta_Box_Order_Items {
 		 */
 		wc_save_order_items( $post_id, $_POST );
 	}
+
 }
