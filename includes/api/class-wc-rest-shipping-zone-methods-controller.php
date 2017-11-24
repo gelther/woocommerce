@@ -27,7 +27,7 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	 */
 	public function register_routes() {
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<zone_id>[\d]+)/methods', array(
-			'args' => array(
+			'args'   => array(
 				'zone_id' => array(
 					'description' => __( 'Unique ID for the zone.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -54,8 +54,8 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<zone_id>[\d]+)/methods/(?P<instance_id>[\d]+)', array(
-			'args' => array(
-				'zone_id' => array(
+			'args'   => array(
+				'zone_id'     => array(
 					'description' => __( 'Unique ID for the zone.', 'woocommerce' ),
 					'type'        => 'integer',
 				),
@@ -94,7 +94,7 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Get a single Shipping Zone Method.
 	 *
-	 * @param WP_REST_Request $request
+	 * @param  WP_REST_Request           $request
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function get_item( $request ) {
@@ -127,7 +127,7 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Get all Shipping Zone Methods.
 	 *
-	 * @param WP_REST_Request $request
+	 * @param  WP_REST_Request           $request
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function get_items( $request ) {
@@ -151,7 +151,7 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Create a new shipping zone method instance.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request          $request Full details about the request.
 	 * @return WP_REST_Request|WP_Error
 	 */
 	public function create_item( $request ) {
@@ -187,7 +187,7 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Delete a shipping method instance.
 	 *
-	 * @param WP_REST_Request $request Full details about the request
+	 * @param  WP_REST_Request  $request Full details about the request
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item( $request ) {
@@ -199,8 +199,8 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 		$instance_id = (int) $request['instance_id'];
 		$force       = $request['force'];
 
-		$methods     = $zone->get_shipping_methods();
-		$method      = false;
+		$methods = $zone->get_shipping_methods();
+		$method  = false;
 
 		foreach ( $methods as $method_obj ) {
 			if ( $instance_id === $method_obj->instance_id ) {
@@ -232,8 +232,8 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 		 * Fires after a product review is deleted via the REST API.
 		 *
 		 * @param object           $method
-		 * @param WP_REST_Response $response        The response data.
-		 * @param WP_REST_Request  $request         The request sent to the API.
+		 * @param WP_REST_Response $response The response data.
+		 * @param WP_REST_Request  $request  The request sent to the API.
 		 */
 		do_action( 'rest_delete_product_review', $method, $response, $request );
 
@@ -243,7 +243,7 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Update A Single Shipping Zone Method.
 	 *
-	 * @param WP_REST_Request $request
+	 * @param  WP_REST_Request           $request
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function update_item( $request ) {
@@ -279,9 +279,9 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Updates settings, order, and enabled status on create.
 	 *
-	 * @param int $instance_id integer
-	 * @param WC_Shipping_Method $method
-	 * @param WP_REST_Request $request
+	 * @param  int                $instance_id integer
+	 * @param  WC_Shipping_Method $method
+	 * @param  WP_REST_Request    $request
 	 *
 	 * @return WC_Shipping_Method
 	 */
@@ -335,8 +335,8 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Prepare the Shipping Zone Method for the REST response.
 	 *
-	 * @param array $item Shipping Zone Method.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  array            $item     Shipping Zone Method.
+	 * @param  WP_REST_Request  $request  Request object.
 	 * @return WP_REST_Response $response
 	 */
 	public function prepare_item_for_response( $item, $request ) {
@@ -369,7 +369,7 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Return settings associated with this shipping zone method instance.
 	 *
-	 * @param WC_Shipping_Method $item
+	 * @param  WC_Shipping_Method $item
 	 *
 	 * @return array
 	 */
@@ -398,14 +398,14 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param int $zone_id Given Shipping Zone ID.
-	 * @param int $instance_id Given Shipping Zone Method Instance ID.
-	 * @return array Links for the given Shipping Zone Method.
+	 * @param  int   $zone_id     Given Shipping Zone ID.
+	 * @param  int   $instance_id Given Shipping Zone Method Instance ID.
+	 * @return array              Links for the given Shipping Zone Method.
 	 */
 	protected function prepare_links( $zone_id, $instance_id ) {
 		$base  = '/' . $this->namespace . '/' . $this->rest_base . '/' . $zone_id;
 		$links = array(
-			'self' => array(
+			'self'       => array(
 				'href' => rest_url( $base . '/methods/' . $instance_id ),
 			),
 			'collection' => array(
@@ -430,41 +430,41 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 			'title'      => 'shipping_zone_method',
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'                 => array(
 					'description' => __( 'Shipping method instance ID.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'instance_id' => array(
+				'instance_id'        => array(
 					'description' => __( 'Shipping method instance ID.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'title' => array(
+				'title'              => array(
 					'description' => __( 'Shipping method customer facing title.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'order' => array(
+				'order'              => array(
 					'description' => __( 'Shipping method sort order.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'enabled' => array(
+				'enabled'            => array(
 					'description' => __( 'Shipping method enabled status.', 'woocommerce' ),
 					'type'        => 'boolean',
 					'context'     => array( 'view', 'edit' ),
 				),
-				'method_id' => array(
+				'method_id'          => array(
 					'description' => __( 'Shipping method ID.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'method_title' => array(
+				'method_title'       => array(
 					'description' => __( 'Shipping method title.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
@@ -476,18 +476,18 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 					'context'     => array( 'view', 'edit' ),
 					'readonly'    => true,
 				),
-				'settings' => array(
+				'settings'           => array(
 					'description' => __( 'Shipping method settings.', 'woocommerce' ),
 					'type'        => 'object',
 					'context'     => array( 'view', 'edit' ),
-					'properties' => array(
-						'id' => array(
+					'properties'  => array(
+						'id'          => array(
 							'description' => __( 'A unique identifier for the setting.', 'woocommerce' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 							'readonly'    => true,
 						),
-						'label' => array(
+						'label'       => array(
 							'description' => __( 'A human readable label for the setting used in interfaces.', 'woocommerce' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
@@ -499,25 +499,25 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 							'context'     => array( 'view', 'edit' ),
 							'readonly'    => true,
 						),
-						'type' => array(
+						'type'        => array(
 							'description' => __( 'Type of setting.', 'woocommerce' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 							'enum'        => array( 'text', 'email', 'number', 'color', 'password', 'textarea', 'select', 'multiselect', 'radio', 'image_width', 'checkbox' ),
 							'readonly'    => true,
 						),
-						'value' => array(
+						'value'       => array(
 							'description' => __( 'Setting value.', 'woocommerce' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
-						'default' => array(
+						'default'     => array(
 							'description' => __( 'Default value for the setting.', 'woocommerce' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 							'readonly'    => true,
 						),
-						'tip' => array(
+						'tip'         => array(
 							'description' => __( 'Additional help text shown to the user about the setting.', 'woocommerce' ),
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
@@ -536,4 +536,5 @@ class WC_REST_Shipping_Zone_Methods_Controller extends WC_REST_Shipping_Zones_Co
 
 		return $this->add_additional_fields_schema( $schema );
 	}
+
 }
