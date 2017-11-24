@@ -58,7 +58,6 @@ class WC_Admin_API_Keys {
 	 * Table list output.
 	 */
 	private static function table_list_output() {
-
 		global $wpdb;
 
 		echo '<h2>' . __( 'Keys/Apps', 'woocommerce' ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=api&section=keys&create-key=1' ) ) . '" class="add-new-h2">' . __( 'Add key', 'woocommerce' ) . '</a></h2>';
@@ -90,7 +89,7 @@ class WC_Admin_API_Keys {
 	/**
 	 * Get key data.
 	 *
-	 * @param  int $key_id
+	 * @param  int   $key_id
 	 * @return array
 	 */
 	private static function get_key_data( $key_id ) {
@@ -192,7 +191,7 @@ class WC_Admin_API_Keys {
 	/**
 	 * Remove key.
 	 *
-	 * @param  int $key_id
+	 * @param  int  $key_id
 	 * @return bool
 	 */
 	private function remove_key( $key_id ) {
@@ -202,6 +201,7 @@ class WC_Admin_API_Keys {
 
 		return $delete;
 	}
+
 }
 
 new WC_Admin_API_Keys();
