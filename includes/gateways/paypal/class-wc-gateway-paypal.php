@@ -53,7 +53,7 @@ class WC_Gateway_Paypal extends WC_Payment_Gateway {
 		$this->receiver_email = $this->get_option( 'receiver_email', $this->email );
 		$this->identity_token = $this->get_option( 'identity_token' );
 
-		self::$log_enabled    = $this->debug;
+		self::$log_enabled = $this->debug;
 
 		if ( $this->testmode ) {
 			$this->description .= ' ' . sprintf( __( 'SANDBOX ENABLED. You can use sandbox testing accounts only. See the <a href="%s">PayPal Sandbox Testing Guide</a> for more details.', 'woocommerce' ), 'https://developer.paypal.com/docs/classic/lifecycle/ug_sandbox/' );
@@ -133,8 +133,8 @@ class WC_Gateway_Paypal extends WC_Payment_Gateway {
 	/**
 	 * Get PayPal images for a country.
 	 *
-	 * @param string $country Country code.
-	 * @return array of image URLs
+	 * @param  string $country Country code.
+	 * @return array           of image URLs
 	 */
 	protected function get_icon_image( $country ) {
 		switch ( $country ) {
@@ -247,7 +247,7 @@ class WC_Gateway_Paypal extends WC_Payment_Gateway {
 
 	/**
 	 * Process the payment and return the result.
-	 * @param  int $order_id
+	 * @param  int   $order_id
 	 * @return array
 	 */
 	public function process_payment( $order_id ) {
@@ -285,9 +285,9 @@ class WC_Gateway_Paypal extends WC_Payment_Gateway {
 
 	/**
 	 * Process a refund if supported.
-	 * @param  int    $order_id
-	 * @param  float  $amount
-	 * @param  string $reason
+	 * @param  int           $order_id
+	 * @param  float         $amount
+	 * @param  string        $reason
 	 * @return bool|WP_Error
 	 */
 	public function process_refund( $order_id, $amount = null, $reason = '' ) {
@@ -323,7 +323,7 @@ class WC_Gateway_Paypal extends WC_Payment_Gateway {
 	/**
 	 * Capture payment when the order is changed from on-hold to complete or processing
 	 *
-	 * @param  int $order_id
+	 * @param int $order_id
 	 */
 	public function capture_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
@@ -372,4 +372,5 @@ class WC_Gateway_Paypal extends WC_Payment_Gateway {
 
 		wp_enqueue_script( 'woocommerce_paypal_admin', WC()->plugin_url() . '/includes/gateways/paypal/assets/js/paypal-admin' . $suffix . '.js', array(), WC_VERSION, true );
 	}
+
 }
