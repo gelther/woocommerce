@@ -59,7 +59,7 @@ class WC_Tracker {
 		// Update time first before sending to ensure it is set
 		update_option( 'woocommerce_tracker_last_send', time() );
 
-		$params   = self::get_tracking_data();
+		$params = self::get_tracking_data();
 		wp_safe_remote_post( self::$api_url, array(
 				'method'      => 'POST',
 				'timeout'     => 45,
@@ -86,23 +86,23 @@ class WC_Tracker {
 	 * @return array
 	 */
 	private static function get_tracking_data() {
-		$data                       = array();
+		$data = array();
 
 		// General site info
-		$data['url']                = home_url();
-		$data['email']              = apply_filters( 'woocommerce_tracker_admin_email', get_option( 'admin_email' ) );
-		$data['theme']              = self::get_theme_info();
+		$data['url']   = home_url();
+		$data['email'] = apply_filters( 'woocommerce_tracker_admin_email', get_option( 'admin_email' ) );
+		$data['theme'] = self::get_theme_info();
 
 		// WordPress Info
-		$data['wp']                 = self::get_wordpress_info();
+		$data['wp'] = self::get_wordpress_info();
 
 		// Server Info
-		$data['server']             = self::get_server_info();
+		$data['server'] = self::get_server_info();
 
 		// Plugin info
-		$all_plugins                = self::get_all_plugins();
-		$data['active_plugins']     = $all_plugins['active_plugins'];
-		$data['inactive_plugins']   = $all_plugins['inactive_plugins'];
+		$all_plugins              = self::get_all_plugins();
+		$data['active_plugins']   = $all_plugins['active_plugins'];
+		$data['inactive_plugins'] = $all_plugins['inactive_plugins'];
 
 		// Jetpack & WooCommerce Connect
 		$data['jetpack_version']    = defined( 'JETPACK__VERSION' ) ? JETPACK__VERSION : 'none';
@@ -112,24 +112,24 @@ class WC_Tracker {
 		$data['connect_active']     = ( class_exists( 'WC_Connect_Loader' ) && wp_next_scheduled( 'wc_connect_fetch_service_schemas' ) ) ? 'yes' : 'no';
 
 		// Store count info
-		$data['users']              = self::get_user_counts();
-		$data['products']           = self::get_product_counts();
-		$data['orders']             = self::get_order_counts();
+		$data['users']    = self::get_user_counts();
+		$data['products'] = self::get_product_counts();
+		$data['orders']   = self::get_order_counts();
 
 		// Payment gateway info
-		$data['gateways']           = self::get_active_payment_gateways();
+		$data['gateways'] = self::get_active_payment_gateways();
 
 		// Shipping method info
-		$data['shipping_methods']   = self::get_active_shipping_methods();
+		$data['shipping_methods'] = self::get_active_shipping_methods();
 
 		// Get all WooCommerce options info
-		$data['settings']           = self::get_all_woocommerce_options_values();
+		$data['settings'] = self::get_all_woocommerce_options_values();
 
 		// Template overrides
 		$data['template_overrides'] = self::get_all_template_overrides();
 
 		// Template overrides
-		$data['admin_user_agents']  = self::get_admin_user_agents();
+		$data['admin_user_agents'] = self::get_admin_user_agents();
 
 		return apply_filters( 'woocommerce_tracker_data', $data );
 	}
@@ -185,20 +185,20 @@ class WC_Tracker {
 		}
 
 		if ( function_exists( 'ini_get' ) ) {
-			$server_data['php_post_max_size'] = size_format( wc_let_to_num( ini_get( 'post_max_size' ) ) );
-			$server_data['php_time_limt'] = ini_get( 'max_execution_time' );
+			$server_data['php_post_max_size']  = size_format( wc_let_to_num( ini_get( 'post_max_size' ) ) );
+			$server_data['php_time_limt']      = ini_get( 'max_execution_time' );
 			$server_data['php_max_input_vars'] = ini_get( 'max_input_vars' );
-			$server_data['php_suhosin'] = extension_loaded( 'suhosin' ) ? 'Yes' : 'No';
+			$server_data['php_suhosin']        = extension_loaded( 'suhosin' ) ? 'Yes' : 'No';
 		}
 
 		global $wpdb;
 		$server_data['mysql_version'] = $wpdb->db_version();
 
-		$server_data['php_max_upload_size'] = size_format( wp_max_upload_size() );
+		$server_data['php_max_upload_size']  = size_format( wp_max_upload_size() );
 		$server_data['php_default_timezone'] = date_default_timezone_get();
-		$server_data['php_soap'] = class_exists( 'SoapClient' ) ? 'Yes' : 'No';
-		$server_data['php_fsockopen'] = function_exists( 'fsockopen' ) ? 'Yes' : 'No';
-		$server_data['php_curl'] = function_exists( 'curl_init' ) ? 'Yes' : 'No';
+		$server_data['php_soap']             = class_exists( 'SoapClient' ) ? 'Yes' : 'No';
+		$server_data['php_fsockopen']        = function_exists( 'fsockopen' ) ? 'Yes' : 'No';
+		$server_data['php_curl']             = function_exists( 'curl_init' ) ? 'Yes' : 'No';
 
 		return $server_data;
 	}
@@ -213,13 +213,13 @@ class WC_Tracker {
 			include ABSPATH . '/wp-admin/includes/plugin.php';
 		}
 
-		$plugins        	 = get_plugins();
+		$plugins             = get_plugins();
 		$active_plugins_keys = get_option( 'active_plugins', array() );
-		$active_plugins 	 = array();
+		$active_plugins      = array();
 
 		foreach ( $plugins as $k => $v ) {
 			// Take care of formatting the data how we want it.
-			$formatted = array();
+			$formatted         = array();
 			$formatted['name'] = strip_tags( $v['Name'] );
 			if ( isset( $v['Version'] ) ) {
 				$formatted['version'] = strip_tags( $v['Version'] );
@@ -396,6 +396,7 @@ class WC_Tracker {
 	private static function get_admin_user_agents() {
 		return array_filter( (array) get_option( 'woocommerce_tracker_ua', array() ) );
 	}
+
 }
 
 WC_Tracker::init();
