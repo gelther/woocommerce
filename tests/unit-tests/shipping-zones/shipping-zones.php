@@ -152,4 +152,5 @@ class WC_Tests_Shipping_Zones extends WC_Unit_Test_Case {
 		// Clean
 		WC_Helper_Shipping_Zones::remove_mock_zones();
 	}
+
 }
