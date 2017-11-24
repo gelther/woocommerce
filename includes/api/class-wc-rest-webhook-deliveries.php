@@ -32,15 +32,15 @@ class WC_REST_Webhook_Deliveries_Controller extends WC_REST_Webhook_Deliveries_V
 	/**
 	 * Prepare a single webhook delivery output for response.
 	 *
-	 * @param stdClass $log Delivery log object.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  stdClass         $log      Delivery log object.
+	 * @param  WP_REST_Request  $request  Request object.
 	 * @return WP_REST_Response $response Response data.
 	 */
 	public function prepare_item_for_response( $log, $request ) {
 		$data = (array) $log;
 
 		// Add timestamp.
-		$data['date_created'] = wc_rest_prepare_date_response( $log->comment->comment_date );
+		$data['date_created']     = wc_rest_prepare_date_response( $log->comment->comment_date );
 		$data['date_created_gmt'] = wc_rest_prepare_date_response( $log->comment->comment_date_gmt );
 
 		// Remove comment object.
@@ -76,47 +76,47 @@ class WC_REST_Webhook_Deliveries_Controller extends WC_REST_Webhook_Deliveries_V
 			'title'      => 'webhook_delivery',
 			'type'       => 'object',
 			'properties' => array(
-				'id' => array(
+				'id'               => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'duration' => array(
+				'duration'         => array(
 					'description' => __( 'The delivery duration, in seconds.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'summary' => array(
+				'summary'          => array(
 					'description' => __( 'A friendly summary of the response including the HTTP response code, message, and body.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'request_url' => array(
+				'request_url'      => array(
 					'description' => __( 'The URL where the webhook was delivered.', 'woocommerce' ),
 					'type'        => 'string',
 					'format'      => 'uri',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'request_headers' => array(
+				'request_headers'  => array(
 					'description' => __( 'Request headers.', 'woocommerce' ),
 					'type'        => 'array',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 					'items'       => array(
-						'type'    => 'string',
+						'type' => 'string',
 					),
 				),
-				'request_body' => array(
+				'request_body'     => array(
 					'description' => __( 'Request body.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'response_code' => array(
+				'response_code'    => array(
 					'description' => __( 'The HTTP response code from the receiving server.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
@@ -134,16 +134,16 @@ class WC_REST_Webhook_Deliveries_Controller extends WC_REST_Webhook_Deliveries_V
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 					'items'       => array(
-						'type'    => 'string',
+						'type' => 'string',
 					),
 				),
-				'response_body' => array(
+				'response_body'    => array(
 					'description' => __( 'The response body from the receiving server.', 'woocommerce' ),
 					'type'        => 'string',
 					'context'     => array( 'view' ),
 					'readonly'    => true,
 				),
-				'date_created' => array(
+				'date_created'     => array(
 					'description' => __( "The date the webhook delivery was logged, in the site's timezone.", 'woocommerce' ),
 					'type'        => 'date-time',
 					'context'     => array( 'view', 'edit' ),
@@ -160,4 +160,5 @@ class WC_REST_Webhook_Deliveries_Controller extends WC_REST_Webhook_Deliveries_V
 
 		return $this->add_additional_fields_schema( $schema );
 	}
+
 }
