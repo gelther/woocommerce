@@ -53,4 +53,5 @@ class WC_Tests_Integrations extends WC_Unit_Test_Case {
 			'Dummy_Integration',
 		);
 	}
+
 }
