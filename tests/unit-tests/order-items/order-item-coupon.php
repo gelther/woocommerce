@@ -26,4 +26,5 @@ class WC_Tests_Order_Item_Coupon extends WC_Unit_Test_Case {
 		$coupon->set_discount_tax( '0.50' );
 		$this->assertEquals( '0.50', $coupon->get_discount_tax() );
 	}
+
 }
