@@ -36,7 +36,7 @@ class WC_Order_Refund_Data_Store_CPT extends Abstract_WC_Order_Data_Store_CPT im
 	/**
 	 * Delete a refund - no trash is supported.
 	 * @param WC_Order $order
-	 * @param array $args Array of args to pass to the delete method.
+	 * @param array    $args  Array of args to pass to the delete method.
 	 */
 	public function delete( &$order, $args = array() ) {
 		$id = $order->get_id();
@@ -54,7 +54,7 @@ class WC_Order_Refund_Data_Store_CPT extends Abstract_WC_Order_Data_Store_CPT im
 	 * Read refund data. Can be overridden by child classes to load other props.
 	 *
 	 * @param WC_Order $refund
-	 * @param object $post_object
+	 * @param object   $post_object
 	 * @since 3.0.0
 	 */
 	protected function read_order_data( &$refund, $post_object ) {
@@ -105,4 +105,5 @@ class WC_Order_Refund_Data_Store_CPT extends Abstract_WC_Order_Data_Store_CPT im
 		return sprintf( __( 'Refund &ndash; %s', 'woocommerce' ), strftime( _x( '%b %d, %Y @ %I:%M %p', 'Order date parsed by strftime', 'woocommerce' ) ) );
 		// @codingStandardsIgnoreEnd
 	}
+
 }
