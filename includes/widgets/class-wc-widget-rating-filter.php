@@ -25,7 +25,7 @@ class WC_Widget_Rating_Filter extends WC_Widget {
 		$this->widget_id          = 'woocommerce_rating_filter';
 		$this->widget_name        = __( 'Filter Products by Rating', 'woocommerce' );
 		$this->settings           = array(
-			'title'  => array(
+			'title' => array(
 				'type'  => 'text',
 				'std'   => __( 'Average rating', 'woocommerce' ),
 				'label' => __( 'Title', 'woocommerce' ),
@@ -111,7 +111,7 @@ class WC_Widget_Rating_Filter extends WC_Widget {
 
 		// Set new rating filter.
 		$product_visibility_terms = wc_get_product_visibility_term_ids();
-		$tax_query[]             = array(
+		$tax_query[]              = array(
 			'taxonomy'      => 'product_visibility',
 			'field'         => 'term_taxonomy_id',
 			'terms'         => $product_visibility_terms[ 'rated-' . $rating ],
@@ -196,4 +196,5 @@ class WC_Widget_Rating_Filter extends WC_Widget {
 			echo ob_get_clean();
 		}
 	}
+
 }
