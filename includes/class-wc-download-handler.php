@@ -33,9 +33,9 @@ class WC_Download_Handler {
 	 * Check if we need to download a file and check validity.
 	 */
 	public static function download_product() {
-		$product_id   = absint( $_GET['download_file'] );
-		$product      = wc_get_product( $product_id );
-		$data_store   = WC_Data_Store::load( 'customer-download' );
+		$product_id = absint( $_GET['download_file'] );
+		$product    = wc_get_product( $product_id );
+		$data_store = WC_Data_Store::load( 'customer-download' );
 
 		if ( ! $product || ! isset( $_GET['key'], $_GET['order'] ) ) {
 			self::download_error( __( 'Invalid download link.', 'woocommerce' ) );
@@ -76,7 +76,7 @@ class WC_Download_Handler {
 
 		// Track the download in logs and change remaining/counts.
 		$current_user_id = get_current_user_id();
-		$ip_address = WC_Geolocation::get_ip_address();
+		$ip_address      = WC_Geolocation::get_ip_address();
 		$download->track_download( $current_user_id > 0 ? $current_user_id : null, ! empty( $ip_address ) ? $ip_address : null );
 
 		self::download( $product->get_file_download_path( $download->get_download_id() ), $download->get_product_id() );
@@ -84,7 +84,7 @@ class WC_Download_Handler {
 
 	/**
 	 * Check if an order is valid for downloading from.
-	 * @param  WC_Customer_Download $download
+	 * @param WC_Customer_Download $download
 	 * @access private
 	 */
 	private static function check_order_is_valid( $download ) {
@@ -95,7 +95,7 @@ class WC_Download_Handler {
 
 	/**
 	 * Check if there are downloads remaining.
-	 * @param  WC_Customer_Download $download
+	 * @param WC_Customer_Download $download
 	 * @access private
 	 */
 	private static function check_downloads_remaining( $download ) {
@@ -106,7 +106,7 @@ class WC_Download_Handler {
 
 	/**
 	 * Check if the download has expired.
-	 * @param  WC_Customer_Download $download
+	 * @param WC_Customer_Download $download
 	 * @access private
 	 */
 	private static function check_download_expiry( $download ) {
@@ -117,7 +117,7 @@ class WC_Download_Handler {
 
 	/**
 	 * Check if a download requires the user to login first.
-	 * @param  WC_Customer_Download $download
+	 * @param WC_Customer_Download $download
 	 * @access private
 	 */
 	private static function check_download_login_required( $download ) {
@@ -144,7 +144,7 @@ class WC_Download_Handler {
 
 	/**
 	 * Download a file - hook into init function.
-	 * @param string $file_path URL to file
+	 * @param string  $file_path  URL to file
 	 * @param integer $product_id of the product being downloaded
 	 */
 	public static function download( $file_path, $product_id ) {
@@ -170,8 +170,8 @@ class WC_Download_Handler {
 
 	/**
 	 * Redirect to a file to start the download.
-	 * @param  string $file_path
-	 * @param  string $filename
+	 * @param string $file_path
+	 * @param string $filename
 	 */
 	public static function download_file_redirect( $file_path, $filename = '' ) {
 		header( 'Location: ' . $file_path );
@@ -194,7 +194,7 @@ class WC_Download_Handler {
 		 * via filters we can still do the string replacement on a HTTP file.
 		 */
 		$replacements = array(
-			$wp_uploads_url                                                   => $wp_uploads_dir,
+			$wp_uploads_url => $wp_uploads_dir,
 			network_site_url( '/', 'https' )                                  => ABSPATH,
 			str_replace( 'https:', 'http:', network_site_url( '/', 'http' ) ) => ABSPATH,
 			site_url( '/', 'https' )                                          => ABSPATH,
@@ -228,8 +228,8 @@ class WC_Download_Handler {
 
 	/**
 	 * Download a file using X-Sendfile, X-Lighttpd-Sendfile, or X-Accel-Redirect if available.
-	 * @param  string $file_path
-	 * @param  string $filename
+	 * @param string $file_path
+	 * @param string $filename
 	 */
 	public static function download_file_xsendfile( $file_path, $filename ) {
 		$parsed_file_path = self::parse_file_path( $file_path );
@@ -255,8 +255,8 @@ class WC_Download_Handler {
 
 	/**
 	 * Force download - this is the default method.
-	 * @param  string $file_path
-	 * @param  string $filename
+	 * @param string $file_path
+	 * @param string $filename
 	 */
 	public static function download_file_force( $file_path, $filename ) {
 		$parsed_file_path = self::parse_file_path( $file_path );
@@ -297,8 +297,8 @@ class WC_Download_Handler {
 
 	/**
 	 * Set headers for the download.
-	 * @param  string $file_path
-	 * @param  string $filename
+	 * @param string $file_path
+	 * @param string $filename
 	 * @access private
 	 */
 	private static function download_headers( $file_path, $filename ) {
@@ -355,8 +355,8 @@ class WC_Download_Handler {
 	 *
 	 * Reads file in chunks so big downloads are possible without changing PHP.INI - http://codeigniter.com/wiki/Download_helper_for_large_files/.
 	 *
-	 * @param   string $file
-	 * @return 	bool Success or fail
+	 * @param  string $file
+	 * @return bool         Success or fail
 	 */
 	public static function readfile_chunked( $file ) {
 		if ( ! defined( 'WC_CHUNK_SIZE' ) ) {
@@ -385,7 +385,7 @@ class WC_Download_Handler {
 	 *
 	 * IE bug prevents download via SSL when Cache Control and Pragma no-cache headers set.
 	 *
-	 * @param array $headers
+	 * @param  array $headers
 	 * @return array
 	 */
 	public static function ie_nocache_headers_fix( $headers ) {
@@ -398,9 +398,9 @@ class WC_Download_Handler {
 
 	/**
 	 * Die with an error message if the download fails.
-	 * @param  string $message
-	 * @param  string  $title
-	 * @param  integer $status
+	 * @param string  $message
+	 * @param string  $title
+	 * @param integer $status
 	 * @access private
 	 */
 	private static function download_error( $message, $title = '', $status = 404 ) {
@@ -409,6 +409,7 @@ class WC_Download_Handler {
 		}
 		wp_die( $message, $title, array( 'response' => $status ) );
 	}
+
 }
 
 WC_Download_Handler::init();
