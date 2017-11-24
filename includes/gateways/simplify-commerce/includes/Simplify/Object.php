@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/*
+/**
  * Copyright (c) 2013 - 2015 MasterCard International Incorporated
  * All rights reserved.
  *
@@ -41,13 +41,13 @@ class Simplify_Object {
 	/**
 	 * @ignore
 	 *
-	 * @param string $key
+	 * @param  string $key
 	 *
 	 * @return mixed
 	 */
-	public function __get($key) {
-		if (array_key_exists($key, $this->properties)) {
-			return $this->properties[$key];
+	public function __get( $key ) {
+		if ( array_key_exists( $key, $this->properties ) ) {
+			return $this->properties[ $key ];
 		} else {
 			return null;
 		}
@@ -57,18 +57,18 @@ class Simplify_Object {
 	 * @ignore
 	 *
 	 * @param string $key
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
-	public function __set($key, $value) {
-		$this->properties[$key] = $value;
+	public function __set( $key, $value ) {
+		$this->properties[ $key ] = $value;
 	}
 
 	/**
 	 * Updates the object's properties with the values in the specified map.
 	 * @param $hash array Map of values to set.
 	 */
-	public function setAll($hash) {
-		foreach ($hash as $key => $value) {
+	public function setAll( $hash ) {
+		foreach ( $hash as $key => $value ) {
 			$this->$key = $value;
 		}
 	}
@@ -77,7 +77,7 @@ class Simplify_Object {
 	 * @ignore
 	 */
 	public function __toString() {
-		return json_encode($this->properties);
+		return json_encode( $this->properties );
 	}
 
 	/**
@@ -87,4 +87,5 @@ class Simplify_Object {
 	public function getProperties() {
 		return $this->properties;
 	}
+
 }
