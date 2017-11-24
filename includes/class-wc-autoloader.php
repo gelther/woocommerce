@@ -25,8 +25,8 @@ class WC_Autoloader {
 	 * The Constructor.
 	 */
 	public function __construct() {
-		if ( function_exists( "__autoload" ) ) {
-			spl_autoload_register( "__autoload" );
+		if ( function_exists( '__autoload' ) ) {
+			spl_autoload_register( '__autoload' );
 		}
 
 		spl_autoload_register( array( $this, 'autoload' ) );
@@ -48,7 +48,7 @@ class WC_Autoloader {
 	 * Include a class file.
 	 *
 	 * @param  string $path
-	 * @return bool successful or not
+	 * @return bool         successful or not
 	 */
 	private function load_file( $path ) {
 		if ( $path && is_readable( $path ) ) {
@@ -70,10 +70,10 @@ class WC_Autoloader {
 			return;
 		}
 
-		$file  = $this->get_file_name_from_class( $class );
-		$path  = '';
+		$file = $this->get_file_name_from_class( $class );
+		$path = '';
 
-		if ( 0 === strpos( $class, 'wc_addons_gateway_' )  ) {
+		if ( 0 === strpos( $class, 'wc_addons_gateway_' ) ) {
 			$path = $this->include_path . 'gateways/' . substr( str_replace( '_', '-', $class ), 18 ) . '/';
 		} elseif ( 0 ===  strpos( $class, 'wc_gateway_' ) ) {
 			$path = $this->include_path . 'gateways/' . substr( str_replace( '_', '-', $class ), 11 ) . '/';
@@ -95,6 +95,7 @@ class WC_Autoloader {
 			$this->load_file( $this->include_path . $file );
 		}
 	}
+
 }
 
 new WC_Autoloader();
