@@ -24,9 +24,9 @@ class WC_Helper_Updater {
 	 * Runs in a cron thread, or in a visitor thread if triggered
 	 * by _maybe_update_plugins(), or in an auto-update thread.
 	 *
-	 * @param object $transient The update_plugins transient object.
+	 * @param  object $transient The update_plugins transient object.
 	 *
-	 * @return object The same or a modified version of the transient.
+	 * @return object            The same or a modified version of the transient.
 	 */
 	public static function transient_update_plugins( $transient ) {
 		$update_data = self::get_update_data();
@@ -36,16 +36,16 @@ class WC_Helper_Updater {
 				continue;
 			}
 
-			$data = $update_data[ $plugin['_product_id'] ];
+			$data     = $update_data[ $plugin['_product_id'] ];
 			$filename = $plugin['_filename'];
 
 			$item = array(
-				'id' => 'woocommerce-com-' . $plugin['_product_id'],
-				'slug' => 'woocommerce-com-' . $data['slug'],
-				'plugin' => $filename,
-				'new_version' => $data['version'],
-				'url' => $data['url'],
-				'package' => '',
+				'id'             => 'woocommerce-com-' . $plugin['_product_id'],
+				'slug'           => 'woocommerce-com-' . $data['slug'],
+				'plugin'         => $filename,
+				'new_version'    => $data['version'],
+				'url'            => $data['url'],
+				'package'        => '',
 				'upgrade_notice' => $data['upgrade_notice'],
 			);
 
@@ -69,9 +69,9 @@ class WC_Helper_Updater {
 	 * Runs on pre_set_site_transient_update_themes, provides custom
 	 * packages for WooCommerce.com-hosted extensions.
 	 *
-	 * @param object $transient The update_themes transient object.
+	 * @param  object $transient The update_themes transient object.
 	 *
-	 * @return object The same or a modified version of the transient.
+	 * @return object            The same or a modified version of the transient.
 	 */
 	public static function transient_update_themes( $transient ) {
 		$update_data = self::get_update_data();
@@ -85,10 +85,10 @@ class WC_Helper_Updater {
 			$slug = $theme['_stylesheet'];
 
 			$item = array(
-				'theme' => $slug,
+				'theme'       => $slug,
 				'new_version' => $data['version'],
-				'url' => $data['url'],
-				'package' => '',
+				'url'         => $data['url'],
+				'package'     => '',
 			);
 
 			if ( self::_has_active_subscription( $theme['_product_id'] ) ) {
@@ -122,7 +122,7 @@ class WC_Helper_Updater {
 		foreach ( WC_Helper::get_subscriptions() as $subscription ) {
 			$payload[ $subscription['product_id'] ] = array(
 				'product_id' => $subscription['product_id'],
-				'file_id' => '',
+				'file_id'    => '',
 			);
 		}
 
@@ -171,14 +171,14 @@ class WC_Helper_Updater {
 		}
 
 		$data = array(
-			'hash' => $hash,
-			'updated' => time(),
+			'hash'     => $hash,
+			'updated'  => time(),
 			'products' => array(),
-			'errors' => array(),
+			'errors'   => array(),
 		);
 
 		$request = WC_Helper_API::post( 'update-check', array(
-			'body' => json_encode( array( 'products' => $payload ) ),
+			'body'          => json_encode( array( 'products' => $payload ) ),
 			'authenticated' => true,
 		) );
 
@@ -199,9 +199,9 @@ class WC_Helper_Updater {
 	 * the current site. Returns true if at least one active
 	 * subscription is found.
 	 *
-	 * @param int $product_id The product id to look for.
+	 * @param  int  $product_id The product id to look for.
 	 *
-	 * @return bool True if active subscription found.
+	 * @return bool             True if active subscription found.
 	 */
 	private static function _has_active_subscription( $product_id ) {
 		if ( ! isset( $auth ) ) {
@@ -250,7 +250,7 @@ class WC_Helper_Updater {
 			return 0;
 		}
 
-		$count = 0;
+		$count       = 0;
 		$update_data = self::get_update_data();
 
 		if ( empty( $update_data ) ) {
@@ -324,6 +324,7 @@ class WC_Helper_Updater {
 	public static function upgrader_process_complete() {
 		delete_transient( '_woocommerce_helper_updates_count' );
 	}
+
 }
 
 WC_Helper_Updater::load();
