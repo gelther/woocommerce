@@ -172,7 +172,6 @@ class WC_Form_Handler {
 	 * Save the password/account details and redirect back to the my account page.
 	 */
 	public static function save_account_details() {
-
 		if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
 			return;
 		}
@@ -183,8 +182,8 @@ class WC_Form_Handler {
 
 		wc_nocache_headers();
 
-		$errors       = new WP_Error();
-		$user         = new stdClass();
+		$errors = new WP_Error();
+		$user   = new stdClass();
 
 		$user->ID     = (int) get_current_user_id();
 		$current_user = get_user_by( 'id', $user->ID );
@@ -201,8 +200,8 @@ class WC_Form_Handler {
 		$pass2              = ! empty( $_POST['password_2'] ) ? $_POST['password_2'] : '';
 		$save_pass          = true;
 
-		$user->first_name   = $account_first_name;
-		$user->last_name    = $account_last_name;
+		$user->first_name = $account_first_name;
+		$user->last_name  = $account_last_name;
 
 		// Prevent emails being displayed, or leave alone.
 		$user->display_name = is_email( $current_user->display_name ) ? $user->first_name : $current_user->display_name;
@@ -302,9 +301,9 @@ class WC_Form_Handler {
 			ob_start();
 
 			// Pay for existing order
-			$order_key  = $_GET['key'];
-			$order_id   = absint( $wp->query_vars['order-pay'] );
-			$order      = wc_get_order( $order_id );
+			$order_key = $_GET['key'];
+			$order_id  = absint( $wp->query_vars['order-pay'] );
+			$order     = wc_get_order( $order_id );
 
 			if ( $order_id === $order->get_id() && $order_key === $order->get_order_key() && $order->needs_payment() ) {
 
@@ -437,7 +436,6 @@ class WC_Form_Handler {
 			wp_redirect( wc_get_account_endpoint_url( 'payment-methods' ) );
 			exit();
 		}
-
 	}
 
 	/**
@@ -462,7 +460,6 @@ class WC_Form_Handler {
 			wp_redirect( wc_get_account_endpoint_url( 'payment-methods' ) );
 			exit();
 		}
-
 	}
 
 	/**
@@ -502,7 +499,7 @@ class WC_Form_Handler {
 				wc_add_notice( $removed_notice );
 			}
 
-			$referer  = wp_get_referer() ? remove_query_arg( array( 'remove_item', 'add-to-cart', 'added-to-cart' ), add_query_arg( 'removed_item', '1', wp_get_referer() ) ) : wc_get_cart_url();
+			$referer = wp_get_referer() ? remove_query_arg( array( 'remove_item', 'add-to-cart', 'added-to-cart' ), add_query_arg( 'removed_item', '1', wp_get_referer() ) ) : wc_get_cart_url();
 			wp_safe_redirect( $referer );
 			exit;
 
@@ -513,7 +510,7 @@ class WC_Form_Handler {
 
 			WC()->cart->restore_cart_item( $cart_item_key );
 
-			$referer  = wp_get_referer() ? remove_query_arg( array( 'undo_item', '_wpnonce' ), wp_get_referer() ) : wc_get_cart_url();
+			$referer = wp_get_referer() ? remove_query_arg( array( 'undo_item', '_wpnonce' ), wp_get_referer() ) : wc_get_cart_url();
 			wp_safe_redirect( $referer );
 			exit;
 
@@ -536,14 +533,14 @@ class WC_Form_Handler {
 					}
 
 					// Sanitize
-					$quantity = apply_filters( 'woocommerce_stock_amount_cart_item', wc_stock_amount( preg_replace( "/[^0-9\.]/", '', $cart_totals[ $cart_item_key ]['qty'] ) ), $cart_item_key );
+					$quantity = apply_filters( 'woocommerce_stock_amount_cart_item', wc_stock_amount( preg_replace( '/[^0-9\.]/', '', $cart_totals[ $cart_item_key ]['qty'] ) ), $cart_item_key );
 
 					if ( '' === $quantity || $quantity === $values['quantity'] ) {
 						continue;
 					}
 
 					// Update cart validation
-					$passed_validation 	= apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $values, $quantity );
+					$passed_validation = apply_filters( 'woocommerce_update_cart_validation', true, $cart_item_key, $values, $quantity );
 
 					// is_sold_individually
 					if ( $_product->is_sold_individually() && $quantity > 1 ) {
@@ -614,15 +611,15 @@ class WC_Form_Handler {
 		$order_items = $order->get_items();
 		foreach ( $order_items as $item ) {
 			// Load all product info including variation data
-			$product_id   = (int) apply_filters( 'woocommerce_add_to_cart_product_id', $item->get_product_id() );
-			$quantity     = $item->get_quantity();
-			$variation_id = $item->get_variation_id();
-			$variations   = array();
+			$product_id     = (int) apply_filters( 'woocommerce_add_to_cart_product_id', $item->get_product_id() );
+			$quantity       = $item->get_quantity();
+			$variation_id   = $item->get_variation_id();
+			$variations     = array();
 			$cart_item_data = apply_filters( 'woocommerce_order_again_cart_item_data', array(), $item, $order );
 
 			foreach ( $item->get_meta_data() as $meta ) {
 				if ( taxonomy_is_product_attribute( $meta->key ) ) {
-					$term = get_term_by( 'slug', $meta->value, $meta->key );
+					$term                     = get_term_by( 'slug', $meta->value, $meta->key );
 					$variations[ $meta->key ] = $term ? $term->name : $meta->value;
 				} elseif ( meta_is_product_attribute( $meta->key, $meta->value, $product_id ) ) {
 					$variations[ $meta->key ] = $meta->value;
@@ -644,7 +641,7 @@ class WC_Form_Handler {
 
 		do_action( 'woocommerce_ordered_again', $order->get_id() );
 
-		$num_items_in_cart = count( WC()->cart->get_cart() );
+		$num_items_in_cart           = count( WC()->cart->get_cart() );
 		$num_items_in_original_order = count( $order_items );
 
 		if ( $num_items_in_original_order > $num_items_in_cart ) {
@@ -727,9 +724,9 @@ class WC_Form_Handler {
 
 		wc_nocache_headers();
 
-		$product_id          = apply_filters( 'woocommerce_add_to_cart_product_id', absint( $_REQUEST['add-to-cart'] ) );
-		$was_added_to_cart   = false;
-		$adding_to_cart      = wc_get_product( $product_id );
+		$product_id        = apply_filters( 'woocommerce_add_to_cart_product_id', absint( $_REQUEST['add-to-cart'] ) );
+		$was_added_to_cart = false;
+		$adding_to_cart    = wc_get_product( $product_id );
 
 		if ( ! $adding_to_cart ) {
 			return;
@@ -763,12 +760,12 @@ class WC_Form_Handler {
 	 * Handle adding simple products to the cart.
 	 *
 	 * @since 2.4.6 Split from add_to_cart_action.
-	 * @param int $product_id Product ID to add to the cart.
-	 * @return bool success or not
+	 * @param  int  $product_id Product ID to add to the cart.
+	 * @return bool             success or not
 	 */
 	private static function add_to_cart_handler_simple( $product_id ) {
-		$quantity 			= empty( $_REQUEST['quantity'] ) ? 1 : wc_stock_amount( $_REQUEST['quantity'] );
-		$passed_validation 	= apply_filters( 'woocommerce_add_to_cart_validation', true, $product_id, $quantity );
+		$quantity          = empty( $_REQUEST['quantity'] ) ? 1 : wc_stock_amount( $_REQUEST['quantity'] );
+		$passed_validation = apply_filters( 'woocommerce_add_to_cart_validation', true, $product_id, $quantity );
 
 		if ( $passed_validation && false !== WC()->cart->add_to_cart( $product_id, $quantity ) ) {
 			wc_add_to_cart_message( array( $product_id => $quantity ), true );
@@ -781,8 +778,8 @@ class WC_Form_Handler {
 	 * Handle adding grouped products to the cart.
 	 *
 	 * @since 2.4.6 Split from add_to_cart_action.
-	 * @param int $product_id Product ID to add to the cart.
-	 * @return bool success or not
+	 * @param  int  $product_id Product ID to add to the cart.
+	 * @return bool             success or not
 	 */
 	private static function add_to_cart_handler_grouped( $product_id ) {
 		$was_added_to_cart = false;
@@ -798,13 +795,13 @@ class WC_Form_Handler {
 				$quantity_set = true;
 
 				// Add to cart validation
-				$passed_validation 	= apply_filters( 'woocommerce_add_to_cart_validation', true, $item, $quantity );
+				$passed_validation = apply_filters( 'woocommerce_add_to_cart_validation', true, $item, $quantity );
 
 				// Suppress total recalculation until finished.
 				remove_action( 'woocommerce_add_to_cart', array( WC()->cart, 'calculate_totals' ), 20, 0 );
 
 				if ( $passed_validation && false !== WC()->cart->add_to_cart( $item, $quantity ) ) {
-					$was_added_to_cart = true;
+					$was_added_to_cart      = true;
 					$added_to_cart[ $item ] = $quantity;
 				}
 
@@ -829,8 +826,8 @@ class WC_Form_Handler {
 	 * Handle adding variable products to the cart.
 	 *
 	 * @since 2.4.6 Split from add_to_cart_action.
-	 * @param int $product_id Product ID to add to the cart.
-	 * @return bool success or not
+	 * @param  int  $product_id Product ID to add to the cart.
+	 * @return bool             success or not
 	 */
 	private static function add_to_cart_handler_variable( $product_id ) {
 		try {
@@ -911,7 +908,7 @@ class WC_Form_Handler {
 			return false;
 		}
 
-		$passed_validation 	= apply_filters( 'woocommerce_add_to_cart_validation', true, $product_id, $quantity, $variation_id, $variations );
+		$passed_validation = apply_filters( 'woocommerce_add_to_cart_validation', true, $product_id, $quantity, $variation_id, $variations );
 
 		if ( $passed_validation && false !== WC()->cart->add_to_cart( $product_id, $quantity, $variation_id, $variations ) ) {
 			wc_add_to_cart_message( array( $product_id => $quantity ), true );
@@ -1090,6 +1087,7 @@ class WC_Form_Handler {
 			}
 		}
 	}
+
 }
 
 WC_Form_Handler::init();
