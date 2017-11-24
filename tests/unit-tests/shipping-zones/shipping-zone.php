@@ -306,7 +306,7 @@ class WC_Tests_Shipping_Zone extends WC_Unit_Test_Case {
 		WC_Helper_Shipping_Zones::create_mock_zones();
 
 		// Test
-		$zone        = WC_Shipping_Zones::get_zone( 1 );
+		$zone = WC_Shipping_Zones::get_zone( 1 );
 		$zone->add_shipping_method( 'flat_rate' );
 		$zone->add_shipping_method( 'free_shipping' );
 
