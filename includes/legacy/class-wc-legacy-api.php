@@ -55,7 +55,7 @@ class WC_Legacy_API {
 	 * Add new query vars.
 	 *
 	 * @since 2.0
-	 * @param array $vars Vars.
+	 * @param  array    $vars Vars.
 	 * @return string[]
 	 */
 	public function add_query_vars( $vars ) {
@@ -126,7 +126,6 @@ class WC_Legacy_API {
 	 * @deprecated 2.6.0
 	 */
 	public function includes() {
-
 		// API server / response handlers.
 		include_once( dirname( __FILE__ ) . '/../api/legacy/v3/class-wc-api-exception.php' );
 		include_once( dirname( __FILE__ ) . '/../api/legacy/v3/class-wc-api-server.php' );
@@ -158,7 +157,6 @@ class WC_Legacy_API {
 	 * @param WC_API_Server $server the REST server.
 	 */
 	public function register_resources( $server ) {
-
 		$api_classes = apply_filters( 'woocommerce_api_classes',
 			array(
 				'WC_API_Coupons',
@@ -176,7 +174,6 @@ class WC_Legacy_API {
 		}
 	}
 
-
 	/**
 	 * Handle legacy v1 REST API requests.
 	 *
@@ -184,7 +181,6 @@ class WC_Legacy_API {
 	 * @deprecated 2.6.0
 	 */
 	private function handle_v1_rest_api_request() {
-
 		// Include legacy required files for v1 REST API request.
 		include_once( dirname( __FILE__ ) . '/../api/legacy/v1/class-wc-api-server.php' );
 		include_once( dirname( __FILE__ ) . '/../api/legacy/v1/interface-wc-api-handler.php' );
@@ -272,4 +268,5 @@ class WC_Legacy_API {
 		// Fire off the request.
 		$this->server->serve_request();
 	}
+
 }
