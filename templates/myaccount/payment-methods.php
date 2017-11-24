@@ -40,7 +40,7 @@ do_action( 'woocommerce_before_account_payment_methods', $has_methods ); ?>
 		</thead>
 		<?php foreach ( $saved_methods as $type => $methods ) : ?>
 			<?php foreach ( $methods as $method ) : ?>
-				<tr class="payment-method<?php echo ! empty( $method['is_default'] ) ? ' default-payment-method' : '' ?>">
+				<tr class="payment-method<?php echo ! empty( $method['is_default'] ) ? ' default-payment-method' : ''; ?>">
 					<?php foreach ( wc_get_account_payment_methods_columns() as $column_id => $column_name ) : ?>
 						<td class="woocommerce-PaymentMethod woocommerce-PaymentMethod--<?php echo esc_attr( $column_id ); ?> payment-method-<?php echo esc_attr( $column_id ); ?>" data-title="<?php echo esc_attr( $column_name ); ?>">
 							<?php
@@ -78,4 +78,4 @@ do_action( 'woocommerce_before_account_payment_methods', $has_methods ); ?>
 
 <?php if ( WC()->payment_gateways->get_available_payment_gateways() ) : ?>
 	<a class="button" href="<?php echo esc_url( wc_get_endpoint_url( 'add-payment-method' ) ); ?>"><?php esc_html_e( 'Add payment method', 'woocommerce' ); ?></a>
-<?php endif; ?>
+<?php endif;
