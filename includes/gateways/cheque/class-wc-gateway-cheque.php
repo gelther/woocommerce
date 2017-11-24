@@ -48,22 +48,21 @@ class WC_Gateway_Cheque extends WC_Payment_Gateway {
 	 * Initialise Gateway Settings Form Fields.
 	 */
 	public function init_form_fields() {
-
 		$this->form_fields = array(
-			'enabled' => array(
+			'enabled'      => array(
 				'title'   => __( 'Enable/Disable', 'woocommerce' ),
 				'type'    => 'checkbox',
 				'label'   => __( 'Enable check payments', 'woocommerce' ),
 				'default' => 'yes',
 			),
-			'title' => array(
+			'title'        => array(
 				'title'       => __( 'Title', 'woocommerce' ),
 				'type'        => 'text',
 				'description' => __( 'This controls the title which the user sees during checkout.', 'woocommerce' ),
 				'default'     => _x( 'Check payments', 'Check payment method', 'woocommerce' ),
 				'desc_tip'    => true,
 			),
-			'description' => array(
+			'description'  => array(
 				'title'       => __( 'Description', 'woocommerce' ),
 				'type'        => 'textarea',
 				'description' => __( 'Payment method description that the customer will see on your checkout.', 'woocommerce' ),
@@ -94,8 +93,8 @@ class WC_Gateway_Cheque extends WC_Payment_Gateway {
 	 *
 	 * @access public
 	 * @param WC_Order $order
-	 * @param bool $sent_to_admin
-	 * @param bool $plain_text
+	 * @param bool     $sent_to_admin
+	 * @param bool     $plain_text
 	 */
 	public function email_instructions( $order, $sent_to_admin, $plain_text = false ) {
 		if ( $this->instructions && ! $sent_to_admin && 'cheque' === $order->get_payment_method() && $order->has_status( 'on-hold' ) ) {
@@ -106,11 +105,10 @@ class WC_Gateway_Cheque extends WC_Payment_Gateway {
 	/**
 	 * Process the payment and return the result.
 	 *
-	 * @param int $order_id
+	 * @param  int   $order_id
 	 * @return array
 	 */
 	public function process_payment( $order_id ) {
-
 		$order = wc_get_order( $order_id );
 
 		// Mark as on-hold (we're awaiting the cheque)
@@ -124,8 +122,9 @@ class WC_Gateway_Cheque extends WC_Payment_Gateway {
 
 		// Return thankyou redirect
 		return array(
-			'result' 	=> 'success',
-			'redirect'	=> $this->get_return_url( $order ),
+			'result'   => 'success',
+			'redirect' => $this->get_return_url( $order ),
 		);
 	}
+
 }
