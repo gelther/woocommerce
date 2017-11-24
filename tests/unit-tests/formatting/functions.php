@@ -38,7 +38,7 @@ class WC_Tests_Formatting_Functions extends WC_Unit_Test_Case {
 	 * @since 3.3.0
 	 */
 	public function test_wc_bool_to_string() {
-		$this->assertEquals( array( 'yes', 'no' ), array( wc_bool_to_string( true ), wc_bool_to_string( false )	) );
+		$this->assertEquals( array( 'yes', 'no' ), array( wc_bool_to_string( true ), wc_bool_to_string( false ) ) );
 	}
 
 	/**
@@ -83,7 +83,7 @@ class WC_Tests_Formatting_Functions extends WC_Unit_Test_Case {
 		$this->assertEquals( 'woocommerce.pdf', wc_get_filename_from_url( 'https://woocommerce.com/woocommerce.pdf' ) );
 		$this->assertEmpty( wc_get_filename_from_url( 'ftp://wc' ) );
 		$this->assertEmpty( wc_get_filename_from_url( 'http://www.skyverge.com' ) );
-		$this->assertEquals( 'woocommerce',  wc_get_filename_from_url( 'https://woocommerce.com/woocommerce' ) );
+		$this->assertEquals( 'woocommerce', wc_get_filename_from_url( 'https://woocommerce.com/woocommerce' ) );
 	}
 
 	/**
@@ -755,8 +755,8 @@ class WC_Tests_Formatting_Functions extends WC_Unit_Test_Case {
 	 */
 	public function test_wc_trim_string() {
 		$this->assertEquals( 'string', wc_trim_string( 'string' ) );
-		$this->assertEquals( 's...',   wc_trim_string( 'string', 4 ) );
-		$this->assertEquals( 'st.',    wc_trim_string( 'string', 3, '.' ) );
+		$this->assertEquals( 's...', wc_trim_string( 'string', 4 ) );
+		$this->assertEquals( 'st.', wc_trim_string( 'string', 3, '.' ) );
 		$this->assertEquals( 'string¥', wc_trim_string( 'string¥', 7, '' ) );
 	}
 
@@ -892,7 +892,6 @@ class WC_Tests_Formatting_Functions extends WC_Unit_Test_Case {
 		$this->assertEquals( 'foo', wc_get_string_before_colon( 'foo:1' ) );
 	}
 
-
 	/**
 	 * Test wc_array_merge_recursive_numeric().
 	 *
@@ -939,4 +938,5 @@ class WC_Tests_Formatting_Functions extends WC_Unit_Test_Case {
 			),
 		), wc_array_merge_recursive_numeric( $a, $b, $c ) );
 	}
+
 }
