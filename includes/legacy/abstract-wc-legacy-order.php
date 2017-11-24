@@ -18,10 +18,10 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 
 	/**
 	 * Add coupon code to the order.
-	 * @param string|array $code
-	 * @param int $discount tax amount.
-	 * @param int $discount_tax amount.
-	 * @return int order item ID
+	 * @param  string|array $code
+	 * @param  int          $discount     tax amount.
+	 * @param  int          $discount_tax amount.
+	 * @return int                        order item ID
 	 * @throws WC_Data_Exception
 	 */
 	public function add_coupon( $code = array(), $discount = 0, $discount_tax = 0 ) {
@@ -42,10 +42,10 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 
 	/**
 	 * Add a tax row to the order.
-	 * @param int $tax_rate_id
-	 * @param int $tax_amount amount of tax.
-	 * @param int $shipping_tax_amount shipping amount.
-	 * @return int order item ID
+	 * @param  int $tax_rate_id
+	 * @param  int $tax_amount          amount of tax.
+	 * @param  int $shipping_tax_amount shipping amount.
+	 * @return int                      order item ID
 	 * @throws WC_Data_Exception
 	 */
 	public function add_tax( $tax_rate_id, $tax_amount = 0, $shipping_tax_amount = 0 ) {
@@ -67,8 +67,8 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 
 	/**
 	 * Add a shipping row to the order.
-	 * @param WC_Shipping_Rate shipping_rate
-	 * @return int order item ID
+	 * @param  WC_Shipping_Rate shipping_rate
+	 * @return int              order item ID
 	 * @throws WC_Data_Exception
 	 */
 	public function add_shipping( $shipping_rate ) {
@@ -127,10 +127,10 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	 *
 	 * Note this does not update order totals.
 	 *
-	 * @param object|int $item order item ID or item object.
-	 * @param WC_Product $product
-	 * @param array $args data to update.
-	 * @return int updated order item ID
+	 * @param  object|int $item    order item ID or item object.
+	 * @param  WC_Product $product
+	 * @param  array      $args    data to update.
+	 * @return int                 updated order item ID
 	 * @throws WC_Data_Exception
 	 */
 	public function update_product( $item, $product, $args ) {
@@ -164,7 +164,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 				$item->add_meta_data( apply_filters( 'woocommerce_backordered_item_meta_name', __( 'Backordered', 'woocommerce' ), $item ), $args['qty'] - max( 0, $product->get_stock_quantity() ), true );
 			}
 			$args['subtotal'] = $args['subtotal'] ? $args['subtotal'] : wc_get_price_excluding_tax( $product, array( 'qty' => $args['qty'] ) );
-			$args['total']	= $args['total'] ? $args['total'] : wc_get_price_excluding_tax( $product, array( 'qty' => $args['qty'] ) );
+			$args['total']    = $args['total'] ? $args['total'] : wc_get_price_excluding_tax( $product, array( 'qty' => $args['qty'] ) );
 		}
 
 		$item->set_order_id( $this->get_id() );
@@ -177,9 +177,9 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 
 	/**
 	 * Update coupon for order. Note this does not update order totals.
-	 * @param object|int $item
-	 * @param array $args
-	 * @return int updated order item ID
+	 * @param  object|int $item
+	 * @param  array      $args
+	 * @return int              updated order item ID
 	 * @throws WC_Data_Exception
 	 */
 	public function update_coupon( $item, $args ) {
@@ -216,9 +216,9 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	 *
 	 * Note this does not update the order total.
 	 *
-	 * @param object|int $item
-	 * @param array $args
-	 * @return int updated order item ID
+	 * @param  object|int $item
+	 * @param  array      $args
+	 * @return int              updated order item ID
 	 * @throws WC_Data_Exception
 	 */
 	public function update_shipping( $item, $args ) {
@@ -253,9 +253,9 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	 *
 	 * Note this does not update order totals.
 	 *
-	 * @param object|int $item
-	 * @param array $args
-	 * @return int updated order item ID
+	 * @param  object|int $item
+	 * @param  array      $args
+	 * @return int              updated order item ID
 	 * @throws WC_Data_Exception
 	 */
 	public function update_fee( $item, $args ) {
@@ -284,9 +284,9 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	 * Note this does not update order totals.
 	 *
 	 * @since 3.0
-	 * @param object|int $item
-	 * @param array $args
-	 * @return int updated order item ID
+	 * @param  object|int $item
+	 * @param  array      $args
+	 * @return int              updated order item ID
 	 * @throws WC_Data_Exception
 	 */
 	public function update_tax( $item, $args ) {
@@ -313,7 +313,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	/**
 	 * Get a product (either product or variation).
 	 * @deprecated Add deprecation notices in future release. Replaced with $item->get_product()
-	 * @param object $item
+	 * @param  object          $item
 	 * @return WC_Product|bool
 	 */
 	public function get_product_from_item( $item ) {
@@ -327,8 +327,8 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 
 	/**
 	 * Set the customer address.
-	 * @param array $address Address data.
-	 * @param string $type billing or shipping.
+	 * @param array  $address Address data.
+	 * @param string $type    billing or shipping.
 	 */
 	public function set_address( $address, $type = 'billing' ) {
 		foreach ( $address as $key => $value ) {
@@ -341,8 +341,8 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 
 	/**
 	 * Set an order total.
-	 * @param float $amount
-	 * @param string $total_type
+	 * @param  float  $amount
+	 * @param  string $total_type
 	 * @return bool
 	 */
 	public function legacy_set_total( $amount, $total_type = 'total' ) {
@@ -389,7 +389,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	/**
 	 * Magic __isset method for backwards compatibility. Handles legacy properties which could be accessed directly in the past.
 	 *
-	 * @param string $key
+	 * @param  string $key
 	 * @return bool
 	 */
 	public function __isset( $key ) {
@@ -400,7 +400,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	/**
 	 * Magic __get method for backwards compatibility.
 	 *
-	 * @param string $key
+	 * @param  string $key
 	 * @return mixed
 	 */
 	public function __get( $key ) {
@@ -450,7 +450,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 			return $this->get_currency();
 		} elseif ( 'order_version' === $key ) {
 			return $this->get_version();
-	 	} elseif ( is_callable( array( $this, "get_{$key}" ) ) ) {
+		} elseif ( is_callable( array( $this, "get_{$key}" ) ) ) {
 			return $this->{"get_{$key}"}();
 		} else {
 			return get_post_meta( $this->get_id(), '_' . $key, true );
@@ -463,9 +463,9 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	 *
 	 * @deprecated
 	 *
-	 * @param int $order_item_id
+	 * @param  int   $order_item_id
 	 *
-	 * @return array of meta data.
+	 * @return array                of meta data.
 	 */
 	public function has_meta( $order_item_id ) {
 		global $wpdb;
@@ -479,7 +479,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 
 	/**
 	 * Display meta data belonging to an item.
-	 * @param  array $item
+	 * @param array $item
 	 */
 	public function display_item_meta( $item ) {
 		wc_deprecated_function( 'WC_Order::display_item_meta', '3.0', 'wc_display_item_meta' );
@@ -490,16 +490,16 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 
 	/**
 	 * Display download links for an order item.
-	 * @param  array $item
+	 * @param array $item
 	 */
 	public function display_item_downloads( $item ) {
 		wc_deprecated_function( 'WC_Order::display_item_downloads', '3.0', 'wc_display_item_downloads' );
-		$product   = $item->get_product();
+		$product = $item->get_product();
 
 		if ( $product && $product->exists() && $product->is_downloadable() && $this->is_download_permitted() ) {
 			$download_files = $this->get_item_downloads( $item );
-			$i			  = 0;
-			$links		  = array();
+			$i              = 0;
+			$links          = array();
 
 			foreach ( $download_files as $download_id => $file ) {
 				$i++;
@@ -515,8 +515,8 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	/**
 	 * Get the Download URL.
 	 *
-	 * @param  int $product_id
-	 * @param  int $download_id
+	 * @param  int    $product_id
+	 * @param  int    $download_id
 	 * @return string
 	 */
 	public function get_download_url( $product_id, $download_id ) {
@@ -569,9 +569,9 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	/**
 	 * Get order item meta.
 	 * @deprecated 3.0.0
-	 * @param mixed $order_item_id
-	 * @param string $key (default: '')
-	 * @param bool $single (default: false)
+	 * @param  mixed        $order_item_id
+	 * @param  string       $key           (default: '')
+	 * @param  bool         $single        (default: false)
 	 * @return array|string
 	 */
 	public function get_item_meta( $order_item_id, $key = '', $single = false ) {
@@ -582,8 +582,8 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	/**
 	 * Get all item meta data in array format in the order it was saved. Does not group meta by key like get_item_meta().
 	 *
-	 * @param mixed $order_item_id
-	 * @return array of objects
+	 * @param  mixed $order_item_id
+	 * @return array                of objects
 	 */
 	public function get_item_meta_array( $order_item_id ) {
 		wc_deprecated_function( 'WC_Order::get_item_meta_array', '3.0', 'WC_Order_Item::get_meta_data() (note the format has changed)' );
@@ -602,7 +602,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	 * Expand item meta into the $item array.
 	 * @deprecated 3.0.0 Item meta no longer expanded due to new order item
 	 *		classes. This function now does nothing to avoid data breakage.
-	 * @param array $item before expansion.
+	 * @param  array $item before expansion.
 	 * @return array
 	 */
 	public function expand_item_meta( $item ) {
@@ -631,7 +631,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	/**
 	 * Gets an order from the database.
 	 * @deprecated 3.0
-	 * @param int $id (default: 0).
+	 * @param  int  $id (default: 0).
 	 * @return bool
 	 */
 	public function get_order( $id = 0 ) {
@@ -725,7 +725,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 	/**
 	 * Output items for display in html emails.
 	 * @deprecated 3.0.0 Moved to template functions.
-	 * @param array $args Items args.
+	 * @param  array  $args Items args.
 	 * @return string
 	 */
 	public function email_order_items_table( $args = array() ) {
@@ -741,4 +741,5 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 		wc_deprecated_function( 'WC_Order::get_order_currency', '3.0', 'WC_Order::get_currency' );
 		return apply_filters( 'woocommerce_get_order_currency', $this->get_currency(), $this );
 	}
+
 }
