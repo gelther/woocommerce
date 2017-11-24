@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/*
+/**
  * Copyright (c) 2013 - 2015 MasterCard International Incorporated
  * All rights reserved.
  *
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Simplify_Coupon extends Simplify_Object {
 	/**
 	 * Creates an Simplify_Coupon object
-	 * @param     array $hash a map of parameters; valid keys are:<dl style="padding-left:10px;">
+	 * @param  array  $hash           a map of parameters; valid keys are:<dl style="padding-left:10px;">
 	 *     <dt><tt>amountOff</tt></dt>    <dd>Amount off of the price of the product in the smallest units of the currency of the merchant. While this field is optional, you must provide either amountOff or percentOff for a coupon. Example: 100 = $1.00USD [min value: 1] </dd>
 	 *     <dt><tt>couponCode</tt></dt>    <dd>Code that identifies the coupon to be used. [min length: 2] <strong>required </strong></dd>
 	 *     <dt><tt>description</tt></dt>    <dd>A brief section that describes the coupon. </dd>
@@ -44,84 +44,76 @@ class Simplify_Coupon extends Simplify_Object {
 	 *     <dt><tt>numTimesApplied</tt></dt>    <dd>The number of times a coupon will be applied on a customer's subscription. [min value: 1, max value: 9999] </dd>
 	 *     <dt><tt>percentOff</tt></dt>    <dd>Percentage off of the price of the product. While this field is optional, you must provide either amountOff or percentOff for a coupon. The percent off is a whole number. [min value: 1, max value: 100] </dd>
 	 *     <dt><tt>startDate</tt></dt>    <dd>First date of the coupon in UTC millis that the coupon can be applied to a subscription. This starts at midnight of the merchant timezone. <strong>required </strong></dd></dl>
-	 * @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.<i/>
-	 * @return    Coupon a Coupon object.
+	 * @param         $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.<i/>
+	 * @return Coupon                 a Coupon object.
 	 */
-	static public function createCoupon($hash, $authentication = null) {
-
-		$args = func_get_args();
-		$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 2);
+	static public function createCoupon( $hash, $authentication = null ) {
+		$args           = func_get_args();
+		$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 2 );
 
 		$instance = new Simplify_Coupon();
-		$instance->setAll($hash);
+		$instance->setAll( $hash );
 
-		$object = Simplify_PaymentsApi::createObject($instance, $authentication);
+		$object = Simplify_PaymentsApi::createObject( $instance, $authentication );
 		return $object;
 	}
-
 
 	/**
 	 * Deletes an Simplify_Coupon object.
 	 *
-	 * @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
+	 * @param       $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
 	 *
 	 * @return true
 	 */
-		public function deleteCoupon($authentication = null) {
+		public function deleteCoupon( $authentication = null ) {
+			$args           = func_get_args();
+			$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 1 );
 
-			$args = func_get_args();
-			$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 1);
-
-			$obj = Simplify_PaymentsApi::deleteObject($this, $authentication);
+			$obj              = Simplify_PaymentsApi::deleteObject( $this, $authentication );
 			$this->properties = null;
 			return true;
 		}
 
+		/**
+		 * Retrieve Simplify_Coupon objects.
+		 * @param  array                        criteria a map of parameters; valid keys are:<dl style="padding-left:10px;">
+		 *     <dt><tt>filter</tt></dt>    <dd>Filters to apply to the list.  </dd>
+		 *     <dt><tt>max</tt></dt>    <dd>Allows up to a max of 50 list items to return. [min value: 0, max value: 50, default: 20]  </dd>
+		 *     <dt><tt>offset</tt></dt>    <dd>Used in paging of the list.  This is the start offset of the page. [min value: 0, default: 0]  </dd>
+		 *     <dt><tt>sorting</tt></dt>    <dd>Allows for ascending or descending sorting of the list.  The value maps properties to the sort direction (either <tt>asc</tt> for ascending or <tt>desc</tt> for descending).  Sortable properties are: <tt> dateCreated</tt><tt> maxRedemptions</tt><tt> timesRedeemed</tt><tt> id</tt><tt> startDate</tt><tt> endDate</tt><tt> percentOff</tt><tt> couponCode</tt><tt> durationInMonths</tt><tt> numTimesApplied</tt><tt> amountOff</tt>.</dd></dl>
+		 * @param               $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
+		 * @return ResourceList                 a ResourceList object that holds the list of Coupon objects and the total
+		 *            number of Coupon objects available for the given criteria.
+		 * @see       ResourceList
+		 */
+		static public function listCoupon( $criteria = null, $authentication = null ) {
+			$args           = func_get_args();
+			$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 2 );
 
-	   /**
-		* Retrieve Simplify_Coupon objects.
-		* @param     array criteria a map of parameters; valid keys are:<dl style="padding-left:10px;">
-		*     <dt><tt>filter</tt></dt>    <dd>Filters to apply to the list.  </dd>
-		*     <dt><tt>max</tt></dt>    <dd>Allows up to a max of 50 list items to return. [min value: 0, max value: 50, default: 20]  </dd>
-		*     <dt><tt>offset</tt></dt>    <dd>Used in paging of the list.  This is the start offset of the page. [min value: 0, default: 0]  </dd>
-		*     <dt><tt>sorting</tt></dt>    <dd>Allows for ascending or descending sorting of the list.  The value maps properties to the sort direction (either <tt>asc</tt> for ascending or <tt>desc</tt> for descending).  Sortable properties are: <tt> dateCreated</tt><tt> maxRedemptions</tt><tt> timesRedeemed</tt><tt> id</tt><tt> startDate</tt><tt> endDate</tt><tt> percentOff</tt><tt> couponCode</tt><tt> durationInMonths</tt><tt> numTimesApplied</tt><tt> amountOff</tt>.</dd></dl>
-		* @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
-		* @return    ResourceList a ResourceList object that holds the list of Coupon objects and the total
-		*            number of Coupon objects available for the given criteria.
-		* @see       ResourceList
-		*/
-		static public function listCoupon($criteria = null, $authentication = null) {
-
-			$args = func_get_args();
-			$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 2);
-
-			$val = new Simplify_Coupon();
-			$list = Simplify_PaymentsApi::listObject($val, $criteria, $authentication);
+			$val  = new Simplify_Coupon();
+			$list = Simplify_PaymentsApi::listObject( $val, $criteria, $authentication );
 
 			return $list;
 		}
 
-
 		/**
 		 * Retrieve a Simplify_Coupon object from the API
 		 *
-		 * @param     string id  the id of the Coupon object to retrieve
-		 * @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
-		 * @return    Coupon a Coupon object
+		 * @param  string                 id  the id of the Coupon object to retrieve
+		 * @param         $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
+		 * @return Coupon                 a Coupon object
 		 */
-		static public function findCoupon($id, $authentication = null) {
+		static public function findCoupon( $id, $authentication = null ) {
+			$args           = func_get_args();
+			$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 2 );
 
-			$args = func_get_args();
-			$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 2);
-
-			$val = new Simplify_Coupon();
+			$val     = new Simplify_Coupon();
 			$val->id = $id;
 
-			$obj = Simplify_PaymentsApi::findObject($val, $authentication);
+			$obj = Simplify_PaymentsApi::findObject( $val, $authentication );
 
 			return $obj;
 		}
-
 
 		/**
 		 * Updates an Simplify_Coupon object.
@@ -130,15 +122,14 @@ class Simplify_Coupon extends Simplify_Object {
 		 * <dl style="padding-left:10px;">
 		 *     <dt><tt>endDate</tt></dt>    <dd>The ending date in UTC millis for the coupon. This must be after the starting date of the coupon. </dd>
 		 *     <dt><tt>maxRedemptions</tt></dt>    <dd>Maximum number of redemptions allowed for the coupon. A redemption is defined as when the coupon is applied to the subscription for the first time. [min value: 1] </dd></dl>
-		 * @param     $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
-		 * @return    Coupon a Coupon object.
+		 * @param         $authentication -  information used for the API call.  If no value is passed the global keys Simplify::public_key and Simplify::private_key are used.  <i>For backwards compatibility the public and private keys may be passed instead of the authentication object.</i>
+		 * @return Coupon                 a Coupon object.
 		 */
-		public function updateCoupon($authentication = null)  {
+		public function updateCoupon( $authentication = null ) {
+			$args           = func_get_args();
+			$authentication = Simplify_PaymentsApi::buildAuthenticationObject( $authentication, $args, 1 );
 
-			$args = func_get_args();
-			$authentication = Simplify_PaymentsApi::buildAuthenticationObject($authentication, $args, 1);
-
-			$object = Simplify_PaymentsApi::updateObject($this, $authentication);
+			$object = Simplify_PaymentsApi::updateObject( $this, $authentication );
 			return $object;
 		}
 
@@ -146,6 +137,7 @@ class Simplify_Coupon extends Simplify_Object {
 	 * @ignore
 	 */
 	public function getClazz() {
-		return "Coupon";
+		return 'Coupon';
 	}
+
 }
