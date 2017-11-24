@@ -90,7 +90,7 @@ abstract class WC_Deprecated_Hooks {
 	/**
 	 * Get deprecated version.
 	 *
-	 * @param string $old_hook Old hook name.
+	 * @param  string $old_hook Old hook name.
 	 * @return string
 	 */
 	protected function get_deprecated_version( $old_hook ) {
