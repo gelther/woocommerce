@@ -332,7 +332,7 @@ class WC_Order_Item_Product extends WC_Order_Item {
 	/**
 	 * Get the Download URL.
 	 *
-	 * @param  int $download_id
+	 * @param  int    $download_id
 	 * @return string
 	 */
 	public function get_item_download_url( $download_id ) {
@@ -407,7 +407,7 @@ class WC_Order_Item_Product extends WC_Order_Item {
 	 * offsetGet for ArrayAccess/Backwards compatibility.
 	 *
 	 * @deprecated Add deprecation notices in future release.
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return mixed
 	 */
 	public function offsetGet( $offset ) {
@@ -432,7 +432,7 @@ class WC_Order_Item_Product extends WC_Order_Item {
 	 *
 	 * @deprecated Add deprecation notices in future release.
 	 * @param string $offset
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function offsetSet( $offset, $value ) {
 		if ( 'line_subtotal' === $offset ) {
@@ -454,7 +454,7 @@ class WC_Order_Item_Product extends WC_Order_Item {
 	/**
 	 * offsetExists for ArrayAccess
 	 *
-	 * @param string $offset
+	 * @param  string $offset
 	 * @return bool
 	 */
 	public function offsetExists( $offset ) {
@@ -463,4 +463,5 @@ class WC_Order_Item_Product extends WC_Order_Item {
 		}
 		return parent::offsetExists( $offset );
 	}
+
 }
