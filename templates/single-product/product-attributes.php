@@ -25,14 +25,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <table class="shop_attributes">
 	<?php if ( $display_dimensions && $product->has_weight() ) : ?>
 		<tr>
-			<th><?php _e( 'Weight', 'woocommerce' ) ?></th>
+			<th><?php _e( 'Weight', 'woocommerce' ); ?></th>
 			<td class="product_weight"><?php echo esc_html( wc_format_weight( $product->get_weight() ) ); ?></td>
 		</tr>
 	<?php endif; ?>
 
 	<?php if ( $display_dimensions && $product->has_dimensions() ) : ?>
 		<tr>
-			<th><?php _e( 'Dimensions', 'woocommerce' ) ?></th>
+			<th><?php _e( 'Dimensions', 'woocommerce' ); ?></th>
 			<td class="product_dimensions"><?php echo esc_html( wc_format_dimensions( $product->get_dimensions( false ) ) ); ?></td>
 		</tr>
 	<?php endif; ?>
@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				if ( $attribute->is_taxonomy() ) {
 					$attribute_taxonomy = $attribute->get_taxonomy_object();
-					$attribute_values = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
+					$attribute_values   = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
 
 					foreach ( $attribute_values as $attribute_value ) {
 						$value_name = esc_html( $attribute_value->name );
