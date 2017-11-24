@@ -163,5 +163,6 @@ class WC_Plugins_Screen_Updates extends WC_Plugin_Updates {
 		<?php
 		$this->generic_modal_js();
 	}
+
 }
 new WC_Plugins_Screen_Updates();
