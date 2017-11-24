@@ -173,7 +173,7 @@ abstract class WC_Data {
 	 *
 	 * @since  2.6.0
 	 * @param  bool $force_delete
-	 * @return bool result
+	 * @return bool               result
 	 */
 	public function delete( $force_delete = false ) {
 		if ( $this->data_store ) {
@@ -248,7 +248,7 @@ abstract class WC_Data {
 	 * Filter null meta values from array.
 	 *
 	 * @since  3.0.0
-	 * @param mixed $meta Meta value to check.
+	 * @param  mixed $meta Meta value to check.
 	 * @return bool
 	 */
 	protected function filter_null_meta( $meta ) {
@@ -271,7 +271,7 @@ abstract class WC_Data {
 	 *
 	 * @since  3.2.0
 	 * @param  string $key Key to check.
-	 * @return bool   true if it's an internal key, false otherwise
+	 * @return bool        true if it's an internal key, false otherwise
 	 */
 	protected function is_internal_meta_key( $key ) {
 		$internal_meta_key = ! empty( $key ) && $this->data_store && in_array( $key, $this->data_store->get_internal_meta_keys() );
@@ -296,7 +296,7 @@ abstract class WC_Data {
 	 *
 	 * @since  2.6.0
 	 * @param  string $key
-	 * @param  bool $single return first found meta with key, or all with $key
+	 * @param  bool   $single  return first found meta with key, or all with $key
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return mixed
 	 */
@@ -334,7 +334,7 @@ abstract class WC_Data {
 	 * See if meta data exists, since get_meta always returns a '' or array().
 	 *
 	 * @since  3.0.0
-	 * @param  string $key
+	 * @param  string  $key
 	 * @return boolean
 	 */
 	public function meta_exists( $key = '' ) {
@@ -369,9 +369,9 @@ abstract class WC_Data {
 	 * Add meta data.
 	 *
 	 * @since 2.6.0
-	 * @param string $key Meta key
-	 * @param string $value Meta value
-	 * @param bool $unique Should this be a unique key?
+	 * @param string $key    Meta key
+	 * @param string $value  Meta value
+	 * @param bool   $unique Should this be a unique key?
 	 */
 	public function add_meta_data( $key, $value, $unique = false ) {
 		if ( $this->is_internal_meta_key( $key ) ) {
@@ -396,9 +396,9 @@ abstract class WC_Data {
 	 * Update meta data by key or ID, if provided.
 	 * @since  2.6.0
 	 *
-	 * @param  string $key
-	 * @param  string $value
-	 * @param  int $meta_id
+	 * @param string $key
+	 * @param string $value
+	 * @param int    $meta_id
 	 */
 	public function update_meta_data( $key, $value, $meta_id = 0 ) {
 		if ( $this->is_internal_meta_key( $key ) ) {
@@ -414,8 +414,8 @@ abstract class WC_Data {
 		$array_key = $meta_id ? array_keys( wp_list_pluck( $this->meta_data, 'id' ), $meta_id ) : '';
 
 		if ( $array_key ) {
-			$meta = $this->meta_data[ current( $array_key ) ];
-			$meta->key = $key;
+			$meta        = $this->meta_data[ current( $array_key ) ];
+			$meta->key   = $key;
 			$meta->value = $value;
 		} else {
 			$this->add_meta_data( $key, $value, true );
@@ -475,8 +475,8 @@ abstract class WC_Data {
 	 * @param bool $force_read True to force a new DB read (and update cache).
 	 */
 	public function read_meta_data( $force_read = false ) {
-		$this->meta_data  = array();
-		$cache_loaded     = false;
+		$this->meta_data = array();
+		$cache_loaded    = false;
 
 		if ( ! $this->get_id() ) {
 			return;
@@ -561,8 +561,8 @@ abstract class WC_Data {
 	 * @since 3.0.0
 	 */
 	public function set_defaults() {
-		$this->data        = $this->default_data;
-		$this->changes     = array();
+		$this->data    = $this->default_data;
+		$this->changes = array();
 		$this->set_object_read( false );
 	}
 
@@ -592,8 +592,8 @@ abstract class WC_Data {
 	 *
 	 * @since  3.0.0
 	 *
-	 * @param  array $props Key value pairs to set. Key is the prop and should map to a setter function name.
-	 * @param string $context
+	 * @param  array         $props   Key value pairs to set. Key is the prop and should map to a setter function name.
+	 * @param  string        $context
 	 *
 	 * @return bool|WP_Error
 	 */
@@ -628,7 +628,7 @@ abstract class WC_Data {
 	 * the the DB later.
 	 *
 	 * @since 3.0.0
-	 * @param string $prop Name of prop to set.
+	 * @param string $prop  Name of prop to set.
 	 * @param mixed  $value Value of the prop.
 	 */
 	protected function set_prop( $prop, $value ) {
@@ -680,7 +680,7 @@ abstract class WC_Data {
 	 * Context controls what happens to the value before it's returned.
 	 *
 	 * @since  3.0.0
-	 * @param  string $prop Name of prop to get.
+	 * @param  string $prop    Name of prop to get.
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 * @return mixed
 	 */
@@ -702,7 +702,7 @@ abstract class WC_Data {
 	 * Sets a date prop whilst handling formatting and datetime objects.
 	 *
 	 * @since 3.0.0
-	 * @param string $prop Name of prop to set.
+	 * @param string         $prop  Name of prop to set.
 	 * @param string|integer $value Value of the prop.
 	 */
 	protected function set_date_prop( $prop, $value ) {
@@ -725,7 +725,7 @@ abstract class WC_Data {
 				} else {
 					$timestamp = wc_string_to_timestamp( get_gmt_from_date( gmdate( 'Y-m-d H:i:s', wc_string_to_timestamp( $value ) ) ) );
 				}
-				$datetime  = new WC_DateTime( "@{$timestamp}", new DateTimeZone( 'UTC' ) );
+				$datetime = new WC_DateTime( "@{$timestamp}", new DateTimeZone( 'UTC' ) );
 			}
 
 			// Set local timezone or offset.
@@ -752,4 +752,5 @@ abstract class WC_Data {
 	protected function error( $code, $message, $http_status_code = 400, $data = array() ) {
 		throw new WC_Data_Exception( $code, $message, $http_status_code, $data );
 	}
+
 }
