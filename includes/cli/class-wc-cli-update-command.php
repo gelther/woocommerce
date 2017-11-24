@@ -46,4 +46,5 @@ class WC_CLI_Update_Command {
 		WC_Admin_Notices::remove_notice( 'update' );
 		WP_CLI::success( sprintf( __( '%1$d updates complete. Database version is %2$s', 'woocommerce' ), absint( $update_count ), get_option( 'woocommerce_db_version' ) ) );
 	}
+
 }
