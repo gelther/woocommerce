@@ -35,16 +35,15 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	 * @global wpdb $wpdb
 	 */
 	public function level_dropdown() {
-
 		$levels = array(
 			array( 'value' => WC_Log_Levels::EMERGENCY, 'label' => __( 'Emergency', 'woocommerce' ) ),
-			array( 'value' => WC_Log_Levels::ALERT,     'label' => __( 'Alert',     'woocommerce' ) ),
-			array( 'value' => WC_Log_Levels::CRITICAL,  'label' => __( 'Critical',  'woocommerce' ) ),
-			array( 'value' => WC_Log_Levels::ERROR,     'label' => __( 'Error',     'woocommerce' ) ),
-			array( 'value' => WC_Log_Levels::WARNING,   'label' => __( 'Warning',   'woocommerce' ) ),
-			array( 'value' => WC_Log_Levels::NOTICE,    'label' => __( 'Notice',    'woocommerce' ) ),
-			array( 'value' => WC_Log_Levels::INFO,      'label' => __( 'Info',      'woocommerce' ) ),
-			array( 'value' => WC_Log_Levels::DEBUG,     'label' => __( 'Debug',     'woocommerce' ) ),
+			array( 'value' => WC_Log_Levels::ALERT, 'label' => __( 'Alert', 'woocommerce' ) ),
+			array( 'value' => WC_Log_Levels::CRITICAL, 'label' => __( 'Critical', 'woocommerce' ) ),
+			array( 'value' => WC_Log_Levels::ERROR, 'label' => __( 'Error', 'woocommerce' ) ),
+			array( 'value' => WC_Log_Levels::WARNING, 'label' => __( 'Warning', 'woocommerce' ) ),
+			array( 'value' => WC_Log_Levels::NOTICE, 'label' => __( 'Notice', 'woocommerce' ) ),
+			array( 'value' => WC_Log_Levels::INFO, 'label' => __( 'Info', 'woocommerce' ) ),
+			array( 'value' => WC_Log_Levels::DEBUG, 'label' => __( 'Debug', 'woocommerce' ) ),
 		);
 
 		$selected_level = isset( $_REQUEST['level'] ) ? $_REQUEST['level'] : '';
@@ -72,16 +71,16 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 		return array(
 			'cb'        => '<input type="checkbox" />',
 			'timestamp' => __( 'Timestamp', 'woocommerce' ),
-			'level'     => __( 'Level',     'woocommerce' ),
-			'message'   => __( 'Message',   'woocommerce' ),
-			'source'    => __( 'Source',    'woocommerce' ),
+			'level'     => __( 'Level', 'woocommerce' ),
+			'message'   => __( 'Message', 'woocommerce' ),
+			'source'    => __( 'Source', 'woocommerce' ),
 		);
 	}
 
 	/**
 	 * Column cb.
 	 *
-	 * @param  array $log
+	 * @param  array  $log
 	 * @return string
 	 */
 	public function column_cb( $log ) {
@@ -91,7 +90,7 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	/**
 	 * Timestamp column.
 	 *
-	 * @param  array $log
+	 * @param  array  $log
 	 * @return string
 	 */
 	public function column_timestamp( $log ) {
@@ -104,24 +103,24 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	/**
 	 * Level column.
 	 *
-	 * @param  array $log
+	 * @param  array  $log
 	 * @return string
 	 */
 	public function column_level( $log ) {
 		$level_key = WC_Log_Levels::get_severity_level( $log['level'] );
 		$levels    = array(
 			'emergency' => __( 'Emergency', 'woocommerce' ),
-			'alert'     => __( 'Alert',     'woocommerce' ),
-			'critical'  => __( 'Critical',  'woocommerce' ),
-			'error'     => __( 'Error',     'woocommerce' ),
-			'warning'   => __( 'Warning',   'woocommerce' ),
-			'notice'    => __( 'Notice',    'woocommerce' ),
-			'info'      => __( 'Info',      'woocommerce' ),
-			'debug'     => __( 'Debug',     'woocommerce' ),
+			'alert'     => __( 'Alert', 'woocommerce' ),
+			'critical'  => __( 'Critical', 'woocommerce' ),
+			'error'     => __( 'Error', 'woocommerce' ),
+			'warning'   => __( 'Warning', 'woocommerce' ),
+			'notice'    => __( 'Notice', 'woocommerce' ),
+			'info'      => __( 'Info', 'woocommerce' ),
+			'debug'     => __( 'Debug', 'woocommerce' ),
 		);
 
 		if ( isset( $levels[ $level_key ] ) ) {
-			$level = $levels[ $level_key ];
+			$level       = $levels[ $level_key ];
 			$level_class = sanitize_html_class( 'log-level--' . $level_key );
 			return '<span class="log-level ' . $level_class . '">' . esc_html( $level ) . '</span>';
 		} else {
@@ -132,7 +131,7 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	/**
 	 * Message column.
 	 *
-	 * @param  array $log
+	 * @param  array  $log
 	 * @return string
 	 */
 	public function column_message( $log ) {
@@ -142,7 +141,7 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	/**
 	 * Source column.
 	 *
-	 * @param  array $log
+	 * @param  array  $log
 	 * @return string
 	 */
 	public function column_source( $log ) {
@@ -183,8 +182,8 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	protected function get_sortable_columns() {
 		return array(
 			'timestamp' => array( 'timestamp', true ),
-			'level'     => array( 'level',     true ),
-			'source'    => array( 'source',    true ),
+			'level'     => array( 'level', true ),
+			'source'    => array( 'source', true ),
 		);
 	}
 
@@ -280,7 +279,7 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 	protected function get_items_query_offset() {
 		global $wpdb;
 
-		$per_page = $this->get_items_per_page( 'woocommerce_status_log_items_per_page', 10 );
+		$per_page     = $this->get_items_per_page( 'woocommerce_status_log_items_per_page', 10 );
 		$current_page = $this->get_pagenum();
 		if ( 1 < $current_page ) {
 			$offset = $per_page * ( $current_page - 1 );
@@ -356,4 +355,5 @@ class WC_Admin_Log_Table_List extends WP_List_Table {
 			$this->get_sortable_columns(),
 		);
 	}
+
 }
