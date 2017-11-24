@@ -122,7 +122,7 @@ class WC_Emails {
 	 * @internal
 	 *
 	 * @param string $filter Filter name.
-	 * @param array  $args Email args (default: []).
+	 * @param array  $args   Email args (default: []).
 	 */
 	public static function send_queued_transactional_email( $filter = '', $args = array() ) {
 		if ( apply_filters( 'woocommerce_allow_send_queued_transactional_email', true, $filter, $args ) ) {
@@ -157,7 +157,6 @@ class WC_Emails {
 
 	/**
 	 * Constructor for the email class hooks in all emails that can be sent.
-	 *
 	 */
 	public function __construct() {
 		$this->init();
@@ -178,7 +177,7 @@ class WC_Emails {
 		add_action( 'woocommerce_created_customer_notification', array( $this, 'customer_new_account' ), 10, 3 );
 
 		// Hook for replacing {site_title} in email-footer.
-		add_filter( 'woocommerce_email_footer_text' , array( $this, 'email_footer_replace_site_title' ) );
+		add_filter( 'woocommerce_email_footer_text', array( $this, 'email_footer_replace_site_title' ) );
 
 		// Let 3rd parties unhook the above via this hook
 		do_action( 'woocommerce_email', $this );
@@ -191,17 +190,17 @@ class WC_Emails {
 		// Include email classes
 		include_once( dirname( __FILE__ ) . '/emails/class-wc-email.php' );
 
-		$this->emails['WC_Email_New_Order'] 		                 = include( 'emails/class-wc-email-new-order.php' );
-		$this->emails['WC_Email_Cancelled_Order'] 		             = include( 'emails/class-wc-email-cancelled-order.php' );
-		$this->emails['WC_Email_Failed_Order'] 		                 = include( 'emails/class-wc-email-failed-order.php' );
-		$this->emails['WC_Email_Customer_On_Hold_Order'] 		     = include( 'emails/class-wc-email-customer-on-hold-order.php' );
-		$this->emails['WC_Email_Customer_Processing_Order'] 		 = include( 'emails/class-wc-email-customer-processing-order.php' );
-		$this->emails['WC_Email_Customer_Completed_Order'] 		     = include( 'emails/class-wc-email-customer-completed-order.php' );
-		$this->emails['WC_Email_Customer_Refunded_Order'] 		     = include( 'emails/class-wc-email-customer-refunded-order.php' );
-		$this->emails['WC_Email_Customer_Invoice'] 		             = include( 'emails/class-wc-email-customer-invoice.php' );
-		$this->emails['WC_Email_Customer_Note'] 		             = include( 'emails/class-wc-email-customer-note.php' );
-		$this->emails['WC_Email_Customer_Reset_Password'] 		     = include( 'emails/class-wc-email-customer-reset-password.php' );
-		$this->emails['WC_Email_Customer_New_Account'] 		         = include( 'emails/class-wc-email-customer-new-account.php' );
+		$this->emails['WC_Email_New_Order']                 = include( 'emails/class-wc-email-new-order.php' );
+		$this->emails['WC_Email_Cancelled_Order']           = include( 'emails/class-wc-email-cancelled-order.php' );
+		$this->emails['WC_Email_Failed_Order']              = include( 'emails/class-wc-email-failed-order.php' );
+		$this->emails['WC_Email_Customer_On_Hold_Order']    = include( 'emails/class-wc-email-customer-on-hold-order.php' );
+		$this->emails['WC_Email_Customer_Processing_Order'] = include( 'emails/class-wc-email-customer-processing-order.php' );
+		$this->emails['WC_Email_Customer_Completed_Order']  = include( 'emails/class-wc-email-customer-completed-order.php' );
+		$this->emails['WC_Email_Customer_Refunded_Order']   = include( 'emails/class-wc-email-customer-refunded-order.php' );
+		$this->emails['WC_Email_Customer_Invoice']          = include( 'emails/class-wc-email-customer-invoice.php' );
+		$this->emails['WC_Email_Customer_Note']             = include( 'emails/class-wc-email-customer-note.php' );
+		$this->emails['WC_Email_Customer_Reset_Password']   = include( 'emails/class-wc-email-customer-reset-password.php' );
+		$this->emails['WC_Email_Customer_New_Account']      = include( 'emails/class-wc-email-customer-new-account.php' );
 
 		$this->emails = apply_filters( 'woocommerce_email_classes', $this->emails );
 
@@ -268,9 +267,9 @@ class WC_Emails {
 	/**
 	 * Wraps a message in the woocommerce mail template.
 	 *
-	 * @param string $email_heading Heading text.
-	 * @param string $message       Email message.
-	 * @param bool   $plain_text    Set true to send as plain text. Default to false.
+	 * @param  string $email_heading Heading text.
+	 * @param  string $message       Email message.
+	 * @param  bool   $plain_text    Set true to send as plain text. Default to false.
 	 *
 	 * @return string
 	 */
@@ -293,14 +292,14 @@ class WC_Emails {
 	/**
 	 * Send the email.
 	 *
-	 * @param mixed $to
-	 * @param mixed $subject
-	 * @param mixed $message
-	 * @param string $headers (default: "Content-Type: text/html\r\n")
-	 * @param string $attachments (default: "")
+	 * @param  mixed  $to
+	 * @param  mixed  $subject
+	 * @param  mixed  $message
+	 * @param  string $headers     (default: "Content-Type: text/html\r\n")
+	 * @param  string $attachments (default: "")
 	 * @return bool
 	 */
-	public function send( $to, $subject, $message, $headers = "Content-Type: text/html\r\n", $attachments = "" ) {
+	public function send( $to, $subject, $message, $headers = "Content-Type: text/html\r\n", $attachments = '' ) {
 		// Send
 		$email = new WC_Email();
 		return $email->send( $to, $subject, $message, $headers, $attachments );
@@ -324,9 +323,9 @@ class WC_Emails {
 	/**
 	 * Customer new account welcome email.
 	 *
-	 * @param int $customer_id
+	 * @param int   $customer_id
 	 * @param array $new_customer_data
-	 * @param bool $password_generated
+	 * @param bool  $password_generated
 	 */
 	public function customer_new_account( $customer_id, $new_customer_data = array(), $password_generated = false ) {
 		if ( ! $customer_id ) {
@@ -343,9 +342,9 @@ class WC_Emails {
 	 * Show the order details table
 	 *
 	 * @param WC_Order $order
-	 * @param bool $sent_to_admin
-	 * @param bool $plain_text
-	 * @param string $email
+	 * @param bool     $sent_to_admin
+	 * @param bool     $plain_text
+	 * @param string   $email
 	 */
 	public function order_details( $order, $sent_to_admin = false, $plain_text = false, $email = '' ) {
 		if ( $plain_text ) {
@@ -360,9 +359,9 @@ class WC_Emails {
 	 *
 	 * @since 3.2.0
 	 * @param WC_Order $order
-	 * @param bool $sent_to_admin
-	 * @param bool $plain_text
-	 * @param string $email
+	 * @param bool     $sent_to_admin
+	 * @param bool     $plain_text
+	 * @param string   $email
 	 */
 	public function order_downloads( $order, $sent_to_admin = false, $plain_text = false, $email = '' ) {
 		$show_downloads = $order->has_downloadable_item() && $order->is_download_permitted() && ! $sent_to_admin;
@@ -437,7 +436,7 @@ class WC_Emails {
 
 	/**
 	 * Is customer detail field valid?
-	 * @param  array  $field
+	 * @param  array   $field
 	 * @return boolean
 	 */
 	public function customer_detail_field_is_valid( $field ) {
@@ -449,9 +448,9 @@ class WC_Emails {
 	 *
 	 * In versions prior to 3.2 this was used for notes, phone and email but this data has moved.
 	 *
-	 * @param WC_Order $order
-	 * @param bool $sent_to_admin (default: false)
-	 * @param bool $plain_text (default: false)
+	 * @param  WC_Order $order
+	 * @param  bool     $sent_to_admin (default: false)
+	 * @param  bool     $plain_text    (default: false)
 	 * @return string
 	 */
 	public function customer_details( $order, $sent_to_admin = false, $plain_text = false ) {
@@ -474,8 +473,8 @@ class WC_Emails {
 	 * Get the email addresses.
 	 *
 	 * @param WC_Order $order
-	 * @param bool $sent_to_admin
-	 * @param bool $plain_text
+	 * @param bool     $sent_to_admin
+	 * @param bool     $plain_text
 	 */
 	public function email_addresses( $order, $sent_to_admin = false, $plain_text = false ) {
 		if ( ! is_a( $order, 'WC_Order' ) ) {
@@ -570,7 +569,7 @@ class WC_Emails {
 
 		$subject = sprintf( '[%s] %s', $this->get_blogname(), __( 'Product backorder', 'woocommerce' ) );
 		$message = sprintf( __( '%1$s units of %2$s have been backordered in order #%3$s.', 'woocommerce' ), $args['quantity'], html_entity_decode( strip_tags( $args['product']->get_formatted_name() ), ENT_QUOTES, get_bloginfo( 'charset' ) ), $order->get_order_number() );
-		
+
 		wp_mail(
 			apply_filters( 'woocommerce_email_recipient_backorder', get_option( 'woocommerce_stock_email_recipient' ), $args ),
 			apply_filters( 'woocommerce_email_subject_backorder', $subject, $args ),
@@ -588,8 +587,8 @@ class WC_Emails {
 	 *
 	 * @since 2.6.0
 	 * @param mixed $order
-	 * @param bool $sent_to_admin (default: false)
-	 * @param bool $plain_text (default: false)
+	 * @param bool  $sent_to_admin (default: false)
+	 * @param bool  $plain_text    (default: false)
 	 */
 	public function order_schema_markup( $order, $sent_to_admin = false, $plain_text = false ) {
 		wc_deprecated_function( 'WC_Emails::order_schema_markup', '3.0', 'WC_Structured_Data::generate_order_data' );
@@ -597,4 +596,5 @@ class WC_Emails {
 		WC()->structured_data->generate_order_data( $order, $sent_to_admin, $plain_text );
 		WC()->structured_data->output_structured_data();
 	}
+
 }
