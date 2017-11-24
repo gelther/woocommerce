@@ -94,7 +94,7 @@ abstract class WC_CSV_Batch_Exporter extends WC_CSV_Exporter {
 	 * Write data to the file.
 	 *
 	 * @since 3.1.0
-	 * @param  string $data
+	 * @param string $data
 	 */
 	protected function write_csv_data( $data ) {
 		$file = $this->get_file();
@@ -147,4 +147,5 @@ abstract class WC_CSV_Batch_Exporter extends WC_CSV_Exporter {
 	public function get_percent_complete() {
 		return $this->total_rows ? floor( ( $this->get_total_exported() / $this->total_rows ) * 100 ) : 100;
 	}
+
 }
