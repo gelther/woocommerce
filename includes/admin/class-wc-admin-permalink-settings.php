@@ -73,7 +73,7 @@ class WC_Admin_Permalink_Settings {
 	 */
 	public function product_category_slug_input() {
 		?>
-		<input name="woocommerce_product_category_slug" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['category_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'product-category', 'slug', 'woocommerce' ) ?>" />
+		<input name="woocommerce_product_category_slug" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['category_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'product-category', 'slug', 'woocommerce' ); ?>" />
 		<?php
 	}
 
@@ -82,7 +82,7 @@ class WC_Admin_Permalink_Settings {
 	 */
 	public function product_tag_slug_input() {
 		?>
-		<input name="woocommerce_product_tag_slug" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['tag_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'product-tag', 'slug', 'woocommerce' ) ?>" />
+		<input name="woocommerce_product_tag_slug" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['tag_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'product-tag', 'slug', 'woocommerce' ); ?>" />
 		<?php
 	}
 
@@ -102,9 +102,9 @@ class WC_Admin_Permalink_Settings {
 		echo wpautop( __( 'These settings control the permalinks used specifically for products.', 'woocommerce' ) );
 
 		// Get shop page
-		$shop_page_id   = wc_get_page_id( 'shop' );
-		$base_slug      = urldecode( ( $shop_page_id > 0 && get_post( $shop_page_id ) ) ? get_page_uri( $shop_page_id ) : _x( 'shop', 'default-slug', 'woocommerce' ) );
-		$product_base   = _x( 'product', 'default-slug', 'woocommerce' );
+		$shop_page_id = wc_get_page_id( 'shop' );
+		$base_slug    = urldecode( ( $shop_page_id > 0 && get_post( $shop_page_id ) ) ? get_page_uri( $shop_page_id ) : _x( 'shop', 'default-slug', 'woocommerce' ) );
+		$product_base = _x( 'product', 'default-slug', 'woocommerce' );
 
 		$structures = array(
 			0 => '',
@@ -211,6 +211,7 @@ class WC_Admin_Permalink_Settings {
 			wc_restore_locale();
 		}
 	}
+
 }
 
 endif;
