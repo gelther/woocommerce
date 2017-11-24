@@ -34,7 +34,7 @@ class WC_Tests_WC_Order_Query extends WC_Unit_Test_Case {
 		$order2->save();
 
 		// Just get some orders.
-		$query = new WC_Order_Query();
+		$query   = new WC_Order_Query();
 		$results = $query->get_orders();
 		$this->assertEquals( 2, count( $results ) );
 
@@ -67,20 +67,20 @@ class WC_Tests_WC_Order_Query extends WC_Unit_Test_Case {
 	 * @since 3.1
 	 */
 	public function test_order_query_date_queries() {
-		$now = current_time( 'mysql', true );
-		$now_stamp = strtotime( $now );
-		$now_date = date( 'Y-m-d', $now_stamp );
-		$past_stamp = $now_stamp - DAY_IN_SECONDS;
-		$past = date( 'Y-m-d', $past_stamp );
+		$now          = current_time( 'mysql', true );
+		$now_stamp    = strtotime( $now );
+		$now_date     = date( 'Y-m-d', $now_stamp );
+		$past_stamp   = $now_stamp - DAY_IN_SECONDS;
+		$past         = date( 'Y-m-d', $past_stamp );
 		$future_stamp = $now_stamp + DAY_IN_SECONDS;
-		$future = date( 'Y-m-d', $future_stamp );
+		$future       = date( 'Y-m-d', $future_stamp );
 
 		$order = new WC_Order();
 		$order->set_date_completed( $now_stamp );
 		$order->save();
 
 		// Check WC_DateTime support.
-		$query = new WC_Order_Query( array(
+		$query  = new WC_Order_Query( array(
 			'date_created' => $order->get_date_created(),
 		) );
 		$orders = $query->get_orders();
@@ -148,20 +148,20 @@ class WC_Tests_WC_Order_Query extends WC_Unit_Test_Case {
 	 * @since 3.1
 	 */
 	public function test_order_query_meta_date_queries() {
-		$now = current_time( 'mysql', true );
-		$now_stamp = strtotime( $now );
-		$now_date = date( 'Y-m-d', $now_stamp );
-		$past_stamp = $now_stamp - DAY_IN_SECONDS;
-		$past = date( 'Y-m-d', $past_stamp );
+		$now          = current_time( 'mysql', true );
+		$now_stamp    = strtotime( $now );
+		$now_date     = date( 'Y-m-d', $now_stamp );
+		$past_stamp   = $now_stamp - DAY_IN_SECONDS;
+		$past         = date( 'Y-m-d', $past_stamp );
 		$future_stamp = $now_stamp + DAY_IN_SECONDS;
-		$future = date( 'Y-m-d', $future_stamp );
+		$future       = date( 'Y-m-d', $future_stamp );
 
 		$order = new WC_Order();
 		$order->set_date_completed( $now_stamp );
 		$order->save();
 
 		// Check WC_DateTime support.
-		$query = new WC_Order_Query( array(
+		$query  = new WC_Order_Query( array(
 			'date_completed' => $order->get_date_completed(),
 		) );
 		$orders = $query->get_orders();
@@ -231,7 +231,7 @@ class WC_Tests_WC_Order_Query extends WC_Unit_Test_Case {
 	public function test_order_query_key_mapping() {
 		$user_id = wp_insert_user( array(
 			'user_login' => 'testname',
-			'user_pass' => 'testpass',
+			'user_pass'  => 'testpass',
 			'user_email' => 'email@testmail.com',
 		) );
 
@@ -239,11 +239,12 @@ class WC_Tests_WC_Order_Query extends WC_Unit_Test_Case {
 		$order->set_customer_id( $user_id );
 		$order->save();
 
-		$query = new WC_Order_Query( array(
+		$query   = new WC_Order_Query( array(
 			'customer_id' => $user_id,
 		) );
 		$results = $query->get_orders();
 
 		$this->assertEquals( 1, count( $results ) );
 	}
+
 }
