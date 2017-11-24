@@ -114,7 +114,6 @@ class WC_API_Server {
 	 * @param $path
 	 */
 	public function __construct( $path ) {
-
 		if ( empty( $path ) ) {
 			if ( isset( $_SERVER['PATH_INFO'] ) ) {
 				$path = $_SERVER['PATH_INFO'];
@@ -156,7 +155,6 @@ class WC_API_Server {
 	 * @return WP_User|WP_Error WP_User object indicates successful login, WP_Error indicates unsuccessful login
 	 */
 	public function check_authentication() {
-
 		// allow plugins to remove default authentication or add their own authentication
 		$user = apply_filters( 'woocommerce_api_check_authentication', null, $this );
 
@@ -179,8 +177,8 @@ class WC_API_Server {
 	 * list in JSON rather than an object/map
 	 *
 	 * @since 2.1
-	 * @param WP_Error $error
-	 * @return array List of associative arrays with code and message keys
+	 * @param  WP_Error $error
+	 * @return array           List of associative arrays with code and message keys
 	 */
 	protected function error_to_array( $error ) {
 		$errors = array();
@@ -202,7 +200,6 @@ class WC_API_Server {
 	 * @uses WC_API_Server::dispatch()
 	 */
 	public function serve_request() {
-
 		do_action( 'woocommerce_api_server_before_serve', $this );
 
 		$this->header( 'Content-Type', $this->handler->get_content_type(), true );
@@ -267,7 +264,6 @@ class WC_API_Server {
 	 * @return array `'/path/regex' => array( $callback, $bitmask )` or `'/path/regex' => array( array( $callback, $bitmask ), ...)`
 	 */
 	public function get_routes() {
-
 		// index added by default
 		$endpoints = array(
 
@@ -293,7 +289,6 @@ class WC_API_Server {
 	 * @return mixed The value returned by the callback, or a WP_Error instance
 	 */
 	public function dispatch() {
-
 		switch ( $this->method ) {
 
 			case 'HEAD':
@@ -323,7 +318,7 @@ class WC_API_Server {
 
 		foreach ( $this->get_routes() as $route => $handlers ) {
 			foreach ( $handlers as $handler ) {
-				$callback = $handler[0];
+				$callback  = $handler[0];
 				$supported = isset( $handler[1] ) ? $handler[1] : self::METHOD_GET;
 
 				if ( ! ( $supported & $method ) ) {
@@ -385,8 +380,8 @@ class WC_API_Server {
 	 *
 	 * @since 2.1
 	 *
-	 * @param callable|array $callback the endpoint callback
-	 * @param array $provided the provided request parameters
+	 * @param  callable|array $callback the endpoint callback
+	 * @param  array          $provided the provided request parameters
 	 *
 	 * @return array|WP_Error
 	 */
@@ -397,7 +392,7 @@ class WC_API_Server {
 			$ref_func = new ReflectionFunction( $callback );
 		}
 
-		$wanted = $ref_func->getParameters();
+		$wanted             = $ref_func->getParameters();
 		$ordered_parameters = array();
 
 		foreach ( $wanted as $param ) {
@@ -424,7 +419,6 @@ class WC_API_Server {
 	 * @return array Index entity
 	 */
 	public function get_index() {
-
 		// General site data
 		$available = array(
 			'store' => array(
@@ -434,15 +428,15 @@ class WC_API_Server {
 				'wc_version'  => WC()->version,
 				'routes'      => array(),
 				'meta'        => array(
-					'timezone'			 => wc_timezone_string(),
-					'currency'       	 => get_woocommerce_currency(),
+					'timezone'           => wc_timezone_string(),
+					'currency'           => get_woocommerce_currency(),
 					'currency_format'    => get_woocommerce_currency_symbol(),
-					'tax_included'   	 => wc_prices_include_tax(),
-					'weight_unit'    	 => get_option( 'woocommerce_weight_unit' ),
-					'dimension_unit' 	 => get_option( 'woocommerce_dimension_unit' ),
-					'ssl_enabled'    	 => ( 'yes' === get_option( 'woocommerce_force_ssl_checkout' ) ),
+					'tax_included'       => wc_prices_include_tax(),
+					'weight_unit'        => get_option( 'woocommerce_weight_unit' ),
+					'dimension_unit'     => get_option( 'woocommerce_dimension_unit' ),
+					'ssl_enabled'        => ( 'yes' === get_option( 'woocommerce_force_ssl_checkout' ) ),
 					'permalinks_enabled' => ( '' !== get_option( 'permalink_structure' ) ),
-					'links'          	 => array(
+					'links'              => array(
 						'help' => 'https://woocommerce.github.io/woocommerce/rest-api/',
 					),
 				),
@@ -453,7 +447,7 @@ class WC_API_Server {
 		foreach ( $this->get_routes() as $route => $callbacks ) {
 			$data = array();
 
-			$route = preg_replace( '#\(\?P(<\w+?>).*?\)#', '$1', $route );
+			$route   = preg_replace( '#\(\?P(<\w+?>).*?\)#', '$1', $route );
 			$methods = array();
 			foreach ( self::$method_map as $name => $bitmask ) {
 				foreach ( $callbacks as $callback ) {
@@ -497,8 +491,8 @@ class WC_API_Server {
 	 * Send a HTTP header
 	 *
 	 * @since 2.1
-	 * @param string $key Header key
-	 * @param string $value Header value
+	 * @param string  $key     Header key
+	 * @param string  $value   Header value
 	 * @param boolean $replace Should we replace the existing header?
 	 */
 	public function header( $key, $value, $replace = true ) {
@@ -514,12 +508,11 @@ class WC_API_Server {
 	 * @link http://www.iana.org/assignments/link-relations/link-relations.xml
 	 *
 	 * @since 2.1
-	 * @param string $rel Link relation. Either a registered type, or an absolute URL
-	 * @param string $link Target IRI for the link
-	 * @param array $other Other parameters to send, as an associative array
+	 * @param string $rel   Link relation. Either a registered type, or an absolute URL
+	 * @param string $link  Target IRI for the link
+	 * @param array  $other Other parameters to send, as an associative array
 	 */
 	public function link_header( $rel, $link, $other = array() ) {
-
 		$header = sprintf( '<%s>; rel="%s"', $link, esc_attr( $rel ) );
 
 		foreach ( $other as $key => $value ) {
@@ -542,7 +535,6 @@ class WC_API_Server {
 	 * @param WP_Query|WP_User_Query $query
 	 */
 	public function add_pagination_headers( $query ) {
-
 		// WP_User_Query
 		if ( is_a( $query, 'WP_User_Query' ) ) {
 
@@ -595,11 +587,10 @@ class WC_API_Server {
 	 * Returns the request URL with the page query parameter set to the specified page
 	 *
 	 * @since 2.1
-	 * @param int $page
+	 * @param  int    $page
 	 * @return string
 	 */
 	private function get_paginated_url( $page ) {
-
 		// remove existing page query param
 		$request = remove_query_arg( 'page' );
 
@@ -643,11 +634,10 @@ class WC_API_Server {
 	 * Invalid dates default to unix epoch
 	 *
 	 * @since 2.1
-	 * @param string $datetime RFC3339 datetime
-	 * @return string MySQl datetime (YYYY-MM-DD HH:MM:SS)
+	 * @param  string $datetime RFC3339 datetime
+	 * @return string           MySQl datetime (YYYY-MM-DD HH:MM:SS)
 	 */
 	public function parse_datetime( $datetime ) {
-
 		// Strip millisecond precision (a full stop followed by one or more digits)
 		if ( strpos( $datetime, '.' ) !== false ) {
 			$datetime = preg_replace( '/\.\d+/', '', $datetime );
@@ -673,10 +663,10 @@ class WC_API_Server {
 	 * Format a unix timestamp or MySQL datetime into an RFC3339 datetime
 	 *
 	 * @since 2.1
-	 * @param int|string $timestamp unix timestamp or MySQL datetime
-	 * @param bool $convert_to_utc
-	 * @param bool $convert_to_gmt Use GMT timezone.
-	 * @return string RFC3339 datetime
+	 * @param  int|string $timestamp      unix timestamp or MySQL datetime
+	 * @param  bool       $convert_to_utc
+	 * @param  bool       $convert_to_gmt Use GMT timezone.
+	 * @return string                     RFC3339 datetime
 	 */
 	public function format_datetime( $timestamp, $convert_to_utc = false, $convert_to_gmt = false ) {
 		if ( $convert_to_gmt ) {
@@ -717,11 +707,11 @@ class WC_API_Server {
 	 * Extract headers from a PHP-style $_SERVER array
 	 *
 	 * @since 2.1
-	 * @param array $server Associative array similar to $_SERVER
-	 * @return array Headers extracted from the input
+	 * @param  array $server Associative array similar to $_SERVER
+	 * @return array         Headers extracted from the input
 	 */
 	public function get_headers( $server ) {
-		$headers = array();
+		$headers    = array();
 		// CONTENT_* headers are not prefixed with HTTP_
 		$additional = array( 'CONTENT_LENGTH' => true, 'CONTENT_MD5' => true, 'CONTENT_TYPE' => true );
 
@@ -744,7 +734,6 @@ class WC_API_Server {
 	 * @return bool
 	 */
 	private function is_json_request() {
-
 		// check path
 		if ( false !== stripos( $this->path, '.json' ) ) {
 			return true;
@@ -766,7 +755,6 @@ class WC_API_Server {
 	 * @return bool
 	 */
 	private function is_xml_request() {
-
 		// check path
 		if ( false !== stripos( $this->path, '.xml' ) ) {
 			return true;
@@ -779,4 +767,5 @@ class WC_API_Server {
 
 		return false;
 	}
+
 }
