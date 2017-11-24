@@ -52,7 +52,6 @@ class WC_Widget_Top_Rated_Products extends WC_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-
 		if ( $this->get_cached_widget( $args ) ) {
 			return;
 		}
@@ -104,4 +103,5 @@ class WC_Widget_Top_Rated_Products extends WC_Widget {
 
 		$this->cache_widget( $args, $content );
 	}
+
 }
