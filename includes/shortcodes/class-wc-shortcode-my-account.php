@@ -19,7 +19,7 @@ class WC_Shortcode_My_Account {
 	/**
 	 * Get the shortcode content.
 	 *
-	 * @param array $atts
+	 * @param  array  $atts
 	 *
 	 * @return string
 	 */
@@ -314,10 +314,10 @@ class WC_Shortcode_My_Account {
 	 *
 	 * @uses $wpdb WordPress Database object
 	 *
-	 * @param string $key Hash to validate sending user's password
-	 * @param string $login The user login
+	 * @param  string       $key   Hash to validate sending user's password
+	 * @param  string       $login The user login
 	 *
-	 * @return WP_User|bool User's database row on success, false for invalid keys
+	 * @return WP_User|bool        User's database row on success, false for invalid keys
 	 */
 	public static function check_password_reset_key( $key, $login ) {
 		// Check for the password reset key.
@@ -335,7 +335,7 @@ class WC_Shortcode_My_Account {
 	/**
 	 * Handles resetting the user's password.
 	 *
-	 * @param object $user The user
+	 * @param object $user     The user
 	 * @param string $new_pass New password for the user in plaintext
 	 */
 	public static function reset_password( $user, $new_pass ) {
@@ -367,7 +367,6 @@ class WC_Shortcode_My_Account {
 	 * Show the add payment method page.
 	 */
 	public static function add_payment_method() {
-
 		if ( ! is_user_logged_in() ) {
 
 			wp_safe_redirect( wc_get_page_permalink( 'myaccount' ) );
@@ -385,4 +384,5 @@ class WC_Shortcode_My_Account {
 
 		}
 	}
+
 }
