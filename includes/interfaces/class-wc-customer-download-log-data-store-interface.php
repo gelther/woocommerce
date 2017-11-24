@@ -16,14 +16,14 @@ interface WC_Customer_Download_Log_Data_Store_Interface {
 	 * Get array of download log ids by specified args.
 	 *
 	 * @param  array $args
-	 * @return array of WC_Customer_Download_Log
+	 * @return array       of WC_Customer_Download_Log
 	 */
 	public function get_download_logs( $args = array() );
 
 	/**
 	 * Get logs for a specific download permission.
 	 *
-	 * @param  int $permission_id
+	 * @param  int   $permission_id
 	 * @return array
 	 */
 	public function get_download_logs_for_permission( $permission_id );
