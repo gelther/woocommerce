@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since  2.6.0
  * @param  string|null|WC_DateTime $date
- * @param  bool Send false to get local/offset time.
- * @return string|null ISO8601/RFC3339 formatted datetime.
+ * @param  bool                          Send false to get local/offset time.
+ * @return string|null                   ISO8601/RFC3339 formatted datetime.
  */
 function wc_rest_prepare_date_response( $date, $utc = true ) {
 	if ( is_numeric( $date ) ) {
@@ -62,8 +62,8 @@ function wc_rest_allowed_image_mime_types() {
  * Upload image from URL.
  *
  * @since 2.6.0
- * @param string $image_url
- * @return array|WP_Error Attachment data or error message.
+ * @param  string         $image_url
+ * @return array|WP_Error            Attachment data or error message.
  */
 function wc_rest_upload_image_from_url( $image_url ) {
 	$file_name  = basename( current( explode( '?', $image_url ) ) );
@@ -136,9 +136,9 @@ function wc_rest_upload_image_from_url( $image_url ) {
  * Set uploaded image as attachment.
  *
  * @since 2.6.0
- * @param array $upload Upload information from wp_upload_bits.
- * @param int $id Post ID. Default to 0.
- * @return int Attachment ID
+ * @param  array $upload Upload information from wp_upload_bits.
+ * @param  int   $id     Post ID. Default to 0.
+ * @return int           Attachment ID
  */
 function wc_rest_set_uploaded_image_as_attachment( $upload, $id = 0 ) {
 	$info    = wp_check_filetype( $upload['file'] );
@@ -178,13 +178,12 @@ function wc_rest_set_uploaded_image_as_attachment( $upload, $id = 0 ) {
  * Validate reports request arguments.
  *
  * @since 2.6.0
- * @param mixed $value
- * @param WP_REST_Request $request
- * @param string $param
+ * @param  mixed            $value
+ * @param  WP_REST_Request  $request
+ * @param  string           $param
  * @return WP_Error|boolean
  */
 function wc_rest_validate_reports_request_arg( $value, $request, $param ) {
-
 	$attributes = $request->get_attributes();
 	if ( ! isset( $attributes['args'][ $param ] ) || ! is_array( $attributes['args'][ $param ] ) ) {
 		return true;
@@ -211,8 +210,8 @@ function wc_rest_validate_reports_request_arg( $value, $request, $param ) {
  * Supports multidimensional arrays.
  *
  * @since 2.6.0
- * @param string|array $value The value to encode.
- * @return string|array       Encoded values.
+ * @param  string|array $value The value to encode.
+ * @return string|array        Encoded values.
  */
 function wc_rest_urlencode_rfc3986( $value ) {
 	if ( is_array( $value ) ) {
@@ -226,9 +225,9 @@ function wc_rest_urlencode_rfc3986( $value ) {
  * Check permissions of posts on REST API.
  *
  * @since 2.6.0
- * @param string $post_type Post type.
- * @param string $context   Request context.
- * @param int    $object_id Post ID.
+ * @param  string $post_type Post type.
+ * @param  string $context   Request context.
+ * @param  int    $object_id Post ID.
  * @return bool
  */
 function wc_rest_check_post_permissions( $post_type, $context = 'read', $object_id = 0 ) {
@@ -243,9 +242,9 @@ function wc_rest_check_post_permissions( $post_type, $context = 'read', $object_
 	if ( 'revision' === $post_type ) {
 		$permission = false;
 	} else {
-		$cap = $contexts[ $context ];
+		$cap              = $contexts[ $context ];
 		$post_type_object = get_post_type_object( $post_type );
-		$permission = current_user_can( $post_type_object->cap->$cap, $object_id );
+		$permission       = current_user_can( $post_type_object->cap->$cap, $object_id );
 	}
 
 	return apply_filters( 'woocommerce_rest_check_permissions', $permission, $context, $object_id, $post_type );
@@ -255,8 +254,8 @@ function wc_rest_check_post_permissions( $post_type, $context = 'read', $object_
  * Check permissions of users on REST API.
  *
  * @since 2.6.0
- * @param string $context   Request context.
- * @param int    $object_id Post ID.
+ * @param  string $context   Request context.
+ * @param  int    $object_id Post ID.
  * @return bool
  */
 function wc_rest_check_user_permissions( $context = 'read', $object_id = 0 ) {
@@ -277,9 +276,9 @@ function wc_rest_check_user_permissions( $context = 'read', $object_id = 0 ) {
  * Check permissions of product terms on REST API.
  *
  * @since 2.6.0
- * @param string $taxonomy  Taxonomy.
- * @param string $context   Request context.
- * @param int    $object_id Post ID.
+ * @param  string $taxonomy  Taxonomy.
+ * @param  string $context   Request context.
+ * @param  int    $object_id Post ID.
  * @return bool
  */
 function wc_rest_check_product_term_permissions( $taxonomy, $context = 'read', $object_id = 0 ) {
@@ -291,9 +290,9 @@ function wc_rest_check_product_term_permissions( $taxonomy, $context = 'read', $
 		'batch'  => 'edit_terms',
 	);
 
-	$cap = $contexts[ $context ];
+	$cap             = $contexts[ $context ];
 	$taxonomy_object = get_taxonomy( $taxonomy );
-	$permission = current_user_can( $taxonomy_object->cap->$cap, $object_id );
+	$permission      = current_user_can( $taxonomy_object->cap->$cap, $object_id );
 
 	return apply_filters( 'woocommerce_rest_check_permissions', $permission, $context, $object_id, $taxonomy );
 }
@@ -302,8 +301,8 @@ function wc_rest_check_product_term_permissions( $taxonomy, $context = 'read', $
  * Check manager permissions on REST API.
  *
  * @since 2.6.0
- * @param string $object  Object.
- * @param string $context Request context.
+ * @param  string $object  Object.
+ * @param  string $context Request context.
  * @return bool
  */
 function wc_rest_check_manager_permissions( $object, $context = 'read' ) {
