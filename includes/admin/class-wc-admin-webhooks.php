@@ -205,14 +205,14 @@ class WC_Admin_Webhooks {
 		}
 
 		$webhook_id = wp_insert_post( array(
-			'post_type'     => 'shop_webhook',
-			'post_status'   => 'pending',
-			'ping_status'   => 'closed',
-			'post_author'   => get_current_user_id(),
-			'post_password' => strlen( ( $password = uniqid( 'webhook_' ) ) ) > 20 ? substr( $password, 0, 20 ) : $password,
+			'post_type'      => 'shop_webhook',
+			'post_status'    => 'pending',
+			'ping_status'    => 'closed',
+			'post_author'    => get_current_user_id(),
+			'post_password'  => strlen( ( $password = uniqid( 'webhook_' ) ) ) > 20 ? substr( $password, 0, 20 ) : $password,
 			// @codingStandardsIgnoreStart
 			/* translators: %s: date */
-			'post_title'    => sprintf( __( 'Webhook created on %s', 'woocommerce' ), strftime( _x( '%b %d, %Y @ %I:%M %p', 'Webhook created on date parsed by strftime', 'woocommerce' ) ) ),
+			'post_title'     => sprintf( __( 'Webhook created on %s', 'woocommerce' ), strftime( _x( '%b %d, %Y @ %I:%M %p', 'Webhook created on date parsed by strftime', 'woocommerce' ) ) ),
 			// @codingStandardsIgnoreEnd
 			'comment_status' => 'open',
 		) );
@@ -486,7 +486,7 @@ class WC_Admin_Webhooks {
 	/**
 	 * Get the webhook topic data.
 	 *
-	 * @param WC_Webhook $webhook
+	 * @param  WC_Webhook $webhook
 	 *
 	 * @return array
 	 */
@@ -515,7 +515,7 @@ class WC_Admin_Webhooks {
 	/**
 	 * Get the logs navigation.
 	 *
-	 * @param  int $total
+	 * @param  int        $total
 	 * @param  WC_Webhook $webhook
 	 *
 	 * @return string
@@ -556,6 +556,7 @@ class WC_Admin_Webhooks {
 
 		return $html;
 	}
+
 }
 
 new WC_Admin_Webhooks();
