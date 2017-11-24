@@ -37,52 +37,51 @@ class WC_Meta_Box_Order_Data {
 	 * Init billing and shipping fields we display + save.
 	 */
 	public static function init_address_fields() {
-
 		self::$billing_fields = apply_filters( 'woocommerce_admin_billing_fields', array(
 			'first_name' => array(
 				'label' => __( 'First name', 'woocommerce' ),
 				'show'  => false,
 			),
-			'last_name' => array(
+			'last_name'  => array(
 				'label' => __( 'Last name', 'woocommerce' ),
 				'show'  => false,
 			),
-			'company' => array(
+			'company'    => array(
 				'label' => __( 'Company', 'woocommerce' ),
 				'show'  => false,
 			),
-			'address_1' => array(
+			'address_1'  => array(
 				'label' => __( 'Address line 1', 'woocommerce' ),
 				'show'  => false,
 			),
-			'address_2' => array(
+			'address_2'  => array(
 				'label' => __( 'Address line 2', 'woocommerce' ),
 				'show'  => false,
 			),
-			'city' => array(
+			'city'       => array(
 				'label' => __( 'City', 'woocommerce' ),
 				'show'  => false,
 			),
-			'postcode' => array(
+			'postcode'   => array(
 				'label' => __( 'Postcode / ZIP', 'woocommerce' ),
 				'show'  => false,
 			),
-			'country' => array(
+			'country'    => array(
 				'label'   => __( 'Country', 'woocommerce' ),
 				'show'    => false,
 				'class'   => 'js_field-country select short',
 				'type'    => 'select',
 				'options' => array( '' => __( 'Select a country&hellip;', 'woocommerce' ) ) + WC()->countries->get_allowed_countries(),
 			),
-			'state' => array(
+			'state'      => array(
 				'label' => __( 'State / County', 'woocommerce' ),
-				'class'   => 'js_field-state select short',
+				'class' => 'js_field-state select short',
 				'show'  => false,
 			),
-			'email' => array(
+			'email'      => array(
 				'label' => __( 'Email address', 'woocommerce' ),
 			),
-			'phone' => array(
+			'phone'      => array(
 				'label' => __( 'Phone', 'woocommerce' ),
 			),
 		) );
@@ -92,40 +91,40 @@ class WC_Meta_Box_Order_Data {
 				'label' => __( 'First name', 'woocommerce' ),
 				'show'  => false,
 			),
-			'last_name' => array(
+			'last_name'  => array(
 				'label' => __( 'Last name', 'woocommerce' ),
 				'show'  => false,
 			),
-			'company' => array(
+			'company'    => array(
 				'label' => __( 'Company', 'woocommerce' ),
 				'show'  => false,
 			),
-			'address_1' => array(
+			'address_1'  => array(
 				'label' => __( 'Address line 1', 'woocommerce' ),
 				'show'  => false,
 			),
-			'address_2' => array(
+			'address_2'  => array(
 				'label' => __( 'Address line 2', 'woocommerce' ),
 				'show'  => false,
 			),
-			'city' => array(
+			'city'       => array(
 				'label' => __( 'City', 'woocommerce' ),
 				'show'  => false,
 			),
-			'postcode' => array(
+			'postcode'   => array(
 				'label' => __( 'Postcode / ZIP', 'woocommerce' ),
 				'show'  => false,
 			),
-			'country' => array(
+			'country'    => array(
 				'label'   => __( 'Country', 'woocommerce' ),
 				'show'    => false,
 				'type'    => 'select',
 				'class'   => 'js_field-country select short',
 				'options' => array( '' => __( 'Select a country&hellip;', 'woocommerce' ) ) + WC()->countries->get_shipping_countries(),
 			),
-			'state' => array(
+			'state'      => array(
 				'label' => __( 'State / County', 'woocommerce' ),
-				'class'   => 'js_field-state select short',
+				'class' => 'js_field-state select short',
 				'show'  => false,
 			),
 		) );
@@ -221,11 +220,11 @@ class WC_Meta_Box_Order_Data {
 					<div class="order_data_column">
 						<h3><?php _e( 'General Details', 'woocommerce' ); ?></h3>
 
-						<p class="form-field form-field-wide"><label for="order_date"><?php _e( 'Order date:', 'woocommerce' ) ?></label>
-							<input type="text" class="date-picker" name="order_date" id="order_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $post->post_date ) ); ?>" pattern="<?php echo esc_attr( apply_filters( 'woocommerce_date_input_html_pattern', '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])' ) ); ?>" />@&lrm;<input type="number" class="hour" placeholder="<?php esc_attr_e( 'h', 'woocommerce' ) ?>" name="order_date_hour" id="order_date_hour" min="0" max="23" step="1" value="<?php echo date_i18n( 'H', strtotime( $post->post_date ) ); ?>" pattern="([01]?[0-9]{1}|2[0-3]{1})" />:<input type="number" class="minute" placeholder="<?php esc_attr_e( 'm', 'woocommerce' ) ?>" name="order_date_minute" id="order_date_minute" min="0" max="59" step="1" value="<?php echo date_i18n( 'i', strtotime( $post->post_date ) ); ?>" pattern="[0-5]{1}[0-9]{1}" />&lrm;
+						<p class="form-field form-field-wide"><label for="order_date"><?php _e( 'Order date:', 'woocommerce' ); ?></label>
+							<input type="text" class="date-picker" name="order_date" id="order_date" maxlength="10" value="<?php echo date_i18n( 'Y-m-d', strtotime( $post->post_date ) ); ?>" pattern="<?php echo esc_attr( apply_filters( 'woocommerce_date_input_html_pattern', '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])' ) ); ?>" />@&lrm;<input type="number" class="hour" placeholder="<?php esc_attr_e( 'h', 'woocommerce' ); ?>" name="order_date_hour" id="order_date_hour" min="0" max="23" step="1" value="<?php echo date_i18n( 'H', strtotime( $post->post_date ) ); ?>" pattern="([01]?[0-9]{1}|2[0-3]{1})" />:<input type="number" class="minute" placeholder="<?php esc_attr_e( 'm', 'woocommerce' ); ?>" name="order_date_minute" id="order_date_minute" min="0" max="59" step="1" value="<?php echo date_i18n( 'i', strtotime( $post->post_date ) ); ?>" pattern="[0-5]{1}[0-9]{1}" />&lrm;
 						</p>
 
-						<p class="form-field form-field-wide wc-order-status"><label for="order_status"><?php _e( 'Order status:', 'woocommerce' ) ?> <?php
+						<p class="form-field form-field-wide wc-order-status"><label for="order_status"><?php _e( 'Order status:', 'woocommerce' ); ?> <?php
 							if ( $order->needs_payment() ) {
 								printf( '<a href="%s">%s</a>',
 									esc_url( $order->get_checkout_payment_url() ),
@@ -244,7 +243,7 @@ class WC_Meta_Box_Order_Data {
 
 						<p class="form-field form-field-wide wc-customer-user">
 							<!--email_off--> <!-- Disable CloudFlare email obfuscation -->
-							<label for="customer_user"><?php _e( 'Customer:', 'woocommerce' ) ?> <?php
+							<label for="customer_user"><?php _e( 'Customer:', 'woocommerce' ); ?> <?php
 								if ( $order->get_user_id( 'edit' ) ) {
 									$args = array(
 										'post_status'    => 'all',
@@ -346,7 +345,7 @@ class WC_Meta_Box_Order_Data {
 								<select name="_payment_method" id="_payment_method" class="first">
 									<option value=""><?php _e( 'N/A', 'woocommerce' ); ?></option>
 									<?php
-										$found_method 	= false;
+										$found_method = false;
 
 										foreach ( $payment_gateways as $gateway ) {
 											if ( 'yes' === $gateway->enabled ) {
@@ -443,7 +442,7 @@ class WC_Meta_Box_Order_Data {
 
 							if ( apply_filters( 'woocommerce_enable_order_notes_field', 'yes' == get_option( 'woocommerce_enable_order_comments', 'yes' ) ) ) {
 								?>
-								<p class="form-field form-field-wide"><label for="excerpt"><?php _e( 'Customer provided note', 'woocommerce' ) ?>:</label>
+								<p class="form-field form-field-wide"><label for="excerpt"><?php _e( 'Customer provided note', 'woocommerce' ); ?>:</label>
 								<textarea rows="1" cols="40" name="excerpt" tabindex="6" id="excerpt" placeholder="<?php esc_attr_e( 'Customer notes about the order', 'woocommerce' ); ?>"><?php echo wp_kses_post( $post->post_excerpt ); ?></textarea></p>
 								<?php
 							}
@@ -539,7 +538,7 @@ class WC_Meta_Box_Order_Data {
 				$payment_method_title = $methods[ $payment_method ]->get_title();
 			}
 
-			$props['payment_method'] = $payment_method;
+			$props['payment_method']       = $payment_method;
 			$props['payment_method_title'] = $payment_method_title;
 		}
 
@@ -557,4 +556,5 @@ class WC_Meta_Box_Order_Data {
 		$order->set_status( wc_clean( $_POST['order_status'] ), '', true );
 		$order->save();
 	}
+
 }
