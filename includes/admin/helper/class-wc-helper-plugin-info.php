@@ -21,11 +21,11 @@ class WC_Helper_Plugin_Info {
 	/**
 	 * Plugin information callback for Woo extensions.
 	 *
-	 * @param object $response The response core needs to display the modal.
-	 * @param string $action The requested plugins_api() action.
-	 * @param object $args Arguments passed to plugins_api().
+	 * @param  object $response The response core needs to display the modal.
+	 * @param  string $action   The requested plugins_api() action.
+	 * @param  object $args     Arguments passed to plugins_api().
 	 *
-	 * @return object An updated $response.
+	 * @return object           An updated $response.
 	 */
 	public static function plugins_api( $response, $action, $args ) {
 		if ( 'plugin_information' !== $action ) {
@@ -45,7 +45,7 @@ class WC_Helper_Plugin_Info {
 
 		// Look through update data by slug.
 		$update_data = WC_Helper_Updater::get_update_data();
-		$products = wp_list_filter( $update_data, array( 'slug' => $clean_slug ) );
+		$products    = wp_list_filter( $update_data, array( 'slug' => $clean_slug ) );
 
 		if ( empty( $products ) ) {
 			return $response;
@@ -66,6 +66,7 @@ class WC_Helper_Plugin_Info {
 
 		return $response;
 	}
+
 }
 
 WC_Helper_Plugin_Info::load();
