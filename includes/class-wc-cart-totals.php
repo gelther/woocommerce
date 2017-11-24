@@ -98,16 +98,16 @@ final class WC_Cart_Totals {
 	 * @var array
 	 */
 	protected $totals = array(
-		'fees_total'          => 0,
-		'fees_total_tax'      => 0,
-		'items_subtotal'      => 0,
-		'items_subtotal_tax'  => 0,
-		'items_total'         => 0,
-		'items_total_tax'     => 0,
-		'total'               => 0,
-		'shipping_total'      => 0,
-		'shipping_tax_total'  => 0,
-		'discounts_total'     => 0,
+		'fees_total'         => 0,
+		'fees_total_tax'     => 0,
+		'items_subtotal'     => 0,
+		'items_subtotal_tax' => 0,
+		'items_total'        => 0,
+		'items_total_tax'    => 0,
+		'total'              => 0,
+		'shipping_total'     => 0,
+		'shipping_tax_total' => 0,
+		'discounts_total'    => 0,
 	);
 
 	/**
@@ -208,11 +208,11 @@ final class WC_Cart_Totals {
 	 * into the same format for use by this class.
 	 *
 	 * Each item is made up of the following props, in addition to those returned by get_default_item_props() for totals.
-	 * 	- key: An identifier for the item (cart item key or line item ID).
-	 *  - cart_item: For carts, the cart item from the cart which may include custom data.
-	 *  - quantity: The qty for this line.
-	 *  - price: The line price in cents.
-	 *  - product: The product object this cart item is for.
+	 * - key: An identifier for the item (cart item key or line item ID).
+	 * - cart_item: For carts, the cart item from the cart which may include custom data.
+	 * - quantity: The qty for this line.
+	 * - price: The line price in cents.
+	 * - product: The product object this cart item is for.
 	 *
 	 * @since 3.2.0
 	 */
@@ -393,13 +393,13 @@ final class WC_Cart_Totals {
 	 * Sort coupons so discounts apply consistently across installs.
 	 *
 	 * In order of priority;
-	 * 	- sort param
-	 *  - usage restriction
-	 *  - coupon value
-	 *  - ID
+	 * - sort param
+	 * - usage restriction
+	 * - coupon value
+	 * - ID
 	 *
-	 * @param WC_Coupon $a Coupon object.
-	 * @param WC_Coupon $b Coupon object.
+	 * @param  WC_Coupon $a Coupon object.
+	 * @param  WC_Coupon $b Coupon object.
 	 * @return int
 	 */
 	protected function sort_coupons_callback( $a, $b ) {
@@ -419,15 +419,15 @@ final class WC_Cart_Totals {
 	 * Ran to remove all base taxes from an item. Used when prices include tax, and the customer is tax exempt.
 	 *
 	 * @since 3.2.2
-	 * @param object $item Item to adjust the prices of.
+	 * @param  object $item Item to adjust the prices of.
 	 * @return object
 	 */
 	protected function remove_item_base_taxes( $item ) {
 		if ( $item->price_includes_tax && $item->taxable ) {
-			$base_tax_rates           = WC_Tax::get_base_tax_rates( $item->product->get_tax_class( 'unfiltered' ) );
+			$base_tax_rates = WC_Tax::get_base_tax_rates( $item->product->get_tax_class( 'unfiltered' ) );
 
 			// Work out a new base price without the shop's base tax.
-			$taxes                    = WC_Tax::calc_tax( $item->price, $base_tax_rates, true, true );
+			$taxes = WC_Tax::calc_tax( $item->price, $base_tax_rates, true, true );
 
 			// Now we have a new item price (excluding TAX).
 			$item->price              = absint( $item->price - array_sum( $taxes ) );
@@ -445,7 +445,7 @@ final class WC_Cart_Totals {
 	 * Uses edit context so unfiltered tax class is returned.
 	 *
 	 * @since 3.2.0
-	 * @param object $item Item to adjust the prices of.
+	 * @param  object $item Item to adjust the prices of.
 	 * @return object
 	 */
 	protected function adjust_non_base_location_price( $item ) {
@@ -454,8 +454,8 @@ final class WC_Cart_Totals {
 
 			if ( $item->tax_rates !== $base_tax_rates ) {
 				// Work out a new base price without the shop's base tax.
-				$taxes       = WC_Tax::calc_tax( $item->price, $base_tax_rates, true, true );
-				$new_taxes   = WC_Tax::calc_tax( $item->price - array_sum( $taxes ), $item->tax_rates, false, true );
+				$taxes     = WC_Tax::calc_tax( $item->price, $base_tax_rates, true, true );
+				$new_taxes = WC_Tax::calc_tax( $item->price - array_sum( $taxes ), $item->tax_rates, false, true );
 
 				// Now we have a new item price.
 				$item->price = $item->price - array_sum( $taxes ) + array_sum( $new_taxes );
@@ -481,7 +481,7 @@ final class WC_Cart_Totals {
 	 * Get tax rates for an item. Caches rates in class to avoid multiple look ups.
 	 *
 	 * @param  object $item Item to get tax rates for.
-	 * @return array of taxes
+	 * @return array        of taxes
 	 */
 	protected function get_item_tax_rates( $item ) {
 		$tax_class = $item->product->get_tax_class();
@@ -518,8 +518,8 @@ final class WC_Cart_Totals {
 	 * Get a single total with or without precision (in cents).
 	 *
 	 * @since  3.2.0
-	 * @param  string $key Total to get.
-	 * @param  bool   $in_cents Should the totals be returned in cents, or without precision.
+	 * @param  string    $key      Total to get.
+	 * @param  bool      $in_cents Should the totals be returned in cents, or without precision.
 	 * @return int|float
 	 */
 	public function get_total( $key = 'total', $in_cents = false ) {
@@ -531,7 +531,7 @@ final class WC_Cart_Totals {
 	 * Set a single total.
 	 *
 	 * @since  3.2.0
-	 * @param string $key Total name you want to set.
+	 * @param string $key   Total name you want to set.
 	 * @param int    $total Total to set.
 	 */
 	protected function set_total( $key = 'total', $total ) {
@@ -542,8 +542,8 @@ final class WC_Cart_Totals {
 	 * Get all totals with or without precision (in cents).
 	 *
 	 * @since  3.2.0
-	 * @param  bool $in_cents Should the totals be returned in cents, or without precision.
-	 * @return array.
+	 * @param  bool  $in_cents Should the totals be returned in cents, or without precision.
+	 * @return array           .
 	 */
 	public function get_totals( $in_cents = false ) {
 		return $in_cents ? $this->totals : wc_remove_number_precision_deep( $this->totals );
@@ -586,7 +586,7 @@ final class WC_Cart_Totals {
 	 * Combine item taxes into a single array, preserving keys.
 	 *
 	 * @since 3.2.0
-	 * @param array $taxes Taxes to combine.
+	 * @param  array $taxes Taxes to combine.
 	 * @return array
 	 */
 	protected function combine_item_taxes( $item_taxes ) {
@@ -827,4 +827,5 @@ final class WC_Cart_Totals {
 		// Allow plugins to filter the grand total, and sum the cart totals in case of modifications.
 		$this->cart->set_total( max( 0, apply_filters( 'woocommerce_calculated_total', $this->get_total( 'total' ), $this->cart ) ) );
 	}
+
 }
