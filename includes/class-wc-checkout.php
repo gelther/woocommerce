@@ -60,7 +60,7 @@ class WC_Checkout {
 	/**
 	 * See if variable is set. Used to support legacy public variables which are no longer defined.
 	 *
-	 * @param string $key
+	 * @param  string $key
 	 * @return bool
 	 */
 	public function __isset( $key ) {
@@ -81,7 +81,7 @@ class WC_Checkout {
 	 * Sets the legacy public variables for backwards compatibility.
 	 *
 	 * @param string $key
-	 * @param mixed $value
+	 * @param mixed  $value
 	 */
 	public function __set( $key, $value ) {
 		switch ( $key ) {
@@ -118,7 +118,7 @@ class WC_Checkout {
 	/**
 	 * Gets the legacy public variables for backwards compatibility.
 	 *
-	 * @param string $key
+	 * @param  string       $key
 	 *
 	 * @return array|string
 	 */
@@ -206,19 +206,19 @@ class WC_Checkout {
 			);
 			if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) {
 				$this->fields['account']['account_username'] = array(
-					'type'         => 'text',
-					'label'        => __( 'Account username', 'woocommerce' ),
-					'required'     => true,
-					'placeholder'  => esc_attr__( 'Username', 'woocommerce' ),
+					'type'        => 'text',
+					'label'       => __( 'Account username', 'woocommerce' ),
+					'required'    => true,
+					'placeholder' => esc_attr__( 'Username', 'woocommerce' ),
 				);
 			}
 
 			if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) {
 				$this->fields['account']['account_password'] = array(
-					'type'         => 'password',
-					'label'        => __( 'Create account password', 'woocommerce' ),
-					'required'     => true,
-					'placeholder'  => esc_attr__( 'Password', 'woocommerce' ),
+					'type'        => 'password',
+					'label'       => __( 'Create account password', 'woocommerce' ),
+					'required'    => true,
+					'placeholder' => esc_attr__( 'Password', 'woocommerce' ),
 				);
 			}
 
@@ -264,7 +264,7 @@ class WC_Checkout {
 	 * 		529 - Cannot create coupon item.
 	 *
 	 * @throws Exception
-	 * @param  $data Posted data.
+	 * @param               $data Posted data.
 	 * @return int|WP_ERROR
 	 */
 	public function create_order( $data ) {
@@ -347,8 +347,8 @@ class WC_Checkout {
 	/**
 	 * Add line items to the order.
 	 *
-	 * @param  WC_Order $order
-	 * @param WC_Cart $cart
+	 * @param WC_Order $order
+	 * @param WC_Cart  $cart
 	 */
 	public function create_order_line_items( &$order, $cart ) {
 		foreach ( $cart->get_cart() as $cart_item_key => $values ) {
@@ -393,8 +393,8 @@ class WC_Checkout {
 	/**
 	 * Add fees to the order.
 	 *
-	 * @param  WC_Order $order
-	 * @param WC_Cart $cart
+	 * @param WC_Order $order
+	 * @param WC_Cart  $cart
 	 */
 	public function create_order_fee_lines( &$order, $cart ) {
 		foreach ( $cart->get_fees() as $fee_key => $fee ) {
@@ -426,9 +426,9 @@ class WC_Checkout {
 	/**
 	 * Add shipping lines to the order.
 	 *
-	 * @param  WC_Order $order
-	 * @param array $chosen_shipping_methods
-	 * @param array $packages
+	 * @param WC_Order $order
+	 * @param array    $chosen_shipping_methods
+	 * @param array    $packages
 	 */
 	public function create_order_shipping_lines( &$order, $chosen_shipping_methods, $packages ) {
 		foreach ( $packages as $package_key => $package ) {
@@ -465,8 +465,8 @@ class WC_Checkout {
 	/**
 	 * Add tax lines to the order.
 	 *
-	 * @param  WC_Order $order
-	 * @param WC_Cart $cart
+	 * @param WC_Order $order
+	 * @param WC_Cart  $cart
 	 */
 	public function create_order_tax_lines( &$order, $cart ) {
 		foreach ( array_keys( $cart->get_cart_contents_taxes() + $cart->get_shipping_taxes() + $cart->get_fee_taxes() ) as $tax_rate_id ) {
@@ -525,8 +525,8 @@ class WC_Checkout {
 	 *
 	 * @since 3.0.0
 	 *
-	 * @param string $fieldset_key
-	 * @param array $data
+	 * @param  string $fieldset_key
+	 * @param  array  $data
 	 *
 	 * @return bool
 	 */
@@ -599,8 +599,8 @@ class WC_Checkout {
 	 * Validates the posted checkout data based on field properties.
 	 *
 	 * @since  3.0.0
-	 * @param  array $data An array of posted data.
-	 * @param  WP_Error $errors
+	 * @param array    $data   An array of posted data.
+	 * @param WP_Error $errors
 	 */
 	protected function validate_posted_data( &$data, &$errors ) {
 		foreach ( $this->get_checkout_fields() as $fieldset_key => $fieldset ) {
@@ -686,8 +686,8 @@ class WC_Checkout {
 	 * Validates that the checkout has enough info to proceed.
 	 *
 	 * @since  3.0.0
-	 * @param  array $data An array of posted data.
-	 * @param  WP_Error $errors
+	 * @param array    $data   An array of posted data.
+	 * @param WP_Error $errors
 	 */
 	protected function validate_checkout( &$data, &$errors ) {
 		$this->validate_posted_data( $data, $errors );
@@ -734,15 +734,15 @@ class WC_Checkout {
 	 * @since 3.0.7
 	 * @param $field string to update
 	 * @param $key
-	 * @param $data array of data to get the value from
+	 * @param $data  array of data to get the value from
 	 */
 	protected function set_customer_address_fields( $field, $key, $data ) {
-		if ( isset( $data[ "billing_{$field}" ] ) ) {
-			WC()->customer->{"set_billing_{$field}"}( $data[ "billing_{$field}" ] );
-			WC()->customer->{"set_shipping_{$field}"}( $data[ "billing_{$field}" ] );
+		if ( isset( $data["billing_{$field}"] ) ) {
+			WC()->customer->{"set_billing_{$field}"}( $data["billing_{$field}"] );
+			WC()->customer->{"set_shipping_{$field}"}( $data["billing_{$field}"] );
 		}
-		if ( isset( $data[ "shipping_{$field}" ] ) ) {
-			WC()->customer->{"set_shipping_{$field}"}( $data[ "shipping_{$field}" ] );
+		if ( isset( $data["shipping_{$field}"] ) ) {
+			WC()->customer->{"set_shipping_{$field}"}( $data["shipping_{$field}"] );
 		}
 	}
 
@@ -750,7 +750,7 @@ class WC_Checkout {
 	 * Update customer and session data from the posted checkout data.
 	 *
 	 * @since  3.0.0
-	 * @param  array $data
+	 * @param array $data
 	 */
 	protected function update_session( $data ) {
 		// Update both shipping and billing to the passed billing address first if set.
@@ -782,13 +782,12 @@ class WC_Checkout {
 		WC()->cart->calculate_totals();
 	}
 
-
 	/**
 	 * Process an order that does require payment.
 	 *
 	 * @since  3.0.0
-	 * @param  int $order_id
-	 * @param  string $payment_method
+	 * @param int    $order_id
+	 * @param string $payment_method
 	 */
 	protected function process_order_payment( $order_id, $payment_method ) {
 		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
@@ -820,7 +819,7 @@ class WC_Checkout {
 	 * Process an order that doesn't require payment.
 	 *
 	 * @since  3.0.0
-	 * @param  int $order_id
+	 * @param int $order_id
 	 */
 	protected function process_order_without_payment( $order_id ) {
 		$order = wc_get_order( $order_id );
@@ -842,7 +841,7 @@ class WC_Checkout {
 
 	/**
 	 * Create a new customer account if needed.
-	 * @param  array $data
+	 * @param array $data
 	 * @throws Exception
 	 */
 	protected function process_customer( $data ) {
@@ -997,8 +996,8 @@ class WC_Checkout {
 	/**
 	 * Get a posted address field after sanitization and validation.
 	 *
-	 * @param string $key
-	 * @param string $type billing for shipping
+	 * @param  string $key
+	 * @param  string $type billing for shipping
 	 * @return string
 	 */
 	public function get_posted_address_data( $key, $type = 'billing' ) {
@@ -1013,7 +1012,7 @@ class WC_Checkout {
 	/**
 	 * Gets the value either from the posted data, or from the users meta data.
 	 *
-	 * @param string $input
+	 * @param  string $input
 	 * @return string
 	 */
 	public function get_value( $input ) {
@@ -1037,4 +1036,5 @@ class WC_Checkout {
 			return apply_filters( 'default_checkout_' . $input, $value, $input );
 		}
 	}
+
 }
