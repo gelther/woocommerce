@@ -43,7 +43,7 @@ class WC_Regenerate_Images_Request extends WP_Background_Process {
 	/**
 	 * Code to execute for each item in the queue
 	 *
-	 * @param mixed $item Queue item to iterate over.
+	 * @param  mixed $item Queue item to iterate over.
 	 * @return bool
 	 */
 	protected function task( $item ) {
@@ -105,6 +105,5 @@ class WC_Regenerate_Images_Request extends WP_Background_Process {
 			)
 		);
 	}
-
 
 }
