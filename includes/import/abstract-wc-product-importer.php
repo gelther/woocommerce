@@ -133,7 +133,7 @@ abstract class WC_Product_Importer implements WC_Importer_Interface {
 	public function get_params() {
 		return $this->params;
 	}
-	
+
 	/**
 	 * Get file pointer position from the last read.
 	 *
@@ -160,7 +160,7 @@ abstract class WC_Product_Importer implements WC_Importer_Interface {
 	/**
 	 * Prepare a single product for create or update.
 	 *
-	 * @param  array $data     Item data.
+	 * @param  array               $data Item data.
 	 * @return WC_Product|WP_Error
 	 */
 	protected function get_product_object( $data ) {
@@ -198,7 +198,7 @@ abstract class WC_Product_Importer implements WC_Importer_Interface {
 	/**
 	 * Process a single item and save.
 	 *
-	 * @param  array $data Raw CSV data.
+	 * @param  array          $data Raw CSV data.
 	 * @return array|WC_Error
 	 */
 	protected function process_item( $data ) {
@@ -348,7 +348,7 @@ abstract class WC_Product_Importer implements WC_Importer_Interface {
 						}
 
 						$default_attributes[ $attribute_name ] = $default;
-						$is_variation = 1;
+						$is_variation                          = 1;
 					}
 
 					if ( ! empty( $options ) ) {
@@ -365,7 +365,7 @@ abstract class WC_Product_Importer implements WC_Importer_Interface {
 					// Check for default attributes and set "is_variation".
 					if ( ! empty( $attribute['default'] ) && in_array( $attribute['default'], $attribute['value'] ) ) {
 						$default_attributes[ sanitize_title( $attribute['name'] ) ] = $attribute['default'];
-						$is_variation = 1;
+						$is_variation                                               = 1;
 					}
 
 					$attribute_object = new WC_Product_Attribute();
@@ -390,8 +390,8 @@ abstract class WC_Product_Importer implements WC_Importer_Interface {
 	/**
 	 * Set variation data.
 	 *
-	 * @param WC_Product $variation Product instance.
-	 * @param array      $data    Item data.
+	 * @param  WC_Product          $variation Product instance.
+	 * @param  array               $data      Item data.
 	 *
 	 * @return WC_Product|WP_Error
 	 * @throws Exception
@@ -726,4 +726,5 @@ abstract class WC_Product_Importer implements WC_Importer_Interface {
 	protected function explode_values_formatter( $value ) {
 		return trim( str_replace( '::separator::', ',', $value ) );
 	}
+
 }
