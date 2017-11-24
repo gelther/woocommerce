@@ -3,4 +3,3 @@
 function wp_mail() {
 	// do nothing
 }
-
