@@ -49,7 +49,7 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 			$this->set_id( $zone );
 		} elseif ( is_object( $zone ) ) {
 			$this->set_id( $zone->zone_id );
-		} elseif ( 0 === $zone || "0" === $zone ) {
+		} elseif ( 0 === $zone || '0' === $zone ) {
 			$this->set_id( 0 );
 		} else {
 			$this->set_object_read( true );
@@ -62,9 +62,9 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 	}
 
 	/*
-	 |--------------------------------------------------------------------------
-	 | Getters
-	 |--------------------------------------------------------------------------
+	|--------------------------------------------------------------------------
+	| Getters
+	|--------------------------------------------------------------------------
 	 */
 
 	/**
@@ -91,7 +91,7 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 	 * Get zone locations.
 	 *
 	 * @param  string $context
-	 * @return array of zone objects
+	 * @return array           of zone objects
 	 */
 	public function get_zone_locations( $context = 'view' ) {
 		return $this->get_prop( 'zone_locations', $context );
@@ -100,7 +100,7 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 	/**
 	 * Return a text string representing what this zone is for.
 	 *
-	 * @param  int $max
+	 * @param  int    $max
 	 * @param  string $context
 	 * @return string
 	 */
@@ -124,7 +124,7 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 		}
 
 		foreach ( $states as $location ) {
-			$location_codes = explode( ':', $location->code );
+			$location_codes   = explode( ':', $location->code );
 			$location_parts[] = $all_states[ $location_codes[0] ][ $location_codes[1] ];
 		}
 
@@ -150,7 +150,7 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 	/**
 	 * Get shipping methods linked to this zone.
 	 *
-	 * @param bool Only return enabled methods.
+	 * @param  bool  Only return enabled methods.
 	 * @return array of objects
 	 */
 	public function get_shipping_methods( $enabled_only = false ) {
@@ -171,7 +171,7 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 				// as classes. If the "class" is an instance, just use it. If not,
 				// create an instance.
 				if ( is_object( $class_name ) ) {
-					$class_name_of_instance = get_class( $class_name );
+					$class_name_of_instance              = get_class( $class_name );
 					$methods[ $raw_method->instance_id ] = new $class_name_of_instance( $raw_method->instance_id );
 				} else {
 					// If the class is not an object, it should be a string. It's better
@@ -199,9 +199,9 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 	}
 
 	/*
-	 |--------------------------------------------------------------------------
-	 | Setters
-	 |--------------------------------------------------------------------------
+	|--------------------------------------------------------------------------
+	| Setters
+	|--------------------------------------------------------------------------
 	 */
 
 	/**
@@ -235,9 +235,9 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 	}
 
 	/*
-	 |--------------------------------------------------------------------------
-	 | Other Methods
-	 |--------------------------------------------------------------------------
+	|--------------------------------------------------------------------------
+	| Other Methods
+	|--------------------------------------------------------------------------
 	 */
 
 	/**
@@ -338,16 +338,15 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 			if ( 'postcode' === $type ) {
 				$code = trim( strtoupper( str_replace( chr( 226 ) . chr( 128 ) . chr( 166 ), '...', $code ) ) ); // No normalization - postcodes are matched against both normal and formatted versions to support wildcards.
 			}
-			$location = array(
+			$location         = array(
 				'code' => wc_clean( $code ),
 				'type' => wc_clean( $type ),
 			);
-			$zone_locations = $this->get_prop( 'zone_locations', 'edit' );
+			$zone_locations   = $this->get_prop( 'zone_locations', 'edit' );
 			$zone_locations[] = (object) $location;
 			$this->set_prop( 'zone_locations', $zone_locations );
 		}
 	}
-
 
 	/**
 	 * Clear all locations for this zone.
@@ -383,8 +382,8 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 	/**
 	 * Add a shipping method to this zone.
 	 *
-	 * @param string $type shipping method type
-	 * @return int new instance_id, 0 on failure
+	 * @param  string $type shipping method type
+	 * @return int          new instance_id, 0 on failure
 	 */
 	public function add_shipping_method( $type ) {
 		if ( null === $this->get_id() ) {
@@ -412,8 +411,8 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 	/**
 	 * Delete a shipping method from a zone.
 	 *
-	 * @param int $instance_id
-	 * @return True on success, false on failure
+	 * @param  int  $instance_id
+	 * @return True              on success, false on failure
 	 */
 	public function delete_shipping_method( $instance_id ) {
 		if ( null === $this->get_id() ) {
@@ -432,4 +431,5 @@ class WC_Shipping_Zone extends WC_Legacy_Shipping_Zone {
 
 		return true;
 	}
+
 }
