@@ -145,7 +145,7 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 	 * Method to delete a download permission from the database.
 	 *
 	 * @param WC_Customer_Download $download
-	 * @param array $args Array of args to pass to the delete method.
+	 * @param array                $args     Array of args to pass to the delete method.
 	 */
 	public function delete( &$download, $args = array() ) {
 		global $wpdb;
@@ -200,7 +200,7 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 	/**
 	 * Get a download object.
 	 *
-	 * @param  array $data From the DB.
+	 * @param  array                $data From the DB.
 	 * @return WC_Customer_Download
 	 */
 	private function get_download( $data ) {
@@ -232,23 +232,23 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 		$query[] = "SELECT * FROM {$wpdb->prefix}woocommerce_downloadable_product_permissions WHERE 1=1";
 
 		if ( $args['user_email'] ) {
-			$query[] = $wpdb->prepare( "AND user_email = %s", sanitize_email( $args['user_email'] ) );
+			$query[] = $wpdb->prepare( 'AND user_email = %s', sanitize_email( $args['user_email'] ) );
 		}
 
 		if ( $args['order_id'] ) {
-			$query[] = $wpdb->prepare( "AND order_id = %d", $args['order_id'] );
+			$query[] = $wpdb->prepare( 'AND order_id = %d', $args['order_id'] );
 		}
 
 		if ( $args['order_key'] ) {
-			$query[] = $wpdb->prepare( "AND order_key = %s", $args['order_key'] );
+			$query[] = $wpdb->prepare( 'AND order_key = %s', $args['order_key'] );
 		}
 
 		if ( $args['product_id'] ) {
-			$query[] = $wpdb->prepare( "AND product_id = %d", $args['product_id'] );
+			$query[] = $wpdb->prepare( 'AND product_id = %d', $args['product_id'] );
 		}
 
 		if ( $args['download_id'] ) {
-			$query[] = $wpdb->prepare( "AND download_id = %s", $args['download_id'] );
+			$query[] = $wpdb->prepare( 'AND download_id = %s', $args['download_id'] );
 		}
 
 		$allowed_orders = array( 'permission_id', 'download_id', 'product_id', 'order_id', 'order_key', 'user_email', 'user_id', 'downloads_remaining', 'access_granted', 'access_expires', 'download_count' );
@@ -258,7 +258,7 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 		$query[]        = "ORDER BY {$orderby_sql}";
 
 		if ( 0 < $args['limit'] ) {
-			$query[] = $wpdb->prepare( "LIMIT %d", $args['limit'] );
+			$query[] = $wpdb->prepare( 'LIMIT %d', $args['limit'] );
 		}
 
 		$raw_downloads = $wpdb->get_results( implode( ' ', $query ) );
@@ -276,9 +276,9 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 	 *
 	 * @deprecated 3.3.0 Download id is now a static UUID and should not be changed based on file hash.
 	 *
-	 * @param  int $product_id
-	 * @param  string $old_id
-	 * @param  string $new_id
+	 * @param int    $product_id
+	 * @param string $old_id
+	 * @param string $new_id
 	 */
 	public function update_download_id( $product_id, $old_id, $new_id ) {
 		global $wpdb;
@@ -300,7 +300,7 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 	/**
 	 * Get a customers downloads.
 	 *
-	 * @param  int $customer_id
+	 * @param  int   $customer_id
 	 * @return array
 	 */
 	public function get_downloads_for_customer( $customer_id ) {
@@ -333,9 +333,9 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 	/**
 	 * Update user prop for downloads based on order id.
 	 *
-	 * @param  int $order_id
-	 * @param  int $customer_id
-	 * @param  string $email
+	 * @param int    $order_id
+	 * @param int    $customer_id
+	 * @param string $email
 	 */
 	public function update_user_by_order_id( $order_id, $customer_id, $email ) {
 		global $wpdb;
@@ -345,7 +345,7 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 				'user_email' => $email,
 			),
 			array(
-				'order_id'   => $order_id,
+				'order_id' => $order_id,
 			),
 			array(
 				'%d',
@@ -356,4 +356,5 @@ class WC_Customer_Download_Data_Store implements WC_Customer_Download_Data_Store
 			)
 		);
 	}
+
 }
