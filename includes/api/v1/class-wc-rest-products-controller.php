@@ -72,7 +72,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 		) );
 
 		register_rest_route( $this->namespace, '/' . $this->rest_base . '/(?P<id>[\d]+)', array(
-			'args' => array(
+			'args'   => array(
 				'id' => array(
 					'description' => __( 'Unique identifier for the resource.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -130,8 +130,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Query args.
 	 *
-	 * @param array           $args    Request args.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  array           $args    Request args.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return array
 	 */
 	public function query_args( $args, $request ) {
@@ -222,7 +222,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get the downloads for a product or product variation.
 	 *
-	 * @param WC_Product|WC_Product_Variation $product Product instance.
+	 * @param  WC_Product|WC_Product_Variation $product Product instance.
 	 * @return array
 	 */
 	protected function get_downloads( $product ) {
@@ -244,8 +244,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get taxonomy terms.
 	 *
-	 * @param WC_Product $product  Product instance.
-	 * @param string     $taxonomy Taxonomy slug.
+	 * @param  WC_Product $product  Product instance.
+	 * @param  string     $taxonomy Taxonomy slug.
 	 * @return array
 	 */
 	protected function get_taxonomy_terms( $product, $taxonomy = 'cat' ) {
@@ -265,11 +265,11 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get the images for a product or product variation.
 	 *
-	 * @param WC_Product|WC_Product_Variation $product Product instance.
+	 * @param  WC_Product|WC_Product_Variation $product Product instance.
 	 * @return array
 	 */
 	protected function get_images( $product ) {
-		$images = array();
+		$images         = array();
 		$attachment_ids = array();
 
 		// Add featured image.
@@ -335,7 +335,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get default attributes.
 	 *
-	 * @param WC_Product $product Product instance.
+	 * @param  WC_Product $product Product instance.
 	 * @return array
 	 */
 	protected function get_default_attributes( $product ) {
@@ -365,8 +365,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get attribute options.
 	 *
-	 * @param int   $product_id Product ID.
-	 * @param array $attribute  Attribute data.
+	 * @param  int   $product_id Product ID.
+	 * @param  array $attribute  Attribute data.
 	 * @return array
 	 */
 	protected function get_attribute_options( $product_id, $attribute ) {
@@ -382,7 +382,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get the attributes for a product or product variation.
 	 *
-	 * @param WC_Product|WC_Product_Variation $product Product instance.
+	 * @param  WC_Product|WC_Product_Variation $product Product instance.
 	 * @return array
 	 */
 	protected function get_attributes( $product ) {
@@ -399,7 +399,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 
 				// Taxonomy-based attributes are prefixed with `pa_`, otherwise simply `attribute_`.
 				if ( 0 === strpos( $attribute_name, 'attribute_pa_' ) ) {
-					$option_term = get_term_by( 'slug', $attribute, $name );
+					$option_term  = get_term_by( 'slug', $attribute, $name );
 					$attributes[] = array(
 						'id'     => wc_attribute_taxonomy_id_by_name( $name ),
 						'name'   => $this->get_attribute_taxonomy_label( $name ),
@@ -444,7 +444,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	 * Get product menu order.
 	 *
 	 * @deprecated 3.0.0
-	 * @param WC_Product $product Product instance.
+	 * @param  WC_Product $product Product instance.
 	 * @return int
 	 */
 	protected function get_product_menu_order( $product ) {
@@ -454,76 +454,76 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get product data.
 	 *
-	 * @param WC_Product $product Product instance.
+	 * @param  WC_Product $product Product instance.
 	 * @return array
 	 */
 	protected function get_product_data( $product ) {
 		$data = array(
-			'id'                    => $product->get_id(),
-			'name'                  => $product->get_name(),
-			'slug'                  => $product->get_slug(),
-			'permalink'             => $product->get_permalink(),
-			'date_created'          => wc_rest_prepare_date_response( $product->get_date_created() ),
-			'date_modified'         => wc_rest_prepare_date_response( $product->get_date_modified() ),
-			'type'                  => $product->get_type(),
-			'status'                => $product->get_status(),
-			'featured'              => $product->is_featured(),
-			'catalog_visibility'    => $product->get_catalog_visibility(),
-			'description'           => wpautop( do_shortcode( $product->get_description() ) ),
-			'short_description'     => apply_filters( 'woocommerce_short_description', $product->get_short_description() ),
-			'sku'                   => $product->get_sku(),
-			'price'                 => $product->get_price(),
-			'regular_price'         => $product->get_regular_price(),
-			'sale_price'            => $product->get_sale_price() ? $product->get_sale_price() : '',
-			'date_on_sale_from'     => $product->get_date_on_sale_from() ? date( 'Y-m-d', $product->get_date_on_sale_from()->getTimestamp() ) : '',
-			'date_on_sale_to'       => $product->get_date_on_sale_to() ? date( 'Y-m-d', $product->get_date_on_sale_to()->getTimestamp() ) : '',
-			'price_html'            => $product->get_price_html(),
-			'on_sale'               => $product->is_on_sale(),
-			'purchasable'           => $product->is_purchasable(),
-			'total_sales'           => $product->get_total_sales(),
-			'virtual'               => $product->is_virtual(),
-			'downloadable'          => $product->is_downloadable(),
-			'downloads'             => $this->get_downloads( $product ),
-			'download_limit'        => $product->get_download_limit(),
-			'download_expiry'       => $product->get_download_expiry(),
-			'download_type'         => 'standard',
-			'external_url'          => $product->is_type( 'external' ) ? $product->get_product_url() : '',
-			'button_text'           => $product->is_type( 'external' ) ? $product->get_button_text() : '',
-			'tax_status'            => $product->get_tax_status(),
-			'tax_class'             => $product->get_tax_class(),
-			'manage_stock'          => $product->managing_stock(),
-			'stock_quantity'        => $product->get_stock_quantity(),
-			'in_stock'              => $product->is_in_stock(),
-			'backorders'            => $product->get_backorders(),
-			'backorders_allowed'    => $product->backorders_allowed(),
-			'backordered'           => $product->is_on_backorder(),
-			'sold_individually'     => $product->is_sold_individually(),
-			'weight'                => $product->get_weight(),
-			'dimensions'            => array(
+			'id'                 => $product->get_id(),
+			'name'               => $product->get_name(),
+			'slug'               => $product->get_slug(),
+			'permalink'          => $product->get_permalink(),
+			'date_created'       => wc_rest_prepare_date_response( $product->get_date_created() ),
+			'date_modified'      => wc_rest_prepare_date_response( $product->get_date_modified() ),
+			'type'               => $product->get_type(),
+			'status'             => $product->get_status(),
+			'featured'           => $product->is_featured(),
+			'catalog_visibility' => $product->get_catalog_visibility(),
+			'description'        => wpautop( do_shortcode( $product->get_description() ) ),
+			'short_description'  => apply_filters( 'woocommerce_short_description', $product->get_short_description() ),
+			'sku'                => $product->get_sku(),
+			'price'              => $product->get_price(),
+			'regular_price'      => $product->get_regular_price(),
+			'sale_price'         => $product->get_sale_price() ? $product->get_sale_price() : '',
+			'date_on_sale_from'  => $product->get_date_on_sale_from() ? date( 'Y-m-d', $product->get_date_on_sale_from()->getTimestamp() ) : '',
+			'date_on_sale_to'    => $product->get_date_on_sale_to() ? date( 'Y-m-d', $product->get_date_on_sale_to()->getTimestamp() ) : '',
+			'price_html'         => $product->get_price_html(),
+			'on_sale'            => $product->is_on_sale(),
+			'purchasable'        => $product->is_purchasable(),
+			'total_sales'        => $product->get_total_sales(),
+			'virtual'            => $product->is_virtual(),
+			'downloadable'       => $product->is_downloadable(),
+			'downloads'          => $this->get_downloads( $product ),
+			'download_limit'     => $product->get_download_limit(),
+			'download_expiry'    => $product->get_download_expiry(),
+			'download_type'      => 'standard',
+			'external_url'       => $product->is_type( 'external' ) ? $product->get_product_url() : '',
+			'button_text'        => $product->is_type( 'external' ) ? $product->get_button_text() : '',
+			'tax_status'         => $product->get_tax_status(),
+			'tax_class'          => $product->get_tax_class(),
+			'manage_stock'       => $product->managing_stock(),
+			'stock_quantity'     => $product->get_stock_quantity(),
+			'in_stock'           => $product->is_in_stock(),
+			'backorders'         => $product->get_backorders(),
+			'backorders_allowed' => $product->backorders_allowed(),
+			'backordered'        => $product->is_on_backorder(),
+			'sold_individually'  => $product->is_sold_individually(),
+			'weight'             => $product->get_weight(),
+			'dimensions'         => array(
 				'length' => $product->get_length(),
 				'width'  => $product->get_width(),
 				'height' => $product->get_height(),
 			),
-			'shipping_required'     => $product->needs_shipping(),
-			'shipping_taxable'      => $product->is_shipping_taxable(),
-			'shipping_class'        => $product->get_shipping_class(),
-			'shipping_class_id'     => $product->get_shipping_class_id(),
-			'reviews_allowed'       => $product->get_reviews_allowed(),
-			'average_rating'        => wc_format_decimal( $product->get_average_rating(), 2 ),
-			'rating_count'          => $product->get_rating_count(),
-			'related_ids'           => array_map( 'absint', array_values( wc_get_related_products( $product->get_id() ) ) ),
-			'upsell_ids'            => array_map( 'absint', $product->get_upsell_ids() ),
-			'cross_sell_ids'        => array_map( 'absint', $product->get_cross_sell_ids() ),
-			'parent_id'             => $product->get_parent_id(),
-			'purchase_note'         => wpautop( do_shortcode( wp_kses_post( $product->get_purchase_note() ) ) ),
-			'categories'            => $this->get_taxonomy_terms( $product ),
-			'tags'                  => $this->get_taxonomy_terms( $product, 'tag' ),
-			'images'                => $this->get_images( $product ),
-			'attributes'            => $this->get_attributes( $product ),
-			'default_attributes'    => $this->get_default_attributes( $product ),
-			'variations'            => array(),
-			'grouped_products'      => array(),
-			'menu_order'            => $product->get_menu_order(),
+			'shipping_required'  => $product->needs_shipping(),
+			'shipping_taxable'   => $product->is_shipping_taxable(),
+			'shipping_class'     => $product->get_shipping_class(),
+			'shipping_class_id'  => $product->get_shipping_class_id(),
+			'reviews_allowed'    => $product->get_reviews_allowed(),
+			'average_rating'     => wc_format_decimal( $product->get_average_rating(), 2 ),
+			'rating_count'       => $product->get_rating_count(),
+			'related_ids'        => array_map( 'absint', array_values( wc_get_related_products( $product->get_id() ) ) ),
+			'upsell_ids'         => array_map( 'absint', $product->get_upsell_ids() ),
+			'cross_sell_ids'     => array_map( 'absint', $product->get_cross_sell_ids() ),
+			'parent_id'          => $product->get_parent_id(),
+			'purchase_note'      => wpautop( do_shortcode( wp_kses_post( $product->get_purchase_note() ) ) ),
+			'categories'         => $this->get_taxonomy_terms( $product ),
+			'tags'               => $this->get_taxonomy_terms( $product, 'tag' ),
+			'images'             => $this->get_images( $product ),
+			'attributes'         => $this->get_attributes( $product ),
+			'default_attributes' => $this->get_default_attributes( $product ),
+			'variations'         => array(),
+			'grouped_products'   => array(),
+			'menu_order'         => $product->get_menu_order(),
 		);
 
 		return $data;
@@ -532,7 +532,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Get an individual variation's data.
 	 *
-	 * @param WC_Product $product Product instance.
+	 * @param  WC_Product $product Product instance.
 	 * @return array
 	 */
 	protected function get_variation_data( $product ) {
@@ -590,8 +590,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Prepare a single product output for response.
 	 *
-	 * @param WP_Post         $post    Post object.
-	 * @param WP_REST_Request $request Request object.
+	 * @param  WP_Post          $post    Post object.
+	 * @param  WP_REST_Request  $request Request object.
 	 * @return WP_REST_Response
 	 */
 	public function prepare_item_for_response( $post, $request ) {
@@ -623,9 +623,9 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 		 * The dynamic portion of the hook name, $this->post_type, refers to post_type of the post being
 		 * prepared for the response.
 		 *
-		 * @param WP_REST_Response   $response   The response object.
-		 * @param WP_Post            $post       Post object.
-		 * @param WP_REST_Request    $request    Request object.
+		 * @param WP_REST_Response $response The response object.
+		 * @param WP_Post          $post     Post object.
+		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "woocommerce_rest_prepare_{$this->post_type}", $response, $post, $request );
 	}
@@ -633,13 +633,13 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Prepare links for the request.
 	 *
-	 * @param WC_Product      $product Product object.
-	 * @param WP_REST_Request $request Request object.
-	 * @return array Links for the given product.
+	 * @param  WC_Product      $product Product object.
+	 * @param  WP_REST_Request $request Request object.
+	 * @return array                    Links for the given product.
 	 */
 	protected function prepare_links( $product, $request ) {
 		$links = array(
-			'self' => array(
+			'self'       => array(
 				'href' => rest_url( sprintf( '/%s/%s/%d', $this->namespace, $this->rest_base, $product->get_id() ) ),
 			),
 			'collection' => array(
@@ -659,8 +659,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Prepare a single product for create or update.
 	 *
-	 * @param WP_REST_Request $request Request object.
-	 * @return WP_Error|stdClass $data Post object.
+	 * @param  WP_REST_Request   $request Request object.
+	 * @return WP_Error|stdClass $data    Post object.
 	 */
 	protected function prepare_item_for_database( $request ) {
 		$id = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -721,9 +721,9 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 		 * The dynamic portion of the hook name, $this->post_type, refers to post_type of the post being
 		 * prepared for insertion.
 		 *
-		 * @param WC_Product       $product An object representing a single item prepared
+		 * @param WC_Product      $product An object representing a single item prepared
 		 *                                       for inserting or updating the database.
-		 * @param WP_REST_Request $request       Request object.
+		 * @param WP_REST_Request $request Request object.
 		 */
 		return apply_filters( "woocommerce_rest_pre_insert_{$this->post_type}", $product, $request );
 	}
@@ -731,7 +731,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Create a single product.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function create_item( $request ) {
@@ -750,9 +750,9 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 			/**
 			 * Fires after a single item is created or updated via the REST API.
 			 *
-			 * @param WP_Post         $post      Post data.
-			 * @param WP_REST_Request $request   Request object.
-			 * @param boolean         $creating  True when creating item, false when updating.
+			 * @param WP_Post         $post     Post data.
+			 * @param WP_REST_Request $request  Request object.
+			 * @param boolean         $creating True when creating item, false when updating.
 			 */
 			do_action( 'woocommerce_rest_insert_product', $post, $request, true );
 			$request->set_param( 'context', 'edit' );
@@ -774,7 +774,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Update a single product.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function update_item( $request ) {
@@ -793,9 +793,9 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 			/**
 			 * Fires after a single item is created or updated via the REST API.
 			 *
-			 * @param WP_Post         $post      Post data.
-			 * @param WP_REST_Request $request   Request object.
-			 * @param boolean         $creating  True when creating item, false when updating.
+			 * @param WP_Post         $post     Post data.
+			 * @param WP_REST_Request $request  Request object.
+			 * @param boolean         $creating True when creating item, false when updating.
 			 */
 			do_action( 'woocommerce_rest_insert_product', $post, $request, false );
 			$request->set_param( 'context', 'edit' );
@@ -812,7 +812,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Saves a product to the database.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return int
 	 */
 	public function save_product( $request ) {
@@ -824,7 +824,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	 * Save product images.
 	 *
 	 * @deprecated 3.0.0
-	 * @param int $product_id
+	 * @param int   $product_id
 	 * @param array $images
 	 * @throws WC_REST_Exception
 	 */
@@ -838,8 +838,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	 * Set product images.
 	 *
 	 * @throws WC_REST_Exception REST API exceptions.
-	 * @param WC_Product $product Product instance.
-	 * @param array      $images  Images data.
+	 * @param  WC_Product $product Product instance.
+	 * @param  array      $images  Images data.
 	 * @return WC_Product
 	 */
 	protected function set_product_images( $product, $images ) {
@@ -898,8 +898,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Save product shipping data.
 	 *
-	 * @param WC_Product $product Product instance.
-	 * @param array      $data    Shipping data.
+	 * @param  WC_Product $product Product instance.
+	 * @param  array      $data    Shipping data.
 	 * @return WC_Product
 	 */
 	protected function save_product_shipping_data( $product, $data ) {
@@ -943,9 +943,9 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Save downloadable files.
 	 *
-	 * @param WC_Product $product    Product instance.
-	 * @param array      $downloads  Downloads data.
-	 * @param int        $deprecated Deprecated since 3.0.
+	 * @param  WC_Product $product    Product instance.
+	 * @param  array      $downloads  Downloads data.
+	 * @param  int        $deprecated Deprecated since 3.0.
 	 * @return WC_Product
 	 */
 	protected function save_downloadable_files( $product, $downloads, $deprecated = 0 ) {
@@ -963,7 +963,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 			$download->set_id( $key );
 			$download->set_name( $file['name'] ? $file['name'] : wc_get_filename_from_url( $file['file'] ) );
 			$download->set_file( apply_filters( 'woocommerce_file_download_path', $file['file'], $product, $key ) );
-			$files[]  = $download;
+			$files[] = $download;
 		}
 		$product->set_downloads( $files );
 
@@ -973,9 +973,9 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Save taxonomy terms.
 	 *
-	 * @param WC_Product $product  Product instance.
-	 * @param array      $terms    Terms data.
-	 * @param string     $taxonomy Taxonomy name.
+	 * @param  WC_Product $product  Product instance.
+	 * @param  array      $terms    Terms data.
+	 * @param  string     $taxonomy Taxonomy name.
 	 * @return WC_Product
 	 */
 	protected function save_taxonomy_terms( $product, $terms, $taxonomy = 'cat' ) {
@@ -995,8 +995,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	 *
 	 * @since 3.0.0
 	 *
-	 * @param WC_Product      $product Product instance.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  WC_Product      $product Product instance.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return WC_Product
 	 */
 	protected function save_default_attributes( $product, $request ) {
@@ -1054,8 +1054,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	 * Save product meta.
 	 *
 	 * @deprecated 3.0.0
-	 * @param WC_Product $product
-	 * @param WP_REST_Request $request
+	 * @param  WC_Product      $product
+	 * @param  WP_REST_Request $request
 	 * @return bool
 	 * @throws WC_REST_Exception
 	 */
@@ -1070,8 +1070,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	 * Set product meta.
 	 *
 	 * @throws WC_REST_Exception REST API exceptions.
-	 * @param WC_Product      $product Product instance.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  WC_Product      $product Product instance.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return WC_Product
 	 */
 	protected function set_product_meta( $product, $request ) {
@@ -1358,8 +1358,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	 * Save variations.
 	 *
 	 * @throws WC_REST_Exception REST API exceptions.
-	 * @param WC_Product      $product          Product instance.
-	 * @param WP_REST_Request $request          Request data.
+	 * @param  WC_Product      $product Product instance.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return bool
 	 */
 	protected function save_variations_data( $product, $request ) {
@@ -1487,7 +1487,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 
 			// Update taxonomies.
 			if ( isset( $data['attributes'] ) ) {
-				$attributes = array();
+				$attributes        = array();
 				$parent_attributes = $product->get_attributes();
 
 				foreach ( $data['attributes'] as $attribute ) {
@@ -1541,8 +1541,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Add post meta fields.
 	 *
-	 * @param WP_Post         $post    Post data.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  WP_Post         $post    Post data.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return bool|WP_Error
 	 */
 	protected function add_post_meta_fields( $post, $request ) {
@@ -1552,8 +1552,8 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Update post meta fields.
 	 *
-	 * @param WP_Post         $post    Post data.
-	 * @param WP_REST_Request $request Request data.
+	 * @param  WP_Post         $post    Post data.
+	 * @param  WP_REST_Request $request Request data.
 	 * @return bool|WP_Error
 	 */
 	protected function update_post_meta_fields( $post, $request ) {
@@ -1624,7 +1624,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	/**
 	 * Delete a single item.
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param  WP_REST_Request           $request Full details about the request.
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function delete_item( $request ) {
@@ -2576,12 +2576,12 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		$params['slug'] = array(
+		$params['slug']           = array(
 			'description'       => __( 'Limit result set to products with a specific slug.', 'woocommerce' ),
 			'type'              => 'string',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['status'] = array(
+		$params['status']         = array(
 			'default'           => 'any',
 			'description'       => __( 'Limit result set to products assigned a specific status.', 'woocommerce' ),
 			'type'              => 'string',
@@ -2589,20 +2589,20 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['type'] = array(
+		$params['type']           = array(
 			'description'       => __( 'Limit result set to products assigned a specific type.', 'woocommerce' ),
 			'type'              => 'string',
 			'enum'              => array_keys( wc_get_product_types() ),
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['category'] = array(
+		$params['category']       = array(
 			'description'       => __( 'Limit result set to products assigned a specific category ID.', 'woocommerce' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['tag'] = array(
+		$params['tag']            = array(
 			'description'       => __( 'Limit result set to products assigned a specific tag ID.', 'woocommerce' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'wp_parse_id_list',
@@ -2614,7 +2614,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['attribute'] = array(
+		$params['attribute']      = array(
 			'description'       => __( 'Limit result set to products with a specific attribute.', 'woocommerce' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_text_field',
@@ -2626,7 +2626,7 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 			'sanitize_callback' => 'wp_parse_id_list',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
-		$params['sku'] = array(
+		$params['sku']            = array(
 			'description'       => __( 'Limit result set to products with a specific SKU.', 'woocommerce' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_text_field',
@@ -2635,4 +2635,5 @@ class WC_REST_Products_V1_Controller extends WC_REST_Posts_Controller {
 
 		return $params;
 	}
+
 }
