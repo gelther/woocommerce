@@ -8,11 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Add mappings for WordPress tables.
  *
  * @since 3.1.0
- * @param array $mappings
+ * @param  array $mappings
  * @return array
  */
 function wc_importer_wordpress_mappings( $mappings ) {
-
 	$wp_mappings = array(
 		'post_id'      => 'id',
 		'post_title'   => 'name',
