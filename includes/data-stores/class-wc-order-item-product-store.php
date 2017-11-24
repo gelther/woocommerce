@@ -69,8 +69,8 @@ class WC_Order_Item_Product_Data_Store extends Abstract_WC_Order_Item_Type_Data_
 	 * Get a list of download IDs for a specific item from an order.
 	 *
 	 * @since 3.0.0
-	 * @param WC_Order_Item_Product $item
-	 * @param WC_Order $order
+	 * @param  WC_Order_Item_Product $item
+	 * @param  WC_Order              $order
 	 * @return array
 	 */
 	public function get_download_ids( $item, $order ) {
@@ -84,4 +84,5 @@ class WC_Order_Item_Product_Data_Store extends Abstract_WC_Order_Item_Type_Data_
 			)
 		);
 	}
+
 }
