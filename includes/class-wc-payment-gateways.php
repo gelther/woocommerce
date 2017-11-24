@@ -213,4 +213,5 @@ class WC_Payment_Gateways {
 
 		update_option( 'woocommerce_gateway_order', $order );
 	}
+
 }
