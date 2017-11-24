@@ -1,8 +1,8 @@
 <?php
 
 use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode,
-    WP_CLI\Process;
+	Behat\Gherkin\Node\TableNode,
+	WP_CLI\Process;
 
 $steps->Given( '/^an empty directory$/',
 	function ( $world ) {
@@ -72,7 +72,7 @@ $steps->Given( '/^these installed and active plugins:$/',
 
 $steps->Given( '/^a custom wp-content directory$/',
 	function ( $world ) {
-		$wp_config_path = $world->variables['RUN_DIR'] . "/wp-config.php";
+		$wp_config_path = $world->variables['RUN_DIR'] . '/wp-config.php';
 
 		$wp_config_code = file_get_contents( $wp_config_path );
 
@@ -109,10 +109,11 @@ $steps->Given( '/^save (STDOUT|STDERR) ([\'].+[^\'])?as \{(\w+)\}$/',
 
 		if ( $output_filter ) {
 			$output_filter = '/' . trim( str_replace( '%s', '(.+[^\b])', $output_filter ), "' " ) . '/';
-			if ( false !== preg_match( $output_filter, $world->result->$stream, $matches ) )
+			if ( false !== preg_match( $output_filter, $world->result->$stream, $matches ) ) {
 				$output = array_pop( $matches );
-			else
+			} else {
 				$output = '';
+			}
 		} else {
 			$output = $world->result->$stream;
 		}
@@ -132,10 +133,11 @@ $steps->Given( '/^save the (.+) file ([\'].+[^\'])?as \{(\w+)\}$/',
 
 		if ( $output_filter ) {
 			$output_filter = '/' . trim( str_replace( '%s', '(.+[^\b])', $output_filter ), "' " ) . '/';
-			if ( false !== preg_match( $output_filter, $full_file, $matches ) )
+			if ( false !== preg_match( $output_filter, $full_file, $matches ) ) {
 				$output = array_pop( $matches );
-			else
+			} else {
 				$output = '';
+			}
 		} else {
 			$output = $full_file;
 		}
@@ -143,9 +145,9 @@ $steps->Given( '/^save the (.+) file ([\'].+[^\'])?as \{(\w+)\}$/',
 	}
 );
 
-$steps->Given('/^a misconfigured WP_CONTENT_DIR constant directory$/',
-	function($world) {
-		$wp_config_path = $world->variables['RUN_DIR'] . "/wp-config.php";
+$steps->Given( '/^a misconfigured WP_CONTENT_DIR constant directory$/',
+	function( $world ) {
+		$wp_config_path = $world->variables['RUN_DIR'] . '/wp-config.php';
 
 		$wp_config_code = file_get_contents( $wp_config_path );
 
