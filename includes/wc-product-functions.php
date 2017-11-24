@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Args and usage: https://github.com/woocommerce/woocommerce/wiki/wc_get_products-and-WC_Product_Query
  *
  * @since  3.0.0
- * @param  array $args Array of args (above).
- * @return array|stdClass Number of pages and an array of product objects if
+ * @param  array          $args Array of args (above).
+ * @return array|stdClass       Number of pages and an array of product objects if
  *                             paginate is true, or just an array of values.
  */
 function wc_get_products( $args ) {
@@ -52,8 +52,8 @@ function wc_get_products( $args ) {
  *
  * @since 2.2.0
  *
- * @param mixed $the_product Post object or post ID of the product.
- * @param array $deprecated Previously used to pass arguments to the factory, e.g. to force a type.
+ * @param  mixed                 $the_product Post object or post ID of the product.
+ * @param  array                 $deprecated  Previously used to pass arguments to the factory, e.g. to force a type.
  * @return WC_Product|null|false
  */
 function wc_get_product( $the_product = false, $deprecated = array() ) {
@@ -205,7 +205,7 @@ function wc_get_featured_product_ids() {
  * Filter to allow product_cat in the permalinks for products.
  *
  * @param  string  $permalink The existing permalink URL.
- * @param  WP_Post $post WP_Post object.
+ * @param  WP_Post $post      WP_Post object.
  * @return string
  */
 function wc_product_post_type_link( $permalink, $post ) {
@@ -274,7 +274,6 @@ function wc_product_post_type_link( $permalink, $post ) {
 }
 add_filter( 'post_type_link', 'wc_product_post_type_link', 10, 2 );
 
-
 /**
  * Get the placeholder image URL for products etc.
  *
@@ -290,7 +289,7 @@ function wc_placeholder_img_src() {
  *
  * @access public
  *
- * @param string $size Image size.
+ * @param  string $size Image size.
  *
  * @return string
  */
@@ -305,10 +304,10 @@ function wc_placeholder_img( $size = 'woocommerce_thumbnail' ) {
  *
  * Gets a formatted version of variation data or item meta.
  *
- * @param array|WC_Product_Variation $variation Variation object.
- * @param bool                       $flat Should this be a flat list or HTML list? (default: false).
- * @param bool                       $include_names include attribute names/labels in the list.
- * @param bool                       $skip_attributes_in_name Do not list attributes already part of the variation name.
+ * @param  array|WC_Product_Variation $variation               Variation object.
+ * @param  bool                       $flat                    Should this be a flat list or HTML list? (default: false).
+ * @param  bool                       $include_names           include attribute names/labels in the list.
+ * @param  bool                       $skip_attributes_in_name Do not list attributes already part of the variation name.
  * @return string
  */
 function wc_get_formatted_variation( $variation, $flat = false, $include_names = true, $skip_attributes_in_name = false ) {
@@ -319,8 +318,8 @@ function wc_get_formatted_variation( $variation, $flat = false, $include_names =
 		$product              = $variation;
 		$variation_name       = $variation->get_name();
 	} else {
-		$product        = false;
-		$variation_name = '';
+		$product              = false;
+		$variation_name       = '';
 		// Remove attribute_ prefix from names.
 		$variation_attributes = array();
 		if ( is_array( $variation ) ) {
@@ -434,7 +433,7 @@ add_action( 'woocommerce_scheduled_sales', 'wc_scheduled_sales' );
  * Get attachment image attributes.
  *
  * @access public
- * @param array $attr Image attributes.
+ * @param  array $attr Image attributes.
  * @return array
  */
 function wc_get_attachment_image_attributes( $attr ) {
@@ -445,16 +444,14 @@ function wc_get_attachment_image_attributes( $attr ) {
 }
 add_filter( 'wp_get_attachment_image_attributes', 'wc_get_attachment_image_attributes' );
 
-
 /**
  * Prepare attachment for JavaScript.
  *
  * @access public
- * @param array $response JS version of a attachment post object.
+ * @param  array $response JS version of a attachment post object.
  * @return array
  */
 function wc_prepare_attachment_for_js( $response ) {
-
 	if ( isset( $response['url'] ) && strstr( $response['url'], 'woocommerce_uploads/' ) ) {
 		$response['full']['url'] = wc_placeholder_img_src();
 		if ( isset( $response['sizes'] ) ) {
@@ -517,8 +514,8 @@ function wc_get_product_types() {
  * Check if product sku is unique.
  *
  * @since 2.2
- * @param int    $product_id Product ID.
- * @param string $sku Product SKU.
+ * @param  int    $product_id Product ID.
+ * @param  string $sku        Product SKU.
  * @return bool
  */
 function wc_product_has_unique_sku( $product_id, $sku ) {
@@ -536,7 +533,7 @@ function wc_product_has_unique_sku( $product_id, $sku ) {
  * Force a unique SKU.
  *
  * @since  3.0.0
- * @param  integer $product_id Product ID.
+ * @param integer $product_id Product ID.
  */
 function wc_product_force_unique_sku( $product_id ) {
 	$product = wc_get_product( $product_id );
@@ -558,8 +555,8 @@ function wc_product_force_unique_sku( $product_id ) {
  *
  * @since  3.0.0
  * @param  integer $product_id Product ID.
- * @param  string  $sku Product SKU.
- * @param  integer $index An optional index that can be added to the product SKU.
+ * @param  string  $sku        Product SKU.
+ * @param  integer $index      An optional index that can be added to the product SKU.
  * @return string
  */
 function wc_product_generate_unique_sku( $product_id, $sku, $index = 0 ) {
@@ -588,7 +585,7 @@ function wc_get_product_id_by_sku( $sku ) {
  * Get attibutes/data for an individual variation from the database and maintain it's integrity.
  *
  * @since  2.4.0
- * @param  int $variation_id Variation ID.
+ * @param  int   $variation_id Variation ID.
  * @return array
  */
 function wc_get_product_variation_attributes( $variation_id ) {
@@ -647,7 +644,7 @@ function wc_get_product_variation_attributes( $variation_id ) {
  * Get all product cats for a product by ID, including hierarchy
  *
  * @since  2.5.0
- * @param  int $product_id Product ID.
+ * @param  int   $product_id Product ID.
  * @return array
  */
 function wc_get_product_cat_ids( $product_id ) {
@@ -665,8 +662,8 @@ function wc_get_product_cat_ids( $product_id ) {
  *
  * @since 2.6.0
  *
- * @param int|null        $attachment_id Attachment ID.
- * @param WC_Product|bool $product WC_Product object.
+ * @param  int|null        $attachment_id Attachment ID.
+ * @param  WC_Product|bool $product       WC_Product object.
  *
  * @return array
  */
@@ -693,7 +690,7 @@ function wc_get_product_attachment_props( $attachment_id = null, $product = fals
 		$props['full_src_h'] = $src[2];
 
 		// Thumbnail version.
-		$src                 = wp_get_attachment_image_src( $attachment_id, 'woocommerce_thumbnail' );
+		$src                  = wp_get_attachment_image_src( $attachment_id, 'woocommerce_thumbnail' );
 		$props['thumb_src']   = $src[0];
 		$props['thumb_src_w'] = $src[1];
 		$props['thumb_src_h'] = $src[2];
@@ -733,7 +730,7 @@ function wc_get_product_visibility_options() {
  * Get min/max price meta query args.
  *
  * @since 3.0.0
- * @param array $args Min price and max price arguments.
+ * @param  array $args Min price and max price arguments.
  * @return array
  */
 function wc_get_min_max_price_meta_query( $args ) {
@@ -867,7 +864,7 @@ function wc_get_product_term_ids( $product_id, $taxonomy ) {
  *
  * @since  3.0.0
  * @param  WC_Product $product WC_Product object.
- * @param  array      $args Optional arguments to pass product quantity and price.
+ * @param  array      $args    Optional arguments to pass product quantity and price.
  * @return float
  */
 function wc_get_price_including_tax( $product, $args = array() ) {
@@ -908,10 +905,10 @@ function wc_get_price_including_tax( $product, $args = array() ) {
 				$return_price = round( $line_price - $remove_tax, wc_get_price_decimals() );
 
 				/**
-			 * The woocommerce_adjust_non_base_location_prices filter can stop base taxes being taken off when dealing with out of base locations.
-			 * e.g. If a product costs 10 including tax, all users will pay 10 regardless of location and taxes.
-			 * This feature is experimental @since 2.4.7 and may change in the future. Use at your risk.
-			 */
+				 * The woocommerce_adjust_non_base_location_prices filter can stop base taxes being taken off when dealing with out of base locations.
+				 * e.g. If a product costs 10 including tax, all users will pay 10 regardless of location and taxes.
+				 * This feature is experimental @since 2.4.7 and may change in the future. Use at your risk.
+				 */
 			} elseif ( $tax_rates !== $base_tax_rates && apply_filters( 'woocommerce_adjust_non_base_location_prices', true ) ) {
 				$base_taxes   = WC_Tax::calc_tax( $line_price, $base_tax_rates, true );
 				$modded_taxes = WC_Tax::calc_tax( $line_price - array_sum( $base_taxes ), $tax_rates, false );
@@ -927,7 +924,7 @@ function wc_get_price_including_tax( $product, $args = array() ) {
  *
  * @since  3.0.0
  * @param  WC_Product $product WC_Product object.
- * @param  array      $args Optional arguments to pass product quantity and price.
+ * @param  array      $args    Optional arguments to pass product quantity and price.
  * @return float
  */
 function wc_get_price_excluding_tax( $product, $args = array() ) {
@@ -946,9 +943,9 @@ function wc_get_price_excluding_tax( $product, $args = array() ) {
 	}
 
 	if ( $product->is_taxable() && wc_prices_include_tax() ) {
-		$tax_rates  = WC_Tax::get_base_tax_rates( $product->get_tax_class( 'unfiltered' ) );
-		$taxes      = WC_Tax::calc_tax( $price * $qty, $tax_rates, true );
-		$price      = WC_Tax::round( $price * $qty - array_sum( $taxes ) );
+		$tax_rates = WC_Tax::get_base_tax_rates( $product->get_tax_class( 'unfiltered' ) );
+		$taxes     = WC_Tax::calc_tax( $price * $qty, $tax_rates, true );
+		$price     = WC_Tax::round( $price * $qty - array_sum( $taxes ) );
 	} else {
 		$price = $price * $qty;
 	}
@@ -961,7 +958,7 @@ function wc_get_price_excluding_tax( $product, $args = array() ) {
  *
  * @since  3.0.0
  * @param  WC_Product $product WC_Product object.
- * @param  array      $args Optional arguments to pass product quantity and price.
+ * @param  array      $args    Optional arguments to pass product quantity and price.
  * @return float
  */
 function wc_get_price_to_display( $product, $args = array() ) {
@@ -979,10 +976,10 @@ function wc_get_price_to_display( $product, $args = array() ) {
 /**
  * Returns the product categories in a list.
  *
- * @param int    $product_id Product ID.
- * @param string $sep (default: ', ').
- * @param string $before (default: '').
- * @param string $after (default: '').
+ * @param  int    $product_id Product ID.
+ * @param  string $sep        (default: ', ').
+ * @param  string $before     (default: '').
+ * @param  string $after      (default: '').
  * @return string
  */
 function wc_get_product_category_list( $product_id, $sep = ', ', $before = '', $after = '' ) {
@@ -992,10 +989,10 @@ function wc_get_product_category_list( $product_id, $sep = ', ', $before = '', $
 /**
  * Returns the product tags in a list.
  *
- * @param int    $product_id Product ID.
- * @param string $sep (default: ', ').
- * @param string $before (default: '').
- * @param string $after (default: '').
+ * @param  int    $product_id Product ID.
+ * @param  string $sep        (default: ', ').
+ * @param  string $before     (default: '').
+ * @param  string $after      (default: '').
  * @return string
  */
 function wc_get_product_tag_list( $product_id, $sep = ', ', $before = '', $after = '' ) {
@@ -1040,9 +1037,9 @@ function wc_products_array_filter_editable( $product ) {
  *
  * @since  3.0.0
  *
- * @param array  $products List of products to be ordered.
- * @param string $orderby Optional order criteria.
- * @param string $order Ascending or descending order.
+ * @param  array  $products List of products to be ordered.
+ * @param  string $orderby  Optional order criteria.
+ * @param  string $order    Ascending or descending order.
  *
  * @return array
  */
