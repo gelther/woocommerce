@@ -75,7 +75,7 @@ class WC_Admin_Addons {
 	/**
 	 * Get section for the addons screen.
 	 *
-	 * @param  string $section_id
+	 * @param  string      $section_id
 	 *
 	 * @return object|bool
 	 */
@@ -254,7 +254,7 @@ class WC_Admin_Addons {
 	public static function output_small_light_block( $block ) {
 		?>
 		<div class="addons-small-light-block">
-			<img class="addons-img" src="<?php echo esc_url( $block->image ) ?>" />
+			<img class="addons-img" src="<?php echo esc_url( $block->image ); ?>" />
 			<div class="addons-small-light-block-content">
 				<h1><?php echo esc_html( $block->title ); ?></h1>
 				<p><?php echo esc_html( $block->description ); ?></p>
@@ -357,7 +357,7 @@ class WC_Admin_Addons {
 				break;
 			case 'US':
 				$local_defaults = array(
-					'logos'       => array_merge( $defaults['logos'], array(
+					'logos' => array_merge( $defaults['logos'], array(
 						array(
 							'link' => WC()->plugin_url() . '/assets/images/wcs-usps-logo.png',
 							'alt'  => 'USPS logo',
@@ -449,7 +449,7 @@ class WC_Admin_Addons {
 	public static function output_button( $url, $text, $theme, $plugin = '' ) {
 		$theme = __( 'Free', 'woocommerce' ) === $text ? 'addons-button-outline-green' : $theme;
 		$theme = is_plugin_active( $plugin ) ? 'addons-button-installed' : $theme;
-		$text = is_plugin_active( $plugin ) ? __( 'Installed', 'woocommerce' ) : $text;
+		$text  = is_plugin_active( $plugin ) ? __( 'Installed', 'woocommerce' ) : $text;
 		?>
 		<a
 			class="addons-button <?php echo esc_attr( $theme ); ?>"
@@ -458,7 +458,6 @@ class WC_Admin_Addons {
 		</a>
 		<?php
 	}
-
 
 	/**
 	 * Handles output of the addons page in admin.
@@ -506,4 +505,5 @@ class WC_Admin_Addons {
 		wp_safe_redirect( remove_query_arg( array( 'install-addon', '_wpnonce' ) ) );
 		exit;
 	}
+
 }
