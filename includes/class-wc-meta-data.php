@@ -39,7 +39,7 @@ class WC_Meta_Data implements JsonSerializable {
 	/**
 	 * Constructor.
 	 *
-	 * @param array	$meta Data to wrap behind this function.
+	 * @param array $meta Data to wrap behind this function.
 	 */
 	public function __construct( $meta = array() ) {
 		$this->current_data = $meta;
@@ -65,7 +65,7 @@ class WC_Meta_Data implements JsonSerializable {
 	/**
 	 * Creates or updates a property in the metadata object.
 	 *
-	 * @param string $key Key to set.
+	 * @param string $key   Key to set.
 	 * @param mixed  $value Value to set.
 	 */
 	public function __set( $key, $value ) {
@@ -85,8 +85,8 @@ class WC_Meta_Data implements JsonSerializable {
 	/**
 	 * Returns the value of any property.
 	 *
-	 * @param string $key Key to get.
-	 * @return mixed Property value or NULL if it does not exists
+	 * @param  string $key Key to get.
+	 * @return mixed       Property value or NULL if it does not exists
 	 */
 	public function __get( $key ) {
 		if ( array_key_exists( $key, $this->current_data ) ) {
@@ -118,4 +118,5 @@ class WC_Meta_Data implements JsonSerializable {
 	public function get_data() {
 		return $this->data;
 	}
+
 }
