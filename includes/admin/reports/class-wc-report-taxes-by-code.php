@@ -26,7 +26,6 @@ class WC_Report_Taxes_By_Code extends WC_Admin_Report {
 	 * Output an export link.
 	 */
 	public function get_export_button() {
-
 		$current_range = ! empty( $_GET['range'] ) ? sanitize_text_field( $_GET['range'] ) : 'last_month';
 		?>
 		<a
@@ -44,11 +43,10 @@ class WC_Report_Taxes_By_Code extends WC_Admin_Report {
 	 * Output the report.
 	 */
 	public function output_report() {
-
 		$ranges = array(
-			'year'         => __( 'Year', 'woocommerce' ),
-			'last_month'   => __( 'Last month', 'woocommerce' ),
-			'month'        => __( 'This month', 'woocommerce' ),
+			'year'       => __( 'Year', 'woocommerce' ),
+			'last_month' => __( 'Last month', 'woocommerce' ),
+			'month'      => __( 'This month', 'woocommerce' ),
 		);
 
 		$current_range = ! empty( $_GET['range'] ) ? sanitize_text_field( $_GET['range'] ) : 'last_month';
@@ -72,12 +70,12 @@ class WC_Report_Taxes_By_Code extends WC_Admin_Report {
 		global $wpdb;
 
 		$query_data = array(
-			'order_item_name' => array(
+			'order_item_name'     => array(
 				'type'     => 'order_item',
 				'function' => '',
 				'name'     => 'tax_rate',
 			),
-			'tax_amount' => array(
+			'tax_amount'          => array(
 				'type'            => 'order_item_meta',
 				'order_item_type' => 'tax',
 				'function'        => '',
@@ -89,13 +87,13 @@ class WC_Report_Taxes_By_Code extends WC_Admin_Report {
 				'function'        => '',
 				'name'            => 'shipping_tax_amount',
 			),
-			'rate_id' => array(
+			'rate_id'             => array(
 				'type'            => 'order_item_meta',
 				'order_item_type' => 'tax',
 				'function'        => '',
 				'name'            => 'rate_id',
 			),
-			'ID' => array(
+			'ID'                  => array(
 				'type'     => 'post_data',
 				'function' => '',
 				'name'     => 'post_id',
@@ -134,10 +132,10 @@ class WC_Report_Taxes_By_Code extends WC_Admin_Report {
 			$tax_rows[ $key ] = isset( $tax_rows[ $key ] ) ? $tax_rows[ $key ] : (object) array( 'tax_amount' => 0, 'shipping_tax_amount' => 0, 'total_orders' => 0 );
 
 			if ( 'shop_order_refund' !== get_post_type( $tax_row->post_id ) ) {
-				$tax_rows[ $key ]->total_orders        += 1;
+				$tax_rows[ $key ]->total_orders += 1;
 			}
 
-			$tax_rows[ $key ]->tax_rate            = $tax_row->tax_rate;
+			$tax_rows[ $key ]->tax_rate             = $tax_row->tax_rate;
 			$tax_rows[ $key ]->tax_amount          += wc_round_tax_total( $tax_row->tax_amount );
 			$tax_rows[ $key ]->shipping_tax_amount += wc_round_tax_total( $tax_row->shipping_tax_amount );
 		}
@@ -189,4 +187,5 @@ class WC_Report_Taxes_By_Code extends WC_Admin_Report {
 		</table>
 		<?php
 	}
+
 }
