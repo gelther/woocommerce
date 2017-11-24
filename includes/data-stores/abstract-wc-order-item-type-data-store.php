@@ -82,7 +82,7 @@ abstract class Abstract_WC_Order_Item_Type_Data_Store extends WC_Data_Store_WP i
 	 *
 	 * @since 3.0.0
 	 * @param WC_Order_Item $item
-	 * @param array $args Array of args to pass to the delete method.
+	 * @param array         $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$item, $args = array() ) {
 		if ( $item->get_id() ) {
@@ -147,4 +147,5 @@ abstract class Abstract_WC_Order_Item_Type_Data_Store extends WC_Data_Store_WP i
 		wp_cache_delete( 'order-items-' . $item->get_order_id(), 'orders' );
 		wp_cache_delete( $item->get_id(), $this->meta_type . '_meta' );
 	}
+
 }
