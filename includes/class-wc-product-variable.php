@@ -74,8 +74,8 @@ class WC_Product_Variable extends WC_Product {
 	/**
 	 * Get an array of all sale and regular prices from all variations. This is used for example when displaying the price range at variable product level or seeing if the variable product is on sale.
 	 *
-	 * @param  bool $include_taxes Should taxes be included in the prices.
-	 * @return array Array of RAW prices, regular prices, and sale prices with keys set to variation ID.
+	 * @param  bool  $include_taxes Should taxes be included in the prices.
+	 * @return array                Array of RAW prices, regular prices, and sale prices with keys set to variation ID.
 	 */
 	public function get_variation_prices( $include_taxes = false ) {
 		$prices = $this->data_store->read_price_data( $this, $include_taxes );
@@ -139,7 +139,7 @@ class WC_Product_Variable extends WC_Product {
 	 * due to the strings being very long and unclear/confusing. A single range
 	 * is shown instead.
 	 *
-	 * @param string $price (default: '')
+	 * @param  string $price (default: '')
 	 * @return string
 	 */
 	public function get_price_html( $price = '' ) {
@@ -191,9 +191,9 @@ class WC_Product_Variable extends WC_Product {
 	/**
 	 * Return a products child ids.
 	 *
-	 * @param bool|string $visible_only
+	 * @param  bool|string $visible_only
 	 *
-	 * @return array Children ids
+	 * @return array                     Children ids
 	 */
 	public function get_children( $visible_only = '' ) {
 		if ( is_bool( $visible_only ) ) {
@@ -225,7 +225,7 @@ class WC_Product_Variable extends WC_Product {
 	/**
 	 * If set, get the default attributes for a variable product.
 	 *
-	 * @param string $attribute_name
+	 * @param  string $attribute_name
 	 * @return string
 	 */
 	public function get_variation_default_attribute( $attribute_name ) {
@@ -237,7 +237,7 @@ class WC_Product_Variable extends WC_Product {
 	/**
 	 * Variable products themselves cannot be downloadable.
 	 *
-	 * @param string $context
+	 * @param  string $context
 	 *
 	 * @return bool
 	 */
@@ -248,7 +248,7 @@ class WC_Product_Variable extends WC_Product {
 	/**
 	 * Variable products themselves cannot be virtual.
 	 *
-	 * @param string $context
+	 * @param  string $context
 	 *
 	 * @return bool
 	 */
@@ -295,7 +295,7 @@ class WC_Product_Variable extends WC_Product {
 		}
 
 		// See if prices should be shown for each variation after selection.
-		$show_variation_price = apply_filters( 'woocommerce_show_variation_price', $variation->get_price() === "" || $this->get_variation_sale_price( 'min' ) !== $this->get_variation_sale_price( 'max' ) || $this->get_variation_regular_price( 'min' ) !== $this->get_variation_regular_price( 'max' ), $this, $variation );
+		$show_variation_price = apply_filters( 'woocommerce_show_variation_price', $variation->get_price() === '' || $this->get_variation_sale_price( 'min' ) !== $this->get_variation_sale_price( 'max' ) || $this->get_variation_regular_price( 'min' ) !== $this->get_variation_regular_price( 'max' ), $this, $variation );
 
 		return apply_filters( 'woocommerce_available_variation', array(
 			'attributes'            => $variation->get_variation_attributes(),
@@ -520,9 +520,9 @@ class WC_Product_Variable extends WC_Product {
 	 * Sync a variable product with it's children. These sync functions sync
 	 * upwards (from child to parent) when the variation is saved.
 	 *
-	 * @param WC_Product|int $product Product object or ID for which you wish to sync.
-	 * @param bool $save If true, the product object will be saved to the DB before returning it.
-	 * @return WC_Product Synced product object.
+	 * @param  WC_Product|int $product Product object or ID for which you wish to sync.
+	 * @param  bool           $save    If true, the product object will be saved to the DB before returning it.
+	 * @return WC_Product              Synced product object.
 	 */
 	public static function sync( $product, $save = true ) {
 		if ( ! is_a( $product, 'WC_Product' ) ) {
@@ -548,9 +548,9 @@ class WC_Product_Variable extends WC_Product {
 	/**
 	 * Sync parent stock status with the status of all children and save.
 	 *
-	 * @param WC_Product|int $product Product object or ID for which you wish to sync.
-	 * @param bool $save If true, the product object will be saved to the DB before returning it.
-	 * @return WC_Product Synced product object.
+	 * @param  WC_Product|int $product Product object or ID for which you wish to sync.
+	 * @param  bool           $save    If true, the product object will be saved to the DB before returning it.
+	 * @return WC_Product              Synced product object.
 	 */
 	public static function sync_stock_status( $product, $save = true ) {
 		if ( ! is_a( $product, 'WC_Product' ) ) {
@@ -570,7 +570,7 @@ class WC_Product_Variable extends WC_Product {
 	/**
 	 * Sort an associativate array of $variation_id => $price pairs in order of min and max prices.
 	 *
-	 * @param array $prices Associativate array of $variation_id => $price pairs
+	 * @param  array $prices Associativate array of $variation_id => $price pairs
 	 * @return array
 	 */
 	protected function sort_variation_prices( $prices ) {
