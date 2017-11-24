@@ -23,14 +23,14 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->id               = 'customer_processing_order';
-		$this->customer_email   = true;
+		$this->id             = 'customer_processing_order';
+		$this->customer_email = true;
 
-		$this->title            = __( 'Processing order', 'woocommerce' );
-		$this->description      = __( 'This is an order notification sent to customers containing order details after payment.', 'woocommerce' );
-		$this->template_html    = 'emails/customer-processing-order.php';
-		$this->template_plain   = 'emails/plain/customer-processing-order.php';
-		$this->placeholders = array(
+		$this->title          = __( 'Processing order', 'woocommerce' );
+		$this->description    = __( 'This is an order notification sent to customers containing order details after payment.', 'woocommerce' );
+		$this->template_html  = 'emails/customer-processing-order.php';
+		$this->template_plain = 'emails/plain/customer-processing-order.php';
+		$this->placeholders   = array(
 			'{site_title}'   => $this->get_blogname(),
 			'{order_date}'   => '',
 			'{order_number}' => '',
@@ -68,8 +68,8 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 	/**
 	 * Trigger the sending of this email.
 	 *
-	 * @param int $order_id The order ID.
-	 * @param WC_Order $order Order object.
+	 * @param int      $order_id The order ID.
+	 * @param WC_Order $order    Order object.
 	 */
 	public function trigger( $order_id, $order = false ) {
 		$this->setup_locale();
@@ -104,7 +104,7 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => false,
 			'plain_text'    => false,
-			'email'			=> $this,
+			'email'         => $this,
 		) );
 	}
 
@@ -120,9 +120,10 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => false,
 			'plain_text'    => true,
-			'email'			=> $this,
+			'email'         => $this,
 		) );
 	}
+
 }
 
 endif;
