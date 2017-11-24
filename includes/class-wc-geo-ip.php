@@ -1189,7 +1189,7 @@ class WC_Geo_IP {
 		} else {
 			if ( $this->filehandle = fopen( $filename, 'rb' ) ) {
 				if ( $this->flags & self::GEOIP_MEMORY_CACHE ) {
-					$s_array = fstat( $this->filehandle );
+					$s_array             = fstat( $this->filehandle );
 					$this->memory_buffer = fread( $this->filehandle, $s_array['size'] );
 				}
 			} else {
@@ -1316,7 +1316,7 @@ class WC_Geo_IP {
 						|| ( self::GEOIP_ASNUM_EDITION_V6 == $this->databaseType )
 					) {
 						$this->databaseSegments = 0;
-						$buf = fread( $this->filehandle, self::SEGMENT_RECORD_LENGTH );
+						$buf                    = fread( $this->filehandle, self::SEGMENT_RECORD_LENGTH );
 
 						for ( $j = 0; $j < self::SEGMENT_RECORD_LENGTH; $j++ ) {
 							$this->databaseSegments += ( ord( $buf[ $j ] ) << ( $j * 8 ) );
@@ -1369,8 +1369,8 @@ class WC_Geo_IP {
 	/**
 	 * Common get record.
 	 *
-	 * @param  string $seek_country
-	 * @return WC_Geo_IP_Record instance
+	 * @param  string           $seek_country
+	 * @return WC_Geo_IP_Record               instance
 	 */
 	private function _common_get_record( $seek_country ) {
 		// workaround php's broken substr, strpos, etc handling with
@@ -1392,10 +1392,10 @@ class WC_Geo_IP {
 			$record_buf = fread( $this->filehandle, FULL_RECORD_LENGTH );
 		}
 
-		$record                 = new WC_Geo_IP_Record();
-		$record_buf_pos         = 0;
-		$char                   = ord( substr( $record_buf, $record_buf_pos, 1 ) );
-		$record->country_code   = $this->GEOIP_COUNTRY_CODES[ $char ];
+		$record               = new WC_Geo_IP_Record();
+		$record_buf_pos       = 0;
+		$char                 = ord( substr( $record_buf, $record_buf_pos, 1 ) );
+		$record->country_code = $this->GEOIP_COUNTRY_CODES[ $char ];
 		$record->country_code3  = $this->GEOIP_COUNTRY_CODES3[ $char ];
 		$record->country_name   = $this->GEOIP_COUNTRY_NAMES[ $char ];
 		$record->continent_code = $this->GEOIP_CONTINENT_CODES[ $char ];
@@ -1484,8 +1484,8 @@ class WC_Geo_IP {
 	/**
 	 * Get record.
 	 *
-	 * @param  int $ipnum
-	 * @return WC_Geo_IP_Record instance
+	 * @param  int              $ipnum
+	 * @return WC_Geo_IP_Record        instance
 	 */
 	private function _get_record( $ipnum ) {
 		$seek_country = $this->_geoip_seek_country( $ipnum );
@@ -1499,7 +1499,7 @@ class WC_Geo_IP {
 	/**
 	 * Seek country IPv6.
 	 *
-	 * @param  int $ipnum
+	 * @param  int    $ipnum
 	 * @return string
 	 */
 	public function _geoip_seek_country_v6( $ipnum ) {
@@ -1536,8 +1536,8 @@ class WC_Geo_IP {
 				}
 			}
 
-			$bnum = 127 - $depth;
-			$idx = $bnum >> 3;
+			$bnum   = 127 - $depth;
+			$idx    = $bnum >> 3;
 			$b_mask = 1 << ( $bnum & 7 ^ 7 );
 			if ( ( $v6vec[ $idx ] & $b_mask ) > 0 ) {
 				if ( $x[1] >= $this->databaseSegments ) {
@@ -1560,7 +1560,7 @@ class WC_Geo_IP {
 	/**
 	 * Seek country.
 	 *
-	 * @param  int $ipnum
+	 * @param  int    $ipnum
 	 * @return string
 	 */
 	private function _geoip_seek_country( $ipnum ) {
@@ -1615,7 +1615,7 @@ class WC_Geo_IP {
 	/**
 	 * Record by addr.
 	 *
-	 * @param  string $addr
+	 * @param  string           $addr
 	 *
 	 * @return WC_Geo_IP_Record
 	 */
@@ -1631,7 +1631,7 @@ class WC_Geo_IP {
 	/**
 	 * Country ID by addr IPv6.
 	 *
-	 * @param  string $addr
+	 * @param  string   $addr
 	 * @return int|bool
 	 */
 	public function geoip_country_id_by_addr_v6( $addr ) {
@@ -1717,6 +1717,7 @@ class WC_Geo_IP {
 
 		return $buf;
 	}
+
 }
 
 /**
