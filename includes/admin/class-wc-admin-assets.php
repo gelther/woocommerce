@@ -77,7 +77,6 @@ class WC_Admin_Assets {
 		}
 	}
 
-
 	/**
 	 * Enqueue scripts.
 	 */
@@ -154,19 +153,19 @@ class WC_Admin_Assets {
 
 			$params = array(
 				/* translators: %s: decimal */
-				'i18n_decimal_error'                => sprintf( __( 'Please enter in decimal (%s) format without thousand separators.', 'woocommerce' ), $decimal ),
+				'i18n_decimal_error'               => sprintf( __( 'Please enter in decimal (%s) format without thousand separators.', 'woocommerce' ), $decimal ),
 				/* translators: %s: price decimal separator */
-				'i18n_mon_decimal_error'            => sprintf( __( 'Please enter in monetary decimal (%s) format without thousand separators and currency symbols.', 'woocommerce' ), wc_get_price_decimal_separator() ),
-				'i18n_country_iso_error'            => __( 'Please enter in country code with two capital letters.', 'woocommerce' ),
-				'i18_sale_less_than_regular_error'  => __( 'Please enter in a value less than the regular price.', 'woocommerce' ),
-				'i18_delete_product_notice'         => __( 'This product has produced sales and may be linked to existing orders. Are you sure you want to delete it?', 'woocommerce' ),
-				'decimal_point'                     => $decimal,
-				'mon_decimal_point'                 => wc_get_price_decimal_separator(),
-				'strings' => array(
+				'i18n_mon_decimal_error'           => sprintf( __( 'Please enter in monetary decimal (%s) format without thousand separators and currency symbols.', 'woocommerce' ), wc_get_price_decimal_separator() ),
+				'i18n_country_iso_error'           => __( 'Please enter in country code with two capital letters.', 'woocommerce' ),
+				'i18_sale_less_than_regular_error' => __( 'Please enter in a value less than the regular price.', 'woocommerce' ),
+				'i18_delete_product_notice'        => __( 'This product has produced sales and may be linked to existing orders. Are you sure you want to delete it?', 'woocommerce' ),
+				'decimal_point'                    => $decimal,
+				'mon_decimal_point'                => wc_get_price_decimal_separator(),
+				'strings'                          => array(
 					'import_products' => __( 'Import', 'woocommerce' ),
 					'export_products' => __( 'Export', 'woocommerce' ),
 				),
-				'urls' => array(
+				'urls'                             => array(
 					'import_products' => esc_url_raw( admin_url( 'edit.php?post_type=product&page=product_importer' ) ),
 					'export_products' => esc_url_raw( admin_url( 'edit.php?post_type=product&page=product_exporter' ) ),
 				),
@@ -221,9 +220,9 @@ class WC_Admin_Assets {
 				'i18n_last_warning'                   => esc_js( __( 'Last warning, are you sure?', 'woocommerce' ) ),
 				'i18n_choose_image'                   => esc_js( __( 'Choose an image', 'woocommerce' ) ),
 				'i18n_set_image'                      => esc_js( __( 'Set variation image', 'woocommerce' ) ),
-				'i18n_variation_added'                => esc_js( __( "variation added", 'woocommerce' ) ),
-				'i18n_variations_added'               => esc_js( __( "variations added", 'woocommerce' ) ),
-				'i18n_no_variations_added'            => esc_js( __( "No variations added", 'woocommerce' ) ),
+				'i18n_variation_added'                => esc_js( __( 'variation added', 'woocommerce' ) ),
+				'i18n_variations_added'               => esc_js( __( 'variations added', 'woocommerce' ) ),
+				'i18n_no_variations_added'            => esc_js( __( 'No variations added', 'woocommerce' ) ),
 				'i18n_remove_variation'               => esc_js( __( 'Are you sure you want to remove this variation?', 'woocommerce' ) ),
 				'i18n_scheduled_sale_start'           => esc_js( __( 'Sale start date (YYYY-MM-DD format or leave blank)', 'woocommerce' ) ),
 				'i18n_scheduled_sale_end'             => esc_js( __( 'Sale end date (YYYY-MM-DD format or leave blank)', 'woocommerce' ) ),
@@ -392,6 +391,7 @@ class WC_Admin_Assets {
 			);
 		}
 	}
+
 }
 
 endif;
