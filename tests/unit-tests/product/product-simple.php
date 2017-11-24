@@ -252,4 +252,5 @@ class WC_Tests_Product_Simple extends WC_Unit_Test_Case {
 		// Delete product
 		WC_Helper_Product::delete_product( $product->get_id() );
 	}
+
 }
