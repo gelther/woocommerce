@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/*
+/**
  * Copyright (c) 2013 - 2015 MasterCard International Incorporated
  * All rights reserved.
  *
@@ -45,7 +45,7 @@ class Simplify_Authentication {
 
 	function __construct() {
 		$args = func_get_args();
-		switch( func_num_args() ) {
+		switch ( func_num_args() ) {
 			case 1:
 				self::__construct1( $args[0] );
 				break;
@@ -57,18 +57,19 @@ class Simplify_Authentication {
 		}
 	}
 
-	function __construct1($accessToken) {
+	function __construct1( $accessToken ) {
 		$this->accessToken = $accessToken;
 	}
 
-	function __construct2($publicKey, $privateKey) {
-		$this->publicKey = $publicKey;
+	function __construct2( $publicKey, $privateKey ) {
+		$this->publicKey  = $publicKey;
 		$this->privateKey = $privateKey;
 	}
 
-	function __construct3($publicKey, $privateKey, $accessToken) {
-		$this->publicKey = $publicKey;
-		$this->privateKey = $privateKey;
+	function __construct3( $publicKey, $privateKey, $accessToken ) {
+		$this->publicKey   = $publicKey;
+		$this->privateKey  = $privateKey;
 		$this->accessToken = $accessToken;
 	}
+
 }
