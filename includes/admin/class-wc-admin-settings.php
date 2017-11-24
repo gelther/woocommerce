@@ -150,8 +150,8 @@ class WC_Admin_Settings {
 	/**
 	 * Get a setting from the settings API.
 	 *
-	 * @param string $option_name
-	 * @param mixed $default
+	 * @param  string $option_name
+	 * @param  mixed  $default
 	 *
 	 * @return mixed
 	 */
@@ -282,7 +282,7 @@ class WC_Admin_Settings {
 							<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
 							<?php echo $tooltip_html; ?>
 						</th>
-						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ); ?>">
 							<input
 								name="<?php echo esc_attr( $value['id'] ); ?>"
 								id="<?php echo esc_attr( $value['id'] ); ?>"
@@ -306,7 +306,7 @@ class WC_Admin_Settings {
 							<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
 							<?php echo $tooltip_html; ?>
 						</th>
-						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">&lrm;
+						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ); ?>">&lrm;
 							<span class="colorpickpreview" style="background: <?php echo esc_attr( $option_value ); ?>"></span>
 							<input
 								name="<?php echo esc_attr( $value['id'] ); ?>"
@@ -334,7 +334,7 @@ class WC_Admin_Settings {
 							<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
 							<?php echo $tooltip_html; ?>
 						</th>
-						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ); ?>">
 							<?php echo $description; ?>
 
 							<textarea
@@ -360,7 +360,7 @@ class WC_Admin_Settings {
 							<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
 							<?php echo $tooltip_html; ?>
 						</th>
-						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ); ?>">
 							<select
 								name="<?php echo esc_attr( $value['id'] ); ?><?php echo ( 'multiselect' === $value['type'] ) ? '[]' : ''; ?>"
 								id="<?php echo esc_attr( $value['id'] ); ?>"
@@ -380,7 +380,7 @@ class WC_Admin_Settings {
 												selected( $option_value, $key );
 											}
 
-										?>><?php echo $val ?></option>
+										?>><?php echo $val; ?></option>
 										<?php
 									}
 								?>
@@ -399,7 +399,7 @@ class WC_Admin_Settings {
 							<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
 							<?php echo $tooltip_html; ?>
 						</th>
-						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ); ?>">
 							<fieldset>
 								<?php echo $description; ?>
 								<ul>
@@ -415,7 +415,7 @@ class WC_Admin_Settings {
 												class="<?php echo esc_attr( $value['class'] ); ?>"
 												<?php echo implode( ' ', $custom_attributes ); ?>
 												<?php checked( $key, $option_value ); ?>
-												/> <?php echo $val ?></label>
+												/> <?php echo $val; ?></label>
 										</li>
 										<?php
 									}
@@ -429,7 +429,7 @@ class WC_Admin_Settings {
 				// Checkbox input
 				case 'checkbox' :
 
-					$option_value    = self::get_option( $value['id'], $value['default'] );
+					$option_value     = self::get_option( $value['id'], $value['default'] );
 					$visibility_class = array();
 
 					if ( ! isset( $value['hide_if_checked'] ) ) {
@@ -451,7 +451,7 @@ class WC_Admin_Settings {
 					if ( ! isset( $value['checkboxgroup'] ) || 'start' == $value['checkboxgroup'] ) {
 						?>
 							<tr valign="top" class="<?php echo esc_attr( implode( ' ', $visibility_class ) ); ?>">
-								<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ) ?></th>
+								<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ); ?></th>
 								<td class="forminp forminp-checkbox">
 									<fieldset>
 						<?php
@@ -463,12 +463,12 @@ class WC_Admin_Settings {
 
 					if ( ! empty( $value['title'] ) ) {
 						?>
-							<legend class="screen-reader-text"><span><?php echo esc_html( $value['title'] ) ?></span></legend>
+							<legend class="screen-reader-text"><span><?php echo esc_html( $value['title'] ); ?></span></legend>
 						<?php
 					}
 
 					?>
-						<label for="<?php echo $value['id'] ?>">
+						<label for="<?php echo $value['id']; ?>">
 							<input
 								name="<?php echo esc_attr( $value['id'] ); ?>"
 								id="<?php echo esc_attr( $value['id'] ); ?>"
@@ -477,7 +477,7 @@ class WC_Admin_Settings {
 								value="1"
 								<?php checked( $option_value, 'yes' ); ?>
 								<?php echo implode( ' ', $custom_attributes ); ?>
-							/> <?php echo $description ?>
+							/> <?php echo $description; ?>
 						</label> <?php echo $tooltip_html; ?>
 					<?php
 
@@ -506,12 +506,12 @@ class WC_Admin_Settings {
 					$disabled_message = '';
 
 					if ( has_filter( 'woocommerce_get_image_size_' . $image_size ) ) {
-						$disabled_attr = 'disabled="disabled"';
-						$disabled_message = "<p><small>" . __( 'The settings of this image size have been disabled because its values are being overwritten by a filter.', 'woocommerce' ) . "</small></p>";
+						$disabled_attr    = 'disabled="disabled"';
+						$disabled_message = '<p><small>' . __( 'The settings of this image size have been disabled because its values are being overwritten by a filter.', 'woocommerce' ) . '</small></p>';
 					}
 
 					?><tr valign="top">
-						<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ) ?> <?php echo $tooltip_html . $disabled_message; ?></th>
+						<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html . $disabled_message; ?></th>
 						<td class="forminp image_width_settings">
 
 							<input name="<?php echo esc_attr( $value['id'] ); ?>[width]" <?php echo $disabled_attr; ?> id="<?php echo esc_attr( $value['id'] ); ?>-width" type="text" size="3" value="<?php echo $width; ?>" /> &times; <input name="<?php echo esc_attr( $value['id'] ); ?>[height]" <?php echo $disabled_attr; ?> id="<?php echo esc_attr( $value['id'] ); ?>-height" type="text" size="3" value="<?php echo $height; ?>" />px
@@ -524,7 +524,7 @@ class WC_Admin_Settings {
 
 				// Thumbnail cropping setting. DEVELOPERS: This is private. Re-use at your own risk.
 				case 'thumbnail_cropping' :
-					$option_value   = self::get_option( $value['id'], $value['default'] );
+					$option_value = self::get_option( $value['id'], $value['default'] );
 					if ( strstr( $option_value, ':' ) ) {
 						$cropping_split = explode( ':', $option_value );
 						$width          = max( 1, current( $cropping_split ) );
@@ -535,7 +535,7 @@ class WC_Admin_Settings {
 					}
 
 					?><tr valign="top">
-						<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ) ?> <?php echo $tooltip_html; ?></th>
+						<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></th>
 						<td class="forminp">
 							<ul class="woocommerce-thumbnail-cropping">
 								<li>
@@ -597,7 +597,7 @@ class WC_Admin_Settings {
 					}
 
 					?><tr valign="top" class="single_select_page">
-						<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ) ?> <?php echo $tooltip_html; ?></th>
+						<th scope="row" class="titledesc"><?php echo esc_html( $value['title'] ); ?> <?php echo $tooltip_html; ?></th>
 						<td class="forminp">
 							<?php echo str_replace( ' id=', " data-placeholder='" . esc_attr__( 'Select a page&hellip;', 'woocommerce' ) . "' style='" . $value['css'] . "' class='" . $value['class'] . "' id=", wp_dropdown_pages( $args ) ); ?> <?php echo $description; ?>
 						</td>
@@ -621,7 +621,7 @@ class WC_Admin_Settings {
 							<label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
 							<?php echo $tooltip_html; ?>
 						</th>
-						<td class="forminp"><select name="<?php echo esc_attr( $value['id'] ); ?>" style="<?php echo esc_attr( $value['css'] ); ?>" data-placeholder="<?php esc_attr_e( 'Choose a country&hellip;', 'woocommerce' ); ?>" aria-label="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>" class="wc-enhanced-select">
+						<td class="forminp"><select name="<?php echo esc_attr( $value['id'] ); ?>" style="<?php echo esc_attr( $value['css'] ); ?>" data-placeholder="<?php esc_attr_e( 'Choose a country&hellip;', 'woocommerce' ); ?>" aria-label="<?php esc_attr_e( 'Country', 'woocommerce' ); ?>" class="wc-enhanced-select">
 							<?php WC()->countries->country_dropdown_options( $country, $state ); ?>
 						</select> <?php echo $description; ?>
 						</td>
@@ -646,7 +646,7 @@ class WC_Admin_Settings {
 							<?php echo $tooltip_html; ?>
 						</th>
 						<td class="forminp">
-							<select multiple="multiple" name="<?php echo esc_attr( $value['id'] ); ?>[]" style="width:350px" data-placeholder="<?php esc_attr_e( 'Choose countries&hellip;', 'woocommerce' ); ?>" aria-label="<?php esc_attr_e( 'Country', 'woocommerce' ) ?>" class="wc-enhanced-select">
+							<select multiple="multiple" name="<?php echo esc_attr( $value['id'] ); ?>[]" style="width:350px" data-placeholder="<?php esc_attr_e( 'Choose countries&hellip;', 'woocommerce' ); ?>" aria-label="<?php esc_attr_e( 'Country', 'woocommerce' ); ?>" class="wc-enhanced-select">
 								<?php
 									if ( ! empty( $countries ) ) {
 										foreach ( $countries as $key => $val ) {
@@ -673,7 +673,7 @@ class WC_Admin_Settings {
 	 * settings types.
 	 *
 	 * @param  array $value The form field value array
-	 * @return array The description and tip as a 2 element array
+	 * @return array        The description and tip as a 2 element array
 	 */
 	public static function get_field_description( $value ) {
 		$description  = '';
@@ -685,7 +685,7 @@ class WC_Admin_Settings {
 			$description  = $value['desc'];
 			$tooltip_html = $value['desc_tip'];
 		} elseif ( ! empty( $value['desc'] ) ) {
-			$description  = $value['desc'];
+			$description = $value['desc'];
 		}
 
 		if ( $description && in_array( $value['type'], array( 'textarea', 'radio' ) ) ) {
@@ -713,8 +713,8 @@ class WC_Admin_Settings {
 	 *
 	 * Loops though the woocommerce options array and outputs each field.
 	 *
-	 * @param array $options Options array to output
-	 * @param array $data Optional. Data to use for saving. Defaults to $_POST.
+	 * @param  array $options Options array to output
+	 * @param  array $data    Optional. Data to use for saving. Defaults to $_POST.
 	 * @return bool
 	 */
 	public static function save_fields( $options, $data = null ) {
@@ -874,6 +874,7 @@ class WC_Admin_Settings {
 			}
 		}
 	}
+
 }
 
 endif;
