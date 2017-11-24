@@ -60,4 +60,5 @@ class WC_Order_Item_Fee_Data_Store extends Abstract_WC_Order_Item_Type_Data_Stor
 			update_metadata( 'order_item', $id, $key, $value );
 		}
 	}
+
 }
